@@ -11,7 +11,7 @@ const RoutesX = () => {
     return (
         <>
             <Routes>
-                <Route path={'/'} element={<Profile/>}/>
+                <Route path={'/IFriday'} element={<Profile/>}/>
                 <Route path={'register'} element={<Register/>}/>
                 <Route path={'login'} element={<Login/>}/>
                 <Route path={'passwordrecovery'} element={<PasswordRecovery/>}/>

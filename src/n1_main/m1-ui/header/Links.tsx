@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 const Links = () => {
     return (
         <div>
-            <button><NavLink to={'/'}
+            <button><NavLink to={'/IFriday'}
                              style={{textDecoration: 'none'}}>Profile</NavLink></button>
             <button><NavLink to={'register'}
                              style={{textDecoration: 'none'}}>Register</NavLink></button>
