@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {registerStateType, userType} from "./RegisterFormReducer";
+import {registerStateType} from "./RegisterFormReducer";
 
 export const instance = axios.create({
     baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',
@@ -7,8 +7,9 @@ export const instance = axios.create({
 })
 
 export const registerFormAPI = {
-    async registerMe(body:userType) {
+    async registerMe(body: { email: string, password: string }) {
+        debugger
         return await instance.post<registerStateType,
-            AxiosResponse<registerStateType>, { body: userType }>(`/auth/register`, {body})
+            AxiosResponse<registerStateType>, { email: string, password: string }>(`/auth/register`, body)
     }
 }

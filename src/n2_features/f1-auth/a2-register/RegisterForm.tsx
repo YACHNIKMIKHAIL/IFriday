@@ -1,16 +1,14 @@
 import React, {ChangeEvent, useState} from 'react';
 import {registerUserTC} from "./RegisterFormReducer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {fridayReducerType} from "../../../n1_main/m2-bll/store";
 
 const RegisterForm = () => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [confirm, setConfirm] = useState<string>('')
     const dispatch = useDispatch()
-
-    console.log(email)
-    console.log(password)
-    console.log(confirm)
+    const error = useSelector<fridayReducerType, string | undefined>(state => state.registration.error)
 
     const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
@@ -27,6 +25,7 @@ const RegisterForm = () => {
         setConfirm('')
     }
     const registerHandler = () => {
+        debugger
         dispatch(registerUserTC({
             email: email,
             password: password,
@@ -45,6 +44,7 @@ const RegisterForm = () => {
             padding: '10px',
             justifyContent: 'space-around'
         }}>
+            {error && <div>{error}</div>}
             <div style={{border: '2px red solid', textAlign: 'center'}}>
                 <h1>Cards</h1>
                 <h4>Sing in</h4>
