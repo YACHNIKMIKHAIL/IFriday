@@ -2,6 +2,7 @@ import React, {ChangeEvent, useState} from 'react';
 import {registerUserTC} from "./RegisterFormReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {fridayReducerType} from "../../../n1_main/m2-bll/store";
+import {Navigate} from 'react-router-dom';
 
 const RegisterForm = () => {
     const [email, setEmail] = useState<string>('')
@@ -44,17 +45,16 @@ const RegisterForm = () => {
             padding: '10px',
             justifyContent: 'space-around'
         }}>
-            {error && <div>{error}</div>}
-            <div style={{border: '2px red solid', textAlign: 'center'}}>
+            <div style={{textAlign: 'center'}}>
                 <h1>Cards</h1>
                 <h4>Sing in</h4>
             </div>
+            {!!error && <div>{error}</div>}
             <div style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'space-around',
-                border: '2px red solid',
                 height: '50%',
                 width: '80%'
             }}>
@@ -65,7 +65,8 @@ const RegisterForm = () => {
                 Confirm password
                 <input type="password" value={confirm} onChange={onChangeConfirm}/>
             </div>
-            <div style={{border: '2px red solid', width: '80%', display: 'flex', justifyContent: 'space-around'}}>
+            <div style={{width: '80%', display: 'flex', justifyContent: 'space-around'}}>
+
                 <button onClick={cancelHandler}>Cancel</button>
                 <button onClick={registerHandler}>Register</button>
             </div>

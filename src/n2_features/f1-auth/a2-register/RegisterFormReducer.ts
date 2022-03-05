@@ -1,10 +1,12 @@
 import {Dispatch} from "redux";
 import {registerFormAPI} from "./RegisterFormAPI";
+import {Navigate} from 'react-router-dom';
 
 export type userType = {
-    error:string,
-    email:string,
-    in:string}
+    error: string,
+    email: string,
+    in: string
+}
 
 export type registerStateType = {
     addedUser: userType
@@ -12,14 +14,14 @@ export type registerStateType = {
 }
 const initialRegisterState: registerStateType = {
     addedUser: {} as userType,
-    error: ''
+    error: '',
 }
 
 export const registerFormReducer = (state = initialRegisterState, action: registerFormReducerActionType): registerStateType => {
     switch (action.type) {
         case REGISTER_USER: {
             debugger
-            return {...state,addedUser:action.payload.addedUser}
+            return {...state, addedUser: action.payload.addedUser}
         }
         case SET_ERROR_REGISTER: {
             debugger
@@ -55,13 +57,11 @@ export const registerUserTC = (body: { email: string, password: string }) => asy
     debugger
     try {
         let res = await registerFormAPI.registerMe(body)
-        if(res.data.addedUser.error!==undefined) {
-            dispatch(registerUserAC(res.data))
-        }else{
-            dispatch(setErrorRegisterAC(res.data.addedUser.error))
-        }
-    } catch (e) {
-        console.log(e)
+        dispatch(registerUserAC(res.data))
+    } catch (e: any) {
+        const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+        console.log('Error: ', {...e})
+        dispatch(setErrorRegisterAC(error))
     } finally {
 
     }
