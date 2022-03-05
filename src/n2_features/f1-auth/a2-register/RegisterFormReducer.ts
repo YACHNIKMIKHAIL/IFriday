@@ -1,20 +1,23 @@
-type userType = {
+import {Dispatch} from "redux";
+import {registerFormAPI} from "./RegisterFormAPI";
+
+export type userType = {
     email: string
     password: string
 }
-type initialRegisterStateType = {
+export type registerStateType = {
     addedUser: userType
     error?: string;
 }
-const initialRegisterState: initialRegisterStateType = {
+const initialRegisterState: registerStateType = {
     addedUser: {
-        email: "nya-admin@nya.nya",
-        password: "1qazxcvBG"
+        email: '',
+        password: ''
     },
     error: ''
 }
 
-export const registerFormReducer = (state = initialRegisterState, action: registerFormReducerActionType): initialRegisterStateType => {
+export const registerFormReducer = (state = initialRegisterState, action: registerFormReducerActionType): registerStateType => {
     switch (action.type) {
         case REGISTER_USER: {
             return {...state,...action.payload}
@@ -23,13 +26,24 @@ export const registerFormReducer = (state = initialRegisterState, action: regist
             return state
     }
 }
-type registerFormReducerActionType = registerUserACACType
+type registerFormReducerActionType = registerUserACType
 
 const REGISTER_USER = 'REGISTER_USER'
-export type registerUserACACType = ReturnType<typeof registerUserAC>
-export const registerUserAC = (data: initialRegisterStateType) => {
+export type registerUserACType = ReturnType<typeof registerUserAC>
+export const registerUserAC = (data: registerStateType) => {
     return {
         type: REGISTER_USER,
         payload: data
     } as const
+}
+
+export const registerUserTC = (body:userType) => async (dispatch:Dispatch) => {
+    try {
+        let res = await registerFormAPI.registerMe(body)
+        dispatch(registerUserAC(res.data))
+    } catch (e) {
+        console.log(e)
+    } finally {
+
+    }
 }
