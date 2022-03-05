@@ -1,9 +1,12 @@
 import React, {ChangeEvent, useState} from 'react';
+import {registerUserTC} from "./RegisterFormReducer";
+import {useDispatch} from "react-redux";
 
 const RegisterForm = () => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [confirm, setConfirm] = useState<string>('')
+    const dispatch = useDispatch()
 
     console.log(email)
     console.log(password)
@@ -17,6 +20,17 @@ const RegisterForm = () => {
     }
     const onChangeConfirm = (e: ChangeEvent<HTMLInputElement>) => {
         setConfirm(e.currentTarget.value)
+    }
+    const cancelHandler = () => {
+        setEmail('')
+        setPassword('')
+        setConfirm('')
+    }
+    const registerHandler = () => {
+        dispatch(registerUserTC({
+            email: email,
+            password: password,
+        }))
     }
 
     return (
@@ -52,8 +66,8 @@ const RegisterForm = () => {
                 <input type="password" value={confirm} onChange={onChangeConfirm}/>
             </div>
             <div style={{border: '2px red solid', width: '80%', display: 'flex', justifyContent: 'space-around'}}>
-                <button>Cancel</button>
-                <button>Register</button>
+                <button onClick={cancelHandler}>Cancel</button>
+                <button onClick={registerHandler}>Register</button>
             </div>
         </div>
     );
