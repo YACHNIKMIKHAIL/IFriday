@@ -1,13 +1,15 @@
 import React, {ChangeEvent, useState} from 'react';
-import {registerUserTC} from "./RegisterFormReducer";
+import {registerUserTC, setErrorRegisterAC} from "./RegisterFormReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {fridayReducerType} from "../../../n1_main/m2-bll/store";
-import {Navigate} from 'react-router-dom';
 
 const RegisterForm = () => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [confirm, setConfirm] = useState<string>('')
+    const [confirmError, setConfirmError] = useState<string>('')
+
+    debugger
     const dispatch = useDispatch()
     const error = useSelector<fridayReducerType, string | undefined>(state => state.registration.error)
 
@@ -24,13 +26,18 @@ const RegisterForm = () => {
         setEmail('')
         setPassword('')
         setConfirm('')
+        setConfirmError('')
+        dispatch(setErrorRegisterAC(''))
     }
     const registerHandler = () => {
-        debugger
-        dispatch(registerUserTC({
-            email: email,
-            password: password,
-        }))
+        if (confirm.length !== password.length) {
+            setConfirmError('Invalid password')
+        } else {
+            dispatch(registerUserTC({
+                email: email,
+                password: password,
+            }))
+        }
     }
 
     return (
@@ -47,9 +54,10 @@ const RegisterForm = () => {
         }}>
             <div style={{textAlign: 'center'}}>
                 <h1>Cards</h1>
+                {!!error && <div>{error}</div>
+                || !!confirmError && <div>{confirmError}</div>}
                 <h4>Sing in</h4>
             </div>
-            {!!error && <div>{error}</div>}
             <div style={{
                 display: 'flex',
                 flexDirection: 'column',
