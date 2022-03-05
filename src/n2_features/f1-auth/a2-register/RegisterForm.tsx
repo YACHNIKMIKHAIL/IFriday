@@ -2,6 +2,7 @@ import React, {ChangeEvent, useState} from 'react';
 import {registerUserTC, setErrorRegisterAC} from "./RegisterFormReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {fridayReducerType} from "../../../n1_main/m2-bll/store";
+import regS from './RegisterForm.module.css'
 
 const RegisterForm = () => {
     const [email, setEmail] = useState<string>('')
@@ -41,31 +42,14 @@ const RegisterForm = () => {
     }
 
     return (
-        <div style={{
-            border: '2px black solid',
-            height: '60%',
-            width: '20%',
-            borderRadius: '20px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: '10px',
-            justifyContent: 'space-around'
-        }}>
-            <div style={{textAlign: 'center'}}>
+        <div className={regS.main}>
+            <div className={regS.title}>
                 <h1>Cards</h1>
-                {!!error && <div>{error}</div>
-                || !!confirmError && <div>{confirmError}</div>}
+                {!!error && <div>{error}</div>}
+                {!!confirmError && <div>{confirmError}</div>}
                 <h4>Sing in</h4>
             </div>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'space-around',
-                height: '50%',
-                width: '80%'
-            }}>
+            <div className={regS.second}>
                 eMail
                 <input type="text" value={email} onChange={onChangeEmail}/>
                 Password
@@ -73,8 +57,7 @@ const RegisterForm = () => {
                 Confirm password
                 <input type="password" value={confirm} onChange={onChangeConfirm}/>
             </div>
-            <div style={{width: '80%', display: 'flex', justifyContent: 'space-around'}}>
-
+            <div className={regS.buttonsDiv}>
                 <button onClick={cancelHandler}>Cancel</button>
                 <button onClick={registerHandler}>Register</button>
             </div>
