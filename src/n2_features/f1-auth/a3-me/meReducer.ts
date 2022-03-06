@@ -75,10 +75,7 @@ export const meTC = () => async (dispatch: Dispatch) => {
         dispatch(initializeMeAC(true))
         dispatch(setMeAC(res.data))
     } catch (e: any) {
-        if (e.response.status === 401) {
-            dispatch(setErrorAC(e.response.data.error))
-
-        }
+        dispatch(setErrorAC(e.response.data.error))
     } finally {
         dispatch(initializeMeAC(true))
     }
