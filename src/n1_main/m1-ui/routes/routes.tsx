@@ -8,6 +8,7 @@ import Login from "../common/Login";
 import PasswordRecovery from "../common/PasswordRecovery";
 
 const RoutesX = () => {
+
     return (
         <>
             <Routes>
