@@ -1,65 +1,106 @@
-import React, {ChangeEvent, useState} from 'react';
+import React from 'react';
 import {registerUserTC, setErrorRegisterAC} from "./RegisterFormReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {fridayReducerType} from "../../../n1_main/m2-bll/store";
 import regS from './RegisterForm.module.css'
+import {useFormik} from "formik";
+
+type FormikErrorType = {
+    email?: string
+    password?: string
+    confirm?: string
+}
 
 const RegisterForm = () => {
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-    const [confirm, setConfirm] = useState<string>('')
-    const [confirmError, setConfirmError] = useState<string>('')
-    console.log(confirm === password)
-    const dispatch = useDispatch()
+    // const [email, setEmail] = useState<string>('')
+    // const [password, setPassword] = useState<string>('')
+    // const [confirm, setConfirm] = useState<string>('')
+    // const [confirmError, setConfirmError] = useState<string>('')
+    // console.log(confirm === password)
+    // const dispatch = useDispatch()
     const error = useSelector<fridayReducerType, string | undefined>(state => state.registration.error)
-
-    const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.currentTarget.value)
-    }
-    const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.currentTarget.value)
-    }
-    const onChangeConfirm = (e: ChangeEvent<HTMLInputElement>) => {
-        setConfirm(e.currentTarget.value)
-    }
+    //
+    // const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    //     setEmail(e.currentTarget.value)
+    // }
+    // const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    //     setPassword(e.currentTarget.value)
+    // }
+    // const onChangeConfirm = (e: ChangeEvent<HTMLInputElement>) => {
+    //     setConfirm(e.currentTarget.value)
+    // }
     const cancelHandler = () => {
-        setEmail('')
-        setPassword('')
-        setConfirm('')
-        setConfirmError('')
-        dispatch(setErrorRegisterAC(''))
+        formik.resetForm()
+        dispatch(setErrorRegisterAC(""))
     }
-    const registerHandler = () => {
-        if (confirm.length !== password.length
-            || confirm !== password) {
-            setConfirmError('Invalid password')
-        } else {
-            dispatch(registerUserTC({
-                email: email,
-                password: password,
-            }))
+    const dispatch = useDispatch()
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+            confirm: ''
+        },
+        validate: (values) => {
+            const errors: FormikErrorType = {};
+            if (!values.email) {
+                errors.email = 'Required';
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                errors.email = 'Invalid email address';
+            }
+            if (!values.password) {
+                errors.password = 'Required';
+            } else if (values.password.length < 8) {
+                errors.password = 'Invalid password,pass will be longer tham 8 symbols';
+            }
+            if (!values.confirm) {
+                errors.confirm = 'Required';
+            } else if (values.confirm.length !== values.password.length && values.confirm !== values.password) {
+                errors.confirm = 'Invalid confirm password';
+            }
+            return errors;
+        },
+        onSubmit: value => {
+            formik.resetForm()
+            dispatch(registerUserTC({email: value.email, password: value.password}))
         }
-    }
+    })
 
     return (
         <div className={regS.main}>
             <div className={regS.title}>
                 <h1>Cards</h1>
                 {!!error && <div>{error}</div>}
-                {!!confirmError && <div>{confirmError}</div>}
                 <h4>Sing in</h4>
             </div>
-            <div className={regS.second}>
-                eMail
-                <input type="text" value={email} onChange={onChangeEmail}/>
-                Password
-                <input type="password" value={password} onChange={onChangePassword}/>
-                Confirm password
-                <input type="password" value={confirm} onChange={onChangeConfirm}/>
-            </div>
-            <div className={regS.buttonsDiv}>
-                <button onClick={cancelHandler}>Cancel</button>
-                <button onClick={registerHandler}>Register</button>
+
+            <div>
+                <form onSubmit={formik.handleSubmit}>
+                    <div className={regS.second}>
+                        eMail
+                        <input {...formik.getFieldProps('email')}/>
+                        {formik.touched.email && formik.errors.email ?
+                            <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
+                    </div>
+                    <div className={regS.second}>
+                        Password
+                        <input type="password"
+                               {...formik.getFieldProps('password')}/>
+                        {formik.touched.password && formik.errors.password ?
+                            <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
+                    </div>
+                    <div className={regS.second}>
+                        Confirm password
+                        <input type="password"
+                               {...formik.getFieldProps('confirm')}/>
+                        {formik.touched.confirm && formik.errors.confirm ?
+                            <div style={{color: 'red'}}>{formik.errors.confirm}</div> : null}
+                    </div>
+                    <div className={regS.buttonsDiv}>
+                        <button onClick={cancelHandler}>Cancel</button>
+                        <button type="submit">Register</button>
+                    </div>
+                </form>
             </div>
         </div>
     );

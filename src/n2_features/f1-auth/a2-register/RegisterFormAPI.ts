@@ -8,7 +8,6 @@ export const instance = axios.create({
 
 export const registerFormAPI = {
     async registerMe(body: { email: string, password: string }) {
-        debugger
         return await instance.post<registerStateType,
             AxiosResponse<registerStateType>, { email: string, password: string }>(`/auth/register`, body)
     }
