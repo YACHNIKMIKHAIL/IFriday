@@ -1,7 +1,7 @@
 .main {
     border: 2px black solid;
     height: 60%;
-    width: 20%;
+    min-width: 20%;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@
 }
 
 .buttonsDiv {
-    width: 80%;
+    min-width: 90%;
     display: flex;
-    justify-content: space-around
+    justify-content: space-between;
 }

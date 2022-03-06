@@ -9,8 +9,7 @@ const RegisterForm = () => {
     const [password, setPassword] = useState<string>('')
     const [confirm, setConfirm] = useState<string>('')
     const [confirmError, setConfirmError] = useState<string>('')
-
-    debugger
+    console.log(confirm === password)
     const dispatch = useDispatch()
     const error = useSelector<fridayReducerType, string | undefined>(state => state.registration.error)
 
@@ -31,7 +30,8 @@ const RegisterForm = () => {
         dispatch(setErrorRegisterAC(''))
     }
     const registerHandler = () => {
-        if (confirm.length !== password.length) {
+        if (confirm.length !== password.length
+            || confirm !== password) {
             setConfirmError('Invalid password')
         } else {
             dispatch(registerUserTC({

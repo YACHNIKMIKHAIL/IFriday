@@ -49,6 +49,14 @@ export const setErrorRegisterAC = (e: string) => {
 }
 
 export const registerUserTC = (body: { email: string, password: string }) => async (dispatch: Dispatch) => {
+    dispatch(registerUserAC({
+        addedUser: {
+            error: '',
+            email: '',
+            in: ''
+        },
+        error: ''
+    }))
     try {
         let res = await registerFormAPI.registerMe(body)
         dispatch(registerUserAC(res.data))
