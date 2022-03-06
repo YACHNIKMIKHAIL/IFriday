@@ -12,27 +12,7 @@ type FormikErrorType = {
 }
 
 const RegisterForm = () => {
-    // const [email, setEmail] = useState<string>('')
-    // const [password, setPassword] = useState<string>('')
-    // const [confirm, setConfirm] = useState<string>('')
-    // const [confirmError, setConfirmError] = useState<string>('')
-    // console.log(confirm === password)
-    // const dispatch = useDispatch()
     const error = useSelector<fridayReducerType, string | undefined>(state => state.registration.error)
-    //
-    // const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    //     setEmail(e.currentTarget.value)
-    // }
-    // const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    //     setPassword(e.currentTarget.value)
-    // }
-    // const onChangeConfirm = (e: ChangeEvent<HTMLInputElement>) => {
-    //     setConfirm(e.currentTarget.value)
-    // }
-    const cancelHandler = () => {
-        formik.resetForm()
-        dispatch(setErrorRegisterAC(""))
-    }
     const dispatch = useDispatch()
 
     const formik = useFormik({
@@ -65,7 +45,16 @@ const RegisterForm = () => {
             dispatch(registerUserTC({email: value.email, password: value.password}))
         }
     })
+    const cancelHandler = () => {
+        formik.resetForm()
+        formik.setTouched({})
+        formik.setErrors({email: undefined, password: undefined, confirm: undefined})
+        // formik.setFieldError("email",undefined)
+        // formik.setFieldError("password",undefined)
+        // formik.setFieldError("confirm",undefined)
 
+        dispatch(setErrorRegisterAC(""))
+    }
     return (
         <div className={regS.main}>
             <div className={regS.title}>
@@ -97,7 +86,7 @@ const RegisterForm = () => {
                             <div style={{color: 'red'}}>{formik.errors.confirm}</div> : null}
                     </div>
                     <div className={regS.buttonsDiv}>
-                        <button onClick={cancelHandler}>Cancel</button>
+                        <button type="button" onClick={cancelHandler}>Cancel</button>
                         <button type="submit">Register</button>
                     </div>
                 </form>
