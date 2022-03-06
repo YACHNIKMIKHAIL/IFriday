@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fridayReducerType} from "../../../n1_main/m2-bll/store";
 import regS from './RegisterForm.module.css'
 import {useFormik} from "formik";
+import {Navigate} from 'react-router-dom'
 
 type FormikErrorType = {
     email?: string
@@ -14,7 +15,6 @@ type FormikErrorType = {
 const RegisterForm = () => {
     const error = useSelector<fridayReducerType, string | undefined>(state => state.registration.error)
     const dispatch = useDispatch()
-
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -49,12 +49,12 @@ const RegisterForm = () => {
         formik.resetForm()
         formik.setTouched({})
         formik.setErrors({email: undefined, password: undefined, confirm: undefined})
-        // formik.setFieldError("email",undefined)
-        // formik.setFieldError("password",undefined)
-        // formik.setFieldError("confirm",undefined)
-
         dispatch(setErrorRegisterAC(""))
     }
+    //
+    // if (error === "email already exists /ᐠ｡ꞈ｡ᐟ\\") {
+    //     <Navigate to={'/login'}/>
+    // }
     return (
         <div className={regS.main}>
             <div className={regS.title}>
