@@ -3,6 +3,7 @@ import './App.css';
 import {HashRouter} from "react-router-dom";
 import Main from "../Main";
 import RoutesX from "./routes/routes";
+import Profile from "./common/Profile";
 
 function App() {
     
@@ -10,6 +11,7 @@ function App() {
         <div className="App">
             <HashRouter>
                 <>
+                    <Profile/>
                     <Main/>
                     <RoutesX/>
                 </>
