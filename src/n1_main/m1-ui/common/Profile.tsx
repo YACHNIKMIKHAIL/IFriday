@@ -1,15 +1,14 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from './../../../n2_features/f1-auth/a6-profile/Profile.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {fridayReducerType} from "../../m2-bll/store";
-import {updateUserNameTC} from "../../../n2_features/f1-auth/a6-profile/ProfileReducer";
-import {MeType} from "../../../n2_features/f1-auth/a3-me/meReducer";
+import {ProfileType, setProfileTC, updateUserNameTC} from "../../../n2_features/f1-auth/a6-profile/ProfileReducer";
 
-const BASE_IMG_URL = "https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg"
+export const BASE_IMG_URL = "https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg"
 
 const Profile = () => {
 
-    const userInfo = useSelector<fridayReducerType, MeType>(state => state.me.me)
+    const userInfo = useSelector<fridayReducerType, ProfileType>(state => state.profile.profile)
 
     let [name, setName] = useState<string>(userInfo.name)
 
@@ -31,7 +30,6 @@ const Profile = () => {
                 <img src={userInfo.avatar ? userInfo.avatar : BASE_IMG_URL} alt={"user's image"}/>
                 <div className={s.inputContainer}>
                     <input type="text" className={s.input} value={name} onChange={changeName}/>
-                    <input type="text" className={s.input} value={userInfo.email}/>
                 </div>
                 <button className={s.button} onClick={updateUser}>Save</button>
 

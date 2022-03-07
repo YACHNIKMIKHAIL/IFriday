@@ -8,7 +8,7 @@ export const instance = axios.create({
 export const meAPI = {
     async me() {
         return await instance.post<meRespType,
-            AxiosResponse<meRespType>, {  }>(`auth/me`, {})
+            AxiosResponse<meRespType>, {}>(`auth/me`, {})
     }
 }
 type meRespType={
