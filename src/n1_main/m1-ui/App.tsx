@@ -5,7 +5,6 @@ import Main from "../Main";
 import RoutesX from "./routes/routes";
 
 function App() {
-    
     return (
         <div className="App">
             <HashRouter>
@@ -14,8 +13,6 @@ function App() {
                     <RoutesX/>
                 </>
             </HashRouter>
-
-
         </div>
     );
 }

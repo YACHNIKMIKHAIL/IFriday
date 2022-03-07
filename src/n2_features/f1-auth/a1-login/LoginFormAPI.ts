@@ -6,8 +6,14 @@ export const instance = axios.create({
 })
 
 export const loginFormAPI = {
-    async loginMe(body: { email: string, password: string, rememberMe: boolean }) {
-        return await instance.post<any,
-            AxiosResponse<any>, { email: string, password: string,  rememberMe: boolean  }>(`/auth/login`, body)
+    async loginMe(body: loginType) {
+        return await instance.post<loginType,
+            AxiosResponse<loginType>, { email: string, password: string,  rememberMe: boolean  }>(`/auth/login`, body)
     }
+}
+
+export type loginType = {
+    email: string
+    password: string
+    rememberMe: false
 }
