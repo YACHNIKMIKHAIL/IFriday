@@ -2,8 +2,9 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {fridayReducerType} from "../../../n1_main/m2-bll/store";
 import {useFormik} from "formik";
-import {registerUserTC, setErrorRegisterAC} from "../a2-register/RegisterFormReducer";
-import regS from "../a2-register/RegisterForm.module.css";
+import {registerUserTC} from "../a2-register/RegisterFormReducer";
+import style from "./LoginForm.module.css"
+import {NavLink} from "react-router-dom";
 
 type FormikErrorType = {
     email?: string
@@ -18,7 +19,7 @@ const LoginForm = () => {
         initialValues: {
             email: '',
             password: '',
-            confirm: ''
+            rememberMe: false,
         },
         validate: (values) => {
             const errors: FormikErrorType = {};
@@ -39,39 +40,55 @@ const LoginForm = () => {
             dispatch(registerUserTC({email: value.email, password: value.password}))
         }
     })
-    const cancelHandler = () => {
-        formik.resetForm()
-        formik.setTouched({})
-        formik.setErrors({email: undefined, password: undefined})
-        dispatch(setErrorRegisterAC(""))
-    }
 
     return (
-        <div className={regS.main}>
-            <div className={regS.title}>
+        <div className={style.main}>
+            <div className={style.title}>
                 <h1>Login</h1>
                 {!!error && <div>{error}</div>}
             </div>
+            <hr/>
             <div>
                 <form onSubmit={formik.handleSubmit}>
-                    <div className={regS.second}>
+                    <div className={style.second}>
                         eMail
-                        <input {...formik.getFieldProps('email')}/>
-                        {formik.touched.email && formik.errors.email ?
-                            <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
+                        <input
+                            type={"email"}
+                            placeholder={"Enter your email"}
+                            {...formik.getFieldProps('email')}
+                        />
+                        {formik.touched.email && formik.errors.email &&
+                        <div style={{color: 'red'}}>{formik.errors.email}</div>}
                     </div>
-                    <div className={regS.second}>
+                    <div className={style.second}>
                         Password
-                        <input type="password"
-                               {...formik.getFieldProps('password')}/>
-                        {formik.touched.password && formik.errors.password ?
-                            <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
+                        <input
+                            type="password"
+                            placeholder={"Enter your password"}
+                            {...formik.getFieldProps('password')}
+                        />
+                        {formik.touched.password && formik.errors.password &&
+                        <div style={{color: 'red'}}>{formik.errors.password}</div>}
                     </div>
-                    <div className={regS.buttonsDiv}>
-                        <button type="button" onClick={cancelHandler}>Cancel</button>
+                    <div>
+                        Remember me
+                        <input
+                            type="checkbox"
+                            {...formik.getFieldProps('rememberMe')}
+                        />
+                    </div>
+                    <div className={style.buttons}>
                         <button type="submit">Login</button>
                     </div>
                 </form>
+                <div>
+                    <div>
+                        Not registered? <NavLink to={'/register'}>Create an Account</NavLink>
+                    </div>
+                    <div>
+                        Forgot password? <NavLink to={'/passwordrecovery'}>Click here to recover</NavLink>
+                    </div>
+                </div>
             </div>
         </div>
     );
