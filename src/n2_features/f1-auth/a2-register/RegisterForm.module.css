@@ -1,6 +1,6 @@
 .main {
     border: 2px black solid;
-    height: 60%;
+    /*height: 60%;*/
     min-width: 40%;
     border-radius: 20px;
     display: flex;
@@ -14,7 +14,7 @@
     text-align: center;
 }
 form{
-    min-height: 90%;
+    padding: 10px;
 }
 .second {
     display: flex;
@@ -22,10 +22,12 @@ form{
     align-items: center;
     justify-content: space-between;
     height: 50%;
+    padding: 10px;
 }
 
 .buttonsDiv {
     min-width: 90%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    padding: 10px;
 }

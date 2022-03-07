@@ -64,7 +64,7 @@ const RegisterForm = () => {
             </div>
 
             <div>
-                <form onSubmit={formik.handleSubmit}>
+                <form onSubmit={formik.handleSubmit} >
                     <div className={regS.second}>
                         eMail
                         <input {...formik.getFieldProps('email')}/>
