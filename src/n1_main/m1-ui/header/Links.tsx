@@ -12,7 +12,7 @@ const Links = () => {
                              style={{textDecoration: 'none'}}>Login</NavLink></button>
             <button><NavLink to={'passwordrecovery'}
                              style={{textDecoration: 'none'}}>PasswordRecovery</NavLink></button>
-            <button><NavLink to={'newpassword'}
+            <button><NavLink to={'set-new-password'}
                              style={{textDecoration: 'none'}}>NewPassword</NavLink></button>
             <button><NavLink to={'test'}
                              style={{textDecoration: 'none'}}>Test</NavLink></button>

@@ -19,7 +19,7 @@ const RoutesX = () => {
                 <Route path={'register'} element={<Register/>}/>
                 <Route path={'login'} element={<Login/>}/>
                 <Route path={'passwordrecovery'} element={<PasswordRecovery/>}/>
-                <Route path={'newpassword'} element={<NewPassword/>}/>
+                <Route path={'set-new-password/:token'} element={<NewPassword/>}/>
                 <Route path={'test'} element={<Test/>}/>
                 <Route path={'/404'} element={<h1 style={{textAlign: 'center'}}>404:PAGE NOT FOUND</h1>}/>
                 <Route path={'*'} element={<Navigate to={'/404'}/>}/>

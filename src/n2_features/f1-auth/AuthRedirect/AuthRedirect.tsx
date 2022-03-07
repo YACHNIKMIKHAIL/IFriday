@@ -1,8 +1,8 @@
 import React, {DetailedHTMLProps, HTMLAttributes} from 'react';
 import {useSelector} from 'react-redux';
-import {Navigate} from 'react-router-dom';
 import {fridayReducerType} from "../../../n1_main/m2-bll/store";
 import Me from "../a3-me/me";
+import {Navigate} from 'react-router-dom'
 
 
 type DivPropsType = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
