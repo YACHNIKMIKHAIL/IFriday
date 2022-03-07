@@ -17,7 +17,7 @@ const passwordRecoveryState: passwordRecoveryStateType = {
 export const passwordRecoveryReducer = (state = passwordRecoveryState, action: meReducerActionType): passwordRecoveryStateType => {
     switch (action.type) {
         case SET_INFO: {
-            return {...state, ...action.payload}
+            return action.payload.data
         }
         default:
             return state

@@ -10,16 +10,16 @@ const newPasswordState: newPasswordStateType = {
     error: ''
 }
 
-export const newPasswordReducer = (state = newPasswordState, action: meReducerActionType): newPasswordStateType => {
+export const newPasswordReducer = (state = newPasswordState, action: newPasswordActionType): newPasswordStateType => {
     switch (action.type) {
         case SET_INFO: {
-            return {...state, ...action.payload}
+            return {...action.payload.data}
         }
         default:
             return state
     }
 }
-type meReducerActionType = setInfoACType | setErrorACType
+type newPasswordActionType = setInfoACType | setErrorACType
 
 const SET_INFO = 'SET_INFO'
 export type setInfoACType = ReturnType<typeof setInfoAC>
@@ -39,8 +39,10 @@ export const setErrorAC = (error: string) => {
 }
 
 export const newPasswordTC = (body: newPassBodyType) => async (dispatch: Dispatch) => {
+    console.log(body)
     try {
         let res = await createNewPasswordAPI.createNewPass(body)
+        console.log(res.data)
         dispatch(setInfoAC(res.data))
     } catch (e: any) {
         dispatch(setErrorAC(e.response.data.error))

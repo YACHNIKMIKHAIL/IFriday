@@ -11,22 +11,22 @@ import {useSelector} from "react-redux";
 import {fridayReducerType} from "../../m2-bll/store";
 import Me from "../../../n2_features/f1-auth/a3-me/me";
 
-export enum RoutesXPaths  {
-    PROFILE= '/IFriday',
-    LOGIN= '/login',
-    FORGOT= '/forgot',
-    REGISTER= '/register',
-    RECOVERY= '/passwordrecovery',
-    TEST= '/test',
-    SET_PASS= '/set-new-password/:token',
-    PACKS= '/packs/:id',
-    CARDS= '/cards',
-    NOT_FOUND='/404'
+export enum RoutesXPaths {
+    PROFILE = '/IFriday',
+    LOGIN = '/login',
+    FORGOT = '/forgot',
+    REGISTER = '/register',
+    RECOVERY = '/passwordrecovery',
+    TEST = '/test',
+    SET_PASS = '/set-new-password/:token',
+    PACKS = '/packs/:id',
+    CARDS = '/cards',
+    NOT_FOUND = '/404'
 }
 
 const RoutesX = () => {
     const isInitialize = useSelector<fridayReducerType, boolean>(state => state.me.isInitialized)
-    if(!isInitialize){
+    if (!isInitialize) {
         return <Me/>
     }
     return (
@@ -39,10 +39,11 @@ const RoutesX = () => {
                 <Route path={RoutesXPaths.LOGIN} element={<Login/>}/>
                 <Route path={RoutesXPaths.RECOVERY} element={<PasswordRecovery/>}/>
                 <Route path={RoutesXPaths.SET_PASS} element={
-                    <NewPassword/>
+                        <NewPassword/>
                 }/>
                 <Route path={RoutesXPaths.TEST} element={<Test/>}/>
-                <Route path={RoutesXPaths.NOT_FOUND} element={<h1 style={{textAlign: 'center'}}>404:PAGE NOT FOUND</h1>}/>
+                <Route path={RoutesXPaths.NOT_FOUND}
+                       element={<h1 style={{textAlign: 'center'}}>404:PAGE NOT FOUND</h1>}/>
                 <Route path={'*'} element={<Navigate to={RoutesXPaths.NOT_FOUND}/>}/>
             </Routes>
         </>

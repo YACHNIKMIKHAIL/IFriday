@@ -8,7 +8,7 @@ import {fridayReducerType} from "../../../n1_main/m2-bll/store";
 const PasswordRecoveryForm = () => {
     const [email, setEmail] = useState<string>('')
     const dispatch = useDispatch()
-    // const success = useSelector<fridayReducerType, boolean>(state => state.forgot.success)
+    const success = useSelector<fridayReducerType, boolean>(state => state.forgot.success)
 
     const send = () => {
         dispatch(passwordRecoveryTC(email))
@@ -18,6 +18,7 @@ const PasswordRecoveryForm = () => {
             <div className={regS.title}>
                 <h1>Cards</h1>
                 <h4>Forgot your password?</h4>
+                {success && <div>Visit your email</div>}
             </div>
             <form>
                 <div className={regS.second}>

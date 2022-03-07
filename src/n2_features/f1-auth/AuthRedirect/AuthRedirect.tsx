@@ -9,21 +9,20 @@ type DivPropsType = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivEle
 
 type AuthRedirectPagePropsType = DivPropsType & {};
 
-const AuthRedirectPage: React.FC<AuthRedirectPagePropsType> = React.memo(({ children, ...restProps }) => {
-
+const AuthRedirectPage: React.FC<AuthRedirectPagePropsType> = React.memo(({children, ...restProps}) => {
     const isInitialized = useSelector<fridayReducerType, boolean>(state => state.me.isInitialized)
     const meReducerStateError = useSelector<fridayReducerType, string | undefined>(state => state.me.error)
-    const newPassInfo = useSelector<fridayReducerType, string | undefined>(state => state.newPass.info)
-
+    const newPassInfo = useSelector<fridayReducerType,string|undefined>(state=>state.newPass.info)
+    console.log(newPassInfo)
     if (!isInitialized) {
         return <Me/>
     }
-    if (meReducerStateError === "you are not authorized /ᐠ-ꞈ-ᐟ\\") {
+    if (
+        // meReducerStateError === "you are not authorized /ᐠ-ꞈ-ᐟ\\" ||
+        newPassInfo === "\"setNewPassword success —ฅ/ᐠ.̫ .ᐟฅ—\"") {
         return <Navigate to={'/login'}/>
     }
-    if (newPassInfo === "\"setNewPassword success —ฅ/ᐠ.̫ .ᐟฅ—\"") {
-        return <Navigate to={'/login'}/>
-    }
+
 
     return (
         <>

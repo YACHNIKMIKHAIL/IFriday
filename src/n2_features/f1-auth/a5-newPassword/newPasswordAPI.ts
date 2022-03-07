@@ -7,7 +7,7 @@ export const instance = axios.create({
 })
 
 export const createNewPasswordAPI = {
-    async createNewPass(body: newPassBodyType) {
+     async createNewPass(body: newPassBodyType) {
         return await instance.post<SetNewResponseType,
             AxiosResponse<SetNewResponseType>, newPassBodyType>(`/auth/set-new-password`, body)
     },
