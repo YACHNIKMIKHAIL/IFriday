@@ -2,9 +2,9 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {fridayReducerType} from "../../../n1_main/m2-bll/store";
 import {useFormik} from "formik";
-import {registerUserTC} from "../a2-register/RegisterFormReducer";
 import style from "./LoginForm.module.css"
 import {NavLink} from "react-router-dom";
+import {loginUserTC} from "./LoginFormReducer";
 
 type FormikErrorType = {
     email?: string
@@ -37,7 +37,7 @@ const LoginForm = () => {
         },
         onSubmit: value => {
             formik.resetForm()
-            dispatch(registerUserTC({email: value.email, password: value.password}))
+            dispatch(loginUserTC({email: value.email, password: value.password, rememberMe: value.rememberMe}))
         }
     })
 
@@ -48,10 +48,10 @@ const LoginForm = () => {
                 {!!error && <div>{error}</div>}
             </div>
             <hr/>
-            <div>
+            <div className={style.login}>
                 <form onSubmit={formik.handleSubmit}>
                     <div className={style.second}>
-                        eMail
+                        eMail:
                         <input
                             type={"email"}
                             placeholder={"Enter your email"}
@@ -61,7 +61,7 @@ const LoginForm = () => {
                         <div style={{color: 'red'}}>{formik.errors.email}</div>}
                     </div>
                     <div className={style.second}>
-                        Password
+                        Password:
                         <input
                             type="password"
                             placeholder={"Enter your password"}
@@ -71,7 +71,7 @@ const LoginForm = () => {
                         <div style={{color: 'red'}}>{formik.errors.password}</div>}
                     </div>
                     <div>
-                        Remember me
+                        Remember me:
                         <input
                             type="checkbox"
                             {...formik.getFieldProps('rememberMe')}
@@ -81,7 +81,7 @@ const LoginForm = () => {
                         <button type="submit">Login</button>
                     </div>
                 </form>
-                <div>
+                <div className={style.footer}>
                     <div>
                         Not registered? <NavLink to={'/register'}>Create an Account</NavLink>
                     </div>

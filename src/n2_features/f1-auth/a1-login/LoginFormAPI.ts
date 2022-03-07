@@ -15,5 +15,5 @@ export const loginFormAPI = {
 export type loginType = {
     email: string
     password: string
-    rememberMe: false
+    rememberMe: boolean
 }
