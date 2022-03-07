@@ -13,6 +13,7 @@ const AuthRedirectPage: React.FC<AuthRedirectPagePropsType> = React.memo(({ chil
 
     const isInitialized = useSelector<fridayReducerType, boolean>(state => state.me.isInitialized)
     const meReducerStateError = useSelector<fridayReducerType, string | undefined>(state => state.me.error)
+    const newPassInfo = useSelector<fridayReducerType, string | undefined>(state => state.newPass.info)
 
     if (!isInitialized) {
         return <Me/>
@@ -20,6 +21,10 @@ const AuthRedirectPage: React.FC<AuthRedirectPagePropsType> = React.memo(({ chil
     if (meReducerStateError === "you are not authorized /ᐠ-ꞈ-ᐟ\\") {
         return <Navigate to={'/login'}/>
     }
+    if (newPassInfo === "\"setNewPassword success —ฅ/ᐠ.̫ .ᐟฅ—\"") {
+        return <Navigate to={'/login'}/>
+    }
+
     return (
         <>
             <div {...restProps}>{children}</div>

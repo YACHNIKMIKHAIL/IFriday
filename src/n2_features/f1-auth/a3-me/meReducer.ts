@@ -69,7 +69,6 @@ export const setErrorAC = (error: string) => {
     } as const
 }
 export const meTC = () => async (dispatch: Dispatch) => {
-    debugger
     try {
         let res = await meAPI.me()
         dispatch(initializeMeAC(true))
