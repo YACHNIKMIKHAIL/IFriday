@@ -11,6 +11,19 @@ import {useSelector} from "react-redux";
 import {fridayReducerType} from "../../m2-bll/store";
 import Me from "../../../n2_features/f1-auth/a3-me/me";
 
+export enum RoutesXPaths  {
+    PROFILE= '/IFriday',
+    LOGIN= '/login',
+    FORGOT= '/forgot',
+    REGISTER= '/register',
+    RECOVERY= '/passwordrecovery',
+    TEST= '/test',
+    SET_PASS= '/set-new-password/:token',
+    PACKS= '/packs/:id',
+    CARDS= '/cards',
+    NOT_FOUND='/404'
+}
+
 const RoutesX = () => {
     const isInitialize = useSelector<fridayReducerType, boolean>(state => state.me.isInitialized)
     if(!isInitialize){
@@ -19,18 +32,18 @@ const RoutesX = () => {
     return (
         <>
             <Routes>
-                <Route path={'/IFriday'} element={<AuthRedirectPage>
+                <Route path={RoutesXPaths.PROFILE} element={<AuthRedirectPage>
                     <Profile/>
                 </AuthRedirectPage>}/>
-                <Route path={'register'} element={<Register/>}/>
-                <Route path={'login'} element={<Login/>}/>
-                <Route path={'passwordrecovery'} element={<PasswordRecovery/>}/>
-                <Route path={'set-new-password/:token'} element={
+                <Route path={RoutesXPaths.REGISTER} element={<Register/>}/>
+                <Route path={RoutesXPaths.LOGIN} element={<Login/>}/>
+                <Route path={RoutesXPaths.RECOVERY} element={<PasswordRecovery/>}/>
+                <Route path={RoutesXPaths.SET_PASS} element={
                     <NewPassword/>
                 }/>
-                <Route path={'test'} element={<Test/>}/>
-                <Route path={'/404'} element={<h1 style={{textAlign: 'center'}}>404:PAGE NOT FOUND</h1>}/>
-                <Route path={'*'} element={<Navigate to={'/404'}/>}/>
+                <Route path={RoutesXPaths.TEST} element={<Test/>}/>
+                <Route path={RoutesXPaths.NOT_FOUND} element={<h1 style={{textAlign: 'center'}}>404:PAGE NOT FOUND</h1>}/>
+                <Route path={'*'} element={<Navigate to={RoutesXPaths.NOT_FOUND}/>}/>
             </Routes>
         </>
     );
