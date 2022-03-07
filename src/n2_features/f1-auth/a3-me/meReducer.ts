@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 import {meAPI} from "./meAPI";
 
-type MeType = {
+export type MeType = {
     _id: string;
     email: string;
     name: string;
