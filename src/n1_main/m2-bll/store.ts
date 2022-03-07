@@ -4,12 +4,14 @@ import {registerFormReducer} from "../../n2_features/f1-auth/a2-register/Registe
 import {meReducer} from "../../n2_features/f1-auth/a3-me/meReducer";
 import {passwordRecoveryReducer} from "../../n2_features/f1-auth/a4-passwordRecovery/passwordRecoveryReducer";
 import {profileReducer} from "../../n2_features/f1-auth/a6-profile/ProfileReducer";
+import {newPasswordReducer} from "../../n2_features/f1-auth/a5-newPassword/newPasswordReducer";
 
 const fridayReducer = combineReducers({
     registration: registerFormReducer,
     me: meReducer,
     forgot: passwordRecoveryReducer,
-    profile: profileReducer
+    profile: profileReducer,
+    newPass:newPasswordReducer
 })
 
 export type fridayReducerType = ReturnType<typeof fridayReducer>
