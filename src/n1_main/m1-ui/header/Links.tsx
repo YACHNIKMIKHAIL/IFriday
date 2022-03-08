@@ -17,6 +17,8 @@ const Links = () => {
                              style={{textDecoration: 'none'}}>NewPassword</NavLink></button>
             <button><NavLink to={RoutesXPaths.TEST}
                              style={{textDecoration: 'none'}}>Test</NavLink></button>
+            <button><NavLink to={RoutesXPaths.LOGOUT}
+                             style={{textDecoration: 'none'}}>Logout</NavLink></button>
         </div>
     );
 };

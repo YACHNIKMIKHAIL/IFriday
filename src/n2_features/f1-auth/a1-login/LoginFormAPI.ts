@@ -10,6 +10,9 @@ export const loginFormAPI = {
     async loginMe(body: loginType) {
         return await instance.post<UserDataType, AxiosResponse<UserDataType>>(`/auth/login`, body)
     },
+    async logoutMe() {
+        return await instance.delete(`/auth/me`, )
+    },
 }
 
 export type loginType = {

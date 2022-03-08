@@ -75,11 +75,21 @@ export const setErrorAC = (error: string) => {
 
 export const loginUserTC = (body: loginType) => async (dispatch: Dispatch) => {
     try {
-        let res = await loginFormAPI.loginMe(body)
+        const res = await loginFormAPI.loginMe(body)
         dispatch(setUserDataAC(res.data))
         dispatch(setIsLoggedInAC(true))
     } catch (e: any) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
         dispatch(setErrorAC(error))
+    }
+}
+
+export const logoutUserTC = () => async (dispatch: Dispatch) => {
+    try {
+        const res = await loginFormAPI.logoutMe()
+        dispatch(setIsLoggedInAC(false))
+    } catch (e) {
+   /*     const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+        dispatch(setErrorAC(error))*/
     }
 }
