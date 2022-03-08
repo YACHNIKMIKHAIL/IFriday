@@ -1,7 +1,8 @@
 import {Dispatch} from "redux";
 import {loginFormAPI, loginType} from "./LoginFormAPI";
+import {saveIsLoggedIn} from "../../../n1_main/m2-bll/fridayLocalStorage";
 
-type ActionLoginFormType =  setIsLoggedInType | setUserDataType | setErrorACType
+type ActionLoginFormType = setIsLoggedInType | setUserDataType | setErrorACType
 
 export type UserDataType = {
     avatar: string,
@@ -78,6 +79,7 @@ export const loginUserTC = (body: loginType) => async (dispatch: Dispatch) => {
         const res = await loginFormAPI.loginMe(body)
         dispatch(setUserDataAC(res.data))
         dispatch(setIsLoggedInAC(true))
+        saveIsLoggedIn(true)
     } catch (e: any) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
         dispatch(setErrorAC(error))
@@ -89,7 +91,7 @@ export const logoutUserTC = () => async (dispatch: Dispatch) => {
         const res = await loginFormAPI.logoutMe()
         dispatch(setIsLoggedInAC(false))
     } catch (e) {
-   /*     const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-        dispatch(setErrorAC(error))*/
+        /*     const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+             dispatch(setErrorAC(error))*/
     }
 }
