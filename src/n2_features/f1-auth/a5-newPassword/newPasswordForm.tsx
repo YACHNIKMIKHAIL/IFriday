@@ -4,6 +4,7 @@ import {newPasswordTC} from "./newPasswordReducer";
 import {Navigate, useParams} from "react-router-dom";
 import regS from "../a2-register/RegisterForm.module.css";
 import {fridayReducerType} from "../../../n1_main/m2-bll/store";
+import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 
 
 const NewPasswordForm = () => {
@@ -11,15 +12,19 @@ const NewPasswordForm = () => {
     const dispatch = useDispatch()
     const {token} = useParams<'token'>()
     const newPassInfo = useSelector<fridayReducerType, string | undefined>(state => state.newPass.info)
+    const isLoggedIn = useSelector<fridayReducerType, boolean>(state => state.login.isLoggedIn)
+
     const create = () => {
         dispatch(newPasswordTC({
             password: newPass,
             resetPasswordToken: token
         }))
     }
-    console.log(newPassInfo)
     if (newPassInfo) {
-        return <Navigate to={'/login'}/>
+        return <Navigate to={RoutesXPaths.LOGIN}/>
+    }
+    if (isLoggedIn) {
+        return <Navigate to={RoutesXPaths.PROFILE}/>
     }
 
     return (

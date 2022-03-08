@@ -16,6 +16,7 @@ type FormikErrorType = {
 const RegisterForm = () => {
     const error = useSelector<fridayReducerType, string | undefined>(state => state.registration.error)
     const dispatch = useDispatch()
+    const isLoggedIn = useSelector<fridayReducerType, boolean>(state => state.login.isLoggedIn)
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -53,7 +54,11 @@ const RegisterForm = () => {
         dispatch(setErrorRegisterAC(""))
     }
     if (error === "email already exists /ᐠ｡ꞈ｡ᐟ\\") {
-       return  <Navigate to={RoutesXPaths.LOGIN}/>
+        return <Navigate to={RoutesXPaths.LOGIN}/>
+    }
+
+    if (isLoggedIn) {
+        return <Navigate to={RoutesXPaths.PROFILE}/>
     }
     return (
         <div className={regS.main}>
@@ -64,7 +69,7 @@ const RegisterForm = () => {
             </div>
 
             <div>
-                <form onSubmit={formik.handleSubmit} >
+                <form onSubmit={formik.handleSubmit}>
                     <div className={regS.second}>
                         eMail
                         <input {...formik.getFieldProps('email')}/>
