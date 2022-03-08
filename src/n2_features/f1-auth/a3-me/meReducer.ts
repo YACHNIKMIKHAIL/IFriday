@@ -73,15 +73,12 @@ export const setErrorAC = (error: string) => {
 export const meTC = () => async (dispatch: Dispatch) => {
     try {
         let res = await meAPI.me()
-        if (!res.data.error) {
-            dispatch(initializeMeAC(true))
-            dispatch(setProfileAC(res.data))
-            saveToken(res.data.token)
-        } else {
-            saveToken(null)
-        }
+        dispatch(initializeMeAC(true))
+        dispatch(setProfileAC(res.data))
+        saveToken(res.data.token)
     } catch (e: any) {
         dispatch(setErrorAC(e.response.data.error))
+        saveToken(null)
     } finally {
         dispatch(initializeMeAC(true))
     }

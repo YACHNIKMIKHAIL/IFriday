@@ -79,6 +79,7 @@ export const loginUserTC = (body: loginType) => async (dispatch: Dispatch) => {
         const res = await loginFormAPI.loginMe(body)
         dispatch(setUserDataAC(res.data))
         dispatch(setIsLoggedInAC(true))
+        saveToken(res.data.token)
     } catch (e: any) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
         dispatch(setErrorAC(error))
@@ -89,6 +90,7 @@ export const logoutUserTC = () => async (dispatch: Dispatch) => {
     try {
         await loginFormAPI.logoutMe()
         dispatch(setIsLoggedInAC(false))
+        saveToken(null)
     } catch (e) {
         /*     const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
              dispatch(setErrorAC(error))*/

@@ -28,6 +28,7 @@ const Profile = () => {
         return <Navigate to={RoutesXPaths.LOGIN}/>
     }
 
+
     return (
         <div className={s.profilePage}>
             Profile

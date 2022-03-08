@@ -7,8 +7,6 @@ import Test from "../common/Test";
 import Login from "../common/Login";
 import PasswordRecovery from "../common/PasswordRecovery";
 import Logout from "../common/Logout";
-import {useSelector} from "react-redux";
-import {fridayReducerType} from "../../m2-bll/store";
 
 export enum RoutesXPaths {
     PROFILE = '/IFriday',
@@ -22,7 +20,6 @@ export enum RoutesXPaths {
 }
 
 const RoutesX = () => {
-
     return (
         <>
             <Routes>
