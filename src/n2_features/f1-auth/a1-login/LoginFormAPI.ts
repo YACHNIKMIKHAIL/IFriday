@@ -11,7 +11,7 @@ export const loginFormAPI = {
         return await instance.post<UserDataType, AxiosResponse<UserDataType>>(`/auth/login`, body)
     },
     async logoutMe() {
-        return await instance.delete(`/auth/me`, )
+        return await instance.delete(`/auth/me`, {})
     },
 }
 

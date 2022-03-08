@@ -1,16 +1,16 @@
 import React from 'react';
 import {logoutUserTC} from "../../../n2_features/f1-auth/a1-login/LoginFormReducer";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {fridayReducerType} from "../../m2-bll/store";
 import {Navigate} from "react-router-dom";
 import {RoutesXPaths} from "../routes/routes";
 
 const Logout = () => {
-
+    const dispatch = useDispatch()
     const isLoggedIn = useSelector<fridayReducerType, boolean>(state => state.login.isLoggedIn)
 
     const logoutHandler = () => {
-        logoutUserTC()
+        dispatch(logoutUserTC())
     }
 
     if (!isLoggedIn) {
@@ -18,7 +18,13 @@ const Logout = () => {
     }
 
     return (
-        <div style={{display: 'flex', justifyContent: "center", alignItems: 'center', padding: '10px', backgroundColor: 'orange'}}>
+        <div style={{
+            display: 'flex',
+            justifyContent: "center",
+            alignItems: 'center',
+            padding: '10px',
+            backgroundColor: 'orange'
+        }}>
             <button onClick={logoutHandler}>Click me for logout</button>
         </div>
     );
