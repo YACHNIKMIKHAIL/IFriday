@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {meAPI} from "./meAPI";
-import {setProfileTC} from "../a6-profile/ProfileReducer";
+import {setProfileAC} from "../a6-profile/ProfileReducer";
 
 /*export type MeType = {
     _id: string;
@@ -74,6 +74,7 @@ export const meTC = () => async (dispatch: Dispatch) => {
     try {
         let res = await meAPI.me()
         dispatch(initializeMeAC(true))
+        dispatch(setProfileAC(res.data))
     } catch (e: any) {
         dispatch(setErrorAC(e.response.data.error))
     } finally {

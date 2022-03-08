@@ -6,10 +6,6 @@ import NewPassword from "../common/NewPassword";
 import Test from "../common/Test";
 import Login from "../common/Login";
 import PasswordRecovery from "../common/PasswordRecovery";
-import AuthRedirectPage from "../../../n2_features/f1-auth/AuthRedirect/AuthRedirect";
-import {useSelector} from "react-redux";
-import {fridayReducerType} from "../../m2-bll/store";
-import Me from "../../../n2_features/f1-auth/a3-me/me";
 
 export enum RoutesXPaths {
     PROFILE = '/IFriday',
@@ -25,24 +21,32 @@ export enum RoutesXPaths {
 }
 
 const RoutesX = () => {
-    const isInitialize = useSelector<fridayReducerType, boolean>(state => state.me.isInitialized)
-    if (!isInitialize) {
-        return <Me/>
-    }
+    // const isInitialize = useSelector<fridayReducerType, boolean>(state => state.me.isInitialized)
+    // const userEmail = useSelector<fridayReducerType, string>(state => state.profile.profile.email)
+    // if (!isInitialize) {
+    //     return <Me/>
+    // }
+    // if (userEmail !== '') {
+    //     console.log(userEmail)
+    //     return <Navigate to={RoutesXPaths.PROFILE}/>
+    // }
+
     return (
         <>
             <Routes>
+
                 <Route path={RoutesXPaths.PROFILE} element={<Profile/>}/>
                 <Route path={RoutesXPaths.REGISTER} element={<Register/>}/>
-                <Route path={RoutesXPaths.LOGIN} element={<Login/>}/>
-                <Route path={RoutesXPaths.RECOVERY} element={<PasswordRecovery/>}/>
-                <Route path={RoutesXPaths.SET_PASS} element={
-                        <NewPassword/>
+                <Route path={RoutesXPaths.LOGIN} element={
+                    <Login/>
                 }/>
+                <Route path={RoutesXPaths.RECOVERY} element={<PasswordRecovery/>}/>
+                <Route path={RoutesXPaths.SET_PASS} element={<NewPassword/>}/>
                 <Route path={RoutesXPaths.TEST} element={<Test/>}/>
                 <Route path={RoutesXPaths.NOT_FOUND}
                        element={<h1 style={{textAlign: 'center'}}>404:PAGE NOT FOUND</h1>}/>
                 <Route path={'*'} element={<Navigate to={RoutesXPaths.NOT_FOUND}/>}/>
+
             </Routes>
         </>
     );

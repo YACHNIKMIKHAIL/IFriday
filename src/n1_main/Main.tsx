@@ -2,13 +2,12 @@ import React, {useEffect} from 'react';
 import Links from "./m1-ui/header/Links";
 import {useDispatch} from "react-redux";
 import {meTC} from "../n2_features/f1-auth/a3-me/meReducer";
-import {setProfileTC} from "../n2_features/f1-auth/a6-profile/ProfileReducer";
 
 const Main = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(meTC())
-        dispatch(setProfileTC())
+        // dispatch(setProfileTC())
     }, [])
 
     return (

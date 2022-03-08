@@ -12,7 +12,6 @@ type FormikErrorType = {
 }
 
 const LoginForm = () => {
-
     const error = useSelector<fridayReducerType, string | undefined>(state => state.login.error)
     const dispatch = useDispatch()
     const formik = useFormik({
