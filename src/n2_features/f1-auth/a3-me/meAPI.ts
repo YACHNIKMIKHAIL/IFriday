@@ -12,7 +12,7 @@ export const meAPI = {
             AxiosResponse<meRespType>, {}>(`auth/me`, {})
     }
 }
-type meRespType={
+export type meRespType = {
     _id: string;
     email: string;
     name: string;

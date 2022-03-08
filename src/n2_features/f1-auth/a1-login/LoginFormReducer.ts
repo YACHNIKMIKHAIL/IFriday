@@ -1,65 +1,85 @@
 import {Dispatch} from "redux";
 import {loginFormAPI, loginType} from "./LoginFormAPI";
 
-type LoginFormInitialStateType = {
-    data: loginType
-    error: string
+type ActionLoginFormType =  setIsLoggedInType | setUserDataType | setErrorACType
+
+export type UserDataType = {
+    avatar: string,
+    created: number,
+    email: string,
+    isAdmin: boolean,
+    name: string,
+    publicCardPacksCount: number,
+    rememberMe: boolean,
+    token: string,
+    updated: number,
+    _id: string,
 }
 
-type ActionLoginFormType =  loginUserACType | setErrorLoginACType
-
-const LoginFormInitialState = {
-    data : {} as loginType,
+const initialState = {
+    isLoggedIn: false,
+    user: {
+        avatar: '',
+        created: 5,
+        email: '',
+        isAdmin: false,
+        name: '',
+        publicCardPacksCount: 0,
+        rememberMe: false,
+        token: '',
+        updated: 5,
+        _id: '',
+    },
     error: "",
 }
 
-export const loginFormReducer = (state: LoginFormInitialStateType = LoginFormInitialState, action: ActionLoginFormType): LoginFormInitialStateType => {
+type LoginInitialStateType = typeof initialState
+
+
+export const loginFormReducer = (state: LoginInitialStateType = initialState, action: ActionLoginFormType): LoginInitialStateType => {
     switch (action.type) {
-        case LOGIN_USER : {
-            return {...state, data: action.payload.data}
-        }
-        case SET_ERROR_LOGIN: {
-            return {...state, error: action.payload.e}
+        case LOGIN_USER:
+            return {...state, isLoggedIn: action.payload.isLoggedIn}
+        case SET_USER_DATA:
+            return {...state, user: action.payload.userData}
+        case SET_ERROR: {
+            return {...state, error: action.payload.error}
         }
         default:
             return state
     }
 }
 
-const LOGIN_USER = 'LOGIN_USER'
-export type loginUserACType = ReturnType<typeof loginUserAC>
-export const loginUserAC = (data: any) => {
-    return {
-        type: LOGIN_USER,
-        payload: {data}
-    } as const
-}
+const LOGIN_USER = 'CARDS/LOGIN/SET_IS_AUTH'
+export type setIsLoggedInType = ReturnType<typeof setIsLoggedInAC>
+export const setIsLoggedInAC = (isLoggedIn: boolean) => ({
+    type: LOGIN_USER,
+    payload: {isLoggedIn},
+}) as const
 
-const SET_ERROR_LOGIN = 'SET_ERROR_LOGIN'
-export type setErrorLoginACType = ReturnType<typeof setErrorLoginAC>
-export const setErrorLoginAC = (e: string) => {
+const SET_USER_DATA = 'CARDS/LOGIN/SET_USER_DATA'
+export type setUserDataType = ReturnType<typeof setUserDataAC>
+export const setUserDataAC = (userData: UserDataType) => ({
+    type: SET_USER_DATA,
+    payload: {userData},
+}) as const
+
+const SET_ERROR = 'CARDS/LOGIN/SET_ERROR'
+export type setErrorACType = ReturnType<typeof setErrorAC>
+export const setErrorAC = (error: string) => {
     return {
-        type: SET_ERROR_LOGIN,
-        payload: {e}
+        type: SET_ERROR,
+        payload: {error},
     } as const
 }
 
 export const loginUserTC = (body: loginType) => async (dispatch: Dispatch) => {
-    dispatch(loginUserAC({
-        data: {
-            email: '',
-            password: '',
-            rememberMe: true,
-        },
-        error: '',
-    }))
     try {
         let res = await loginFormAPI.loginMe(body)
-        dispatch(loginUserAC(res.data))
+        dispatch(setUserDataAC(res.data))
+        dispatch(setIsLoggedInAC(true))
     } catch (e: any) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-        dispatch(setErrorLoginAC(error))
-    } finally {
-
+        dispatch(setErrorAC(error))
     }
 }

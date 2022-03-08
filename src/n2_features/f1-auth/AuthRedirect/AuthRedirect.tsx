@@ -14,7 +14,7 @@ const AuthRedirectPage: React.FC<AuthRedirectPagePropsType> = React.memo(({child
     const isInitialized = useSelector<fridayReducerType, boolean>(state => state.me.isInitialized)
     const meReducerStateError = useSelector<fridayReducerType, string | undefined>(state => state.me.error)
     const newPassInfo = useSelector<fridayReducerType, string | undefined>(state => state.newPass.info)
-    const userEmail = useSelector<fridayReducerType, string>(state => state.login.data.email)
+    const userEmail = useSelector<fridayReducerType, string>(state => state.login.user.email)
     console.log(newPassInfo)
     if (!isInitialized) {
         return <Me/>

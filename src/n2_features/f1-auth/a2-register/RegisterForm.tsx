@@ -5,6 +5,7 @@ import {fridayReducerType} from "../../../n1_main/m2-bll/store";
 import regS from './RegisterForm.module.css'
 import {useFormik} from "formik";
 import {Navigate} from 'react-router-dom'
+import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 
 type FormikErrorType = {
     email?: string
@@ -52,7 +53,7 @@ const RegisterForm = () => {
         dispatch(setErrorRegisterAC(""))
     }
     if (error === "email already exists /ᐠ｡ꞈ｡ᐟ\\") {
-       return  <Navigate to={'/login'}/>
+       return  <Navigate to={RoutesXPaths.LOGIN}/>
     }
     return (
         <div className={regS.main}>

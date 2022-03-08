@@ -1,14 +1,17 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './../../../n2_features/f1-auth/a6-profile/Profile.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {fridayReducerType} from "../../m2-bll/store";
-import {ProfileType, setProfileTC, updateUserNameTC} from "../../../n2_features/f1-auth/a6-profile/ProfileReducer";
+import {ProfileType, updateUserNameTC} from "../../../n2_features/f1-auth/a6-profile/ProfileReducer";
+import {Navigate} from 'react-router-dom';
+import {RoutesXPaths} from "../routes/routes";
 
 export const BASE_IMG_URL = "https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg"
 
 const Profile = () => {
 
     const userInfo = useSelector<fridayReducerType, ProfileType>(state => state.profile.profile)
+    const isLoggedIn = useSelector<fridayReducerType, boolean>(state => state.login.isLoggedIn)
 
     let [name, setName] = useState<string>(userInfo.name)
 
@@ -21,6 +24,9 @@ const Profile = () => {
         dispatch(updateUserNameTC(name))
     }
 
+    if (!isLoggedIn) {
+        return <Navigate to={RoutesXPaths.LOGIN}/>
+    }
 
     return (
         <div className={s.profilePage}>

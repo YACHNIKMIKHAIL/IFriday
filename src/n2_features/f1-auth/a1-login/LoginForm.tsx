@@ -1,10 +1,11 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {fridayReducerType} from "../../../n1_main/m2-bll/store";
 import {useFormik} from "formik";
 import style from "./LoginForm.module.css"
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {loginUserTC} from "./LoginFormReducer";
+import {fridayReducerType} from "../../../n1_main/m2-bll/store";
+import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 
 type FormikErrorType = {
     email?: string
@@ -13,6 +14,7 @@ type FormikErrorType = {
 
 const LoginForm = () => {
     const error = useSelector<fridayReducerType, string | undefined>(state => state.login.error)
+    const isLoggedIn = useSelector<fridayReducerType, boolean>(state => state.login.isLoggedIn)
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
@@ -40,11 +42,15 @@ const LoginForm = () => {
         }
     })
 
+    if (isLoggedIn) {
+        return <Navigate to={RoutesXPaths.PROFILE}/>
+    }
+
     return (
         <div className={style.main}>
             <div className={style.title}>
                 <h1>Login</h1>
-                {!!error && <div>{error}</div>}
+                {!!error && <div style={{color: 'red'}}>{error}</div>}
             </div>
             <hr/>
             <div className={style.login}>
@@ -82,10 +88,10 @@ const LoginForm = () => {
                 </form>
                 <div className={style.footer}>
                     <div>
-                        Not registered? <NavLink to={'/register'}>Create an Account</NavLink>
+                        Not registered? <NavLink to={RoutesXPaths.REGISTER}>Create an Account</NavLink>
                     </div>
                     <div>
-                        Forgot password? <NavLink to={'/passwordrecovery'}>Click here to recover</NavLink>
+                        Forgot password? <NavLink to={RoutesXPaths.RECOVERY}>Click here to recover</NavLink>
                     </div>
                 </div>
             </div>
