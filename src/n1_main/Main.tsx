@@ -7,7 +7,7 @@ const Main = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(meTC())
-    }, [dispatch])
+    }, [])
 
     return (
         <div>

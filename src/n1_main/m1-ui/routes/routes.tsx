@@ -32,9 +32,7 @@ const RoutesX = () => {
     return (
         <>
             <Routes>
-                <Route path={RoutesXPaths.PROFILE} element={<AuthRedirectPage>
-                    <Profile/>
-                </AuthRedirectPage>}/>
+                <Route path={RoutesXPaths.PROFILE} element={<Profile/>}/>
                 <Route path={RoutesXPaths.REGISTER} element={<Register/>}/>
                 <Route path={RoutesXPaths.LOGIN} element={<Login/>}/>
                 <Route path={RoutesXPaths.RECOVERY} element={<PasswordRecovery/>}/>

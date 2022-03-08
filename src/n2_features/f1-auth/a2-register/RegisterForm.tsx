@@ -51,7 +51,6 @@ const RegisterForm = () => {
         formik.setErrors({email: undefined, password: undefined, confirm: undefined})
         dispatch(setErrorRegisterAC(""))
     }
-    console.log(error)
     if (error === "email already exists /ᐠ｡ꞈ｡ᐟ\\") {
        return  <Navigate to={'/login'}/>
     }
