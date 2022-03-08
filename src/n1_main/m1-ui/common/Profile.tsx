@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
 import s from './../../../n2_features/f1-auth/a6-profile/Profile.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {fridayReducerType} from "../../m2-bll/store";
@@ -21,12 +21,19 @@ const Profile = () => {
     const changeModification = () => {
         setModification(true)
     }
+
     const changeName = (e: ChangeEvent<HTMLInputElement>) => {
         setName(e.currentTarget.value)
     }
     const updateUser = () => {
         dispatch(updateUserNameTC(name))
         setModification(!modification)
+    }
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.charCode === 13) {
+            dispatch(updateUserNameTC(name))
+            setModification(!modification)
+        }
     }
 
     if (!isLoggedIn) {
@@ -44,12 +51,12 @@ const Profile = () => {
                     {
                         modification
                             ? <div>
-                                <input type="text" className={s.input} value={name} onChange={changeName}/>
-                                <p>Enter your new name, please 😌</p>
+                                <input type="text" className={s.input} value={name} onKeyPress={onKeyPressHandler} onChange={changeName}/>
+                                <p className={s.description}>Enter your new name, please 😌</p>
                             </div>
                             : <div>
-                                <span onClick={changeModification}>{`Your name is: ${userInfo.name}`}</span>
-                                <p>If you want to change your name, click on it 😉</p>
+                                <span className={s.yourNameMessage} onClick={changeModification}>{`Your name is: ${userInfo.name}`}</span>
+                                <p className={s.description}>If you want to change your name, click on it 😉</p>
                             </div>
 
                     }
