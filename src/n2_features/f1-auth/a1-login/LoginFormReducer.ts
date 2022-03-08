@@ -88,8 +88,9 @@ export const loginUserTC = (body: loginType) => async (dispatch: Dispatch) => {
 
 export const logoutUserTC = () => async (dispatch: Dispatch) => {
     try {
-        const res = await loginFormAPI.logoutMe()
+        await loginFormAPI.logoutMe()
         dispatch(setIsLoggedInAC(false))
+        saveIsLoggedIn(false)
     } catch (e) {
         /*     const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
              dispatch(setErrorAC(error))*/

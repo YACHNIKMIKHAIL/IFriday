@@ -12,6 +12,7 @@ function App() {
     useEffect(() => {
         dispatch(setIsLoggedInAC(loadIsLoggedIn()))
     }, [])
+
     return (
         <div className="App">
             <HashRouter>
