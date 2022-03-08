@@ -7,7 +7,6 @@ export const instance = axios.create({
 
 export const meAPI = {
     async me() {
-        debugger
         return await instance.post<meRespType,
             AxiosResponse<meRespType>, {}>(`auth/me`, {})
     }
@@ -26,4 +25,6 @@ export type meRespType = {
     rememberMe: boolean;
 
     error?: string;
+    token:string
 }
+

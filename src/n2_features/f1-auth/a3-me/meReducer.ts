@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {meAPI} from "./meAPI";
 import {setProfileAC} from "../a6-profile/ProfileReducer";
+import {saveToken} from "../../../n1_main/m2-bll/fridayLocalStorage";
 
 /*export type MeType = {
     _id: string;
@@ -70,11 +71,15 @@ export const setErrorAC = (error: string) => {
     } as const
 }
 export const meTC = () => async (dispatch: Dispatch) => {
-    debugger
     try {
         let res = await meAPI.me()
-        dispatch(initializeMeAC(true))
-        dispatch(setProfileAC(res.data))
+        if (!res.data.error) {
+            dispatch(initializeMeAC(true))
+            dispatch(setProfileAC(res.data))
+            saveToken(res.data.token)
+        } else {
+            saveToken(null)
+        }
     } catch (e: any) {
         dispatch(setErrorAC(e.response.data.error))
     } finally {

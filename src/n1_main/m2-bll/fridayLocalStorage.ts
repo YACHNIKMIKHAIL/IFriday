@@ -1,21 +1,21 @@
 
 
-export const loadIsLoggedIn = () => {
+export const loadToken = () => {
     try {
-        const serializedIsloggedIn = localStorage.getItem('isLogged');
-        if (serializedIsloggedIn === null) {
+        const serializedToken = localStorage.getItem('token');
+        if (serializedToken === null) {
             return undefined;
         }
-        return JSON.parse(serializedIsloggedIn);
+        return JSON.parse(serializedToken);
     } catch (err) {
         return undefined;
     }
 };
 
-export const saveIsLoggedIn = (isLogged: boolean ) => {
+export const saveToken = (token: string|null ) => {
     try {
-        const serializedIsloggedIn = JSON.stringify(isLogged);
-        localStorage.setItem('isLogged', serializedIsloggedIn);
+        const serializedToken = JSON.stringify(token);
+        localStorage.setItem('token', serializedToken);
     } catch {
 
     }
