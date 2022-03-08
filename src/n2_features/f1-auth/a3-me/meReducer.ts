@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {meAPI} from "./meAPI";
 import {setProfileAC} from "../a6-profile/ProfileReducer";
 import {saveToken} from "../../../n1_main/m2-bll/fridayLocalStorage";
+import Login from "../../../n1_main/m1-ui/common/Login";
 
 /*export type MeType = {
     _id: string;

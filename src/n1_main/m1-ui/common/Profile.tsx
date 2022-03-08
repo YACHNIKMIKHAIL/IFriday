@@ -14,14 +14,19 @@ const Profile = () => {
     const isLoggedIn = useSelector<fridayReducerType, boolean>(state => state.login.isLoggedIn)
 
     let [name, setName] = useState<string>(userInfo.name)
+    let [modification, setModification] = useState<boolean>(false)
 
     const dispatch = useDispatch()
 
+    const changeModification = () => {
+        setModification(true)
+    }
     const changeName = (e: ChangeEvent<HTMLInputElement>) => {
         setName(e.currentTarget.value)
     }
     const updateUser = () => {
         dispatch(updateUserNameTC(name))
+        setModification(!modification)
     }
 
     if (!isLoggedIn) {
@@ -35,11 +40,21 @@ const Profile = () => {
             <div className={s.profileContainer}>
                 <h2 className={s.title}>Personal information</h2>
                 <img src={userInfo.avatar ? userInfo.avatar : BASE_IMG_URL} alt={"user's image"}/>
-                <div className={s.inputContainer}>
-                    <input type="text" className={s.input} value={name} onChange={changeName}/>
+                <div className={s.nameContainer}>
+                    {
+                        modification
+                            ? <div>
+                                <input type="text" className={s.input} value={name} onChange={changeName}/>
+                                <p>Enter your new name, please 😌</p>
+                            </div>
+                            : <div>
+                                <span onClick={changeModification}>{`Your name is: ${userInfo.name}`}</span>
+                                <p>If you want to change your name, click on it 😉</p>
+                            </div>
+
+                    }
                 </div>
                 <button className={s.button} onClick={updateUser}>Save</button>
-
             </div>
         </div>
     );
