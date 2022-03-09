@@ -1,8 +1,8 @@
 import React, {useEffect, useLayoutEffect} from 'react';
 import './App.css';
 import {HashRouter} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {fridayReducerType} from "../../m2-bll/store";
+import {useDispatch} from "react-redux";
+import {useFridaySelector} from "../../m2-bll/store";
 import {RequestStatusType} from "../../m2-bll/r1-reducers/app-reducer";
 import Preloader from "../common/Preloader";
 import {loadToken} from "../../m2-bll/fridayLocalStorage";
@@ -12,7 +12,8 @@ import RoutesX from "../routes/routes";
 import {meTC} from "../../m2-bll/r3-thunks/ThunkMe";
 
 function AppSerge() {
-    const status=useSelector<fridayReducerType,RequestStatusType>(state => state.app.status)
+
+    const status = useFridaySelector<RequestStatusType>(state => state.app.status)
     const dispatch = useDispatch()
 
     useLayoutEffect(() => {

@@ -40,32 +40,3 @@ export const registerAndRecoveryPassActions = {
         } as const
     }
 }
-// export type registerUserACType = ReturnType<typeof registerUserAC>
-// export const registerUserAC = (data: registerStateType) => {
-//     return {
-//         type: REGISTER_USER,
-//         payload: data
-//     } as const
-// }
-
-// export type setErrorRegisterACType = ReturnType<typeof setErrorRegisterAC>
-// export const setErrorRegisterAC = (e: string) => {
-//     return {
-//         type: SET_ERROR_REGISTER,
-//         payload: {e}
-//     } as const
-// }
-// export type setInfoRecoveryACType = ReturnType<typeof setInfoRecoveryAC>
-// export const setInfoRecoveryAC = (data: passwordRecoveryStateType) => {
-//     return {
-//         type: SET_INFO_RECOVERY_PASS,
-//         payload: {data}
-//     } as const
-// }
-// export type setInfoNewPassACType = ReturnType<typeof setInfoNewPassAC>
-// export const setInfoNewPassAC = (data: newPasswordStateType) => {
-//     return {
-//         type: SET_INFO_NEW_PASS,
-//         payload: {data}
-//     } as const
-// }

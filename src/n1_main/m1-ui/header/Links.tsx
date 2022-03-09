@@ -2,8 +2,15 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {RoutesXPaths} from "../routes/routes";
 import s from './Links.module.css'
+import {useFridaySelector} from "../../m2-bll/store";
 
 const Links = () => {
+    const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
+
+    if (!isLoggedIn) {
+        return <div className={s.main}><></></div>
+    }
+
     return (
         <div className={s.main}>
             <><NavLink to={RoutesXPaths.PROFILE}
