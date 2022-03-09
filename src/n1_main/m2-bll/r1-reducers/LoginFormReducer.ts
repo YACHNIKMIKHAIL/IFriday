@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
-import {loginFormAPI, loginType} from "./LoginFormAPI";
-import {saveToken} from "../../../n1_main/m2-bll/fridayLocalStorage";
+import {loginFormAPI, loginType} from "../../m3-dal/LoginFormAPI";
+import {saveToken} from "../fridayLocalStorage";
 import {setAppStatusAC} from "../../../n1_main/m1-ui/app/app-reducer";
 
 type ActionLoginFormType = setIsLoggedInType | setUserDataType | setErrorACType

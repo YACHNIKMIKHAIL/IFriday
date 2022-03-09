@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
-import {profileAPI} from "./ProfileAPI";
-import {meRespType} from "../a3-me/meAPI";
+import {profileAPI} from "../../m3-dal/ProfileAPI";
+import {meRespType} from "../../m3-dal/meAPI";
 
 const PROFILE = {
     CHANGE_USER_NAME: 'CHANGE_USER_NAME',
