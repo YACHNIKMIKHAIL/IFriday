@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {registerFormAPI} from "./RegisterFormAPI";
+import {setAppStatusAC} from "../../../n1_main/m1-ui/app/app-reducer";
 
 export type userType = {
     error: string,
@@ -49,6 +50,7 @@ export const setErrorRegisterAC = (e: string) => {
 }
 
 export const registerUserTC = (body: { email: string, password: string }) => async (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC("loading"))
     dispatch(registerUserAC({
         addedUser: {
             error: '',
@@ -60,9 +62,11 @@ export const registerUserTC = (body: { email: string, password: string }) => asy
     try {
         let res = await registerFormAPI.registerMe(body)
         dispatch(registerUserAC(res.data))
+        dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
         dispatch(setErrorRegisterAC(error))
+        dispatch(setAppStatusAC("failed"))
     } finally {
 
     }

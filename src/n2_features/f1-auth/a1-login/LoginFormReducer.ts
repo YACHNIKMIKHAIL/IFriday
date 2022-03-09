@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {loginFormAPI, loginType} from "./LoginFormAPI";
 import {saveToken} from "../../../n1_main/m2-bll/fridayLocalStorage";
+import {setAppStatusAC} from "../../../n1_main/m1-ui/app/app-reducer";
 
 type ActionLoginFormType = setIsLoggedInType | setUserDataType | setErrorACType
 
@@ -75,14 +76,17 @@ export const setErrorAC = (error: string) => {
 }
 
 export const loginUserTC = (body: loginType) => async (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC("loading"))
     try {
         const res = await loginFormAPI.loginMe(body)
         dispatch(setUserDataAC(res.data))
         dispatch(setIsLoggedInAC(true))
         saveToken(res.data.token)
+        dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
         dispatch(setErrorAC(error))
+        dispatch(setAppStatusAC("failed"))
     }
 }
 
