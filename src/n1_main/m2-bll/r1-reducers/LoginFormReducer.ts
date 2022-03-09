@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {loginFormAPI, loginType} from "../../../n2_features/f1-auth/a1-login/LoginFormAPI";
+import {loginFormAPI, loginType} from "../../m3-dal/LoginFormAPI";
 import {saveToken} from "../fridayLocalStorage";
 
 type ActionLoginFormType = setIsLoggedInType | setUserDataType | setErrorACType

@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {meAPI} from "../../../n2_features/f1-auth/a3-me/meAPI";
+import {meAPI} from "../../m3-dal/meAPI";
 import {setProfileAC} from "./ProfileReducer";
 import {saveToken} from "../fridayLocalStorage";
 

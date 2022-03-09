@@ -1,5 +1,5 @@
 import axios from "axios";
-import {BASE_IMG_URL} from "../../../n1_main/m1-ui/common/Profile";
+import {BASE_IMG_URL} from "../m1-ui/common/Profile";
 
 export const instance = axios.create({
     baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',

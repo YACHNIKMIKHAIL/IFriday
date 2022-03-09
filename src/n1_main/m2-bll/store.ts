@@ -7,11 +7,8 @@ import {registerAndRecoveryPassReducer} from "./r1-reducers/RegisterAndRecoveryP
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 
 const fridayReducer = combineReducers({
-    // registration: registerFormReducer,
     me: meReducer,
-    // forgot: passwordRecoveryReducer,
     profile: profileReducer,
-    // newPass:newPasswordReducer,
     login: loginFormReducer,
     regForNewPass:registerAndRecoveryPassReducer
 })

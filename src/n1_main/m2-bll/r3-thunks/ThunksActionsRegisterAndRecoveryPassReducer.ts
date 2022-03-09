@@ -1,8 +1,6 @@
 import {Dispatch} from "redux";
-import {registerFormAPI} from "../../../n2_features/f1-auth/a2-register/RegisterFormAPI";
-import {passwordRecoveryAPI} from "../../../n2_features/f1-auth/a4-passwordRecovery/passwordRecoveryAPI";
-import {createNewPasswordAPI, newPassBodyType} from "../../../n2_features/f1-auth/a5-newPassword/newPasswordAPI";
 import {registerAndRecoveryPassActions} from "../r2-actions/ActionsRegisterAndRecoveryPassReducer";
+import {newPassBodyType, registerAndRecoveryPassAPI} from "../../m3-dal/RegisterAndRecoveryPassAPI";
 
 export const registerUserTC = (body: { email: string, password: string }) => async (dispatch: Dispatch) => {
     dispatch(registerAndRecoveryPassActions.registerUserAC({
@@ -14,7 +12,7 @@ export const registerUserTC = (body: { email: string, password: string }) => asy
         error: ''
     }))
     try {
-        let res = await registerFormAPI.registerMe(body)
+        let res = await registerAndRecoveryPassAPI.registerMe(body)
         dispatch(registerAndRecoveryPassActions.registerUserAC(res.data))
     } catch (e: any) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
@@ -26,7 +24,7 @@ export const registerUserTC = (body: { email: string, password: string }) => asy
 
 export const passwordRecoveryTC = (email: string) => async (dispatch: Dispatch) => {
     try {
-        let res = await passwordRecoveryAPI.forgot(email)
+        let res = await registerAndRecoveryPassAPI.forgot(email)
         dispatch(registerAndRecoveryPassActions.setInfoRecoveryAC(res.data))
     } catch (e: any) {
         // dispatch(setErrorRecoveryAC(e.response.data.error))
@@ -38,7 +36,7 @@ export const passwordRecoveryTC = (email: string) => async (dispatch: Dispatch) 
 export const newPasswordTC = (body: newPassBodyType) => async (dispatch: Dispatch) => {
     console.log(body)
     try {
-        let res = await createNewPasswordAPI.createNewPass(body)
+        let res = await registerAndRecoveryPassAPI.createNewPass(body)
         console.log(res.data)
         dispatch(registerAndRecoveryPassActions.setInfoNewPassAC(res.data))
     } catch (e: any) {
