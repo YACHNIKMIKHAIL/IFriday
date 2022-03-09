@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Navigate, useParams} from "react-router-dom";
 import regS from "../a2-register/RegisterForm.module.css";
-import {fridayReducerType} from "../../../n1_main/m2-bll/store";
+import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
-import {newPasswordTC} from "../../../n1_main/m2-bll/r1-reducers/RegisterAndRecoveryPassReducer";
+import {newPasswordTC} from "../../../n1_main/m2-bll/r3-thunks/ThunksActionsRegisterAndRecoveryPassReducer";
 
 
 const NewPasswordForm = () => {
     const [newPass, setNewPass] = useState<string>('')
     const dispatch = useDispatch()
     const {token} = useParams<'token'>()
-    const newPassInfo = useSelector<fridayReducerType, string | undefined>(state => state.regForNewPass.newPassword.info)
-    const isLoggedIn = useSelector<fridayReducerType, boolean>(state => state.login.isLoggedIn)
+    const newPassInfo = useFridaySelector<string | undefined>(state => state.regForNewPass.newPassword.info)
+    const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
 
     const create = () => {
         dispatch(newPasswordTC({

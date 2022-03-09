@@ -1,10 +1,10 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {useFormik} from "formik";
 import style from "./LoginForm.module.css"
 import {Navigate, NavLink} from "react-router-dom";
 import {loginUserTC} from "../../../n1_main/m2-bll/r1-reducers/LoginFormReducer";
-import {fridayReducerType} from "../../../n1_main/m2-bll/store";
+import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 
 type FormikErrorType = {
@@ -13,8 +13,8 @@ type FormikErrorType = {
 }
 
 const LoginForm = () => {
-    const error = useSelector<fridayReducerType, string | undefined>(state => state.login.error)
-    const isLoggedIn = useSelector<fridayReducerType, boolean>(state => state.login.isLoggedIn)
+    const error = useFridaySelector<string | undefined>(state => state.login.error)
+    const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
