@@ -1,11 +1,11 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunk from "redux-thunk";
 import {registerFormReducer} from "../../n2_features/f1-auth/a2-register/RegisterFormReducer";
-import {meReducer} from "../../n2_features/f1-auth/a3-me/meReducer";
+import {meReducer} from "./r1-reducers/meReducer";
 import {passwordRecoveryReducer} from "../../n2_features/f1-auth/a4-passwordRecovery/passwordRecoveryReducer";
-import {profileReducer} from "../../n2_features/f1-auth/a6-profile/ProfileReducer";
+import {profileReducer} from "./r1-reducers/ProfileReducer";
 import {newPasswordReducer} from "../../n2_features/f1-auth/a5-newPassword/newPasswordReducer";
-import {loginFormReducer} from "../../n2_features/f1-auth/a1-login/LoginFormReducer";
+import {loginFormReducer} from "./r1-reducers/LoginFormReducer";
 
 const fridayReducer = combineReducers({
     registration: registerFormReducer,

@@ -2,7 +2,7 @@ import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
 import s from './../../../n2_features/f1-auth/a6-profile/Profile.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {fridayReducerType} from "../../m2-bll/store";
-import {ProfileType, updateUserNameTC} from "../../../n2_features/f1-auth/a6-profile/ProfileReducer";
+import {ProfileType, updateUserNameTC} from "../../m2-bll/r1-reducers/ProfileReducer";
 import {Navigate} from 'react-router-dom';
 import {RoutesXPaths} from "../routes/routes";
 

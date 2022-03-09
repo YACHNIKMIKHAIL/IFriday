@@ -5,8 +5,8 @@ import Main from "../Main";
 import RoutesX from "./routes/routes";
 import {useDispatch} from "react-redux";
 import {loadToken} from "../m2-bll/fridayLocalStorage";
-import {setIsLoggedInAC} from "../../n2_features/f1-auth/a1-login/LoginFormReducer";
-import {meTC} from "../../n2_features/f1-auth/a3-me/meReducer";
+import {setIsLoggedInAC} from "../m2-bll/r1-reducers/LoginFormReducer";
+import {meTC} from "../m2-bll/r1-reducers/meReducer";
 
 function App() {
     const dispatch = useDispatch()
