@@ -13,7 +13,7 @@ type AuthRedirectPagePropsType = DivPropsType & {};
 const AuthRedirectPage: React.FC<AuthRedirectPagePropsType> = React.memo(({children, ...restProps}) => {
     const isInitialized = useSelector<fridayReducerType, boolean>(state => state.me.isInitialized)
     const meReducerStateError = useSelector<fridayReducerType, string | undefined>(state => state.me.error)
-    const newPassInfo = useSelector<fridayReducerType, string | undefined>(state => state.newPass.info)
+    const newPassInfo = useSelector<fridayReducerType, string | undefined>(state => state.regForNewPass.newPassword.info)
     const userEmail = useSelector<fridayReducerType, string>(state => state.login.user.email)
     console.log(newPassInfo)
     if (!isInitialized) {

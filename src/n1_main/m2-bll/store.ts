@@ -1,19 +1,18 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunk from "redux-thunk";
-import {registerFormReducer} from "../../n2_features/f1-auth/a2-register/RegisterFormReducer";
 import {meReducer} from "./r1-reducers/meReducer";
-import {passwordRecoveryReducer} from "../../n2_features/f1-auth/a4-passwordRecovery/passwordRecoveryReducer";
 import {profileReducer} from "./r1-reducers/ProfileReducer";
-import {newPasswordReducer} from "../../n2_features/f1-auth/a5-newPassword/newPasswordReducer";
 import {loginFormReducer} from "./r1-reducers/LoginFormReducer";
+import {registerAndRecoveryPassReducer} from "./r1-reducers/RegisterAndRecoveryPassReducer";
 
 const fridayReducer = combineReducers({
-    registration: registerFormReducer,
+    // registration: registerFormReducer,
     me: meReducer,
-    forgot: passwordRecoveryReducer,
+    // forgot: passwordRecoveryReducer,
     profile: profileReducer,
-    newPass:newPasswordReducer,
+    // newPass:newPasswordReducer,
     login: loginFormReducer,
+    regForNewPass:registerAndRecoveryPassReducer
 })
 
 export type fridayReducerType = ReturnType<typeof fridayReducer>

@@ -1,11 +1,11 @@
 import React from 'react';
-import {registerUserTC, setErrorRegisterAC} from "./RegisterFormReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {fridayReducerType} from "../../../n1_main/m2-bll/store";
 import regS from './RegisterForm.module.css'
 import {useFormik} from "formik";
 import {Navigate} from 'react-router-dom'
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
+import {registerUserTC, setErrorRegisterAC} from "../../../n1_main/m2-bll/r1-reducers/RegisterAndRecoveryPassReducer";
 
 type FormikErrorType = {
     email?: string
@@ -14,7 +14,7 @@ type FormikErrorType = {
 }
 
 const RegisterForm = () => {
-    const error = useSelector<fridayReducerType, string | undefined>(state => state.registration.error)
+    const error = useSelector<fridayReducerType, string | undefined>(state => state.regForNewPass.register.error)
     const dispatch = useDispatch()
     const isLoggedIn = useSelector<fridayReducerType, boolean>(state => state.login.isLoggedIn)
     const formik = useFormik({

@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {passwordRecoveryTC} from "./passwordRecoveryReducer";
 import regS from "../a2-register/RegisterForm.module.css";
 import {fridayReducerType} from "../../../n1_main/m2-bll/store";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {Navigate} from 'react-router-dom'
+import {passwordRecoveryTC} from "../../../n1_main/m2-bll/r1-reducers/RegisterAndRecoveryPassReducer";
 
 
 const PasswordRecoveryForm = () => {
     const [email, setEmail] = useState<string>('')
     const dispatch = useDispatch()
-    const success = useSelector<fridayReducerType, boolean>(state => state.forgot.success)
+    const success = useSelector<fridayReducerType, boolean>(state => state.regForNewPass.passwordRecovery.success)
     const isLoggedIn = useSelector<fridayReducerType, boolean>(state => state.login.isLoggedIn)
     const send = () => {
         dispatch(passwordRecoveryTC(email))
