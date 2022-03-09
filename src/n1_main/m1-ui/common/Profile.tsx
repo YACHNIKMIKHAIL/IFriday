@@ -2,15 +2,16 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import s from './../../../n2_features/f1-auth/a6-profile/Profile.module.css'
 import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../m2-bll/store";
-import {ProfileType, updateUserNameTC} from "../../m2-bll/r1-reducers/ProfileReducer";
+import {updateUserNameTC} from "../../m2-bll/r1-reducers/ProfileReducer";
 import {Navigate} from 'react-router-dom';
 import {RoutesXPaths} from "../routes/routes";
+import {UserDataType} from "../../m2-bll/r2-actions/ActionLoginForm";
 
 export const BASE_IMG_URL = "https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg"
 
 const Profile = () => {
 
-    const userInfo = useFridaySelector<ProfileType>(state => state.profile.profile)
+    const userInfo = useFridaySelector<UserDataType>(state => state.profile.profile)
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
 
     let [name, setName] = useState<string>(userInfo.name)
@@ -43,7 +44,6 @@ const Profile = () => {
 
     return (
         <div className={s.profilePage}>
-            Profile
             <div className={s.profileContainer}>
                 <h2 className={s.title}>Personal information</h2>
                 <img src={userInfo.avatar ? userInfo.avatar : BASE_IMG_URL} alt={"user's image"}/>

@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../../m3-dal/ProfileAPI";
 import {meRespType} from "../../m3-dal/meAPI";
 import {setAppStatusAC} from "./app-reducer";
+import {UserDataType} from "../r2-actions/ActionLoginForm";
 
 const PROFILE = {
     CHANGE_USER_NAME: 'CHANGE_USER_NAME',
@@ -10,82 +11,82 @@ const PROFILE = {
 }
 
 // TYPES
-export type ProfileType = {
-    avatar: string
-    created: string
-    email: string
-    isAdmin: boolean
-    name: string
-    publicCardPacksCount: number
-    rememberMe: boolean
-    token: string
-    tokenDeathTime: number
-    updated: string
-    verified: boolean
-    __v: number
-    _id: string
-}
-export type InitialStateType = {
-    profile: ProfileType
+
+export type ProfileInitialStateType = {
+    profile: UserDataType | meRespType
     error: string
 }
 
-export type SetProfileACType = ReturnType<typeof setProfileAC>
-export type ChangeUserNameActionType = ReturnType<typeof changeUserName>
-export type setErrorActionType = ReturnType<typeof setError>
-export type profileReducerActionType = ChangeUserNameActionType | SetProfileACType | setErrorActionType
 
-const initialProfileState = {
+const initialProfileState: ProfileInitialStateType = {
     profile: {
-        avatar: '',
-        created: '',
+        _id: '',
         email: '',
-        isAdmin: false,
         name: '',
-        publicCardPacksCount: 0,
+        avatar: '',
+        publicCardPacksCount: 0, // количество колод
+
+        created: 0,
+        updated: 0,
+        isAdmin: false,
+        verified: false, // подтвердил ли почту
         rememberMe: false,
-        token: '',
-        tokenDeathTime: 0,
-        updated: '',
-        verified: false,
-        __v: 0,
-        _id: ''
+
+        error: '',
+        token: ''
     },
     error: ''
 }
 
-export const profileReducer = (state: InitialStateType = initialProfileState, action: profileReducerActionType) => {
+export type SetProfileACType = ReturnType<typeof ProfileActions.setProfileAC>
+export type ChangeUserNameActionType = ReturnType<typeof ProfileActions.changeUserName>
+export type setErrorActionType = ReturnType<typeof ProfileActions.setError>
+export type profileReducerActionType = ChangeUserNameActionType | SetProfileACType
+
+
+export const profileReducer = (state: ProfileInitialStateType = initialProfileState, action: profileReducerActionType) => {
     switch (action.type) {
-        case PROFILE.SET_PROFILE: {
+        case PROFILE.SET_PROFILE:
             //@ts-ignore
-            return {...state, profile: action.payload.profile}
-        }
+            return {...state, profile: action.payload.data}
+
         case PROFILE.CHANGE_USER_NAME:
             //@ts-ignore
-            return {...state, profile: action.payload.profile}
+            return {...state, profile: action.payload.userData}
         default:
             return state
     }
 }
 
 // ACTIONS
+export const ProfileActions = {
+    setProfileAC: <T>(data: T) => {
+        return {
+            type: PROFILE.SET_PROFILE,
+            payload: {data},
+        } as const
+    },
+    changeUserName: (userData: UserDataType) => {
+        return {
+            type: PROFILE.CHANGE_USER_NAME,
+            payload: {userData},
+        } as const
+    },
+    setError: (error: string) => { //нужно сделать
+        return {
+            type: PROFILE.SET_ERROR,
+            error
+        } as const
+    }
+}
 
-export const setProfileAC = (profile: meRespType) => {
-    return {type: PROFILE.SET_PROFILE, payload: {profile}} as const
-}
-const changeUserName = (profile: ProfileType) => {
-    return {type: PROFILE.CHANGE_USER_NAME, payload: {profile}} as const
-}
-const setError = (error: string | null) => {
-    return {type: PROFILE.SET_ERROR, error} as const
-}
 
 // THUNKS
 export const updateUserNameTC = (newUserName: string) => async (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
         let res = await profileAPI.changeUserName(newUserName)
-        dispatch(changeUserName(res.data.updatedUser))
+        dispatch(ProfileActions.changeUserName(res.data.updatedUser))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e) {
         dispatch(setAppStatusAC("failed"))

@@ -6,8 +6,9 @@ import {
     LoginFormActions, LoginFormInitialState,
     LoginFormReducer,
     LoginFormReducerReducerActionsTypes,
-    LoginInitialStateType
+    LoginInitialStateType, UserDataType
 } from "../r2-actions/ActionLoginForm";
+import {ProfileActions} from "./ProfileReducer";
 
 type ActionLoginFormType = ReturnType<LoginFormReducerReducerActionsTypes<typeof LoginFormActions>>
 
@@ -29,7 +30,8 @@ export const loginUserTC = (body: loginType) => async (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
         const res = await loginFormAPI.loginMe(body)
-        dispatch(LoginFormActions.setUserDataAC(res.data))
+        dispatch(LoginFormActions.setUserDataAC(res.data)) // можно заменить на setProfileAC, чтоб не дублировать логику
+        dispatch(ProfileActions.setProfileAC<UserDataType>(res.data))
         dispatch(LoginFormActions.setIsLoggedInAC(true))
         saveToken(res.data.token)
         dispatch(setAppStatusAC("succeeded"))
