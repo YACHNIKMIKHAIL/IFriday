@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {UserDataType} from "./LoginFormReducer";
+import {UserDataType} from "../m2-bll/r1-reducers/LoginFormReducer";
 
 export const instance = axios.create({
     baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',

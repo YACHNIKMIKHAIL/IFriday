@@ -1,19 +1,21 @@
 import React, {useEffect, useLayoutEffect} from 'react';
 import './App.css';
 import {HashRouter} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {useFridaySelector} from "../../m2-bll/store";
+import {RequestStatusType} from "../../m2-bll/r1-reducers/app-reducer";
+import Preloader from "../common/Preloader";
+import {loadToken} from "../../m2-bll/fridayLocalStorage";
+import {setIsLoggedInAC} from "../../m2-bll/r1-reducers/LoginFormReducer";
 import Main from "../../Main";
 import RoutesX from "../routes/routes";
-import {useDispatch, useSelector} from "react-redux";
-import {loadToken} from "../../m2-bll/fridayLocalStorage";
-import {setIsLoggedInAC} from "../../../n2_features/f1-auth/a1-login/LoginFormReducer";
-import {meTC} from "../../../n2_features/f1-auth/a3-me/meReducer";
-import Preloader from "../common/Preloader";
-import {fridayReducerType} from "../../m2-bll/store";
-import {RequestStatusType} from "./app-reducer";
+import {meTC} from "../../m2-bll/r3-thunks/ThunkMe";
 
-function App() {
-    const status=useSelector<fridayReducerType,RequestStatusType>(state => state.app.status)
+function AppSerge() {
+
+    const status = useFridaySelector<RequestStatusType>(state => state.app.status)
     const dispatch = useDispatch()
+
     useLayoutEffect(() => {
         const token = loadToken()
         if (token) {
@@ -38,4 +40,4 @@ function App() {
     );
 }
 
-export default App;
+export default AppSerge;

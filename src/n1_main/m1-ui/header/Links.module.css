@@ -1,16 +1,18 @@
-
-.links {
+.main{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    font-size: 20px;
-    font-weight: bold;
-    position: fixed;
-    top: 0;
-    width: 100%;
-
+    font-size: 15px;
+    margin: 0 10px;
 }
 .active{
-    border-bottom: white 1px solid;
-    color: white;
+    font-weight: bold;
+    font-size: 25px;
+    opacity: 1;
+    color: blue;
+}
+.activeR{
+    font-weight: bold;
+    font-size: 25px;
+    color: #F7D748;
 }

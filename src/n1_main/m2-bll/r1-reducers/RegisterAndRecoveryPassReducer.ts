@@ -1,0 +1,74 @@
+import {
+    registerAndRecoveryPassActions,
+    RegisterAndRecoveryPassReducer,
+    RegisterAndRecoveryPassReducerActionsTypes
+} from "../r2-actions/ActionsRegisterAndRecoveryPassReducer";
+
+
+export type userType = {
+    error: string,
+    email: string,
+    in: string
+}
+export type registerStateType = {
+    addedUser: userType
+    error?: string;
+}
+export type passwordRecoveryStateType = {
+    info: string,
+    success: boolean,
+    answer: boolean,
+    html: boolean,
+}
+export type newPasswordStateType = {
+    info: string
+    error: string;
+}
+
+export type RegisterAndRecoveryPassReducerType = {
+    register: registerStateType
+    passwordRecovery: passwordRecoveryStateType
+    newPassword: newPasswordStateType
+}
+const registerAndRecoveryPassReducerState: RegisterAndRecoveryPassReducerType = {
+    register: {
+        addedUser: {} as userType,
+        error: ''
+    },
+    passwordRecovery: {
+        info: '',
+        success: false,
+        answer: false,
+        html: false,
+    },
+    newPassword: {
+        info: '',
+        error: ''
+    }
+}
+
+export const registerAndRecoveryPassReducer = (state = registerAndRecoveryPassReducerState, action: RegisterAndRecoveryPassReducerActionType): RegisterAndRecoveryPassReducerType => {
+    switch (action.type) {
+        case RegisterAndRecoveryPassReducer.REGISTER_USER: {
+            return {...state, register: {...state.register, addedUser: action.payload.addedUser}}
+        }
+        case RegisterAndRecoveryPassReducer.SET_ERROR_REGISTER: {
+            return {
+                ...state, register:
+                    {
+                        ...state.register,
+                        error: action.payload.e
+                    }
+            }
+        }
+        case RegisterAndRecoveryPassReducer.SET_INFO_RECOVERY_PASS: {
+            return {...state, passwordRecovery: {...state.passwordRecovery, ...action.payload.data}}
+        }
+        case RegisterAndRecoveryPassReducer.SET_INFO_NEW_PASS: {
+            return {...state, newPassword: {...action.payload.data}}
+        }
+        default:
+            return state
+    }
+}
+type RegisterAndRecoveryPassReducerActionType = ReturnType<RegisterAndRecoveryPassReducerActionsTypes<typeof registerAndRecoveryPassActions>>

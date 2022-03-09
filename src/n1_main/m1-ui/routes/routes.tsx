@@ -21,7 +21,7 @@ export enum RoutesXPaths {
 
 const RoutesX = () => {
     return (
-        <>
+        <div style={{height:'100vh'}}>
             <Routes>
                 <Route path={RoutesXPaths.PROFILE} element={<Profile/>}/>
                 <Route path={RoutesXPaths.REGISTER} element={<Register/>}/>
@@ -36,7 +36,7 @@ const RoutesX = () => {
                        element={<h1 style={{textAlign: 'center'}}>404:PAGE NOT FOUND</h1>}/>
                 <Route path={'*'} element={<Navigate to={RoutesXPaths.NOT_FOUND}/>}/>
             </Routes>
-        </>
+        </div>
     );
 };
 

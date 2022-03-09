@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {passwordRecoveryTC} from "./passwordRecoveryReducer";
+import {useDispatch} from "react-redux";
 import regS from "../a2-register/RegisterForm.module.css";
-import {fridayReducerType} from "../../../n1_main/m2-bll/store";
+import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
-import {Navigate} from 'react-router-dom'
+import {Navigate, NavLink} from 'react-router-dom'
+import {passwordRecoveryTC} from "../../../n1_main/m2-bll/r3-thunks/ThunksActionsRegisterAndRecoveryPassReducer";
 
 
 const PasswordRecoveryForm = () => {
     const [email, setEmail] = useState<string>('')
     const dispatch = useDispatch()
-    const success = useSelector<fridayReducerType, boolean>(state => state.forgot.success)
-    const isLoggedIn = useSelector<fridayReducerType, boolean>(state => state.login.isLoggedIn)
+    const success = useFridaySelector< boolean>(state => state.regForNewPass.passwordRecovery.success)
+    const isLoggedIn = useFridaySelector< boolean>(state => state.login.isLoggedIn)
     const send = () => {
         dispatch(passwordRecoveryTC(email))
     }
@@ -31,7 +31,12 @@ const PasswordRecoveryForm = () => {
                            value={email}
                            onChange={(e) => setEmail(e.currentTarget.value)}/>
                     <div className={regS.buttonsDiv}>
-                        <button onClick={send}>send</button>
+                        <button type="button">
+                            <NavLink to={RoutesXPaths.LOGIN} style={{textDecoration:'none'}}>
+                                Cancel
+                            </NavLink>
+                        </button>
+                        <button onClick={send}>Send</button>
                     </div>
                 </div>
             </form>

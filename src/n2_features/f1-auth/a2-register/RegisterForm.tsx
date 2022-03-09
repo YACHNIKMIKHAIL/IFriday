@@ -1,11 +1,12 @@
 import React from 'react';
-import {registerUserTC, setErrorRegisterAC} from "./RegisterFormReducer";
-import {useDispatch, useSelector} from "react-redux";
-import {fridayReducerType} from "../../../n1_main/m2-bll/store";
+import {useDispatch} from "react-redux";
+import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import regS from './RegisterForm.module.css'
 import {useFormik} from "formik";
-import {Navigate} from 'react-router-dom'
+import {Navigate, NavLink} from 'react-router-dom'
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
+import {registerUserTC} from "../../../n1_main/m2-bll/r3-thunks/ThunksActionsRegisterAndRecoveryPassReducer";
+import {registerAndRecoveryPassActions} from "../../../n1_main/m2-bll/r2-actions/ActionsRegisterAndRecoveryPassReducer";
 
 type FormikErrorType = {
     email?: string
@@ -14,9 +15,9 @@ type FormikErrorType = {
 }
 
 const RegisterForm = () => {
-    const error = useSelector<fridayReducerType, string | undefined>(state => state.registration.error)
+    const error = useFridaySelector<string | undefined>(state => state.regForNewPass.register.error)
     const dispatch = useDispatch()
-    const isLoggedIn = useSelector<fridayReducerType, boolean>(state => state.login.isLoggedIn)
+    const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -51,7 +52,7 @@ const RegisterForm = () => {
         formik.resetForm()
         formik.setTouched({})
         formik.setErrors({email: undefined, password: undefined, confirm: undefined})
-        dispatch(setErrorRegisterAC(""))
+        dispatch(registerAndRecoveryPassActions.setErrorRegisterAC(""))
     }
     if (error === "email already exists /ᐠ｡ꞈ｡ᐟ\\") {
         return <Navigate to={RoutesXPaths.LOGIN}/>
@@ -91,7 +92,10 @@ const RegisterForm = () => {
                             <div style={{color: 'red'}}>{formik.errors.confirm}</div> : null}
                     </div>
                     <div className={regS.buttonsDiv}>
-                        <button type="button" onClick={cancelHandler}>Cancel</button>
+                        <button type="button"
+                                // onClick={cancelHandler}
+                        ><NavLink to={RoutesXPaths.LOGIN} style={{textDecoration:'none'}}>
+                            Cancel</NavLink></button>
                         <button type="submit">Register</button>
                     </div>
                 </form>
