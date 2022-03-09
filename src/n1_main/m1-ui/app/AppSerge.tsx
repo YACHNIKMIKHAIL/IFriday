@@ -6,10 +6,10 @@ import {useFridaySelector} from "../../m2-bll/store";
 import {RequestStatusType} from "../../m2-bll/r1-reducers/app-reducer";
 import Preloader from "../common/Preloader";
 import {loadToken} from "../../m2-bll/fridayLocalStorage";
-import {setIsLoggedInAC} from "../../m2-bll/r1-reducers/LoginFormReducer";
 import Main from "../../Main";
 import RoutesX from "../routes/routes";
 import {meTC} from "../../m2-bll/r3-thunks/ThunkMe";
+import {LoginFormActions} from "../../m2-bll/r2-actions/ActionLoginForm";
 
 function AppSerge() {
 
@@ -19,7 +19,7 @@ function AppSerge() {
     useLayoutEffect(() => {
         const token = loadToken()
         if (token) {
-            dispatch(setIsLoggedInAC(true))
+            dispatch(LoginFormActions.setIsLoggedInAC(true))
         }
     }, [])
     useEffect(() => {
