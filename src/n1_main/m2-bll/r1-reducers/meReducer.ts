@@ -1,85 +1,26 @@
-import {Dispatch} from "redux";
-import {meAPI} from "../../m3-dal/meAPI";
-import {setProfileAC} from "./ProfileReducer";
-import {saveToken} from "../fridayLocalStorage";
+import {initializeMeACType, meActions, setErrorMeACType} from "../r2-actions/ActionsMe";
 
-/*export type MeType = {
-    _id: string;
-    email: string;
-    name: string;
-    avatar?: string;
-    publicCardPacksCount: number; // количество колод
 
-    created: Date;
-    updated: Date;
-    isAdmin: boolean;
-    verified: boolean; // подтвердил ли почту
-    rememberMe: boolean;
-
-    error?: string;
-}*/
 export type meReducerStateType = {
-    /*me: MeType,*/
     isInitialized: boolean,
     error: string
 }
 const meReducerState: meReducerStateType = {
-    /*me: {} as MeType,*/
     isInitialized: false,
     error: ''
 }
 
 export const meReducer = (state = meReducerState, action: meReducerActionType): meReducerStateType => {
     switch (action.type) {
-        case INITIALIZE_ME: {
+        case meActions.INITIALIZE_ME: {
             return {...state, isInitialized: action.payload.initialization}
         }
-        /*case SET_ME: {
-            return {...state, me: {...action.payload.me}}
-        }*/
-        case SET_ERROR: {
+        case meActions.SET_ME_ERROR: {
             return {...state, error: action.payload.error}
         }
         default:
             return state
     }
 }
-type meReducerActionType = initializeMeACType | setErrorACType
+type meReducerActionType = initializeMeACType | setErrorMeACType
 
-const INITIALIZE_ME = 'INITIALIZE_ME'
-export type initializeMeACType = ReturnType<typeof initializeMeAC>
-export const initializeMeAC = (initialization: boolean) => {
-    return {
-        type: INITIALIZE_ME,
-        payload: {initialization}
-    } as const
-}
-/*const SET_ME = 'SET_ME'
-export type setMeACType = ReturnType<typeof setMeAC>
-export const setMeAC = (me: MeType) => {
-    return {
-        type: SET_ME,
-        payload: {me}
-    } as const
-}*/
-const SET_ERROR = 'SET_ERROR'
-export type setErrorACType = ReturnType<typeof setErrorAC>
-export const setErrorAC = (error: string) => {
-    return {
-        type: SET_ERROR,
-        payload: {error}
-    } as const
-}
-export const meTC = () => async (dispatch: Dispatch) => {
-    try {
-        let res = await meAPI.me()
-        dispatch(initializeMeAC(true))
-        dispatch(setProfileAC(res.data))
-        saveToken(res.data.token)
-    } catch (e: any) {
-        dispatch(setErrorAC(e.response.data.error))
-        saveToken(null)
-    } finally {
-        dispatch(initializeMeAC(true))
-    }
-}

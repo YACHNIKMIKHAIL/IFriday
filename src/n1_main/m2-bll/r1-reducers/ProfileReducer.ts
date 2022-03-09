@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {profileAPI} from "../../m3-dal/ProfileAPI";
 import {meRespType} from "../../m3-dal/meAPI";
+import {setAppStatusAC} from "./app-reducer";
 
 const PROFILE = {
     CHANGE_USER_NAME: 'CHANGE_USER_NAME',
@@ -81,11 +82,13 @@ const setError = (error: string | null) => {
 
 // THUNKS
 export const updateUserNameTC = (newUserName: string) => async (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC("loading"))
     try {
         let res = await profileAPI.changeUserName(newUserName)
         dispatch(changeUserName(res.data.updatedUser))
+        dispatch(setAppStatusAC("succeeded"))
     } catch (e) {
-
+        dispatch(setAppStatusAC("failed"))
     }
 }
 

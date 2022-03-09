@@ -5,13 +5,13 @@ import {profileReducer} from "./r1-reducers/ProfileReducer";
 import {loginFormReducer} from "./r1-reducers/LoginFormReducer";
 import {registerAndRecoveryPassReducer} from "./r1-reducers/RegisterAndRecoveryPassReducer";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
-import {appReducer} from "../m1-ui/app/app-reducer";
+import {appReducer} from "./r1-reducers/app-reducer";
 
 const fridayReducer = combineReducers({
     me: meReducer,
     profile: profileReducer,
     login: loginFormReducer,
-    app:appReducer
+    app:appReducer,
     regForNewPass:registerAndRecoveryPassReducer
 })
 
