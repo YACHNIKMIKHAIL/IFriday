@@ -62,9 +62,9 @@ const LoginForm = () => {
                             placeholder={"Enter your email"}
                             {...formik.getFieldProps('email')}
                         />
-                        {formik.touched.email && formik.errors.email &&
-                        <div style={{color: 'red'}}>{formik.errors.email}</div>}
                     </div>
+                    {formik.touched.email && formik.errors.email &&
+                    <div style={{color: 'red'}}>{formik.errors.email}</div>}
                     <div className={style.second}>
                         Password:
                         <input
@@ -72,9 +72,9 @@ const LoginForm = () => {
                             placeholder={"Enter your password"}
                             {...formik.getFieldProps('password')}
                         />
-                        {formik.touched.password && formik.errors.password &&
-                        <div style={{color: 'red'}}>{formik.errors.password}</div>}
                     </div>
+                    {formik.touched.password && formik.errors.password &&
+                    <div style={{color: 'red'}}>{formik.errors.password}</div>}
                     <div>
                         Remember me:
                         <input

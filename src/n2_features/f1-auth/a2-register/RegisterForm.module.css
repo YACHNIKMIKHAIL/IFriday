@@ -28,10 +28,24 @@ form{
     height: 50%;
     padding: 10px;
 }
-
+.second input {
+    outline: none;
+    border: none;
+    border-bottom: 1px #726d6f solid;
+}
 .buttonsDiv {
     min-width: 90%;
     display: flex;
     justify-content: center;
     padding: 10px;
+
+}
+.buttonsDiv button{
+    width: 60px;
+    height: 25px;
+    border: none;
+    border-radius:5px;
+    background-color: blue;
+    color: white;
+    margin:5px
 }
