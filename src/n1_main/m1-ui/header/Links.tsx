@@ -10,28 +10,33 @@ const Links = () => {
                        className={({isActive}) => (isActive ? s.active : '')}
                        style={{textDecoration: 'none'}}
             >Profile</NavLink></>
-            <><NavLink to={RoutesXPaths.REGISTER}
-                       className={({isActive}) => (isActive ? s.activeR : '')}
-                       style={{textDecoration: 'none'}}
-            >Register</NavLink></>
-            <><NavLink to={RoutesXPaths.LOGIN}
-                       className={({isActive}) => (isActive ? s.active : '')}
-                       style={{textDecoration: 'none'}}
-            >Login</NavLink></>
-            <><NavLink to={RoutesXPaths.RECOVERY}
-                       className={({isActive}) => (isActive ? s.activeR : '')}
-                       style={{textDecoration: 'none'}}
-            >PasswordRecovery</NavLink></>
-            <><NavLink to={RoutesXPaths.SET_PASS}
-                       className={({isActive}) => (isActive ? s.activeR : '')}
-                       style={{textDecoration: 'none'}}
-            >NewPassword</NavLink></>
+
+            {/*<><NavLink to={RoutesXPaths.REGISTER}*/}
+            {/*           className={({isActive}) => (isActive ? s.activeR : '')}*/}
+            {/*           style={{textDecoration: 'none'}}*/}
+            {/*>Register</NavLink></>*/}
+
+            {/*<><NavLink to={RoutesXPaths.LOGIN}*/}
+            {/*           className={({isActive}) => (isActive ? s.active : '')}*/}
+            {/*           style={{textDecoration: 'none'}}*/}
+            {/*>Login</NavLink></>*/}
+
+            {/*<><NavLink to={RoutesXPaths.RECOVERY}*/}
+            {/*           className={({isActive}) => (isActive ? s.activeR : '')}*/}
+            {/*           style={{textDecoration: 'none'}}*/}
+            {/*>PasswordRecovery</NavLink></>*/}
+
+            {/*<><NavLink to={RoutesXPaths.SET_PASS}*/}
+            {/*           className={({isActive}) => (isActive ? s.activeR : '')}*/}
+            {/*           style={{textDecoration: 'none'}}*/}
+            {/*>NewPassword</NavLink></>*/}
+
             <><NavLink to={RoutesXPaths.TEST}
                        className={({isActive}) => (isActive ? s.active : '')}
                        style={{textDecoration: 'none'}}
             >Test</NavLink></>
             <><NavLink to={RoutesXPaths.LOGOUT}
-                       className={({isActive}) => (isActive ? s.active : '')}
+                       className={({isActive}) => (isActive ? s.activeR : '')}
                        style={{textDecoration: 'none'}}
             >Logout</NavLink></>
         </div>
