@@ -2,6 +2,11 @@ import {Dispatch} from "redux";
 import {registerFormAPI} from "../../../n2_features/f1-auth/a2-register/RegisterFormAPI";
 import {passwordRecoveryAPI} from "../../../n2_features/f1-auth/a4-passwordRecovery/passwordRecoveryAPI";
 import {createNewPasswordAPI, newPassBodyType} from "../../../n2_features/f1-auth/a5-newPassword/newPasswordAPI";
+import {
+    registerAndRecoveryPassActions,
+    RegisterAndRecoveryPassReducer,
+    RegisterAndRecoveryPassReducerActionsTypes
+} from "../r2-actions/ActionsRegisterAndRecoveryPassReducer";
 
 
 export type userType = {
@@ -46,12 +51,12 @@ const registerAndRecoveryPassReducerState: RegisterAndRecoveryPassReducerType = 
     }
 }
 
-export const registerAndRecoveryPassReducer = (state = registerAndRecoveryPassReducerState, action: registerAndRecoveryPassReducerActionType): RegisterAndRecoveryPassReducerType => {
+export const registerAndRecoveryPassReducer = (state = registerAndRecoveryPassReducerState, action: RegisterAndRecoveryPassReducerActionType): RegisterAndRecoveryPassReducerType => {
     switch (action.type) {
-        case REGISTER_USER: {
+        case RegisterAndRecoveryPassReducer.REGISTER_USER: {
             return {...state, register: {...state.register, addedUser: action.payload.addedUser}}
         }
-        case SET_ERROR_REGISTER: {
+        case RegisterAndRecoveryPassReducer.SET_ERROR_REGISTER: {
             return {
                 ...state, register:
                     {
@@ -60,39 +65,35 @@ export const registerAndRecoveryPassReducer = (state = registerAndRecoveryPassRe
                     }
             }
         }
-        case SET_INFO_RECOVERY_PASS: {
+        case RegisterAndRecoveryPassReducer.SET_INFO_RECOVERY_PASS: {
             return {...state, passwordRecovery: {...state.passwordRecovery, ...action.payload.data}}
         }
-        case SET_INFO_NEW_PASS: {
+        case RegisterAndRecoveryPassReducer.SET_INFO_NEW_PASS: {
             return {...state, newPassword: {...action.payload.data}}
         }
         default:
             return state
     }
 }
-type registerAndRecoveryPassReducerActionType =
-    registerUserACType
-    | setErrorRegisterACType
-    | setInfoNewPassACType
-    | setInfoRecoveryACType
+type RegisterAndRecoveryPassReducerActionType =ReturnType<RegisterAndRecoveryPassReducerActionsTypes<typeof registerAndRecoveryPassActions>>
 
-const REGISTER_USER = 'REGISTER_USER'
-export type registerUserACType = ReturnType<typeof registerUserAC>
-export const registerUserAC = (data: registerStateType) => {
-    return {
-        type: REGISTER_USER,
-        payload: data
-    } as const
-}
-
-const SET_ERROR_REGISTER = 'SET_ERROR_REGISTER'
-export type setErrorRegisterACType = ReturnType<typeof setErrorRegisterAC>
-export const setErrorRegisterAC = (e: string) => {
-    return {
-        type: SET_ERROR_REGISTER,
-        payload: {e}
-    } as const
-}
+// const REGISTER_USER = 'REGISTER_USER'
+// export type registerUserACType = ReturnType<typeof registerUserAC>
+// export const registerUserAC = (data: registerStateType) => {
+//     return {
+//         type: REGISTER_USER,
+//         payload: data
+//     } as const
+// }
+//
+// const SET_ERROR_REGISTER = 'SET_ERROR_REGISTER'
+// export type setErrorRegisterACType = ReturnType<typeof setErrorRegisterAC>
+// export const setErrorRegisterAC = (e: string) => {
+//     return {
+//         type: SET_ERROR_REGISTER,
+//         payload: {e}
+//     } as const
+// }
 
 export const registerUserTC = (body: { email: string, password: string }) => async (dispatch: Dispatch) => {
     dispatch(registerUserAC({
@@ -114,22 +115,15 @@ export const registerUserTC = (body: { email: string, password: string }) => asy
     }
 }
 
-const SET_INFO_RECOVERY_PASS = 'SET_INFO_RECOVERY_PASS'
-export type setInfoRecoveryACType = ReturnType<typeof setInfoRecoveryAC>
-export const setInfoRecoveryAC = (data: passwordRecoveryStateType) => {
-    return {
-        type: SET_INFO_RECOVERY_PASS,
-        payload: {data}
-    } as const
-}
-// const SET_ERROR_RECOVERY_PASS = 'SET_ERROR_RECOVERY_PASS'
-// export type setErrorRecoveryACType = ReturnType<typeof setErrorRecoveryAC>
-// export const setErrorRecoveryAC = (error: string) => {
+// const SET_INFO_RECOVERY_PASS = 'SET_INFO_RECOVERY_PASS'
+// export type setInfoRecoveryACType = ReturnType<typeof setInfoRecoveryAC>
+// export const setInfoRecoveryAC = (data: passwordRecoveryStateType) => {
 //     return {
-//         type: SET_ERROR_RECOVERY_PASS,
-//         payload: {error}
+//         type: SET_INFO_RECOVERY_PASS,
+//         payload: {data}
 //     } as const
 // }
+
 
 export const passwordRecoveryTC = (email: string) => async (dispatch: Dispatch) => {
     try {
@@ -142,20 +136,12 @@ export const passwordRecoveryTC = (email: string) => async (dispatch: Dispatch) 
     }
 }
 
-const SET_INFO_NEW_PASS = 'SET_INFO_NEW_PASS'
-export type setInfoNewPassACType = ReturnType<typeof setInfoNewPassAC>
-export const setInfoNewPassAC = (data: newPasswordStateType) => {
-    return {
-        type: SET_INFO_NEW_PASS,
-        payload: {data}
-    } as const
-}
-// const SET_ERROR = 'SET_ERROR'
-// export type setErrorACType = ReturnType<typeof setErrorAC>
-// export const setErrorAC = (error: string) => {
+// const SET_INFO_NEW_PASS = 'SET_INFO_NEW_PASS'
+// export type setInfoNewPassACType = ReturnType<typeof setInfoNewPassAC>
+// export const setInfoNewPassAC = (data: newPasswordStateType) => {
 //     return {
-//         type: SET_ERROR,
-//         payload: {error}
+//         type: SET_INFO_NEW_PASS,
+//         payload: {data}
 //     } as const
 // }
 
