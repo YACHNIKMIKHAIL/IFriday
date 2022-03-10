@@ -61,7 +61,7 @@ export const updateUserNameTC = (newUserName: string) => async (dispatch: Dispat
     dispatch(setAppStatusAC("loading"))
     debugger
     let updateModel = {
-        name: '',
+        name: newUserName,
         avatar: ''
     }
     try {
