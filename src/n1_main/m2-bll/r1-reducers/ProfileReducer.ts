@@ -2,7 +2,6 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../../m3-dal/ProfileAPI";
 import {meRespType} from "../../m3-dal/meAPI";
 import {setAppStatusAC} from "./app-reducer";
-import {UserDataType} from "../r2-actions/ActionLoginForm";
 
 const PROFILE = {
     SET_PROFILE: 'SET_PROFILE',
@@ -41,11 +40,10 @@ export type setErrorActionType = ReturnType<typeof ProfileActions.setErrorAC>
 export type profileReducerActionType = SetProfileACType | setErrorActionType
 
 
-export const profileReducer = (state: ProfileInitialStateType = initialProfileState, action: profileReducerActionType): ProfileInitialStateType => {
+export const profileReducer = (state = initialProfileState, action: profileReducerActionType): ProfileInitialStateType => {
     switch (action.type) {
         case PROFILE.SET_PROFILE:
-
-            return {...state, profile: {...action.payload.profile}}
+            return {...state, profile: action.payload.profile}
         case PROFILE.SET_ERROR:
             return {...state, error: action.payload.error}
         default:
@@ -55,7 +53,7 @@ export const profileReducer = (state: ProfileInitialStateType = initialProfileSt
 
 // ACTIONS
 export const ProfileActions = {
-    setProfileAC: <T>(profile: T) => {
+    setProfileAC: (profile: meRespType) => {
         return {
             type: PROFILE.SET_PROFILE,
             payload: {profile},
@@ -73,9 +71,14 @@ export const ProfileActions = {
 // THUNKS
 export const updateUserNameTC = (newUserName: string) => async (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
+    let updateModel = {
+        name: newUserName,
+        avatar: ''
+    }
     try {
-        let res = await profileAPI.changeUserName(newUserName)
-        dispatch(ProfileActions.setProfileAC<UserDataType>(res.data.updatedUser))
+        let res = await profileAPI.changeUserName(updateModel)
+        const {updatedUser} = res.data
+        dispatch(ProfileActions.setProfileAC(updatedUser))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         console.log(e.message)

@@ -1,5 +1,4 @@
 import axios, {AxiosResponse} from "axios";
-import {BASE_IMG_URL} from "../m1-ui/common/Profile";
 import {UserDataType} from "../m2-bll/r2-actions/ActionLoginForm";
 
 export const instance = axios.create({
@@ -8,7 +7,7 @@ export const instance = axios.create({
 })
 
 export const profileAPI = {
-    async changeUserName(newName: string) {
+    async changeUserName(updateBody: UpdateUser) {
         return await instance.put<ProfileRespType,
             AxiosResponse<ProfileRespType>>(`/auth/me`, {
             /*name: newName,
@@ -17,6 +16,10 @@ export const profileAPI = {
     }
 }
 
+export type UpdateUser={
+    name: string,
+    avatar: string
+}
 export type ProfileRespType = {
     updatedUser: UserDataType
     error?: string

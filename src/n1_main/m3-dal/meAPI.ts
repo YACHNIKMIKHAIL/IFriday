@@ -18,10 +18,10 @@ export type meRespType = {
     avatar?: string;
     publicCardPacksCount: number; // количество колод
 
-    created: Date;
-    updated: Date;
+    created: number;
+    updated: number;
     isAdmin: boolean;
-    verified: boolean; // подтвердил ли почту
+    verified?: boolean; // подтвердил ли почту
     rememberMe: boolean;
 
     error?: string;
