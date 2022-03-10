@@ -6,15 +6,25 @@ import {updateUserNameTC} from "../../m2-bll/r1-reducers/ProfileReducer";
 import {Navigate} from 'react-router-dom';
 import {RoutesXPaths} from "../routes/routes";
 import {UserDataType} from "../../m2-bll/r2-actions/ActionLoginForm";
+import {meRespType} from "../../m3-dal/meAPI";
 
 export const BASE_IMG_URL = "https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg"
 
 const Profile = () => {
 
-    const userInfo = useFridaySelector<UserDataType>(state => state.profile.profile)
+    const userInfo = useFridaySelector<UserDataType | meRespType>(state => state.profile.profile)
+    const errorMessage = useFridaySelector<string | undefined>(state => state.profile.error)
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
 
+    /*alert(JSON.stringify(errorMessage))*/
     let [name, setName] = useState<string>(userInfo.name)
+    /*let [error, setError] = useState<boolean>(!!errorMessage)*/
+
+    /*if (error) {
+        console.log(errorMessage)
+    }*/
+
+
     let [modification, setModification] = useState<boolean>(false)
 
     const dispatch = useDispatch()
@@ -44,8 +54,12 @@ const Profile = () => {
 
     return (
         <div className={s.profilePage}>
+            {errorMessage !== undefined ? <div>всё клево</div> : <div style={{color: 'red'}}>{errorMessage}</div> }
             <div className={s.profileContainer}>
+                <>
                 <h2 className={s.title}>Personal information</h2>
+
+                </>
                 <img src={userInfo.avatar ? userInfo.avatar : BASE_IMG_URL} alt={"user's image"}/>
                 <div className={s.nameContainer}>
                     {
@@ -63,6 +77,7 @@ const Profile = () => {
 
                     }
                 </div>
+
                 <button className={s.button} onClick={updateUser}>Save</button>
             </div>
         </div>
