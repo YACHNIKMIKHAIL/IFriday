@@ -1,7 +1,6 @@
 import {ProfileActions, ProfileInitialStateType, profileReducer} from "./ProfileReducer";
 import {meRespType} from "../../m3-dal/meAPI";
 import {UserDataType} from "../r2-actions/ActionLoginForm";
-import {ProfileRespType} from "../../m3-dal/ProfileAPI";
 
 
 const loginResponse: UserDataType = {
@@ -59,13 +58,13 @@ beforeEach(() => {
     }
 })
 test('correct user data from me response should be set', () => {
-    const endState = profileReducer(startState, ProfileActions.setProfileAC<meRespType>(meResponse))
+    const endState = profileReducer(startState, ProfileActions.setProfileAC(meResponse))
 
     expect(endState.profile).toEqual(meResponse)
 })
 
 test('correct user data from login response should be set', () => {
-    const endState = profileReducer(startState, ProfileActions.setProfileAC<UserDataType>(loginResponse))
+    const endState = profileReducer(startState, ProfileActions.setProfileAC(loginResponse))
 
     expect(endState.profile).toEqual(loginResponse)
 })

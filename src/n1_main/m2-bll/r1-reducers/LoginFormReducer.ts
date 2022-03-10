@@ -3,10 +3,11 @@ import {loginFormAPI, loginType} from "../../m3-dal/LoginFormAPI";
 import {saveToken} from "../fridayLocalStorage";
 import {setAppStatusAC} from "./app-reducer";
 import {
-    LoginFormActions, LoginFormInitialState,
+    LoginFormActions,
+    LoginFormInitialState,
     LoginFormReducer,
     LoginFormReducerReducerActionsTypes,
-    LoginInitialStateType, UserDataType
+    LoginInitialStateType
 } from "../r2-actions/ActionLoginForm";
 import {ProfileActions} from "./ProfileReducer";
 
@@ -31,7 +32,7 @@ export const loginUserTC = (body: loginType) => async (dispatch: Dispatch) => {
     try {
         const res = await loginFormAPI.loginMe(body)
         dispatch(LoginFormActions.setUserDataAC(res.data)) // можно заменить на setProfileAC, чтоб не дублировать логику
-        dispatch(ProfileActions.setProfileAC<UserDataType>(res.data))
+        dispatch(ProfileActions.setProfileAC(res.data))
         dispatch(LoginFormActions.setIsLoggedInAC(true))
         saveToken(res.data.token)
         dispatch(setAppStatusAC("succeeded"))

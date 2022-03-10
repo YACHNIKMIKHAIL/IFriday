@@ -17,13 +17,11 @@ export type meRespType = {
     name: string;
     avatar?: string;
     publicCardPacksCount: number; // количество колод
-
     created: number;
     updated: number;
     isAdmin: boolean;
     verified?: boolean; // подтвердил ли почту
     rememberMe: boolean;
-
     error?: string;
     token:string
 }

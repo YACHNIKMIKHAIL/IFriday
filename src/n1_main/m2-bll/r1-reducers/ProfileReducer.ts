@@ -3,9 +3,9 @@ import {profileAPI} from "../../m3-dal/ProfileAPI";
 import {meRespType} from "../../m3-dal/meAPI";
 import {setAppStatusAC} from "./app-reducer";
 
-const PROFILE = {
-    SET_PROFILE: 'SET_PROFILE',
-    SET_ERROR: 'SET_ERROR'
+export enum PROFILE {
+    SET_PROFILE = 'SET_PROFILE',
+    SET_ERROR = 'SET_ERROR'
 }
 
 // TYPES
@@ -15,37 +15,27 @@ export type ProfileInitialStateType = {
     error: string
 }
 
-const initialProfileState: ProfileInitialStateType = {
-    profile: {
-        _id: '',
-        email: '',
-        name: '',
-        avatar: '',
-        publicCardPacksCount: 0, // количество колод
-
-        created: 0,
-        updated: 0,
-        isAdmin: false,
-        verified: false, // подтвердил ли почту
-        rememberMe: false,
-
-        error: '',
-        token: ''
-    },
+const initialProfileState = {
+    profile: {} as meRespType,
     error: ''
 }
 
-export type SetProfileACType = ReturnType<typeof ProfileActions.setProfileAC>
-export type setErrorActionType = ReturnType<typeof ProfileActions.setErrorAC>
-export type profileReducerActionType = SetProfileACType | setErrorActionType
+// export type SetProfileACType = ReturnType<typeof ProfileActions.setProfileAC>
+// export type setErrorActionType = ReturnType<typeof ProfileActions.setErrorAC>
+// export type profileReducerActionType = SetProfileACType | setErrorActionType
 
+export type profileReducerActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
 
-export const profileReducer = (state = initialProfileState, action: profileReducerActionType): ProfileInitialStateType => {
+export const profileReducer = (state: ProfileInitialStateType = initialProfileState, action: ReturnType<profileReducerActionsTypes<typeof ProfileActions>>): ProfileInitialStateType => {
     switch (action.type) {
-        case PROFILE.SET_PROFILE:
-            return {...state, profile: action.payload.profile}
-        case PROFILE.SET_ERROR:
-            return {...state, error: action.payload.error}
+        case PROFILE.SET_PROFILE: {
+            let {profile} = action.payload;
+            return {...state, profile}
+        }
+        case PROFILE.SET_ERROR: {
+            let {error} = action.payload
+            return {...state, error}
+        }
         default:
             return state
     }
@@ -59,12 +49,10 @@ export const ProfileActions = {
             payload: {profile},
         } as const
     },
-    setErrorAC: (error: string) => { //нужно сделать
-        return {
-            type: PROFILE.SET_ERROR,
-            payload: {error},
-        } as const
-    },
+    setErrorAC: (error: string) => ({
+        type: PROFILE.SET_ERROR,
+        payload: {error},
+    } as const)
 }
 
 
