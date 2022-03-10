@@ -58,11 +58,19 @@
     outline:none;
 }
 
+.errorMessage {
+    text-align: center;
+    font-family: "Cooper Black";
+    font-size: large;
+    text-transform: uppercase;
+    color: #bd312d;
+    margin-bottom: 30px;
+}
+
 .button {
     width: 110px;
     height: 40px;
-    color: white;
-    background-color: darkslategray;
-    border: none;
+    background-color:#9bc6e9;
+    border:1px solid #9ba4e9;
     border-radius: 20px;
 }

@@ -9,21 +9,14 @@ export enum PROFILE {
 }
 
 // TYPES
-
 export type ProfileInitialStateType = {
     profile: meRespType
     error: string
 }
-
 const initialProfileState = {
     profile: {} as meRespType,
     error: ''
 }
-
-// export type SetProfileACType = ReturnType<typeof ProfileActions.setProfileAC>
-// export type setErrorActionType = ReturnType<typeof ProfileActions.setErrorAC>
-// export type profileReducerActionType = SetProfileACType | setErrorActionType
-
 export type profileReducerActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
 
 export const profileReducer = (state: ProfileInitialStateType = initialProfileState, action: ReturnType<profileReducerActionsTypes<typeof ProfileActions>>): ProfileInitialStateType => {
@@ -56,7 +49,7 @@ export const ProfileActions = {
 }
 
 
-// THUNKS
+// THUNK
 export const updateUserNameTC = (newUserName: string) => async (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
     let updateModel = {
@@ -68,8 +61,8 @@ export const updateUserNameTC = (newUserName: string) => async (dispatch: Dispat
         const {updatedUser} = res.data
         dispatch(ProfileActions.setProfileAC(updatedUser))
         dispatch(setAppStatusAC("succeeded"))
+        dispatch(ProfileActions.setErrorAC(''))
     } catch (e: any) {
-
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
         dispatch(ProfileActions.setErrorAC(error))
         dispatch(setAppStatusAC("failed"))

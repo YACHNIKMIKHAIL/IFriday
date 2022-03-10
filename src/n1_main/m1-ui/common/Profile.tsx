@@ -13,41 +13,32 @@ export const BASE_IMG_URL = "https://upload.wikimedia.org/wikipedia/commons/4/49
 const Profile = () => {
 
     const userInfo = useFridaySelector<UserDataType | meRespType>(state => state.profile.profile)
-    const errorMessage = useFridaySelector<string | undefined>(state => state.profile.error)
+    const errorMessage = useFridaySelector<string>(state => state.profile.error)
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
+    const dispatch = useDispatch()
 
-    /*alert(JSON.stringify(errorMessage))*/
     let [name, setName] = useState<string>(userInfo.name)
-    /*let [error, setError] = useState<boolean>(!!errorMessage)*/
-
-    /*if (error) {
-        console.log(errorMessage)
-    }*/
-
-
     let [modification, setModification] = useState<boolean>(false)
 
-    const dispatch = useDispatch()
 
     const changeModification = () => {
         setModification(true)
     }
 
-    const changeName = (e: ChangeEvent<HTMLInputElement>) => {
+    const changeNameValue = (e: ChangeEvent<HTMLInputElement>) => {
         setName(e.currentTarget.value)
     }
     const updateUser = () => {
-        dispatch(updateUserNameTC(name))
-        setModification(!modification)
-    }
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.charCode === 13) {
+        if(name.trim() !== '') {
             dispatch(updateUserNameTC(name))
             setModification(!modification)
         }
     }
-    const killError = () => {
-        dispatch(ProfileActions.setErrorAC(''))
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            dispatch(updateUserNameTC(name))
+            setModification(!modification)
+        }
     }
 
     if (!isLoggedIn) {
@@ -57,31 +48,35 @@ const Profile = () => {
 
     return (
         <div className={s.profilePage}>
-            {!!errorMessage && <div style={{color: 'red'}}>{errorMessage}</div> }
-            <div className={s.profileContainer} onBlur={killError}>
-                <>
 
+            <div className={s.profileContainer}>
                 <h2 className={s.title}>Personal information</h2>
-                </>
                 <img src={userInfo.avatar ? userInfo.avatar : BASE_IMG_URL} alt={"user's image"}/>
                 <div className={s.nameContainer}>
+                    {!!errorMessage && <div className={s.errorMessage}>{errorMessage}</div>}
                     {
                         modification
-                            ? <div>
-                                <input type="text" className={s.input} value={name} onKeyPress={onKeyPressHandler}
-                                       onChange={changeName}/>
-                                <p className={s.description}>Enter your new name, please 😌</p>
-                            </div>
-                            : <div>
+                            ? (<div>
+                                    <input
+                                        type="text"
+                                        className={s.input}
+                                        value={name}
+                                        onKeyPress={onKeyPressHandler}
+                                        onChange={changeNameValue}
+                                        autoFocus
+                                    />
+                                    <p className={s.description}>Enter your new name, please 😌</p>
+                                </div>
+                            ) : (<div>
                                 <span className={s.yourNameMessage}
                                       onClick={changeModification}>{`Your name is: ${userInfo.name}`}</span>
                                 <p className={s.description}>If you want to change your name, click on it 😉</p>
-                            </div>
-
+                            </div>)
                     }
                 </div>
 
-                <button className={s.button} onClick={updateUser}>Save</button>
+                <button className={s.button} onClick={updateUser} disabled={!modification}>Save</button>
+
             </div>
         </div>
     );
