@@ -32,7 +32,7 @@ const PasswordRecoveryForm = () => {
                            onChange={(e) => setEmail(e.currentTarget.value)}/>
                     <div className={regS.buttonsDiv}>
                         <button type="button">
-                            <NavLink to={RoutesXPaths.LOGIN} style={{textDecoration:'none'}}>
+                            <NavLink to={RoutesXPaths.LOGIN} style={{textDecoration:'none',color:"white"}}>
                                 Cancel
                             </NavLink>
                         </button>
