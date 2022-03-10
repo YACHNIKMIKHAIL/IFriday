@@ -11,14 +11,15 @@ export const profileAPI = {
     async changeUserName(newName: string) {
         return await instance.put<ProfileRespType,
             AxiosResponse<ProfileRespType>>(`/auth/me`, {
-            name: newName,
-            avatar: BASE_IMG_URL // url or base64
+            /*name: newName,
+            avatar: BASE_IMG_URL*/ // url or base64
         })
     }
 }
 
 export type ProfileRespType = {
     updatedUser: UserDataType
-    token: string
-    tokenDeathTime: number
+    error?: string
+    /*token: string
+    tokenDeathTime: number*/
 }
