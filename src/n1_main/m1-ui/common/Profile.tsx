@@ -37,6 +37,7 @@ const Profile = () => {
         setName(e.currentTarget.value)
     }
     const updateUser = () => {
+        debugger
         dispatch(updateUserNameTC(name))
         setModification(!modification)
     }
@@ -57,8 +58,8 @@ const Profile = () => {
             {errorMessage !== undefined ? <div>всё клево</div> : <div style={{color: 'red'}}>{errorMessage}</div> }
             <div className={s.profileContainer}>
                 <>
-                <h2 className={s.title}>Personal information</h2>
 
+                <h2 className={s.title}>Personal information</h2>
                 </>
                 <img src={userInfo.avatar ? userInfo.avatar : BASE_IMG_URL} alt={"user's image"}/>
                 <div className={s.nameContainer}>
