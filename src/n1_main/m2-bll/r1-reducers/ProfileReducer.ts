@@ -2,7 +2,6 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../../m3-dal/ProfileAPI";
 import {meRespType} from "../../m3-dal/meAPI";
 import {setAppStatusAC} from "./app-reducer";
-import {BASE_IMG_URL} from "../../m1-ui/common/Profile";
 
 export enum PROFILE {
     SET_PROFILE = 'SET_PROFILE',
@@ -62,7 +61,7 @@ export const updateUserNameTC = (newUserName: string) => async (dispatch: Dispat
     dispatch(setAppStatusAC("loading"))
     let updateModel = {
         name: newUserName,
-        avatar: BASE_IMG_URL
+        avatar: ''
     }
     try {
         let res = await profileAPI.changeUserName(updateModel)
@@ -70,9 +69,9 @@ export const updateUserNameTC = (newUserName: string) => async (dispatch: Dispat
         dispatch(ProfileActions.setProfileAC(updatedUser))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
-        debugger
-        console.log(e.message)
-        dispatch(ProfileActions.setErrorAC(e.message))
+
+        const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+        dispatch(ProfileActions.setErrorAC(error))
         dispatch(setAppStatusAC("failed"))
     }
 }
