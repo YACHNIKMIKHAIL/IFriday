@@ -37,7 +37,6 @@ const Profile = () => {
         setName(e.currentTarget.value)
     }
     const updateUser = () => {
-        debugger
         dispatch(updateUserNameTC(name))
         setModification(!modification)
     }
@@ -55,7 +54,7 @@ const Profile = () => {
 
     return (
         <div className={s.profilePage}>
-            {errorMessage !== undefined ? <div>всё клево</div> : <div style={{color: 'red'}}>{errorMessage}</div> }
+            {!!errorMessage && <div style={{color: 'red'}}>{errorMessage}</div> }
             <div className={s.profileContainer}>
                 <>
 
