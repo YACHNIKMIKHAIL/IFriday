@@ -59,7 +59,6 @@ export const ProfileActions = {
 // THUNKS
 export const updateUserNameTC = (newUserName: string) => async (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
-    debugger
     let updateModel = {
         name: newUserName,
         avatar: ''
@@ -70,6 +69,7 @@ export const updateUserNameTC = (newUserName: string) => async (dispatch: Dispat
         dispatch(ProfileActions.setProfileAC(updatedUser))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
+
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
         dispatch(ProfileActions.setErrorAC(error))
         dispatch(setAppStatusAC("failed"))
