@@ -7,11 +7,11 @@ import {store} from "./n1_main/m2-bll/store";
 import AppSerge from "./n1_main/m1-ui/app/AppSerge";
 
 ReactDOM.render(
-    <React.StrictMode>
+   // <React.StrictMode>
         <Provider store={store}>
             <AppSerge/>
-        </Provider>
-    </React.StrictMode>,
+        </Provider>,
+    //</React.StrictMode>,
     document.getElementById('root')
 );
 
