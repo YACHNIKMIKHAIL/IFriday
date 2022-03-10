@@ -14,12 +14,16 @@ const Profile = () => {
 
     const userInfo = useFridaySelector<UserDataType | meRespType>(state => state.profile.profile)
     const errorMessage = useFridaySelector<string | undefined>(state => state.profile.error)
+
+    const meError = useFridaySelector<string | undefined>(state => state.me.error)
+
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
 
     /*alert(JSON.stringify(errorMessage))*/
     let [name, setName] = useState<string>(userInfo.name)
     /*let [error, setError] = useState<boolean>(!!errorMessage)*/
 
+    console.log(errorMessage)
     /*if (error) {
         console.log(errorMessage)
     }*/
@@ -54,11 +58,11 @@ const Profile = () => {
 
     return (
         <div className={s.profilePage}>
-            {errorMessage !== undefined ? <div>всё клево</div> : <div style={{color: 'red'}}>{errorMessage}</div> }
+            {errorMessage === '' ? <div>всё клево</div> : <div style={{color: 'red'}}>{errorMessage}</div> }
             <div className={s.profileContainer}>
                 <>
                 <h2 className={s.title}>Personal information</h2>
-
+                    {!!meError && <div>{meError}</div>}
                 </>
                 <img src={userInfo.avatar ? userInfo.avatar : BASE_IMG_URL} alt={"user's image"}/>
                 <div className={s.nameContainer}>
