@@ -15,23 +15,8 @@ export type ProfileInitialStateType = {
     error: string
 }
 
-const initialProfileState: ProfileInitialStateType = {
-    profile: {
-        _id: '',
-        email: '',
-        name: '',
-        avatar: '',
-        publicCardPacksCount: 0, // количество колод
-
-        created: 0,
-        updated: 0,
-        isAdmin: false,
-        verified: false, // подтвердил ли почту
-        rememberMe: false,
-
-        error: '',
-        token: ''
-    },
+const initialProfileState = {
+    profile: {} as meRespType,
     error: ''
 }
 
@@ -40,12 +25,16 @@ export type setErrorActionType = ReturnType<typeof ProfileActions.setErrorAC>
 export type profileReducerActionType = SetProfileACType | setErrorActionType
 
 
-export const profileReducer = (state = initialProfileState, action: profileReducerActionType): ProfileInitialStateType => {
+export const profileReducer = (state: ProfileInitialStateType = initialProfileState, action: profileReducerActionType): ProfileInitialStateType => {
     switch (action.type) {
-        case PROFILE.SET_PROFILE:
-            return {...state, profile: action.payload.profile}
-        case PROFILE.SET_ERROR:
-            return {...state, error: action.payload.error}
+        case PROFILE.SET_PROFILE: {
+            let {profile} = action.payload as { profile: meRespType };
+            return {...state, profile}
+        }
+        case PROFILE.SET_ERROR: {
+            let {error} = action.payload as { error: string }
+            return {...state, error}
+        }
         default:
             return state
     }
@@ -53,18 +42,14 @@ export const profileReducer = (state = initialProfileState, action: profileReduc
 
 // ACTIONS
 export const ProfileActions = {
-    setProfileAC: (profile: meRespType) => {
-        return {
-            type: PROFILE.SET_PROFILE,
-            payload: {profile},
-        } as const
-    },
-    setErrorAC: (error: string) => { //нужно сделать
-        return {
-            type: PROFILE.SET_ERROR,
-            payload: {error},
-        } as const
-    },
+    setProfileAC: (profile: meRespType) => ({
+        type: PROFILE.SET_PROFILE,
+        payload: {profile},
+    } as const),
+    setErrorAC: (error: string) => ({
+        type: PROFILE.SET_ERROR,
+        payload: {error},
+    } as const)
 }
 
 
