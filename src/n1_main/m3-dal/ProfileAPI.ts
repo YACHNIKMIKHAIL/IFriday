@@ -8,6 +8,7 @@ export const instance = axios.create({
 
 export const profileAPI = {
     async changeUserName(updateBody: UpdateUser) {
+        debugger
         return await instance.put<ProfileRespType,
             AxiosResponse<ProfileRespType>>(`/auth/me`,
             // {name: newName,
