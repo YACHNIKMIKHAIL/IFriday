@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import s from './../../../n2_features/f1-auth/a6-profile/Profile.module.css'
 import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../m2-bll/store";
-import {updateUserNameTC} from "../../m2-bll/r1-reducers/ProfileReducer";
+import {ProfileActions, updateUserNameTC} from "../../m2-bll/r1-reducers/ProfileReducer";
 import {Navigate} from 'react-router-dom';
 import {RoutesXPaths} from "../routes/routes";
 import {UserDataType} from "../../m2-bll/r2-actions/ActionLoginForm";
@@ -46,6 +46,9 @@ const Profile = () => {
             setModification(!modification)
         }
     }
+    const killError = () => {
+        dispatch(ProfileActions.setErrorAC(''))
+    }
 
     if (!isLoggedIn) {
         return <Navigate to={RoutesXPaths.LOGIN}/>
@@ -55,7 +58,7 @@ const Profile = () => {
     return (
         <div className={s.profilePage}>
             {!!errorMessage && <div style={{color: 'red'}}>{errorMessage}</div> }
-            <div className={s.profileContainer}>
+            <div className={s.profileContainer} onBlur={killError}>
                 <>
 
                 <h2 className={s.title}>Personal information</h2>
