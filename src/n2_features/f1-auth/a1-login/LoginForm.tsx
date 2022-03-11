@@ -53,12 +53,14 @@ const LoginForm = () => {
     return (
         <div className={style.main}>
             <div className={style.title}>
-                <h1>Login</h1>
+                {/*позволил себе чуть подэтого логин*/}
+                {/*<h1>Login</h1>*/}
                 {!!error && <div style={{color: 'red'}}>{error}</div>}
             </div>
             <hr/>
 
             <div className={style.login}>
+                <h1>Login</h1>
                 <form onSubmit={formik.handleSubmit}>
                     <div className={style.second}>
                         eMail:

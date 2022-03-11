@@ -10,8 +10,8 @@ import {passwordRecoveryTC} from "../../../n1_main/m2-bll/r3-thunks/ThunksAction
 const PasswordRecoveryForm = () => {
     const [email, setEmail] = useState<string>('')
     const dispatch = useDispatch()
-    const success = useFridaySelector< boolean>(state => state.regForNewPass.passwordRecovery.success)
-    const isLoggedIn = useFridaySelector< boolean>(state => state.login.isLoggedIn)
+    const success = useFridaySelector<boolean>(state => state.regForNewPass.passwordRecovery.success)
+    const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
     const send = () => {
         dispatch(passwordRecoveryTC(email))
     }
@@ -23,7 +23,7 @@ const PasswordRecoveryForm = () => {
             <div className={regS.title}>
                 <h1>Cards</h1>
                 <h4>Forgot your password?</h4>
-                {success && <div>Visit your email</div>}
+                {!success ? <h6>Write your email</h6> : <h5>Visit your email</h5>}
             </div>
             <form>
                 <div className={regS.second}>
@@ -32,7 +32,7 @@ const PasswordRecoveryForm = () => {
                            onChange={(e) => setEmail(e.currentTarget.value)}/>
                     <div className={regS.buttonsDiv}>
                         <button type="button">
-                            <NavLink to={RoutesXPaths.LOGIN} style={{textDecoration:'none',color:"white"}}>
+                            <NavLink to={RoutesXPaths.LOGIN} style={{textDecoration: 'none', color: "white"}}>
                                 Cancel
                             </NavLink>
                         </button>
