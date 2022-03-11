@@ -24,7 +24,7 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     height: 50%;
     padding: 10px;
 }
@@ -33,6 +33,7 @@ form{
     border: none;
     border-bottom: 1px #726d6f solid;
 }
+
 .buttonsDiv {
     min-width: 90%;
     display: flex;

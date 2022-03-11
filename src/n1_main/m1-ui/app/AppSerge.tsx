@@ -26,9 +26,6 @@ function AppSerge() {
         dispatch(meTC())
     }, [])
 
-
-
-
     return (
         <div className="App">
             <BrowserRouter>

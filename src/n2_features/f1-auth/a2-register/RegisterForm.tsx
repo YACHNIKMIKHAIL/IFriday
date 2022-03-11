@@ -81,20 +81,21 @@ const RegisterForm = () => {
                         Password
                         <input type="password"
                                {...formik.getFieldProps('password')}/>
+
                         {formik.touched.password && formik.errors.password ?
-                            <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
+                            <div style={{color: 'red',fontSize: '12px'}}>{formik.errors.password}</div> : null}
                     </div>
                     <div className={regS.second}>
                         Confirm password
                         <input type="password"
                                {...formik.getFieldProps('confirm')}/>
                         {formik.touched.confirm && formik.errors.confirm ?
-                            <div style={{color: 'red'}}>{formik.errors.confirm}</div> : null}
+                            <div style={{color: 'red',fontSize: '12px'}}>{formik.errors.confirm}</div> : null}
                     </div>
                     <div className={regS.buttonsDiv}>
                         <button type="button"
-                                // onClick={cancelHandler}
-                        ><NavLink to={RoutesXPaths.LOGIN} style={{textDecoration:'none',color:"white"}}>
+                            // onClick={cancelHandler}
+                        ><NavLink to={RoutesXPaths.LOGIN} style={{textDecoration: 'none', color: "white"}}>
                             Cancel</NavLink></button>
                         <button type="submit">Register</button>
                     </div>

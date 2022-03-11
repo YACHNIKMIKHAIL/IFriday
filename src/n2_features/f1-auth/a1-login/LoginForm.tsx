@@ -6,6 +6,9 @@ import {Navigate, NavLink} from "react-router-dom";
 import {loginUserTC} from "../../../n1_main/m2-bll/r1-reducers/LoginFormReducer";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
+import PasswordView from "../../../n1_main/m1-ui/view-password/PasswordView";
+
+
 
 type FormikErrorType = {
     email?: string
@@ -13,6 +16,7 @@ type FormikErrorType = {
 }
 
 const LoginForm = () => {
+    const isVisible = useFridaySelector<boolean>(state => state.app.isVisible)
     const error = useFridaySelector<string | undefined>(state => state.login.error)
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
     const dispatch = useDispatch()
@@ -53,6 +57,7 @@ const LoginForm = () => {
                 {!!error && <div style={{color: 'red'}}>{error}</div>}
             </div>
             <hr/>
+
             <div className={style.login}>
                 <form onSubmit={formik.handleSubmit}>
                     <div className={style.second}>
@@ -63,18 +68,24 @@ const LoginForm = () => {
                             {...formik.getFieldProps('email')}
                         />
                     </div>
+
                     {formik.touched.email && formik.errors.email &&
-                    <div style={{color: 'red'}}>{formik.errors.email}</div>}
+                    <div style={{color: 'red', fontSize: '12px'}}>{formik.errors.email}</div>}
+
                     <div className={style.second}>
                         Password:
                         <input
-                            type="password"
+                            type={isVisible ? "text" : "password"}
                             placeholder={"Enter your password"}
                             {...formik.getFieldProps('password')}
                         />
+                        <PasswordView isVisible={isVisible}/>
+
                     </div>
+
                     {formik.touched.password && formik.errors.password &&
-                    <div style={{color: 'red'}}>{formik.errors.password}</div>}
+                    <div style={{color: 'red', fontSize: '12px'}}>{formik.errors.password}</div>}
+
                     <div>
                         Remember me:
                         <input
@@ -86,6 +97,7 @@ const LoginForm = () => {
                         <button type="submit">Login</button>
                     </div>
                 </form>
+
                 <div className={style.footer}>
                     <div>
                         Not registered? <NavLink to={RoutesXPaths.REGISTER}>Create an Account</NavLink>
