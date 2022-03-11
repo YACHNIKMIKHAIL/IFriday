@@ -4,14 +4,7 @@ import {newPassBodyType, registerAndRecoveryPassAPI} from "../../m3-dal/Register
 import {setAppStatusAC} from "../r1-reducers/app-reducer";
 
 export const registerUserTC = (body: { email: string, password: string }) => async (dispatch: Dispatch) => {
-    // dispatch(registerAndRecoveryPassActions.registerUserAC({
-    //     addedUser: {
-    //         error: '',
-    //         email: '',
-    //         in: ''
-    //     },
-    //     error: ''
-    // }))
+
     dispatch(setAppStatusAC("loading"))
     try {
         let res = await registerAndRecoveryPassAPI.registerMe(body)

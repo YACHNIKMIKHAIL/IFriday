@@ -2,7 +2,6 @@ import {Dispatch} from "redux";
 import {setAppStatusAC} from "../r1-reducers/app-reducer";
 import {meAPI} from "../../m3-dal/meAPI";
 import {ProfileActions} from "../r1-reducers/ProfileReducer";
-import {saveToken} from "../fridayLocalStorage";
 import {initializeMeAC, setErrorMeAC} from "../r2-actions/ActionsMe";
 
 export const meTC = () => async (dispatch: Dispatch) => {
@@ -11,7 +10,7 @@ export const meTC = () => async (dispatch: Dispatch) => {
         let res = await meAPI.me()
         dispatch(initializeMeAC(true))
         dispatch(ProfileActions.setProfileAC(res.data))
-        saveToken(res.data.token)
+        // saveToken(res.data.token)
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         if(e.response.data) {
