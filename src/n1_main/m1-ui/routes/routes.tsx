@@ -9,7 +9,7 @@ import PasswordRecovery from "../common/PasswordRecovery";
 import Logout from "../common/Logout";
 
 export enum RoutesXPaths {
-    PROFILE = '/IFriday',
+    PROFILE = '/',
     LOGIN = '/login',
     REGISTER = '/register',
     RECOVERY = '/passwordrecovery',
