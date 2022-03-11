@@ -1,6 +1,6 @@
 import React, {useEffect, useLayoutEffect} from 'react';
 import './App.css';
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../m2-bll/store";
 import {RequestStatusType} from "../../m2-bll/r1-reducers/app-reducer";
@@ -31,13 +31,13 @@ function AppSerge() {
 
     return (
         <div className="App">
-            <BrowserRouter>
+            <HashRouter>
                 <>
                     <Preloader status={status}/>
                     <Main/>
                     <RoutesX/>
                 </>
-            </BrowserRouter>
+            </HashRouter>
         </div>
     );
 }
