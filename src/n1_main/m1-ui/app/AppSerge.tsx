@@ -28,13 +28,13 @@ function AppSerge() {
 
     return (
         <div className="App">
-            <HashRouter>
+            <BrowserRouter>
                 <>
                     <Preloader status={status}/>
                     <Main/>
                     <RoutesX/>
                 </>
-            </HashRouter>
+            </BrowserRouter>
         </div>
     );
 }
