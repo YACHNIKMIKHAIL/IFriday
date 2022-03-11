@@ -29,6 +29,7 @@ export type RegisterAndRecoveryPassReducerType = {
     register: registerStateType
     passwordRecovery: passwordRecoveryStateType
     newPassword: newPasswordStateType
+    e:string|null
 }
 const registerAndRecoveryPassReducerState: RegisterAndRecoveryPassReducerType = {
     register: {
@@ -44,7 +45,8 @@ const registerAndRecoveryPassReducerState: RegisterAndRecoveryPassReducerType = 
     newPassword: {
         info: '',
         error: ''
-    }
+    },
+    e:null
 }
 
 export const registerAndRecoveryPassReducer = (state = registerAndRecoveryPassReducerState, action: RegisterAndRecoveryPassReducerActionType): RegisterAndRecoveryPassReducerType => {
@@ -65,7 +67,10 @@ export const registerAndRecoveryPassReducer = (state = registerAndRecoveryPassRe
             return {...state, passwordRecovery: {...state.passwordRecovery, ...action.payload.data}}
         }
         case RegisterAndRecoveryPassReducer.SET_INFO_NEW_PASS: {
-            return {...state, newPassword: {...action.payload.data}}
+            return {...state, newPassword: action.payload.data}
+        }
+        case RegisterAndRecoveryPassReducer.SET_NEW_ERROR:{
+            return {...state,e:action.payload.e}
         }
         default:
             return state

@@ -10,7 +10,7 @@ import {passwordRecoveryTC} from "../../../n1_main/m2-bll/r3-thunks/ThunksAction
 const PasswordRecoveryForm = () => {
     const [email, setEmail] = useState<string>('')
     const dispatch = useDispatch()
-    const success = useFridaySelector<boolean>(state => state.regForNewPass.passwordRecovery.success)
+    const error = useFridaySelector<string|null>(state => state.regForNewPass.e)
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
     const send = () => {
         dispatch(passwordRecoveryTC(email))
@@ -23,9 +23,9 @@ const PasswordRecoveryForm = () => {
             <div className={regS.title}>
                 <h1>Cards</h1>
                 <h4>Forgot your password?</h4>
-                {!success ? <h6>Write your email</h6> : <h5>Visit your email</h5>}
+                <h4>Write your email</h4>
+                {error ? <h6>{error}</h6> : <h5>Visit your email</h5>}
             </div>
-            <form>
                 <div className={regS.second}>
                     <input type="text"
                            value={email}
@@ -39,7 +39,6 @@ const PasswordRecoveryForm = () => {
                         <button onClick={send}>Send</button>
                     </div>
                 </div>
-            </form>
         </div>
     );
 };

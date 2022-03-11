@@ -47,7 +47,7 @@ export const logoutUserTC = () => async (dispatch: Dispatch) => {
     try {
         await loginFormAPI.logoutMe()
         dispatch(LoginFormActions.setIsLoggedInAC(false))
-        saveToken(null)
+        // saveToken(null)
     } catch (e) {
     }
 }

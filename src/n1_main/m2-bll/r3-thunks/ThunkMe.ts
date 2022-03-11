@@ -14,9 +14,10 @@ export const meTC = () => async (dispatch: Dispatch) => {
         saveToken(res.data.token)
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
-        // dispatch(ProfileActions.setErrorAC(e.message))
-        dispatch(setErrorMeAC(e.response.data.error))
-        saveToken(null)
+        if(e.response.data) {
+            dispatch(setErrorMeAC(e.response.data.error))
+        }
+        // saveToken(null)
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(initializeMeAC(true))
