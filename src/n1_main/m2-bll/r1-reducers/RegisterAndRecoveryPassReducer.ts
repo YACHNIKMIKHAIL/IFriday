@@ -76,4 +76,4 @@ export const registerAndRecoveryPassReducer = (state = registerAndRecoveryPassRe
             return state
     }
 }
-type RegisterAndRecoveryPassReducerActionType = ReturnType<RegisterAndRecoveryPassReducerActionsTypes<typeof registerAndRecoveryPassActions>>
+export type RegisterAndRecoveryPassReducerActionType = ReturnType<RegisterAndRecoveryPassReducerActionsTypes<typeof registerAndRecoveryPassActions>>

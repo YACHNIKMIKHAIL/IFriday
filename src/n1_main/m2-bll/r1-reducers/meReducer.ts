@@ -20,7 +20,7 @@ export const meReducer = (state = meReducerState, action: meReducerActionType): 
 
 //Types
 
-type meReducerActionType = initializeMeACType | setErrorMeACType
+export type meReducerActionType = initializeMeACType | setErrorMeACType
 
 export type meReducerStateType = {
     isInitialized: boolean,

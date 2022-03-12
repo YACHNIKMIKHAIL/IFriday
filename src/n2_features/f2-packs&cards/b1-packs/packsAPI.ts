@@ -1,6 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {meRespType} from "../../../n1_main/m3-dal/meAPI";
-import {InitialCardPacksType} from "./packsReducer";
+import {InitialCardPacksType, PacksType} from "./packsReducer";
 
 export const instance = axios.create({
     baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',
@@ -13,6 +12,16 @@ export const pasksAPI = {
         return await instance.get<InitialCardPacksType,
             AxiosResponse<InitialCardPacksType>>
         (`/cards/pack?packName=${packName}&min=${min}&max=${max}&sortPacks=${updated}&page=&{page}&pageCount=${pageCount}&user_id=${user_id}`)
+    },
+    async addNewPack(newPack: newPackType) {
+        return await instance.post<PacksType[],
+            AxiosResponse<PacksType[]>, { cardsPack: newPackType }>
+        (`/cards/pack`, {cardsPack: newPack})
     }
 }
 export type UpdatedType = '0updated' | '1updated'
+export type newPackType = {
+    name: string,
+    deckCover: string,
+    private: boolean
+}

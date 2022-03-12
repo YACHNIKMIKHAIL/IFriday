@@ -35,7 +35,7 @@ export const setAppVisibleAC = (isVisible: boolean) => {
 }
 
 
-type AppActionsType = ReturnType<typeof setAppStatusAC>
+export type AppActionsType = ReturnType<typeof setAppStatusAC>
     | ReturnType<typeof setAppVisibleAC>
 
 

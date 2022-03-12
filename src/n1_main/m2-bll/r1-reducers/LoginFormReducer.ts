@@ -1,6 +1,5 @@
 import {Dispatch} from "redux";
 import {loginFormAPI, loginType} from "../../m3-dal/LoginFormAPI";
-import {saveToken} from "../fridayLocalStorage";
 import {setAppStatusAC} from "./app-reducer";
 import {
     LoginFormActions,
@@ -11,7 +10,7 @@ import {
 } from "../r2-actions/ActionLoginForm";
 import {ProfileActions} from "./ProfileReducer";
 
-type ActionLoginFormType = ReturnType<LoginFormReducerReducerActionsTypes<typeof LoginFormActions>>
+export type ActionLoginFormType = ReturnType<LoginFormReducerReducerActionsTypes<typeof LoginFormActions>>
 
 export const loginFormReducer = (state: LoginInitialStateType = LoginFormInitialState, action: ActionLoginFormType): LoginInitialStateType => {
     switch (action.type) {
