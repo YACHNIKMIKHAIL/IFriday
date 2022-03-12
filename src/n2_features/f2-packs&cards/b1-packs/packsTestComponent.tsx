@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import {packsActions} from "./ActionsPacks";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
-import {addNewPacksTC, deletePacksTC, packsTC} from "./ThunkPacks";
+import {addNewPacksTC, changePacksTC, deletePacksTC, packsTC} from "./ThunkPacks";
 import {InitialCardPacksType, PacksType} from "./packsReducer";
+import {Pack} from "./PackTest";
 
 
 const PacksTestComponent = () => {
@@ -51,6 +52,9 @@ const PacksTestComponent = () => {
         const deletePack = (id: string) => {
             dispatch(deletePacksTC(id))
         }
+        const changePackName=(newPackName: string, id: string)=>{
+            dispatch(changePacksTC(newPackName,id))
+        }
 
         return (
             <div>
@@ -92,10 +96,17 @@ const PacksTestComponent = () => {
                     {myPacks.map((m, i) => {
                         return <div key={i} onClick={() => deletePack(m._id)}>{m._id}</div>
                     })}
-
+                </div>
+                <h1>CHANGE PACK</h1>
+                <div>
+                    packID: delete on click
+                    {myPacks.map((m, i) => {
+                        return <Pack key={i} name={m.name} id={m._id} changeName={changePackName}/>
+                    })}
                 </div>
             </div>
         );
+
     }
 ;
 

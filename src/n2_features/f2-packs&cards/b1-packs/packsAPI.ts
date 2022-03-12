@@ -17,12 +17,22 @@ export const pasksAPI = {
         return await instance.post<PacksType,
             AxiosResponse<PacksType>, { cardsPack: newPackType }>
         (`/cards/pack`, {cardsPack: newPack})
-    }
-    ,
+    },
     async deletePack(packId: string) {
         return await instance.delete<PacksType,
             AxiosResponse<PacksType>>
         (`/cards/pack?id=${packId}`)
+    },
+    async changePack(newName: string, id: string) {
+        const updatedPack: UpdatedPackType = {
+            _id: id,
+            name: newName
+        }
+        return await instance.put <UpdatedPackType,
+            AxiosResponse<UpdatedPackType>, {
+            cardsPack: UpdatedPackType
+        }>
+        (`/cards/pack`, {cardsPack: updatedPack})
     }
 }
 export type UpdatedType = '0updated' | '1updated'
@@ -30,4 +40,8 @@ export type newPackType = {
     name: string,
     deckCover: string,
     private: boolean
+}
+export type UpdatedPackType = {
+    _id: string,
+    name: string
 }

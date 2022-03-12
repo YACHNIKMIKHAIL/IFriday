@@ -53,3 +53,17 @@ export const deletePacksTC = (id: string): FridayThunkType => async (dispatch) =
         dispatch(setAppStatusAC("idle"))
     }
 }
+
+export const changePacksTC = (newName: string, id: string): FridayThunkType => async (dispatch) => {
+    dispatch(setAppStatusAC("loading"))
+    try {
+        await pasksAPI.changePack(newName, id)
+        dispatch(packsTC())
+    } catch (e: any) {
+        if (e.response.data) {
+        }
+        dispatch(setAppStatusAC("failed"))
+    } finally {
+        dispatch(setAppStatusAC("idle"))
+    }
+}
