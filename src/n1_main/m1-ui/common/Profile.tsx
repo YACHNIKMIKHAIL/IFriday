@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import s from './../../../n2_features/f1-auth/a6-profile/Profile.module.css'
 import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../m2-bll/store";
-import {ProfileActions, updateUserNameTC} from "../../m2-bll/r1-reducers/ProfileReducer";
+import {updateUserNameTC} from "../../m2-bll/r1-reducers/ProfileReducer";
 import {Navigate} from 'react-router-dom';
 import {RoutesXPaths} from "../routes/routes";
 import {UserDataType} from "../../m2-bll/r2-actions/ActionLoginForm";
@@ -18,6 +18,7 @@ const Profile = () => {
     const dispatch = useDispatch()
 
     let [name, setName] = useState<string>(userInfo.name)
+    let [error, setError] = useState<string>("")
     let [modification, setModification] = useState<boolean>(false)
 
 
@@ -29,10 +30,14 @@ const Profile = () => {
         setName(e.currentTarget.value)
     }
     const updateUser = () => {
-        if(name.trim() !== '') {
+        if (name.trim() && name.length <= 20) {
             dispatch(updateUserNameTC(name))
             setModification(!modification)
+            setError("")
+        } else {
+            setError("Too long name")
         }
+
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
@@ -61,11 +66,13 @@ const Profile = () => {
                                         type="text"
                                         className={s.input}
                                         value={name}
+                                        onBlur={updateUser}
                                         onKeyPress={onKeyPressHandler}
                                         onChange={changeNameValue}
                                         autoFocus
                                     />
                                     <p className={s.description}>Enter your new name, please 😌</p>
+                                    {error && <span style={{color: "red", fontWeight: 700}}>{error}</span>}
                                 </div>
                             ) : (<div>
                                 <span className={s.yourNameMessage}

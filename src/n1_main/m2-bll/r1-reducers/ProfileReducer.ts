@@ -4,8 +4,8 @@ import {meRespType} from "../../m3-dal/meAPI";
 import {setAppStatusAC} from "./app-reducer";
 
 export enum PROFILE {
-    SET_PROFILE = 'SET_PROFILE',
-    SET_ERROR = 'SET_ERROR'
+    SET_PROFILE = 'CARDS/PROFILE/SET_PROFILE',
+    SET_ERROR = 'CARDS/PROFILE/SET_ERROR'
 }
 
 // TYPES

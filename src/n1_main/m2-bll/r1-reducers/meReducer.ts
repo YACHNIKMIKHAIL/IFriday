@@ -1,10 +1,5 @@
 import {initializeMeACType, meActions, setErrorMeACType} from "../r2-actions/ActionsMe";
 
-
-export type meReducerStateType = {
-    isInitialized: boolean,
-    error: string
-}
 const meReducerState: meReducerStateType = {
     isInitialized: false,
     error: ''
@@ -22,5 +17,13 @@ export const meReducer = (state = meReducerState, action: meReducerActionType): 
             return state
     }
 }
+
+//Types
+
 type meReducerActionType = initializeMeACType | setErrorMeACType
+
+export type meReducerStateType = {
+    isInitialized: boolean,
+    error: string
+}
 

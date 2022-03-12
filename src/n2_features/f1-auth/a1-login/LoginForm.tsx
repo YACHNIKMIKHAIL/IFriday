@@ -101,11 +101,17 @@ const LoginForm = () => {
                 </form>
 
                 <div className={style.footer}>
-                    <div>
-                        Not registered? <NavLink to={RoutesXPaths.REGISTER}>Create an Account</NavLink>
+                    <div className={style.LinkItem}>
+                        <div>Not registered? </div>
+                        <div>
+                            <NavLink className={style.Link} to={RoutesXPaths.REGISTER}>Create an Account</NavLink>
+                        </div>
                     </div>
-                    <div>
-                        Forgot password? <NavLink to={RoutesXPaths.RECOVERY}>Click here to recover</NavLink>
+                    <div className={style.LinkItem}>
+                        <div>Forgot password? </div>
+                        <div>
+                            <NavLink className={style.Link} to={RoutesXPaths.RECOVERY}>Click here to recover</NavLink>
+                        </div>
                     </div>
                 </div>
             </div>

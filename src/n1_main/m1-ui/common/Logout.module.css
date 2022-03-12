@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@400;700&display=swap');
+
+.logoutBtn {
+    margin: 50px auto;
+    width: 200px;
+    padding: 10px;
+    background-color: #5e9ee7;
+    border:1px solid #9ba4e9;
+    text-align: center;
+    font-family: 'Kaushan Script', cursive;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.logoutBtn:hover{
+    opacity: 0.9;
+    color: white;
+    border: solid 1px white;
+}
