@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import {packsActions} from "./ActionsPacks";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
-import {addNewPacksTC, packsTC} from "./ThunkPacks";
-import {InitialCardPacksType} from "./packsReducer";
+import {addNewPacksTC, deletePacksTC, packsTC} from "./ThunkPacks";
+import {InitialCardPacksType, PacksType} from "./packsReducer";
 
 
 const PacksTestComponent = () => {
@@ -46,6 +46,11 @@ const PacksTestComponent = () => {
         const addNewPack = () => {
             dispatch(addNewPacksTC(newPack))
         }
+        const myPacks = useFridaySelector<PacksType[]>(state => state.packs.cardPacks)
+
+        const deletePack = (id: string) => {
+            dispatch(deletePacksTC(id))
+        }
 
         return (
             <div>
@@ -73,13 +78,21 @@ const PacksTestComponent = () => {
                     <input type="number" onChange={(e) => setCardsPage(+e.currentTarget.value)}/>
                 </div>
 
-                <h1>New PACKS</h1>
+                <h1>New PACK</h1>
                 <div>
                     new pack name:
                     <input type="text" onChange={(e) => setNewPackName(e.currentTarget.value)}/>
                     private:
                     <input type="checkbox" onChange={(e) => setNewPackPrivate(e.currentTarget.checked)}/>
                     <button onClick={addNewPack}>add pack</button>
+                </div>
+                <h1>DELETE PACK</h1>
+                <div>
+                    packID: delete on click
+                    {myPacks.map((m, i) => {
+                        return <div key={i} onClick={() => deletePack(m._id)}>{m._id}</div>
+                    })}
+
                 </div>
             </div>
         );

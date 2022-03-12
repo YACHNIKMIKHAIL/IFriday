@@ -14,9 +14,15 @@ export const pasksAPI = {
         (`/cards/pack?packName=${packName}&min=${min}&max=${max}&sortPacks=${updated}&page=&{page}&pageCount=${pageCount}&user_id=${user_id}`)
     },
     async addNewPack(newPack: newPackType) {
-        return await instance.post<PacksType[],
-            AxiosResponse<PacksType[]>, { cardsPack: newPackType }>
+        return await instance.post<PacksType,
+            AxiosResponse<PacksType>, { cardsPack: newPackType }>
         (`/cards/pack`, {cardsPack: newPack})
+    }
+    ,
+    async deletePack(packId: string) {
+        return await instance.delete<PacksType,
+            AxiosResponse<PacksType>>
+        (`/cards/pack?id=${packId}`)
     }
 }
 export type UpdatedType = '0updated' | '1updated'
