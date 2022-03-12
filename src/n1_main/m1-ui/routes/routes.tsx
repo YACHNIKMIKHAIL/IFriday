@@ -1,12 +1,13 @@
 import React from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom';
-import Profile from "../common/Profile/Profile";
+
 import Register from "../common/Register";
 import NewPassword from "../common/NewPassword";
 import Test from "../common/Test";
 import Login from "../common/Login";
 import PasswordRecovery from "../common/PasswordRecovery";
 import Logout from "../common/Logout";
+import Profile from "../common/Profile/Profile";
 
 export enum RoutesXPaths {
     PROFILE = '/',

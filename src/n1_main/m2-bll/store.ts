@@ -6,13 +6,15 @@ import {loginFormReducer} from "./r1-reducers/LoginFormReducer";
 import {registerAndRecoveryPassReducer} from "./r1-reducers/RegisterAndRecoveryPassReducer";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 import {appReducer} from "./r1-reducers/app-reducer";
+import {packsReducer} from "../../n2_features/f2-packs&cards/b1-packs/packsReducer";
 
 const fridayReducer = combineReducers({
     me: meReducer,
     profile: profileReducer,
     login: loginFormReducer,
     app:appReducer,
-    regForNewPass:registerAndRecoveryPassReducer
+    regForNewPass:registerAndRecoveryPassReducer,
+    packs:packsReducer
 })
 
 export const useFridaySelector: TypedUseSelectorHook<fridayReducerType> = useSelector
