@@ -52,6 +52,7 @@ const LoginForm = () => {
 
     return (
         <div className={style.main}>
+
             <div className={style.title}>
                 {/*позволил себе чуть подэтого логин*/}
                 {/*<h1>Login</h1>*/}
@@ -63,7 +64,7 @@ const LoginForm = () => {
                 <h1>Login</h1>
                 <form onSubmit={formik.handleSubmit}>
                     <div className={style.second}>
-                        eMail:
+                        <span>eMail:</span>
                         <input
                             type={"email"}
                             placeholder={"Enter your email"}
@@ -75,21 +76,21 @@ const LoginForm = () => {
                     <div style={{color: 'red', fontSize: '12px'}}>{formik.errors.email}</div>}
 
                     <div className={style.second}>
-                        Password:
+                        <span>Password:</span>
                         <input
                             type={isVisible ? "text" : "password"}
                             placeholder={"Enter your password"}
                             {...formik.getFieldProps('password')}
                         />
-                        <PasswordView isVisible={isVisible}/>
+                        {/*<PasswordView isVisible={isVisible}/>*/}
 
                     </div>
 
                     {formik.touched.password && formik.errors.password &&
                     <div style={{color: 'red', fontSize: '12px'}}>{formik.errors.password}</div>}
 
-                    <div>
-                        Remember me:
+                    <div className={style.rememberMeBlock}>
+                        <span>Remember me:</span>
                         <input
                             type="checkbox"
                             {...formik.getFieldProps('rememberMe')}
@@ -102,13 +103,13 @@ const LoginForm = () => {
 
                 <div className={style.footer}>
                     <div className={style.LinkItem}>
-                        <div>Not registered? </div>
-                        <div>
+                        <span>Not registered?</span>
+                        <div className={style.links}>
                             <NavLink className={style.Link} to={RoutesXPaths.REGISTER}>Create an Account</NavLink>
                         </div>
                     </div>
                     <div className={style.LinkItem}>
-                        <div>Forgot password? </div>
+                        <span>Forgot password? </span>
                         <div>
                             <NavLink className={style.Link} to={RoutesXPaths.RECOVERY}>Click here to recover</NavLink>
                         </div>

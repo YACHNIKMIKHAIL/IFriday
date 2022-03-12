@@ -33,7 +33,7 @@ const Profile = () => {
             setModification(!modification)
             setError("")
         } else {
-            setError("Too long name")
+            setError("Incorrect name")
         }
 
     }

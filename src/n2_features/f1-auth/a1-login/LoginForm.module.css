@@ -1,5 +1,5 @@
 .main {
-    min-width: 40%;
+    width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -14,8 +14,11 @@
 }
 
 .login {
+    width: 413px;
+    height: 540px;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     /*позволил себе чуть подэтого логин*/
     align-items: center;
 
@@ -28,43 +31,109 @@
 }
 
 .login input {
+    width: 240px;
+    height: 20px;
     outline: none;
     border: none;
     border-bottom: 1px #726d6f solid;
     padding: 5px;
 }
 
-.second {
+.login form {
+    width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+}
+
+.second {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
     padding: 10px 0;
 }
 
+.second span {
+    color: #726d6f;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.rememberMeBlock {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.rememberMeBlock span {
+    width: 140px;
+    color: #726d6f;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.rememberMeBlock input {
+    width: 20px;
+}
+
 .login button {
-    width: 100px;
-    height: 25px;
-    border: none;
-    border-radius: 5px;
-    background-color: blue;
-    color: white;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #4f74cb;
+    border-radius: 0.6em;
+    color: #4f74cb;
+    cursor: pointer;
+    line-height: 1;
+    font-size: large;
+    padding: .5em 1.5em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.login button:hover {
+    color: #fff;
+    outline: 0;
+    box-shadow: 0 0 40px 40px #4f74cb inset;
 }
 
 .footer {
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 15px 0;
+}
+
+.LinkItem {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.LinkItem span {
+    width: 50%;
+    color: #726d6f;
+    font-family: 'Montserrat', sans-serif;
 }
 
 /*позволил себе чуть подэтого логин*/
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 20px;
-}
+
 
 .Link {
+    font-family: 'Montserrat', sans-serif;
     text-decoration: none;
     color: #4f74cb;
 
@@ -75,8 +144,11 @@ form {
     color: #092c7e;
 }
 
-.LinkItem {
+form {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
 }
+
+
