@@ -1,15 +1,30 @@
 .main{
+    min-height: 20px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    font-size: 15px;
-    margin: 0 10px;
 }
-.active{
+
+.ordinaryLink {
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    font-size: 25px;
-    opacity: 1;
-    color: blue;
+    font-size: large;
+    text-decoration: none;
+    color: #fff;
+}
+.ordinaryLink:hover {
+    font-size: x-large;
+    cursor: pointer;
+    transition: 0.7s;
+}
+
+.active{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: x-large;
+    text-decoration: none;
+    color: #597bb1;
 }
 .activeR{
     font-weight: bold;

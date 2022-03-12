@@ -14,7 +14,7 @@ const Links = () => {
     return (
         <div className={s.main}>
             <><NavLink to={RoutesXPaths.PROFILE}
-                       className={({isActive}) => (isActive ? s.active : '')}
+                       className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
                        style={{textDecoration: 'none'}}
             >Profile</NavLink></>
 
@@ -39,11 +39,11 @@ const Links = () => {
             {/*>NewPassword</NavLink></>*/}
 
             <><NavLink to={RoutesXPaths.TEST}
-                       className={({isActive}) => (isActive ? s.active : '')}
+                       className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
                        style={{textDecoration: 'none'}}
             >Test</NavLink></>
             <><NavLink to={RoutesXPaths.LOGOUT}
-                       className={({isActive}) => (isActive ? s.activeR : '')}
+                       className={({isActive}) => (isActive ? s.activeR : s.ordinaryLink)}
                        style={{textDecoration: 'none'}}
             >Logout</NavLink></>
         </div>
