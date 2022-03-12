@@ -58,8 +58,10 @@ const Profile = () => {
             <div className={s.profileContainer}>
                 <h2 className={s.title}>Personal information</h2>
                 <img src={userInfo.avatar ? userInfo.avatar : BASE_IMG_URL} alt={"user's image"}/>
+                <span>{`Cards: ${userInfo.publicCardPacksCount}`}</span>
                 <div className={s.nameContainer}>
                     {!!errorMessage && <div className={s.errorMessage}>{errorMessage}</div>}
+
                     {
                         modification
                             ? <ChangeNameInput
@@ -76,7 +78,7 @@ const Profile = () => {
                     }
                 </div>
 
-                <button className={s.button} onClick={updateUser} disabled={!modification}>Save</button>
+
 
             </div>
         </div>

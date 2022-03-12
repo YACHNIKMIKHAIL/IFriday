@@ -12,7 +12,7 @@ export const ChangeNameInput = ({name, updateUser, onKeyPressHandler, changeName
     }
 
     return (
-        <div>
+        <div className={s.changeNameContainer}>
             <input
                 type="text"
                 className={s.input}
@@ -23,7 +23,9 @@ export const ChangeNameInput = ({name, updateUser, onKeyPressHandler, changeName
                 autoFocus
             />
             {!error && <p className={s.description}>Enter your new name, please 😌</p>}
-            {error && <span style={{color: "red", fontWeight: 700}}>{error}</span>}
+            {error && <span className={s.errorMessage}>{`${error}, try again`}</span>}
+
+            <button className={s.button} onClick={updateUser}>Save</button>
         </div>
     );
 };

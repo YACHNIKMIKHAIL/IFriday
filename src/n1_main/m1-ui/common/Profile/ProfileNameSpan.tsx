@@ -3,7 +3,7 @@ import s from "./Profile.module.css";
 
 export const ProfileNameSpan = ({name, changeModification}: ProfileNameSpanPropsType) => {
     return (
-        <div>
+        <div className={s.profileInfo}>
             <span
                 className={s.yourNameMessage}
                 onClick={changeModification}>

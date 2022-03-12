@@ -26,38 +26,58 @@
     width: 120px;
     height: 120px;
     border-radius: 60px;
+    margin-bottom: 20px;
+}
+.profileContainer span{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
 }
 
-.nameContainer {
+
+.profileInfo {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 20px;
     width: 100%;
     height: 30%;
     margin-bottom: 40px;
 }
 
 .yourNameMessage {
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 20px;
 }
 
 .description {
     color:#726d6f;
+    font-family: 'Montserrat', sans-serif;
 }
 
-.input {
+.changeNameContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 40px;
+    width: 100%;
+    height: 30%;
+    margin-bottom: 40px;
+}
+.changeNameContainer input{
     width: 95%;
     min-height: 30px;
+    border: none;
     border-bottom: 1px solid #5f7271;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    margin-bottom: 20px;
     outline:none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
 }
+
 
 .errorMessage {
     text-align: center;
@@ -65,14 +85,35 @@
     font-size: large;
     text-transform: uppercase;
     color: #bd312d;
+    margin-top: 30px;
     margin-bottom: 30px;
 }
 
 .button {
-    width: 110px;
-    height: 40px;
-    background-color:#9bc6e9;
-    border:1px solid #9ba4e9;
-    border-radius: 20px;
+    margin-top: 30px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #4f74cb;
+    border-radius: 0.6em;
+    color: #4f74cb;
     cursor: pointer;
+    line-height: 1;
+    font-size: large;
+    padding: .5em 1.5em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.button:hover {
+    color: #fff;
+    outline: 0;
+    box-shadow: 0 0 40px 40px #4f74cb inset;
 }
