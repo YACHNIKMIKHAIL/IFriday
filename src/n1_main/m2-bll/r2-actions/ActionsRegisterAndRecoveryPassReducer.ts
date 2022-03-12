@@ -9,6 +9,7 @@ export enum RegisterAndRecoveryPassReducer {
     SET_ERROR_REGISTER = 'SET_ERROR_REGISTER',
     SET_INFO_RECOVERY_PASS = 'SET_INFO_RECOVERY_PASS',
     SET_INFO_NEW_PASS = 'SET_INFO_NEW_PASS',
+    SET_NEW_ERROR = 'SET_NEW_ERROR',
 }
 
 
@@ -37,6 +38,13 @@ export const registerAndRecoveryPassActions = {
         return {
             type: RegisterAndRecoveryPassReducer.SET_INFO_NEW_PASS,
             payload: {data}
+        } as const
+    }
+    ,
+    setNewErrorAC: (e: string) => {
+        return {
+            type: RegisterAndRecoveryPassReducer.SET_NEW_ERROR,
+            payload: {e}
         } as const
     }
 }

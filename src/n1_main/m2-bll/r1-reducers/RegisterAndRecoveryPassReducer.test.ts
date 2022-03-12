@@ -21,7 +21,8 @@ beforeEach(() => {
         newPassword: {
             info: '',
             error: ''
-        }
+        },
+        e:null
     }
 })
 test('correct user should be added', () => {

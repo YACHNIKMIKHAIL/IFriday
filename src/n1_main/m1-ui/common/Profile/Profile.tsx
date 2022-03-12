@@ -19,12 +19,10 @@ const Profile = () => {
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
     const dispatch = useDispatch()
 
-
     let [name, setName] = useState<string>(userInfo.name)
     let [error, setError] = useState<string>("")
     let [modification, setModification] = useState<boolean>(false)
 
-    console.log(name)
 
     const changeModification = () => {
         setModification(true)
