@@ -1,6 +1,6 @@
 import React from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom';
-import Profile from "../common/Profile";
+import Profile from "../common/Profile/Profile";
 import Register from "../common/Register";
 import NewPassword from "../common/NewPassword";
 import Test from "../common/Test";

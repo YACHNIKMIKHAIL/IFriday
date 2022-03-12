@@ -18,6 +18,12 @@ const fridayReducer = combineReducers({
 export const useFridaySelector: TypedUseSelectorHook<fridayReducerType> = useSelector
 export type fridayReducerType = ReturnType<typeof fridayReducer>
 
+//@ts-ignore
+/*
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(fridayReducer, composeEnhancers(applyMiddleware(thunk)))
+*/
+
 export const store = createStore(fridayReducer, applyMiddleware(thunk))
 
 //@ts-ignore
