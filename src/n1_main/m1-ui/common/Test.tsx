@@ -1,11 +1,12 @@
 import React from 'react';
+import PacksTestComponent from "../../../n2_features/f2-packs&cards/b1-packs/packsTestComponent";
 
-const Test = () => {
+const Packs = () => {
     return (
         <div>
-            Test
+            <PacksTestComponent/>
         </div>
     );
 };
 
-export default Test;
+export default Packs;
