@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
 import {packsActions} from "./ActionsPacks";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {addNewPacksTC, changePacksTC, deletePacksTC, packsTC} from "./ThunkPacks";
 import {InitialCardPacksType, PacksType} from "./packsReducer";
 import {Pack} from "./PackTest";
+import {cardsTC} from "../b2-cards/ThunkCards";
 
 
 const PacksTestComponent = () => {
@@ -52,10 +53,17 @@ const PacksTestComponent = () => {
         const deletePack = (id: string) => {
             dispatch(deletePacksTC(id))
         }
-        const changePackName=(newPackName: string, id: string)=>{
-            dispatch(changePacksTC(newPackName,id))
+        const changePackName = (newPackName: string, id: string) => {
+            dispatch(changePacksTC(newPackName, id))
+        }
+        const showCards=(id:string)=>{
+            dispatch(cardsTC(id))
         }
 
+
+        useEffect(() => {
+            dispatch(packsTC())
+        }, [])
         return (
             <div>
                 <div>
@@ -94,7 +102,10 @@ const PacksTestComponent = () => {
                 <div>
                     packID: delete on click
                     {myPacks.map((m, i) => {
-                        return <div key={i} onClick={() => deletePack(m._id)}>{m._id}</div>
+                        return <div key={i}>{m.name}
+                            <button onClick={() => showCards(m._id)}>show cards</button>
+                            <button onClick={() => deletePack(m._id)}>delete</button>
+                        </div>
                     })}
                 </div>
                 <h1>CHANGE PACK</h1>

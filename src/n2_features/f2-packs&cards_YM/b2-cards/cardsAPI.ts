@@ -1,0 +1,17 @@
+import axios, {AxiosResponse} from "axios";
+import {UpdatedType} from "../b1-packs/packsAPI";
+import {CardsType} from "./ActionsCards";
+
+export const instance = axios.create({
+    baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',
+    // baseURL: 'https://neko-back.herokuapp.com/2.0',
+    withCredentials: true,
+})
+
+export const cardsAPI = {
+    async setCards(cardAnswer: string, cardQuestion: string, cardsPack_id: string, min: number, max: number, sortCards: UpdatedType, page: number, pageCount: number) {
+        return await instance.get<CardsType,
+            AxiosResponse<CardsType>>
+        (`/cards/card?cardAnswer=${cardAnswer}&cardQuestion=${cardQuestion}&cardsPack_id=${cardsPack_id}&min=${min}&max=${max}&sortCards=${sortCards}&page=${page}&pageCount=${pageCount}`)
+    },
+}
