@@ -62,44 +62,46 @@ const RegisterForm = () => {
         return <Navigate to={RoutesXPaths.PROFILE}/>
     }
     return (
-        <div className={regS.main}>
-            <div className={regS.title}>
-                <h1>Cards</h1>
-                {!!error && <div>{error}</div>}
-                <h4>Sing in</h4>
-            </div>
+        <div className={regS.registerPage}>
+            <div className={regS.registerContainer}>
+                <div className={regS.titles}>
+                    <h1>Cards</h1>
+                    {!!error && <div>{error}</div>}
+                    <h4>Sing in</h4>
+                </div>
 
-            <div>
-                <form onSubmit={formik.handleSubmit}>
-                    <div className={regS.second}>
-                        eMail
-                        <input {...formik.getFieldProps('email')}/>
-                        {formik.touched.email && formik.errors.email ?
-                            <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
-                    </div>
-                    <div className={regS.second}>
-                        Password
-                        <input type="password"
-                               {...formik.getFieldProps('password')}/>
+                <div className={regS.registerForm}>
+                    <form onSubmit={formik.handleSubmit}>
+                        <div className={regS.second}>
+                            eMail
+                            <input {...formik.getFieldProps('email')}/>
+                            {formik.touched.email && formik.errors.email ?
+                                <div className={regS.errorMessage}>{formik.errors.email}</div> : null}
+                        </div>
+                        <div className={regS.second}>
+                            Password
+                            <input type="password"
+                                   {...formik.getFieldProps('password')}/>
 
-                        {formik.touched.password && formik.errors.password ?
-                            <div style={{color: 'red',fontSize: '12px'}}>{formik.errors.password}</div> : null}
-                    </div>
-                    <div className={regS.second}>
-                        Confirm password
-                        <input type="password"
-                               {...formik.getFieldProps('confirm')}/>
-                        {formik.touched.confirm && formik.errors.confirm ?
-                            <div style={{color: 'red',fontSize: '12px'}}>{formik.errors.confirm}</div> : null}
-                    </div>
-                    <div className={regS.buttonsDiv}>
-                        <button type="button"
-                            // onClick={cancelHandler}
-                        ><NavLink to={RoutesXPaths.LOGIN} style={{textDecoration: 'none', color: "white"}}>
-                            Cancel</NavLink></button>
-                        <button type="submit">Register</button>
-                    </div>
-                </form>
+                            {formik.touched.password && formik.errors.password ?
+                                <div className={regS.errorMessage}>{formik.errors.password}</div> : null}
+                        </div>
+                        <div className={regS.second}>
+                            Confirm password
+                            <input type="password"
+                                   {...formik.getFieldProps('confirm')}/>
+                            {formik.touched.confirm && formik.errors.confirm ?
+                                <div className={regS.errorMessage}>{formik.errors.confirm}</div> : null}
+                        </div>
+                        <div className={regS.buttonsDiv}>
+                            <button type="button" className={regS.canselButton}
+                                // onClick={cancelHandler}
+                            ><NavLink to={RoutesXPaths.LOGIN} >
+                                Cancel</NavLink></button>
+                            <button type="submit" className={regS.registerButton}>Register</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );

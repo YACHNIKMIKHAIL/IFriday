@@ -28,7 +28,7 @@ const NewPasswordForm = () => {
     }
 
     return (
-        <div className={regS.main}>
+        <div className={regS.registerPage}>
             <div className={regS.title}>
                 <h1>Cards</h1>
                 <h4> Write new pass!</h4>
