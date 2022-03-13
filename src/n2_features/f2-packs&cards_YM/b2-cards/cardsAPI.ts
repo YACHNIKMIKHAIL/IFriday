@@ -19,6 +19,11 @@ export const cardsAPI = {
             AxiosResponse<CardsType>, { card: addCardType }>
         (`/cards/card`, {card: newCard})
     },
+    async deleteCard(cardId: string) {
+        return await instance.delete<CardsType,
+            AxiosResponse<CardsType>>
+        (`/cards/card?id=${cardId}`)
+    },
 }
 type addCardType = {
     cardsPack_id: string

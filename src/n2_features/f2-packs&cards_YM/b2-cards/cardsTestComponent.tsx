@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
-import {addNewCardTC, cardsTC} from "./ThunkCards";
+import {addNewCardTC, cardsTC, deleteCardTC} from "./ThunkCards";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {CardType} from "./cardsReducer";
 
@@ -30,7 +30,9 @@ const CardsTestComponent = ({packId}: CardsTestComponentType) => {
             <div>
                 <h3>Card list:</h3>
                 {cards.map((m, i) => {
-                    return <div key={i}>{m.question}</div>
+                    return <div key={i}>{m.question}
+                        <button onClick={() => dispatch(deleteCardTC(m._id))}>X</button>
+                    </div>
                 })}
 
 

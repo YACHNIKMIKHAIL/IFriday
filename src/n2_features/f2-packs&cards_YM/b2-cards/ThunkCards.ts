@@ -54,3 +54,18 @@ export const addNewCardTC = (question:string,answer:string,packId:string):Friday
         dispatch(setAppStatusAC("idle"))
     }
 }
+
+export const deleteCardTC = (cardId: string):FridayThunkType => async (dispatch) => {
+    dispatch(setAppStatusAC("loading"))
+    try {
+        let res = await cardsAPI.deleteCard(cardId)
+        dispatch(cardsTC(res.data.packUserId))
+        dispatch(setAppStatusAC("succeeded"))
+    } catch (e: any) {
+        if (e.response.data) {
+        }
+        dispatch(setAppStatusAC("failed"))
+    } finally {
+        dispatch(setAppStatusAC("idle"))
+    }
+}
