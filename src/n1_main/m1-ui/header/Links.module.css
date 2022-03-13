@@ -1,18 +1,35 @@
 .main{
+    min-height: 20px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    font-size: 15px;
-    margin: 0 10px;
 }
+
+.ordinaryLink {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    font-size: large;
+    text-decoration: none;
+    color: #fff;
+}
+.ordinaryLink:hover {
+    font-size: x-large;
+    cursor: pointer;
+    transition: 0.7s;
+}
+
 .active{
+    font-family: 'Montserrat', sans-serif;
+    font-size: x-large;
     font-weight: bold;
-    font-size: 25px;
-    opacity: 1;
-    color: blue;
+    text-decoration: none;
+    color: #597bb1;
 }
 .activeR{
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    font-size: 25px;
-    color: #F7D748;
+    font-size: x-large;
+    text-decoration: none;
+    color: #bd312d;
 }
