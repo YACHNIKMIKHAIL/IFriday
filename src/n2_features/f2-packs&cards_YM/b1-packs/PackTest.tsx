@@ -18,10 +18,7 @@ export const Pack = ({name, changeName, id}: PackType) => {
         new name:
         <input type="text" value={newPackName} onChange={(e) => setNewPackName(e.currentTarget.value)}/>
         <button onClick={changePackName}>change</button>
-        <hr/>
-        <hr/>
-        <hr/>
-        <hr/>
+
         <CardsTestComponent packId={id}/>
     </div>
 }

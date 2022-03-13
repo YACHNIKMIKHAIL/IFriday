@@ -14,4 +14,20 @@ export const cardsAPI = {
             AxiosResponse<CardsType>>
         (`/cards/card?cardAnswer=${cardAnswer}&cardQuestion=${cardQuestion}&cardsPack_id=${cardsPack_id}&min=${min}&max=${max}&sortCards=${sortCards}&page=${page}&pageCount=${pageCount}`)
     },
+    async addCard(newCard: addCardType) {
+        return await instance.post<CardsType,
+            AxiosResponse<CardsType>, { card: addCardType }>
+        (`/cards/card`, {card: newCard})
+    },
+}
+type addCardType = {
+    cardsPack_id: string
+    question: string
+    answer: string
+    grade: number
+    shots: number
+    answerImg: string
+    questionImg: string
+    questionVideo: string
+    answerVideo: string
 }
