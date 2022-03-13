@@ -24,6 +24,11 @@ export const cardsAPI = {
             AxiosResponse<CardsType>>
         (`/cards/card?id=${cardId}`)
     },
+    async updateCard(updatedCard: UpdatedCardType) {
+        return await instance.put<CardsType,
+            AxiosResponse<CardsType>, { card: UpdatedCardType }>
+        (`/cards/card`, {card: updatedCard})
+    },
 }
 type addCardType = {
     cardsPack_id: string
@@ -35,4 +40,9 @@ type addCardType = {
     questionImg: string
     questionVideo: string
     answerVideo: string
+}
+export type UpdatedCardType = {
+    _id: string
+    question: string
+    comments: string
 }

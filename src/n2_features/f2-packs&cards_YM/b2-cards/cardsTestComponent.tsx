@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
-import {addNewCardTC, cardsTC, deleteCardTC} from "./ThunkCards";
+import {addNewCardTC, cardsTC, deleteCardTC, updateCardTC} from "./ThunkCards";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {CardType} from "./cardsReducer";
 
@@ -23,6 +23,18 @@ const CardsTestComponent = ({packId}: CardsTestComponentType) => {
         console.log('cards:', cards)
         console.log('packId:', packId)
 
+
+        const [updateQuestion, setUpdateQuestion] = useState<string>('')
+        const [updateComent, setUpdateComent] = useState<string>('')
+
+        const updateCard = (id: string) => {
+            const updatedModel = {
+                _id: id,
+                question: updateQuestion,
+                comments: updateComent,
+            }
+            dispatch(updateCardTC(updatedModel))
+        }
         useEffect(() => {
             dispatch(cardsTC(packId))
         }, [])
@@ -32,6 +44,15 @@ const CardsTestComponent = ({packId}: CardsTestComponentType) => {
                 {cards.map((m, i) => {
                     return <div key={i}>{m.question}
                         <button onClick={() => dispatch(deleteCardTC(m._id))}>X</button>
+                        <h3>Uddate card</h3>
+                        question:
+                        <input type="text" value={updateQuestion}
+                               onChange={(e) => setUpdateQuestion(e.currentTarget.value)}/>
+                        comment:
+                        <input type="text" value={updateComent}
+                               onChange={(e) => setUpdateComent(e.currentTarget.value)}/>
+
+                        <button onClick={() => updateCard(m._id)}>update</button>
                     </div>
                 })}
 
@@ -46,6 +67,8 @@ const CardsTestComponent = ({packId}: CardsTestComponentType) => {
 
                 <button onClick={cancel}>cancel</button>
                 <button onClick={saveCard}>save</button>
+
+
             </div>
         )
     }

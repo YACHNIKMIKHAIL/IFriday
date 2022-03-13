@@ -1,7 +1,7 @@
 import {setAppStatusAC} from "../../../n1_main/m2-bll/r1-reducers/app-reducer";
 import {fridayReducerType, FridayThunkType} from "../../../n1_main/m2-bll/store";
 import {Dispatch} from "redux";
-import {cardsAPI} from "./cardsAPI";
+import {cardsAPI, UpdatedCardType} from "./cardsAPI";
 import {cardsActions} from "./ActionsCards";
 
 export const cardsTC = (id:string) => async (dispatch:Dispatch, getState: () => fridayReducerType) => {
@@ -59,6 +59,21 @@ export const deleteCardTC = (cardId: string):FridayThunkType => async (dispatch)
     dispatch(setAppStatusAC("loading"))
     try {
         let res = await cardsAPI.deleteCard(cardId)
+        dispatch(cardsTC(res.data.packUserId))
+        dispatch(setAppStatusAC("succeeded"))
+    } catch (e: any) {
+        if (e.response.data) {
+        }
+        dispatch(setAppStatusAC("failed"))
+    } finally {
+        dispatch(setAppStatusAC("idle"))
+    }
+}
+
+export const updateCardTC = (updatedCard: UpdatedCardType):FridayThunkType => async (dispatch) => {
+    dispatch(setAppStatusAC("loading"))
+    try {
+        let res = await cardsAPI.updateCard(updatedCard)
         dispatch(cardsTC(res.data.packUserId))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
