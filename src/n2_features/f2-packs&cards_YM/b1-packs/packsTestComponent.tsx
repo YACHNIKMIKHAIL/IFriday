@@ -1,16 +1,20 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
 import {packsActions} from "./ActionsPacks";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {addNewPacksTC, changePacksTC, deletePacksTC, packsTC} from "./ThunkPacks";
 import {InitialCardPacksType, PacksType} from "./packsReducer";
 import {Pack} from "./PackTest";
+import {cardsTC} from "../b2-cards/ThunkCards";
+import {Navigate} from "react-router-dom";
+import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 
 
 const PacksTestComponent = () => {
         const dispatch = useDispatch()
         const myId = useFridaySelector<string>(state => state.profile.profile._id)
         const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
+        const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
 
         const allMy = (value: string) => {
             dispatch(packsActions.allMyAC(value))
@@ -52,10 +56,21 @@ const PacksTestComponent = () => {
         const deletePack = (id: string) => {
             dispatch(deletePacksTC(id))
         }
-        const changePackName=(newPackName: string, id: string)=>{
-            dispatch(changePacksTC(newPackName,id))
+        const changePackName = (newPackName: string, id: string) => {
+            dispatch(changePacksTC(newPackName, id))
+        }
+        const showCards = (id: string) => {
+            dispatch(cardsTC(id))
         }
 
+
+        useEffect(() => {
+            dispatch(packsTC())
+        }, [])
+
+        if (!isLoggedIn) {
+            return <Navigate to={RoutesXPaths.LOGIN}/>
+        }
         return (
             <div>
                 <div>
@@ -94,7 +109,10 @@ const PacksTestComponent = () => {
                 <div>
                     packID: delete on click
                     {myPacks.map((m, i) => {
-                        return <div key={i} onClick={() => deletePack(m._id)}>{m._id}</div>
+                        return <div key={i}>{m.name}
+                            <button onClick={() => showCards(m._id)}>show cards</button>
+                            <button onClick={() => deletePack(m._id)}>delete</button>
+                        </div>
                     })}
                 </div>
                 <h1>CHANGE PACK</h1>
@@ -103,6 +121,7 @@ const PacksTestComponent = () => {
                     {myPacks.map((m, i) => {
                         return <Pack key={i} name={m.name} id={m._id} changeName={changePackName}/>
                     })}
+
                 </div>
             </div>
         );
