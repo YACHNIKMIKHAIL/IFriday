@@ -39,11 +39,11 @@ const Links = () => {
             {/*>NewPassword</NavLink></>*/}
 
             <><NavLink to={RoutesXPaths.Packs}
-                       className={({isActive}) => (isActive ? s.active : '')}
+                       className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
                        style={{textDecoration: 'none'}}
             >Packs</NavLink></>
             <><NavLink to={RoutesXPaths.LOGOUT}
-                       className={({isActive}) => (isActive ? s.activeR : s.ordinaryLink)}
+                       className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
                        style={{textDecoration: 'none'}}
             >Logout</NavLink></>
         </div>
