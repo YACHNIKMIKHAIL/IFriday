@@ -16,7 +16,7 @@ const PacksTestComponent = () => {
         const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
         const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
 
-        const allMy = (value: string | undefined) => {
+        const allMy = (value: string | null) => {
             dispatch(packsActions.allMyAC(value))
         }
         const onChangeMin = (min: number) => {
@@ -74,7 +74,7 @@ const PacksTestComponent = () => {
         return (
             <div>
                 <div>
-                    <button onClick={() => allMy(undefined)}>All</button>
+                    <button onClick={() => allMy(null)}>All</button>
                     <button onClick={() => allMy(myId)}>My</button>
                 </div>
                 <div>

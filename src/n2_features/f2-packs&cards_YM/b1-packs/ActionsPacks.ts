@@ -19,7 +19,7 @@ export const packsActions = {
             payload: {state}
         } as const
     },
-    allMyAC: (value: string | undefined) => {
+    allMyAC: (value: string | null) => {
         return {
             type: packsActionsEnum.ALL_MY,
             payload: {value}
