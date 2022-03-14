@@ -20,8 +20,6 @@ const CardsTestComponent = ({packId}: CardsTestComponentType) => {
         const saveCard = () => {
             dispatch(addNewCardTC(question, answer, packId))
         }
-        console.log('cards:', cards)
-        console.log('packId:', packId)
 
 
         const [updateQuestion, setUpdateQuestion] = useState<string>('')

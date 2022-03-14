@@ -3,8 +3,6 @@ import './DoubleRange.module.css'
 import Slider from '@mui/material/Slider';
 import {packsActions} from "../../../n2_features/f2-packs&cards_YM/b1-packs/ActionsPacks";
 import {useDispatch} from "react-redux";
-import {useFridaySelector} from "../../m2-bll/store";
-import {InitialCardPacksType} from "../../../n2_features/f2-packs&cards_YM/b1-packs/packsReducer";
 
 
 type DoubleRangePropsType = {}
@@ -14,7 +12,6 @@ const DoubleRange: React.FC<DoubleRangePropsType> = (
 ) => {
     const dispatch = useDispatch()
     const [value, setValue] = useState([0, 100])
-    const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
     const onChangeCallback = (e: Event, values: number | number[]) => {
         setValue(values as number[]);
 
@@ -22,8 +19,6 @@ const DoubleRange: React.FC<DoubleRangePropsType> = (
         dispatch(packsActions.maxAC(value[1]))
     };
 
-    console.log(packsState.minCardsCount)
-    console.log(packsState.maxCardsCount)
 
     return (
         <Slider

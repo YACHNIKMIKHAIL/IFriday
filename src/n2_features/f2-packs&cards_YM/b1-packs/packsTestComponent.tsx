@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import {packsActions} from "./ActionsPacks";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {addNewPacksTC, changePacksTC, deletePacksTC, packsTC} from "./ThunkPacks";
-import {InitialCardPacksType, PacksType} from "./packsReducer";
+import {PackType} from "./packsReducer";
 import {Pack} from "./PackTest";
 import {cardsTC} from "../b2-cards/ThunkCards";
 import {Navigate} from "react-router-dom";
@@ -13,7 +13,6 @@ import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 const PacksTestComponent = () => {
         const dispatch = useDispatch()
         const myId = useFridaySelector<string>(state => state.profile.profile._id)
-        const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
         const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
 
         const allMy = (value: string | null) => {
@@ -50,7 +49,7 @@ const PacksTestComponent = () => {
         const addNewPack = () => {
             dispatch(addNewPacksTC(newPack))
         }
-        const myPacks = useFridaySelector<PacksType[]>(state => state.packs.cardPacks)
+        const myPacks = useFridaySelector<PackType[]>(state => state.packs.cardPacks)
 
         const deletePack = (id: string) => {
             dispatch(deletePacksTC(id))

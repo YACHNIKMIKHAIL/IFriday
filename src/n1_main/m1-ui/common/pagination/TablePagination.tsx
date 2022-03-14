@@ -2,14 +2,11 @@ import * as React from 'react';
 import TablePagination from '@mui/material/TablePagination';
 import {packsActions} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/ActionsPacks";
 import {useDispatch} from "react-redux";
-import {useFridaySelector} from "../../../m2-bll/store";
-import {InitialCardPacksType} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/packsReducer";
 
 
 const TablesPagination=()=> {
     const [page, setPage] = React.useState(2);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
     const dispatch = useDispatch()
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
@@ -17,7 +14,6 @@ const TablesPagination=()=> {
     ) => {
         setPage(newPage);
     };
-    console.log(packsState.pageCount)
     const handleChangeRowsPerPage = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {

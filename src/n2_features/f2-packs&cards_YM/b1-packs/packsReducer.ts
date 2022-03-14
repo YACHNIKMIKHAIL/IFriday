@@ -1,7 +1,7 @@
 import {packsActions, packsActionsEnum, packsActionsTypes} from "./ActionsPacks";
 import {UpdatedType} from "./packsAPI";
 
-export type PacksType = {
+export type PackType = {
     _id: string
     user_id: string
     name: string
@@ -10,7 +10,7 @@ export type PacksType = {
     updated: string
 }
 export type InitialCardPacksType = {
-    cardPacks: PacksType[]
+    cardPacks: PackType[]
     cardPacksTotalCount: number
     maxCardsCount: number
     minCardsCount: number

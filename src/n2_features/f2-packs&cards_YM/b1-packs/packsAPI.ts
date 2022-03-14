@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {InitialCardPacksType, PacksType} from "./packsReducer";
+import {InitialCardPacksType, PackType} from "./packsReducer";
 
 export const instance = axios.create({
     // baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',
@@ -16,13 +16,13 @@ export const pasksAPI = {
         (`/cards/pack`, {params: {packName, min, max, updated, page, pageCount, user_id}})
     },
     async addNewPack(newPack: newPackType) {
-        return await instance.post<PacksType,
-            AxiosResponse<PacksType>, { cardsPack: newPackType }>
+        return await instance.post<PackType,
+            AxiosResponse<PackType>, { cardsPack: newPackType }>
         (`/cards/pack`, {cardsPack: newPack})
     },
     async deletePack(packId: string) {
-        return await instance.delete<PacksType,
-            AxiosResponse<PacksType>>
+        return await instance.delete<PackType,
+            AxiosResponse<PackType>>
         (`/cards/pack?id=${packId}`)
     },
     async changePack(newName: string, id: string) {
