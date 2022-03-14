@@ -35,7 +35,7 @@ const initialCardPacks: InitialCardPacksType = {
     maxCardsCount: 0,
     minCardsCount: 0,
     page: 1,
-    pageCount: 0,
+    pageCount: 10,
     packName: '',
     updated: '0updated',
     user_id: null

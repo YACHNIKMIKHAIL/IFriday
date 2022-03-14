@@ -9,6 +9,7 @@ const Packs = () => {
         <div>
             {/*<PacksTestComponent/>*/}
             {/*<DoubleRange/>*/}
+            <PacksList/>
             <CardsList/>
         </div>
     );

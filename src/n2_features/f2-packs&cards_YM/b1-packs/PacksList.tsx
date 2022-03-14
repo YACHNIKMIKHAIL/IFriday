@@ -5,7 +5,8 @@ import TablesPagination from "../../../n1_main/m1-ui/common/pagination/TablePagi
 import {packsActions} from "./ActionsPacks";
 import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
-import {InitialCardPacksType} from "./packsReducer";
+import {InitialCardPacksType, PacksType} from "./packsReducer";
+import {packsTC} from "./ThunkPacks";
 
 
 const PacksList = () => {
@@ -18,7 +19,15 @@ const PacksList = () => {
     }
     const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
     console.log(packsState.user_id)
-
+    console.log(packsState.user_id)
+    const search = (value: string) => {
+        dispatch(packsActions.searchAC(value))
+    }
+    console.log(packsState.packName)
+    const getPacks = () => {
+        dispatch(packsTC())
+    }
+    const packs = useFridaySelector<PacksType[]>(state => state.packs.cardPacks)
     return (
         <div className={style.packsListBlock}>
             <div className={style.showPacks}>
@@ -37,10 +46,15 @@ const PacksList = () => {
 
             <div className={style.packsList}>
                 <h2>Pack list</h2>
-                <span><input placeholder={"Search..."}
-                /><button>Add new pack</button></span>
+                <span>
+                    <input placeholder={"Search..."} onChange={(e) => search(e.currentTarget.value)}/>
+                    <button onClick={getPacks}>Search</button></span>
                 <div className={style.cardsBlock}>
-
+                    {packs.map((m, i) => {
+                        return <div key={i}
+                                    style={{border:'2px red dashed'}}
+                        >{m.name}</div>
+                    })}
                 </div>
                 <TablesPagination/>
             </div>
