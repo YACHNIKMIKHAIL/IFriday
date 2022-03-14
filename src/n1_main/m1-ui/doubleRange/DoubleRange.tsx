@@ -22,7 +22,7 @@ const DoubleRange: React.FC<DoubleRangePropsType> = (
 
     return (
         <Slider
-            sx={{width: 100}}
+            sx={{width: 150}}
             step={10}
             min={0}
             max={100}

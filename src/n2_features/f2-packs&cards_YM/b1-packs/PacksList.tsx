@@ -11,6 +11,7 @@ import {useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {useDebounce} from "use-debounce";
 import TableX from "../../../n1_main/m1-ui/common/table/TableX";
+import TableHeader from "../../../n1_main/m1-ui/common/table/TableHeader";
 
 
 const PacksList = () => {
@@ -49,11 +50,11 @@ const PacksList = () => {
         <div className={style.packsListBlock}>
             <div className={style.showPacks}>
                 <h4>Show packs cards</h4>
-                <span>
-                    {selected}
-                    <button onClick={() => selectMyOrAll(myId)}>My</button>
-                    <button onClick={() => selectMyOrAll(null)}>All</button>
-                </span>
+
+                <button className={selected === "MY" ? style.selected : ""} onClick={() => selectMyOrAll(myId)}>My
+                </button>
+                <button className={selected === "ALL" ? style.selected : ""} onClick={() => selectMyOrAll(null)}>All
+                </button>
 
                 <h4>Number of cards</h4>
                 <span>min:{packsState.minCardsCount}</span>
@@ -66,9 +67,9 @@ const PacksList = () => {
                 <span>
                     <input placeholder={"Search..."} value={packsState.packName}
                            onChange={onChangeSearchInput}/>
-                    <button onClick={getPacks}>Search</button></span>
+                    <button className={style.buttonSearch} onClick={getPacks}>Search</button></span>
                 <div className={style.cardsBlock}>
-
+<TableHeader/>
                     {packs.map((m, i) => {
                         return <div key={i} onDoubleClick={() => runToCards(m._id)}>
                             <TableX key={i} p={m}/>

@@ -1,14 +1,23 @@
 .table{
+    width: 100%;
+    height: 50px;
    border: 1px black solid;
+
 
 }
 .tableRow{
-    border: 1px #092c7e solid;
+
+
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+
 
 }
+.tableRow:nth-child(2n+1){
+    background-color: #a0c8ea;
+}
 .tableCell{
-    border: white 1px solid;
+    text-align: center;
+
 
 }

@@ -13,12 +13,20 @@
 }
 
 .showPacks {
-    margin: 0;
-    padding: 0 70px;
+    text-align: center;
+    padding: 0 30px;
     background: #d2d2e7;
 }
-.showPacks button{
 
+.showPacks button {
+    border: none;
+    width: 70px;
+    height: 30px;
+
+}
+.selected {
+    color: white;
+    background-color: #899de5;
 }
 .packsList {
     width: 100%;
@@ -34,15 +42,40 @@
 
 .packsList input {
     width: 60%;
-    height: 30px;
-    border-radius: 5px;
+    height: 35px;
+    border-radius:  0.6em;
 
 }
-.packsList button{
-    height: 30px;
-    border-radius: 5px;
-    margin-left: 20px;
+
+.buttonSearch {
+    margin-left: 30px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #4f74cb;
+    border-radius: 0.6em;
+    color: #4f74cb;
+    cursor: pointer;
+    line-height: 1;
+    font-size: large;
+    padding: .5em 1.5em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
+.packsList button:hover{
+    color: #fff;
+    outline: 0;
+    box-shadow: 0 0 40px 40px #4f74cb inset;
+}
+
+
 
 
 .cardsBlock {
