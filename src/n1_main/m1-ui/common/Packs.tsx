@@ -12,10 +12,7 @@ const Packs = () => {
 
     return (
         <div>
-            {/*<PacksTestComponent/>*/}
-            {/*<DoubleRange/>*/}
             <PacksList/>
-            {/*<CardsList/>*/}
         </div>
     );
 };

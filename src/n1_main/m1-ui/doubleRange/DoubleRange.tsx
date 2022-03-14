@@ -23,7 +23,6 @@ const DoubleRange: React.FC<DoubleRangePropsType> = (
     return (
         <Slider
             sx={{width: 100}}
-            aria-label={'Custom marks'}
             step={10}
             min={0}
             max={100}

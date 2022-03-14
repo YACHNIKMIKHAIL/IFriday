@@ -1,16 +1,18 @@
 import React, {useState} from "react";
-import {useSelector} from "react-redux";
 import TableHeader from "./TableHeader";
 import s from "./Table.module.css"
+import {PackType} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/packsReducer";
 
-
-const Table = () => {
+type TableType={
+    p:PackType
+}
+const Table = ({p}:TableType) => {
     const arr = [
         {
-            Name: "PackName",
-            Cards: "4",
-            LastUpd: "10.12.2021",
-            CreatedBy: "Sergey",
+            Name: p.name,
+            Cards: p.cardsCount,
+            LastUpd: p.updated,
+            CreatedBy: p.created,
             Actions: null
         }
     ]
@@ -52,10 +54,11 @@ const TableCell = ({ item }:any) => {
 
     return (
         <div className={s.tableCell}>
-            <input
-                value={state}
-                onChange={({ target }) => setState(target.value)}
-                type="text" />
+            {/*<input*/}
+            {/*    value={state}*/}
+            {/*    onChange={({ target }) => setState(target.value)}*/}
+            {/*    type="text" />*/}
+            <>{state}</>
         </div>
     )
 }

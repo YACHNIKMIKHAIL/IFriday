@@ -10,7 +10,6 @@ type CardsListType = {
 const CardsList = ({name}: CardsListType) => {
     const cards = useFridaySelector<CardType[]>(state => state.cards.cards)
 
-    //alert(name)
     return (
         <div className={style.cardsListBlock}>
             <div className={style.cardsList}>

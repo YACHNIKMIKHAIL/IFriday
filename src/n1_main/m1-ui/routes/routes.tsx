@@ -15,9 +15,9 @@ export enum RoutesXPaths {
     LOGIN = '/login',
     REGISTER = '/register',
     RECOVERY = '/passwordrecovery',
-    PACKS = '/packs/:id',
+    PACKS = '/packs',
     CARDS = '/cards',
-    CARDSOTHER = '/cards/:userId',
+    CARDSWITHID = '/cards/:packId',
     SET_PASS = '/set-new-password/:token',
     NOT_FOUND = '/404',
     LOGOUT = '/logout'
@@ -36,7 +36,7 @@ const RoutesX = () => {
                 <Route path={RoutesXPaths.SET_PASS} element={<NewPassword/>}/>
                 <Route path={RoutesXPaths.PACKS} element={<Packs/>}/>
                 <Route path={RoutesXPaths.CARDS} element={<Cards/>}/>
-                <Route path={RoutesXPaths.CARDSOTHER} element={<Cards/>}/>
+                <Route path={RoutesXPaths.CARDSWITHID} element={<Cards/>}/>
                 <Route path={RoutesXPaths.LOGOUT} element={<Logout/>}/>
                 <Route path={RoutesXPaths.NOT_FOUND}
                        element={<h1 style={{textAlign: 'center'}}>404:PAGE NOT FOUND</h1>}/>

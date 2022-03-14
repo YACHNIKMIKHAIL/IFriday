@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import style from "./PacksList.module.css"
 import DoubleRange from "../../../n1_main/m1-ui/doubleRange/DoubleRange";
 import TablesPagination from "../../../n1_main/m1-ui/common/pagination/TablePagination";
@@ -9,36 +9,41 @@ import {InitialCardPacksType, PackType} from "./packsReducer";
 import {packsTC} from "./ThunkPacks";
 import {useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
+import Table from "../../../n1_main/m1-ui/common/table/Table";
+import {useDebounce} from "use-debounce";
 
 
 const PacksList = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate();
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const [selected, setSelected] = useState<'MY' | 'ALL'>('ALL')
+    const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
+    const packs = useFridaySelector<PackType[]>(state => state.packs.cardPacks)
+    const debouncedSearch = useDebounce<string>(packsState.packName, 1500)
+    const debouncedSelect = useDebounce<'MY' | 'ALL'>(selected, 1500)
+    const debouncedMIN = useDebounce<number>(packsState.minCardsCount, 1500)
+    const debouncedMAX = useDebounce<number>(packsState.maxCardsCount, 1500)
+
+
     const selectMyOrAll = (value: string | null) => {
         dispatch(packsActions.allMyAC(value))
         value ? setSelected('MY') : setSelected('ALL')
     }
-    const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
-
-    const search = (value: string) => {
-        dispatch(packsActions.searchAC(value))
+    const onChangeSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(packsActions.searchAC(e.currentTarget.value))
     }
     const getPacks = () => {
         dispatch(packsTC())
     }
-
-    const navigate = useNavigate();
     const runToCards = (packId: string) => {
         navigate(`${RoutesXPaths.CARDS}/${packId}`)
     }
 
-    const packs = useFridaySelector<PackType[]>(state => state.packs.cardPacks)
-
 
     useEffect(() => {
         dispatch(packsTC())
-    }, [])
+    }, [debouncedSearch[0], debouncedSelect[0], debouncedMIN[0], debouncedMAX[0]])
 
     return (
         <div className={style.packsListBlock}>
@@ -59,15 +64,15 @@ const PacksList = () => {
             <div className={style.packsList}>
                 <h2>Pack list</h2>
                 <span>
-                    <input placeholder={"Search..."} onChange={(e) => search(e.currentTarget.value)}/>
+                    <input placeholder={"Search..."} value={packsState.packName}
+                           onChange={onChangeSearchInput}/>
                     <button onClick={getPacks}>Search</button></span>
                 <div className={style.cardsBlock}>
-                    {/*ЭТО БЫ ВЫНЕСТИ В ОТДЕЛЬНУЮ КОМПОНЕНТУ*/}
+
                     {packs.map((m, i) => {
-                        return <div key={i}
-                                    style={{border: '2px red dashed'}}
-                                    onDoubleClick={() => runToCards(m._id)}
-                        >{m.name}</div>
+                        return <div key={i} onDoubleClick={() => runToCards(m._id)}>
+                            <Table key={i} p={m}/>
+                        </div>
                     })}
                 </div>
                 <TablesPagination/>
