@@ -44,7 +44,6 @@ const initialCards: InitialCardsType  = {
     minGrade: 0,
     page: 0,
     pageCount: 0,
-    // packUserId: '',
     cardAnswer: '',
     cardQuestion: '',
     sortCards: '0updated'

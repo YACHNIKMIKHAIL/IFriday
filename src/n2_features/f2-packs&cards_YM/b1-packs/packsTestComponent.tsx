@@ -16,7 +16,7 @@ const PacksTestComponent = () => {
         const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
         const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
 
-        const allMy = (value: string) => {
+        const allMy = (value: string | undefined) => {
             dispatch(packsActions.allMyAC(value))
         }
         const onChangeMin = (min: number) => {
@@ -34,8 +34,8 @@ const PacksTestComponent = () => {
         const setPage = (page: number) => {
             dispatch(packsActions.pageAC(page))
         }
-        const setCardsPage = (cardsPage: number) => {
-            dispatch(packsActions.cardsPageAC(cardsPage))
+        const setCardsPage = (pageCount: number) => {
+            dispatch(packsActions.pageCountAC(pageCount))
         }
 
         console.log(packsState)
@@ -74,7 +74,7 @@ const PacksTestComponent = () => {
         return (
             <div>
                 <div>
-                    <button onClick={() => allMy('')}>All</button>
+                    <button onClick={() => allMy(undefined)}>All</button>
                     <button onClick={() => allMy(myId)}>My</button>
                 </div>
                 <div>
@@ -93,7 +93,7 @@ const PacksTestComponent = () => {
                     <input type="number" onChange={(e) => setPage(+e.currentTarget.value)}/>
                 </div>
                 <div>
-                    cards per page:
+                    pageCount:
                     <input type="number" onChange={(e) => setCardsPage(+e.currentTarget.value)}/>
                 </div>
 
@@ -106,7 +106,7 @@ const PacksTestComponent = () => {
                     <button onClick={addNewPack}>add pack</button>
                 </div>
                 <h1>DELETE PACK</h1>
-                <div>
+                <div style={{border: '2px white solid', height: '500px', overflow: 'auto'}}>
                     packID: delete on click
                     {myPacks.map((m, i) => {
                         return <div key={i}>{m.name}

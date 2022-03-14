@@ -41,6 +41,7 @@ const CardsTestComponent = ({packId}: CardsTestComponentType) => {
         return (
             <div>
                 <h3>Card list:</h3>
+
                 {cards.map((m, i) => {
                     return <div key={i}>{m.question}
                         <button onClick={() => dispatch(deleteCardTC(m._id))}>X</button>

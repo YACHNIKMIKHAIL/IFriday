@@ -18,7 +18,7 @@ export type InitialCardPacksType = {
     pageCount: number
     packName: string
     updated: UpdatedType
-    user_id: string
+    user_id: string | undefined
 }
 const initialCardPacks: InitialCardPacksType = {
     cardPacks: [
@@ -38,7 +38,7 @@ const initialCardPacks: InitialCardPacksType = {
     pageCount: 0,
     packName: '',
     updated: '0updated',
-    user_id: ''
+    user_id: undefined
 }
 
 export type packsReducerActionType = ReturnType<packsActionsTypes<typeof packsActions>>
@@ -62,8 +62,8 @@ export const packsReducer = (state = initialCardPacks, action: packsReducerActio
         case packsActionsEnum.PAGE : {
             return {...state, page: action.payload.page}
         }
-        case packsActionsEnum.CARDS_PER_PAGE : {
-            return {...state, cardPacksTotalCount: action.payload.cardsPage}
+        case packsActionsEnum.pageCount : {
+            return {...state, pageCount: action.payload.pageCount}
         }
         default:
             return state

@@ -2,12 +2,12 @@ import {InitialCardPacksType} from "./packsReducer";
 
 export enum packsActionsEnum {
     SET_PACKS = 'SET_PACKS',
-    ALL_MY='ALL_MY',
-    MIN='MIN',
-    MAX='MAX',
-    SEARCH='SEARCH',
-    PAGE='PAGE',
-    CARDS_PER_PAGE='CARDS_PER_PAGE',
+    ALL_MY = 'ALL_MY',
+    MIN = 'MIN',
+    MAX = 'MAX',
+    SEARCH = 'SEARCH',
+    PAGE = 'PAGE',
+    pageCount = 'pageCount',
 }
 
 export type packsActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
@@ -19,7 +19,7 @@ export const packsActions = {
             payload: {state}
         } as const
     },
-    allMyAC: (value: string) => {
+    allMyAC: (value: string | undefined) => {
         return {
             type: packsActionsEnum.ALL_MY,
             payload: {value}
@@ -49,10 +49,10 @@ export const packsActions = {
             payload: {page}
         } as const
     },
-    cardsPageAC: (cardsPage: number) => {
+    pageCountAC: (pageCount: number) => {
         return {
-            type: packsActionsEnum.CARDS_PER_PAGE,
-            payload: {cardsPage}
+            type: packsActionsEnum.pageCount,
+            payload: {pageCount}
         } as const
     },
 }

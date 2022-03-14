@@ -8,10 +8,12 @@ export const instance = axios.create({
 })
 
 export const pasksAPI = {
-    async setPacks(packName: string, min: number, max: number, updated: UpdatedType, pageCount: number, user_id: string) {
+    async setPacks(packName: string, min: number, max: number, updated: UpdatedType, page: number, pageCount: number, user_id: string | undefined) {
         return await instance.get<InitialCardPacksType,
-            AxiosResponse<InitialCardPacksType>>
-        (`/cards/pack?packName=${packName}&min=${min}&max=${max}&sortPacks=${updated}&page=&{page}&pageCount=${pageCount}&user_id=${user_id}`)
+            AxiosResponse<InitialCardPacksType>, {
+            packName: string, min: number, max: number, updated: UpdatedType, page: number, pageCount: number, user_id: string
+        }>
+        (`/cards/pack`, {params: {packName, min, max, updated, page, pageCount, user_id}})
     },
     async addNewPack(newPack: newPackType) {
         return await instance.post<PacksType,
