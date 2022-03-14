@@ -11,6 +11,7 @@ import {useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {useDebounce} from "use-debounce";
 import TableX from "../../../n1_main/m1-ui/common/table/TableX";
+import TableHeader from "../../../n1_main/m1-ui/common/table/TableHeader";
 
 
 const PacksList = () => {
@@ -40,6 +41,7 @@ const PacksList = () => {
         navigate(`${RoutesXPaths.CARDS}/${packId}`)
     }
 
+
     useEffect(() => {
         dispatch(packsTC())
     }, [debouncedSearch[0], debouncedSelect[0], debouncedMIN[0], debouncedMAX[0]])
@@ -48,51 +50,36 @@ const PacksList = () => {
         <div className={style.packsListBlock}>
             <div className={style.showPacks}>
                 <h4>Show packs cards</h4>
-                <div className={style.blockContainer}>
-                    <span className={style.btnValue}>
-                        {selected}
-                    </span>
-                    <div>
-                        <button className={style.btn__item} onClick={() => selectMyOrAll(myId)}>My</button>
-                        <button className={style.btn__item} onClick={() => selectMyOrAll(null)}>All</button>
-                    </div>
-                </div>
 
-                <h4 className={style.title}>Number of cards</h4>
+                <button className={selected === "MY" ? style.selected : ""} onClick={() => selectMyOrAll(myId)}>My
+                </button>
+                <button className={selected === "ALL" ? style.selected : ""} onClick={() => selectMyOrAll(null)}>All
+                </button>
+
+                <h4>Number of cards</h4>
+                <span>min:{packsState.minCardsCount}</span>
+                <span>max:{packsState.maxCardsCount}</span>
                 <DoubleRange/>
-                <div className={style.rangeValue}>
-                    <span className={style.rangeValue__item}>min : {packsState.minCardsCount} </span>
-                    <span className={style.rangeValue__item}>max : {packsState.maxCardsCount}</span>
-                </div>
             </div>
 
             <div className={style.packsList}>
                 <h2>Pack list</h2>
                 <span>
-                    <input
-                        placeholder={"Enter your request"}
-                        type="text"
-                        value={packsState.packName}
-                        onChange={onChangeSearchInput}
-                    />
-                    <button
-                        className={style.btn__item}
-                        onClick={getPacks}
-                    >Search</button>
-                </span>
+                    <input placeholder={"Search..."} value={packsState.packName}
+                           onChange={onChangeSearchInput}/>
+                    <button className={style.buttonSearch} onClick={getPacks}>Search</button></span>
                 <div className={style.cardsBlock}>
-                    {
-                        packs.map((item, index) => {
-                            return (
-                                <div key={index} onDoubleClick={() => runToCards(item._id)}>
-                                    <TableX key={index} p={item}/>
-                                </div>
-                            )
-                        })
-                    }
+<TableHeader/>
+                    {packs.map((m, i) => {
+                        return <div key={i} onDoubleClick={() => runToCards(m._id)}>
+                            <TableX key={i} p={m}/>
+                        </div>
+                    })}
                 </div>
                 <TablesPagination/>
             </div>
+
+
         </div>
     )
 }

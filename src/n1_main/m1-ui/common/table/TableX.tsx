@@ -2,11 +2,12 @@ import React, {useState} from "react";
 import TableHeader from "./TableHeader";
 import s from "./Table.module.css"
 import {PackType} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/packsReducer";
+import {useFridaySelector} from "../../../m2-bll/store";
 
-type TableType={
-    p:PackType
+type TableType = {
+    p: PackType
 }
-const TableX = ({p}:TableType) => {
+const TableX = ({p}: TableType) => {
     const arr = [
         {
             Name: p.name,
@@ -17,19 +18,20 @@ const TableX = ({p}:TableType) => {
         }
     ]
 
-
+// const arr=useFridaySelector<any[]>(state => state.packs.cardPacks)
     // const arr = useSelector(({starships}) => arr.....); вставляем массив
 
     return (
-        arr
+            arr
             ? <div className={s.table}>
-                <TableHeader/>
-                {arr.map((arr, idx) => <TableRow key={idx} arr={arr}/>)}
-            </div>
+            {arr.map((arr, idx) => <TableRow key={idx} arr={arr}/>)}
+        </div>
             : <div>loading...</div>
+
+
     )
 };
-const TableRow = ({arr}:any) => {
+const TableRow = ({arr}: any) => {
     const {
         Name,
         Cards,
@@ -41,15 +43,15 @@ const TableRow = ({arr}:any) => {
 
     return (
         <div className={s.tableRow}>
-            <TableCell item={Name} />
-            <TableCell item={Cards} />
-            <TableCell item={LastUpd} />
-            <TableCell item={CreatedBy} />
-            <TableCell item={Actions} />
+            <TableCell item={Name}/>
+            <TableCell item={Cards}/>
+            <TableCell item={LastUpd}/>
+            <TableCell item={CreatedBy}/>
+            <TableCell item={Actions}/>
         </div>
     )
 };
-const TableCell = ({ item }:any) => {
+const TableCell = ({item}: any) => {
     const [state, setState] = useState(item);
 
     return (

@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@400;700&display=swap');
-
 .packsListBlock {
     width: 80%;
     height: 80vh;
@@ -15,22 +13,21 @@
 }
 
 .showPacks {
-    margin: 0 auto;
-    padding: 3px 50px;
-    background: #d2d2e7;
     text-align: center;
-}
-
-.showPacks h4 {
-    font-family: 'Kaushan Script', cursive;
-    font-size: 24px;
-    color: #333
+    padding: 0 30px;
+    background: #d2d2e7;
 }
 
 .showPacks button {
+    border: none;
+    width: 70px;
+    height: 30px;
 
 }
-
+.selected {
+    color: white;
+    background-color: #899de5;
+}
 .packsList {
     width: 100%;
     height: 100%;
@@ -45,19 +42,40 @@
 
 .packsList input {
     width: 60%;
-    height: 22px;
-    border-radius: 5px;
+    height: 35px;
+    border-radius:  0.6em;
+
 }
 
-.packsList input:focus {
-    background-color: #e1eeef;
+.buttonSearch {
+    margin-left: 30px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #4f74cb;
+    border-radius: 0.6em;
+    color: #4f74cb;
+    cursor: pointer;
+    line-height: 1;
+    font-size: large;
+    padding: .5em 1.5em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+.packsList button:hover{
+    color: #fff;
+    outline: 0;
+    box-shadow: 0 0 40px 40px #4f74cb inset;
 }
 
-.packsList button {
-    height: 30px;
-    border-radius: 5px;
-    margin-left: 20px;
-}
+
 
 
 .cardsBlock {
@@ -70,48 +88,4 @@
     -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     overflow: auto;
-}
-
-.title {
-    padding-bottom: 20px;
-}
-
-.rangeValue {
-    display: flex;
-    flex-direction: column;
-}
-
-.rangeValue__item {
-    padding-top: 5px;
-}
-
-.blockContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.btnValue {
-    font-size: 18px;
-}
-
-.btn__item {
-    background-color: #94cfd9;
-    border: 1px solid white;
-    margin: 0 1px;
-    padding: 3px 12px;
-    border-radius: 3px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.btn__item:hover {
-    background-color: #2386a4;
-    color: white;
-    transition: color 0.5s linear;
-}
-
-.btn__item:focus {
-    background-color: #2386a4;
-    color: white;
 }
