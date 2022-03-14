@@ -1,0 +1,14 @@
+.table{
+   border: 1px black solid;
+
+}
+.tableRow{
+    border: 1px #092c7e solid;
+    display: flex;
+    justify-content: space-around;
+
+}
+.tableCell{
+    border: white 1px solid;
+
+}
