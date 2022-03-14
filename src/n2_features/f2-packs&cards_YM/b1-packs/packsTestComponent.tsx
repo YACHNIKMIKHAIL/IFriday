@@ -38,7 +38,6 @@ const PacksTestComponent = () => {
             dispatch(packsActions.pageCountAC(pageCount))
         }
 
-        console.log(packsState)
 
         const [newPackName, setNewPackName] = useState<string>('')
         const [newPackPrivate, setNewPackPrivate] = useState<boolean>(false)
