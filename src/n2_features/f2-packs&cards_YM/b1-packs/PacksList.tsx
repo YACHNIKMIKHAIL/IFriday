@@ -69,21 +69,30 @@ const PacksList = () => {
             <div className={style.packsList}>
                 <h2>Pack list</h2>
                 <span>
-                    <input placeholder={"Search..."} value={packsState.packName}
-                           onChange={onChangeSearchInput}/>
-                    <button onClick={getPacks}>Search</button></span>
+                    <input
+                        placeholder={"Enter your request"}
+                        type="text"
+                        value={packsState.packName}
+                        onChange={onChangeSearchInput}
+                    />
+                    <button
+                        className={style.btn__item}
+                        onClick={getPacks}
+                    >Search</button>
+                </span>
                 <div className={style.cardsBlock}>
-
-                    {packs.map((m, i) => {
-                        return <div key={i} onDoubleClick={() => runToCards(m._id)}>
-                            <TableX key={i} p={m}/>
-                        </div>
-                    })}
+                    {
+                        packs.map((item, index) => {
+                            return (
+                                <div key={index} onDoubleClick={() => runToCards(item._id)}>
+                                    <TableX key={index} p={item}/>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
                 <TablesPagination/>
             </div>
-
-
         </div>
     )
 }

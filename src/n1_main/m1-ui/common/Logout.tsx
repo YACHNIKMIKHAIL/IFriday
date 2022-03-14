@@ -19,10 +19,19 @@ const Logout = () => {
     }
 
     return (
+        <div className={style.logOutBlock}>
+            <div className={style.title}>
+                Are you sure you want to exit?
+            </div>
+            <div className={style.text}>
+                If you are sure click the button below
+            </div>
             <div
                 className={style.logoutBtn}
-                onClick={logoutHandler}>Click me for logout
+                onClick={logoutHandler}>
+                Click me for logout
             </div>
+        </div>
     )
 };
 

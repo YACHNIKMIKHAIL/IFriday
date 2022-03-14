@@ -38,7 +38,7 @@ const initialCardPacks: InitialCardPacksType = {
     pageCount: 10,
     packName: '',
     updated: '0updated',
-    user_id: null
+    user_id: null,
 }
 
 export type packsReducerActionType = ReturnType<packsActionsTypes<typeof packsActions>>
