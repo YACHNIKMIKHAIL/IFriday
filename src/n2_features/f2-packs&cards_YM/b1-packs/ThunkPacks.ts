@@ -6,7 +6,6 @@ import {packsActions} from "./ActionsPacks";
 
 export const packsTC = () => async (dispatch: Dispatch, getState: () => fridayReducerType) => {
     const {packName, minCardsCount, maxCardsCount, updated, page, pageCount, user_id} = getState().packs
-    debugger
     dispatch(setAppStatusAC("loading"))
     try {
         let res = await pasksAPI.setPacks(packName, minCardsCount, maxCardsCount, updated, page, pageCount, user_id)
@@ -14,7 +13,7 @@ export const packsTC = () => async (dispatch: Dispatch, getState: () => fridayRe
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         if (e.response) {
-            alert(e.response ? e.response.data.error : 'some error')
+            //alert(e.response ? e.response.data.error : 'some error')
         } else {
             alert('включи сервак')
         }

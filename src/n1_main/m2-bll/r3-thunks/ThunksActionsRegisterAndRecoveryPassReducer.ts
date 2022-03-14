@@ -27,7 +27,7 @@ export const passwordRecoveryTC = (email: string) => async (dispatch: Dispatch) 
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         if (e.response.data) {
-            alert(e.response.data.error)
+            //alert(e.response.data.error)
             dispatch(registerAndRecoveryPassActions.setNewErrorAC(e.response.data.error))
         }
         dispatch(setAppStatusAC("failed"))

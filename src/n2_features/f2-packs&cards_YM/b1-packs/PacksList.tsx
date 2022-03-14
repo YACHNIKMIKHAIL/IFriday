@@ -27,9 +27,10 @@ const PacksList = () => {
     const getPacks = () => {
         dispatch(packsTC())
     }
+
     const navigate = useNavigate();
     const runToCards = (packId: string) => {
-        navigate(`${RoutesXPaths.CARDS}?cardsPack_id=${packId}`)
+        navigate(`${RoutesXPaths.CARDS}/${packId}`)
     }
 
     const packs = useFridaySelector<PackType[]>(state => state.packs.cardPacks)

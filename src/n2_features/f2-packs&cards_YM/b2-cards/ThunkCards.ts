@@ -15,7 +15,7 @@ export const cardsTC = (id: string) => {
             dispatch(setAppStatusAC("succeeded"))
         } catch (e: any) {
             if (e.response) {
-                alert(e.response ? e.response.data.error : 'some error')
+                //alert(e.response ? e.response.data.error : 'some error')
             }
             dispatch(setAppStatusAC("failed"))
         } finally {
@@ -44,7 +44,7 @@ export const addNewCardTC = (question: string, answer: string, packId: string): 
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         if (e.response) {
-            alert(e.response ? e.response.data.error : 'some error')
+            //alert(e.response ? e.response.data.error : 'some error')
         }
         dispatch(setAppStatusAC("failed"))
     } finally {
@@ -60,7 +60,7 @@ export const deleteCardTC = (cardId: string): FridayThunkType => async (dispatch
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         if (e.response) {
-            alert(e.response ? e.response.data.error : 'some error')
+            //alert(e.response ? e.response.data.error : 'some error')
         }
         dispatch(setAppStatusAC("failed"))
     } finally {
