@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@400;700&display=swap');
+
 .packsListBlock {
     width: 80%;
     height: 80vh;
@@ -69,14 +71,12 @@
     -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
     transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
+
 .packsList button:hover{
     color: #fff;
     outline: 0;
     box-shadow: 0 0 40px 40px #4f74cb inset;
 }
-
-
-
 
 .cardsBlock {
     width: 100%;
@@ -88,4 +88,11 @@
     -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     overflow: auto;
+}
+
+.title {
+    font-family: 'Kaushan Script', cursive;
+    font-size: 22px;
+    padding-bottom: 10px;
+    color: #333
 }

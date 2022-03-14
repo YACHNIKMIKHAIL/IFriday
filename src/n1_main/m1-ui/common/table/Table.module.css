@@ -1,23 +1,19 @@
-.table{
+.table {
     width: 100%;
-    height: 50px;
-   border: 1px black solid;
-
-
+    border: 1px black solid;
+    margin: 2px 0;
 }
-.tableRow{
 
-
+.tableRow {
     display: flex;
     justify-content: space-evenly;
-
-
 }
-.tableRow:nth-child(2n+1){
+
+.tableRow:nth-child(odd) {
     background-color: #a0c8ea;
+    padding: 5px 0;
 }
-.tableCell{
+
+.tableCell {
     text-align: center;
-
-
 }

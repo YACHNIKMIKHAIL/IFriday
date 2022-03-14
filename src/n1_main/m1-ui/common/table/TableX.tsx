@@ -22,13 +22,15 @@ const TableX = ({p}: TableType) => {
     // const arr = useSelector(({starships}) => arr.....); вставляем массив
 
     return (
-            arr
-            ? <div className={s.table}>
-            {arr.map((arr, idx) => <TableRow key={idx} arr={arr}/>)}
-        </div>
-            : <div>loading...</div>
-
-
+        arr
+            ? (
+                <div className={s.table}>
+                    {arr.map((arr, idx) => <TableRow key={idx} arr={arr}/>)}
+                </div>
+            ) : (
+                <div>
+                    loading...
+                </div>)
     )
 };
 const TableRow = ({arr}: any) => {
