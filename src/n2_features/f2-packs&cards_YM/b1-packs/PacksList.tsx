@@ -9,8 +9,8 @@ import {InitialCardPacksType, PackType} from "./packsReducer";
 import {packsTC} from "./ThunkPacks";
 import {useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
-import Table from "../../../n1_main/m1-ui/common/table/Table";
 import {useDebounce} from "use-debounce";
+import TableX from "../../../n1_main/m1-ui/common/table/TableX";
 
 
 const PacksList = () => {
@@ -71,7 +71,7 @@ const PacksList = () => {
 
                     {packs.map((m, i) => {
                         return <div key={i} onDoubleClick={() => runToCards(m._id)}>
-                            <Table key={i} p={m}/>
+                            <TableX key={i} p={m}/>
                         </div>
                     })}
                 </div>

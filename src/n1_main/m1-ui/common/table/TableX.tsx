@@ -6,7 +6,7 @@ import {PackType} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/packs
 type TableType={
     p:PackType
 }
-const Table = ({p}:TableType) => {
+const TableX = ({p}:TableType) => {
     const arr = [
         {
             Name: p.name,
@@ -62,4 +62,4 @@ const TableCell = ({ item }:any) => {
         </div>
     )
 }
-export default Table;
+export default TableX;
