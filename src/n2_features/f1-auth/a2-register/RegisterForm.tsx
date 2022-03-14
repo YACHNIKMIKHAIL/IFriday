@@ -94,7 +94,7 @@ const RegisterForm = () => {
                                 <div className={regS.errorMessage}>{formik.errors.confirm}</div> : null}
                         </div>
                         <div className={regS.buttonsDiv}>
-                            <button type="button" className={regS.canselButton}
+                            <button type="button" className={regS.cancelButton}
                                 // onClick={cancelHandler}
                             ><NavLink to={RoutesXPaths.LOGIN} >
                                 Cancel</NavLink></button>

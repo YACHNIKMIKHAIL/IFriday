@@ -49,13 +49,13 @@ const TableRow = ({arr}: any) => {
             <TableCell item={Cards}/>
             <TableCell item={LastUpd}/>
             <TableCell item={CreatedBy}/>
-            <TableCell item={Actions}/>
+            <TableCell status={true} item={Actions}/>
         </div>
     )
 };
-const TableCell = ({item}: any) => {
+const TableCell = ({item, status}: any) => {
     const [state, setState] = useState(item);
-
+    console.log(state)
     return (
         <div className={s.tableCell}>
             {/*<input*/}
@@ -63,7 +63,20 @@ const TableCell = ({item}: any) => {
             {/*    onChange={({ target }) => setState(target.value)}*/}
             {/*    type="text" />*/}
             <>{state}</>
+            {status &&
+            <ButtonGroup/>
+            }
         </div>
     )
 }
 export default TableX;
+
+export const ButtonGroup = () => {
+    return (
+        <div className={s.BtnContainer}>
+            <button onClick={() => alert("edit")}>edit</button>
+            <button onClick={() => alert("delete")}>delete</button>
+            <button onClick={() => alert("learn")}>learn</button>
+        </div>
+    )
+}

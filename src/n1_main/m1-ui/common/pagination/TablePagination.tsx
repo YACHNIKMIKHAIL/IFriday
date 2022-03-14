@@ -3,7 +3,6 @@ import TablePagination from '@mui/material/TablePagination';
 import {packsActions} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/ActionsPacks";
 import {useDispatch} from "react-redux";
 
-
 const TablesPagination = () => {
     const [page, setPage] = React.useState<number>(2);
     const [rowsPerPage, setRowsPerPage] = React.useState<number>(10);

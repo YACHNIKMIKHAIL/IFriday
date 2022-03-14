@@ -103,7 +103,7 @@
     box-shadow: 0 0 40px 40px #4f74cb inset;
 }
 
-.canselButton {
+.cancelButton {
     box-sizing: border-box;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -125,17 +125,17 @@
     transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
 
-.canselButton:hover {
+.cancelButton:hover {
     color: #fff;
     outline: 0;
     box-shadow: 0 0 40px 40px #4f74cb inset;
 }
 
-.canselButton a {
+.cancelButton a {
     text-decoration: none;
     color: #4f74cb;
 }
 
-.canselButton a:hover {
+.cancelButton a:hover {
     color: #fff;
 }
