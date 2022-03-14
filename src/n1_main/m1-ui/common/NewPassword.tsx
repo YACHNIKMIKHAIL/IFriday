@@ -7,7 +7,7 @@ const NewPassword = () => {
         <div style={newPasswordStyles}>
             <NewPasswordForm/>
         </div>
-    );
-};
+    )
+}
 
 export default NewPassword;
