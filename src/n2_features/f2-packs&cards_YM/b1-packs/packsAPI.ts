@@ -7,7 +7,7 @@ export const instance = axios.create({
     withCredentials: true,
 })
 
-export const pasksAPI = {
+export const packsAPI = {
     async setPacks(packName: string, min: number, max: number, updated: UpdatedType, page: number, pageCount: number, user_id: string | null) {
         return await instance.get<InitialCardPacksType,
             AxiosResponse<InitialCardPacksType>, {
@@ -28,7 +28,7 @@ export const pasksAPI = {
     async changePack(newName: string, id: string) {
         const updatedPack: UpdatedPackType = {
             _id: id,
-            name: newName
+            name: newName,
         }
         return await instance.put <UpdatedPackType,
             AxiosResponse<UpdatedPackType>, {
@@ -39,11 +39,11 @@ export const pasksAPI = {
 }
 export type UpdatedType = '0updated' | '1updated'
 export type newPackType = {
-    name: string,
-    deckCover: string,
+    name: string
+    deckCover: string
     private: boolean
 }
 export type UpdatedPackType = {
-    _id: string,
+    _id: string
     name: string
 }

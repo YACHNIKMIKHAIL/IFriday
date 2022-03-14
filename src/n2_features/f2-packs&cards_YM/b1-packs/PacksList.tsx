@@ -40,7 +40,6 @@ const PacksList = () => {
         navigate(`${RoutesXPaths.CARDS}/${packId}`)
     }
 
-
     useEffect(() => {
         dispatch(packsTC())
     }, [debouncedSearch[0], debouncedSelect[0], debouncedMIN[0], debouncedMAX[0]])
@@ -49,16 +48,22 @@ const PacksList = () => {
         <div className={style.packsListBlock}>
             <div className={style.showPacks}>
                 <h4>Show packs cards</h4>
-                <span>
-                    {selected}
-                    <button onClick={() => selectMyOrAll(myId)}>My</button>
-                    <button onClick={() => selectMyOrAll(null)}>All</button>
-                </span>
+                <div className={style.blockContainer}>
+                    <span className={style.btnValue}>
+                        {selected}
+                    </span>
+                    <div>
+                        <button className={style.btn__item} onClick={() => selectMyOrAll(myId)}>My</button>
+                        <button className={style.btn__item} onClick={() => selectMyOrAll(null)}>All</button>
+                    </div>
+                </div>
 
-                <h4>Number of cards</h4>
-                <span>min:{packsState.minCardsCount}</span>
-                <span>max:{packsState.maxCardsCount}</span>
+                <h4 className={style.title}>Number of cards</h4>
                 <DoubleRange/>
+                <div className={style.rangeValue}>
+                    <span className={style.rangeValue__item}>min : {packsState.minCardsCount} </span>
+                    <span className={style.rangeValue__item}>max : {packsState.maxCardsCount}</span>
+                </div>
             </div>
 
             <div className={style.packsList}>
