@@ -1,4 +1,4 @@
-import {setAppStatusAC} from "../../../n1_main/m2-bll/r1-reducers/app-reducer";
+import {setAppStatusAC, setGlobalErrorAC} from "../../../n1_main/m2-bll/r1-reducers/app-reducer";
 import {newPackType, packsAPI} from "./packsAPI";
 import {fridayReducerType, FridayThunkType} from "../../../n1_main/m2-bll/store";
 import {Dispatch} from "redux";
@@ -12,11 +12,7 @@ export const packsTC = () => async (dispatch: Dispatch, getState: () => fridayRe
         dispatch(packsActions.setPacksAC(res.data))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
-        if (e.response) {
-            //alert(e.response ? e.response.data.error : 'some error')
-        } else {
-            // alert('включи сервак')
-        }
+        dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))
@@ -29,9 +25,7 @@ export const addNewPacksTC = (newPack: newPackType): FridayThunkType => async (d
         await packsAPI.addNewPack(newPack)
         dispatch(packsTC())
     } catch (e: any) {
-        if (e.response) {
-            // alert(e.response ? e.response.data.error : 'some error')
-        }
+        dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))
@@ -44,9 +38,7 @@ export const deletePacksTC = (id: string): FridayThunkType => async (dispatch: a
         await packsAPI.deletePack(id)
         dispatch(packsTC())
     } catch (e: any) {
-        if (e.response) {
-            alert(e.response ? e.response.data.error : 'some error')
-        }
+        dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))
@@ -59,9 +51,7 @@ export const changePacksTC = (newName: string, id: string): FridayThunkType => a
         await packsAPI.changePack(newName, id)
         dispatch(packsTC())
     } catch (e: any) {
-        if (e.response) {
-            alert(e.response ? e.response.data.error : 'some error')
-        }
+        dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))
