@@ -14,7 +14,6 @@ import TableX from "../../../n1_main/m1-ui/common/table/TableX";
 import TableHeader from "../../../n1_main/m1-ui/common/table/TableHeader";
 import TestAddPackComponent from "./TestAddPackComponent";
 
-
 const PacksList = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
