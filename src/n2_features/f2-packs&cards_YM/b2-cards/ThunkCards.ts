@@ -1,4 +1,4 @@
-import {setAppStatusAC} from "../../../n1_main/m2-bll/r1-reducers/app-reducer";
+import {setAppStatusAC, setGlobalErrorAC} from "../../../n1_main/m2-bll/r1-reducers/app-reducer";
 import {fridayReducerType, FridayThunkType} from "../../../n1_main/m2-bll/store";
 import {Dispatch} from "redux";
 import {cardsAPI} from "./cardsAPI";
@@ -14,9 +14,7 @@ export const cardsTC = (id: string) => {
             dispatch(cardsActions.setCardsAC(res.data))
             dispatch(setAppStatusAC("succeeded"))
         } catch (e: any) {
-            if (e.response) {
-                //alert(e.response ? e.response.data.error : 'some error')
-            }
+            dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
             dispatch(setAppStatusAC("failed"))
         } finally {
             dispatch(setAppStatusAC("idle"))
@@ -43,9 +41,7 @@ export const addNewCardTC = (question: string, answer: string, packId: string): 
         dispatch(cardsTC(res.data.packUserId))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
-        if (e.response) {
-            //alert(e.response ? e.response.data.error : 'some error')
-        }
+        dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))
@@ -59,9 +55,7 @@ export const deleteCardTC = (cardId: string): FridayThunkType => async (dispatch
         dispatch(cardsTC(res.data.packUserId))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
-        if (e.response) {
-            //alert(e.response ? e.response.data.error : 'some error')
-        }
+        dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))
@@ -81,9 +75,7 @@ export const updateCardTC = (updatedCard: UpdatedCardType): FridayThunkType => a
         dispatch(cardsTC(res.data.packUserId))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
-        if (e.response) {
-            // alert(e.response ? e.response.data.error : 'some error')
-        }
+        dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))

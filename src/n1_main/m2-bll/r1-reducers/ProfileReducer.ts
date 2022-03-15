@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 import {profileAPI} from "../../m3-dal/ProfileAPI";
 import {meRespType} from "../../m3-dal/meAPI";
-import {setAppStatusAC} from "./app-reducer";
+import {setAppStatusAC, setGlobalErrorAC} from "./app-reducer";
 
 export enum PROFILE {
     SET_PROFILE = 'CARDS/PROFILE/SET_PROFILE',
@@ -66,6 +66,8 @@ export const updateUserNameTC = (newUserName: string) => async (dispatch: Dispat
     } catch (e: any) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
         dispatch(ProfileActions.setErrorAC(error))
+        dispatch(setGlobalErrorAC(error))
+
         dispatch(setAppStatusAC("failed"))
     }
 }
