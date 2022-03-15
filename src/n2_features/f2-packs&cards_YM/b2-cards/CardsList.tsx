@@ -15,7 +15,7 @@ const CardsList = ({name}: CardsListType) => {
     return (
         <div className={style.cardsListBlock}>
             <div className={style.cardsList}>
-                <h2>&#129040; Pack Name: {name}</h2>
+                <h2 className={style.title}>&#129040; Pack Name: {name}</h2>
                 <input placeholder={"Search..."}/>
                 <div className={style.cardsBlock}>
                     <TableCardsHeader/>

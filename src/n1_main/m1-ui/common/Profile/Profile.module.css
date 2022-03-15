@@ -19,16 +19,19 @@
 
 .title {
     text-align: center;
+    font-size: 40px;
     margin-bottom: 40px;
+    font-family: 'Akaya Telivigala', cursive;
 }
 
-.profileContainer img{
+.profileContainer img {
     width: 120px;
     height: 120px;
     border-radius: 60px;
     margin-bottom: 20px;
 }
-.profileContainer span{
+
+.profileContainer span {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 20px;
@@ -53,7 +56,7 @@
 }
 
 .description {
-    color:#726d6f;
+    color: #726d6f;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -67,12 +70,13 @@
     height: 30%;
     margin-bottom: 40px;
 }
-.changeNameContainer input{
+
+.changeNameContainer input {
     width: 95%;
     min-height: 30px;
     border: none;
     border-bottom: 1px solid #5f7271;
-    outline:none;
+    outline: none;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 20px;

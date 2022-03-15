@@ -54,52 +54,60 @@ const PacksList = () => {
                 !addPack
                     ? (<div className={style.packsListBlock}>
 
-                        <div className={style.showPacks}>
-                            <h4 className={style.title}>Show packs cards</h4>
-                            <div className={style.blockContainer}>
+                            <div className={style.showPacks}>
+                                <h4 className={style.title}>Show packs cards</h4>
+                                <div className={style.blockContainer}>
+                                </div>
+                                <button className={selected === "MY" ? style.selected : ""}
+                                        onClick={() => selectMyOrAll(myId)}>My
+                                </button>
+                                <button className={selected === "ALL" ? style.selected : ""}
+                                        onClick={() => selectMyOrAll(null)}>All
+                                </button>
+                                <h4 className={style.title}>Number of cards</h4>
+                                <DoubleRange/>
+                                <div className={style.rangeValue}>
+                                    <div className={style.rangeValue__item}>min : {packsState.minCardsCount} </div>
+                                    <div className={style.rangeValue__item}>max : {packsState.maxCardsCount}</div>
+                                </div>
                             </div>
-                            <button className={selected === "MY" ? style.selected : ""}
-                                    onClick={() => selectMyOrAll(myId)}>My
-                            </button>
-                            <button className={selected === "ALL" ? style.selected : ""}
-                                    onClick={() => selectMyOrAll(null)}>All
-                            </button>
-                            <h4 className={style.title}>Number of cards</h4>
-                            <DoubleRange/>
-                            <div className={style.rangeValue}>
-                                <div className={style.rangeValue__item}>min : {packsState.minCardsCount} </div>
-                                <div className={style.rangeValue__item}>max : {packsState.maxCardsCount}</div>
-                            </div>
-                        </div>
-                        <div className={style.packsList}>
-                            {globalError
-                                ? <h2 style={{color: 'red'}}>{globalError}</h2>
-                                : <h2>Pack list</h2>
-                            }
-                            <div>
-                                <input placeholder={"Search..."} value={packsState.packName}
-                                       onChange={onChangeSearchInput}/>
-                                <button className={style.buttonSearch} onClick={() => setAddPack(!addPack)}>Add New</button>
-                            </div>
-
-                            <div className={style.cardsBlock}>
-                                <TableHeader/>
-                                {
-                                    packs.map((item, index) => {
-                                        return (
-                                            <div key={index} onDoubleClick={() => runToCards(item._id)}>
-                                                <TableX key={index} p={item}/>
-                                            </div>
-                                        )
-                                    })
+                            <div className={style.packsList}>
+                                {globalError
+                                    ? <h2 style={{color: 'red'}}>{globalError}</h2>
+                                    : <h2 className={style.title}>Pack list</h2>
                                 }
-                                <TablesPagination/>
+                                <div>
+                                    <input placeholder={"Search..."}
+                                           value={packsState.packName}
+                                           onChange={onChangeSearchInput}
+                                    />
+                                    <button
+                                        className={style.buttonSearch}
+                                        onClick={() => setAddPack(!addPack)}
+                                    >
+                                        Add New
+                                    </button>
+                                </div>
+
+                                <div className={style.cardsBlock}>
+                                    <TableHeader/>
+                                    {
+                                        packs.map((item, index) => {
+                                            return (
+                                                <div key={index} onDoubleClick={() => runToCards(item._id)}>
+                                                    <TableX key={index} p={item}/>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                    <TablesPagination/>
+                                </div>
                             </div>
                         </div>
-                    </div>)
-                    : (<div>
-                        {addPack && <TestAddPackComponent setAddPack={setAddPack}/>}
-                    </div>)
+                    ) : (
+                        <div>
+                            {addPack && <TestAddPackComponent setAddPack={setAddPack}/>}
+                        </div>)
             }
         </div>
     )

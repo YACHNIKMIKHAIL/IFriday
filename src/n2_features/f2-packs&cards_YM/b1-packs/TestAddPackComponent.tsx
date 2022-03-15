@@ -20,6 +20,7 @@ const TestAddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
         dispatch(addNewPacksTC(pack))
         setAddPack(false)
     }
+
     return (
         <div className={s.addItemContainer}>
             <div>
