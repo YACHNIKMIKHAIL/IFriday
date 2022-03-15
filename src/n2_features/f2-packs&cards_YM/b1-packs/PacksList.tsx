@@ -21,12 +21,12 @@ const PacksList = () => {
     const [selected, setSelected] = useState<'MY' | 'ALL'>('ALL')
     const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
     const packs = useFridaySelector<PackType[]>(state => state.packs.cardPacks)
-    const debouncedSearch = useDebounce<string>(packsState.packName, 1500)
-    const debouncedSelect = useDebounce<'MY' | 'ALL'>(selected, 1500)
-    const debouncedMIN = useDebounce<number>(packsState.minCardsCount, 1500)
-    const debouncedMAX = useDebounce<number>(packsState.maxCardsCount, 1500)
-    const debouncedPackOnPage = useDebounce<number>(packsState.pageCount, 1500)
-    const debouncedPageChanged = useDebounce<number>(packsState.page, 1500)
+    const debouncedSearch = useDebounce<string>(packsState.packName, 1000)
+    const debouncedSelect = useDebounce<'MY' | 'ALL'>(selected, 1000)
+    const debouncedMIN = useDebounce<number>(packsState.minCardsCount, 1000)
+    const debouncedMAX = useDebounce<number>(packsState.maxCardsCount, 1000)
+    const debouncedPackOnPage = useDebounce<number>(packsState.pageCount, 1000)
+    const debouncedPageChanged = useDebounce<number>(packsState.page, 1000)
 
     const selectMyOrAll = (value: string | null) => {
         dispatch(packsActions.allMyAC(value))
@@ -52,9 +52,6 @@ const PacksList = () => {
             <div className={style.showPacks}>
                 <h4 className={style.title}>Show packs cards</h4>
                 <div className={style.blockContainer}>
-                    <span className={style.btnValue}>
-                        {selected}
-                    </span>
                 </div>
                 <button className={selected === "MY" ? style.selected : ""} onClick={() => selectMyOrAll(myId)}>My
                 </button>

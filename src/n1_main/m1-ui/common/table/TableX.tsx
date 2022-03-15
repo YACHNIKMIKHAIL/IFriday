@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import TableHeader from "./TableHeader";
+import React from "react";
 import s from "./Table.module.css"
 import {PackType} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/packsReducer";
 import {useFridaySelector} from "../../../m2-bll/store";
@@ -47,7 +46,6 @@ const TableRow = ({arr}: any) => {
         _id,
         user_id
     } = arr
-    console.log(Name)
 
 
     return (
@@ -61,7 +59,6 @@ const TableRow = ({arr}: any) => {
     )
 };
 const TableCell = ({item, status, _id, user_id}: any) => {
-    const [state, setState] = useState(item);
     return (
         <div className={s.tableCell}>
             {/*<input*/}
@@ -78,7 +75,7 @@ const TableCell = ({item, status, _id, user_id}: any) => {
 export default TableX;
 
 export const ButtonGroup = ({_id, user_id}: any) => {
-    const myPackId = useFridaySelector<string | null>(state => state.packs.user_id)
+    const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const dispatch = useDispatch()
     const navigate = useNavigate();
 
@@ -89,7 +86,7 @@ export const ButtonGroup = ({_id, user_id}: any) => {
 
     return (
         <div className={s.BtnContainer}>
-            {myPackId === user_id && <>
+            {myId === user_id && <>
                 <button onClick={() => alert("edit")}>edit</button>
                 <button onClick={() => deletePack(_id)}>delete</button>
             </>
