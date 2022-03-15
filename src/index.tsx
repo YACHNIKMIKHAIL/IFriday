@@ -5,13 +5,28 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import {store} from "./n1_main/m2-bll/store";
 import AppSerge from "./n1_main/m1-ui/app/AppSerge";
+import {ThemeProvider} from "@material-ui/core";
+import {createTheme} from "@mui/material";
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#730bc4',
+        },
+        secondary: {
+            main: '#9daacc'
+        },
+    },
+})
 
 ReactDOM.render(
-   // <React.StrictMode>
+    // <React.StrictMode>
+    <ThemeProvider theme={theme}>
         <Provider store={store}>
             <AppSerge/>
-        </Provider>,
-    //</React.StrictMode>,
+        </Provider>
+    </ThemeProvider>,
+    //</React.StrictMode>
     document.getElementById('root')
 );
 

@@ -7,11 +7,14 @@ import {changePacksTC, deletePacksTC} from "../../../../n2_features/f2-packs&car
 import {useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../routes/routes";
 import Preloader from "../preloader/Preloader";
+import {Button, IconButton} from "@mui/material";
+import {Delete} from "@material-ui/icons";
 
 
 type TableType = {
     p: PackType
 }
+
 const TableX = ({p}: TableType) => {
     const arr = [
         {
@@ -97,13 +100,16 @@ export const ButtonGroup = ({_id, user_id, edit, setEdit, saveChanges}: any) => 
 
     return (
         <div className={s.BtnContainer}>
-            {myId === user_id && <>{!edit
-                ? <button onClick={() => setEdit(true)}>edit</button>
-                : <button onClick={saveChanges}>save</button>}
-                <button onClick={() => deletePack(_id)}>delete</button>
+            <Button size="small" onClick={() => navigate(`${RoutesXPaths.CARDS}/${_id}`)}>learn</Button>
+            {
+                myId === user_id && <>{!edit
+                ? <Button size="small" onClick={() => setEdit(true)}>edit</Button>
+                : <Button size="small" onClick={saveChanges}>save</Button>}
+                <IconButton  onClick={() => deletePack(_id)} aria-label="delete">
+                    <Delete />
+                </IconButton>
             </>
             }
-            <button onClick={() => navigate(`${RoutesXPaths.CARDS}/${_id}`)}>learn</button>
         </div>
     )
 }
