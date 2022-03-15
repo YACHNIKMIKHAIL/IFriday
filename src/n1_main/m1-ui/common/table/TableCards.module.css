@@ -22,13 +22,5 @@
 }
 
 .tableCell:nth-child(3), :nth-child(4) {
-    font-size: 14px;
+    font-size: 24px;
 }
-
-.BtnContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    text-align: center;
-}
-

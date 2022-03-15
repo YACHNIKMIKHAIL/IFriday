@@ -12,7 +12,7 @@ type PasswordViewType = {
 
 const PasswordView = ({isVisible}: PasswordViewType) => {
     const dispatch = useDispatch()
-    const icon = <FontAwesomeIcon icon={isVisible ? faEyeSlash : faEye}/>
+    const icon = <FontAwesomeIcon icon={isVisible ? faEye : faEyeSlash}/>
     const onChangeIcon = () => {
         dispatch(setAppVisibleAC(!isVisible))
     }

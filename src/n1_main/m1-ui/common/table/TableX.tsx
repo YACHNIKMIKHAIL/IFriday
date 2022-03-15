@@ -6,6 +6,8 @@ import {useDispatch} from "react-redux";
 import {changePacksTC, deletePacksTC} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/ThunkPacks";
 import {useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../routes/routes";
+import Preloader from "../preloader/Preloader";
+
 
 type TableType = {
     p: PackType
@@ -31,7 +33,7 @@ const TableX = ({p}: TableType) => {
                 </div>
             ) : (
                 <div>
-                    loading...
+                    <Preloader status={"failed"}/>
                 </div>)
     )
 };
@@ -61,11 +63,7 @@ const TableCell = ({item, status, _id, user_id}: any) => {
     const dispatch = useDispatch()
     const [newPackName, setNewPackName] = useState<string>('')
     const [edit, setEdit] = useState<boolean>(false)
-    // const debouncedEdit = useDebounce<boolean>(edit, 1000)
 
-    // useEffect(()=>{
-    //     dispatch(changePacksTC(newPackName, _id))
-    // },[debouncedEdit[0]])
 
     const saveChanges = () => {
         setEdit(false)

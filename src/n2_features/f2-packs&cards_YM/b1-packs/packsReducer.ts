@@ -8,6 +8,7 @@ export type PackType = {
     cardsCount: number
     created: string
     updated: string
+    user_name:string
 }
 export type InitialCardPacksType = {
     cardPacks: PackType[]
@@ -29,6 +30,7 @@ const initialCardPacks: InitialCardPacksType = {
             cardsCount: 0,
             created: "",
             updated: "",
+            user_name:""
         }
     ],
     cardPacksTotalCount: 0,
