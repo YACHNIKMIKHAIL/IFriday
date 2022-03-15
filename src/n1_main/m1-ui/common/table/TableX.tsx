@@ -18,7 +18,7 @@ const TableX = ({p}: TableType) => {
             Name: p.name,
             Cards: p.cardsCount,
             LastUpd: p.updated,
-            CreatedBy: p.created,
+            CreatedBy: p.user_name,
             Actions: null,
             _id: p._id,
             user_id: p.user_id

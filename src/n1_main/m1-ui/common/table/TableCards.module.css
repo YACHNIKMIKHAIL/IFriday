@@ -19,8 +19,6 @@
     justify-content: center;
     text-align: center;
     width: 25%;
+
 }
 
-.tableCell:nth-child(3), :nth-child(4) {
-    font-size: 24px;
-}

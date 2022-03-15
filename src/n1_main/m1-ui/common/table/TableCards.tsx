@@ -47,7 +47,7 @@ const TableRow = ({arr}: any) => {
             <TableCell item={Answer}/>
             <TableCell item={Updated}/>
             <TableCell item={<Rating  name={"half-rating-read"}
-                                      value={Grade} precision={0.01} readOnly/>}/>
+                                      value={Grade} precision={0.1} readOnly/>}/>
 
         </div>
     )
