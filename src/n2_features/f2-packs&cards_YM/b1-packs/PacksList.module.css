@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ramaraja&display=swap');
 
+
 .packsListBlock {
     width: 80%;
     height: 80vh;
@@ -25,7 +26,8 @@
     border: none;
     width: 100px;
     height: 50px;
-
+    font-family: "Ramaraja";
+    font-size: 22px;
 }
 
 .selected {
@@ -104,3 +106,7 @@
     color: #333
 }
 
+.rangeValue__item {
+    font-family: "Ramaraja";
+    font-size: 24px;
+}
