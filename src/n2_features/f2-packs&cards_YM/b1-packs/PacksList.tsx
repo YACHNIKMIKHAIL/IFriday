@@ -29,6 +29,7 @@ const PacksList = () => {
     const debouncedMAX = useDebounce<number>(packsState.maxCardsCount, 1000)
     const debouncedPackOnPage = useDebounce<number>(packsState.pageCount, 1000)
     const debouncedPageChanged = useDebounce<number>(packsState.page, 1000)
+    const globalError = useFridaySelector<string>(state => state.app.globalError)
 
     const selectMyOrAll = (value: string | null) => {
         dispatch(packsActions.allMyAC(value))
@@ -37,7 +38,7 @@ const PacksList = () => {
     const onChangeSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(packsActions.searchAC(e.currentTarget.value))
     }
-
+    
     const runToCards = (packId: string) => {
         navigate(`${RoutesXPaths.CARDS}/${packId}`)
     }
@@ -75,6 +76,16 @@ const PacksList = () => {
                                    onChange={onChangeSearchInput}/>
                             <button className={style.buttonSearch} onClick={() => setAddPack(!addPack)}>Add New</button>
                         </div>
+            <div className={style.packsList}>
+                {globalError
+                    ? <h2 style={{color: 'red'}}>{globalError}</h2>
+                    : <h2>Pack list</h2>
+                }
+                <div>
+                    <input placeholder={"Search..."} value={packsState.packName}
+                           onChange={onChangeSearchInput}/>
+                    <button className={style.buttonSearch} onClick={() => setAddPack(!addPack)}>Add New</button>
+                </div>
 
                         <div className={style.cardsBlock}>
                             <TableHeader/>
