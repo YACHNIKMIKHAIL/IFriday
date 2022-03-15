@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {addNewPacksTC} from "./ThunkPacks";
 import {useDispatch} from "react-redux";
+import s from "./AddPackComponent.module.css"
 
 type TestAddPackComponentType = {
     setAddPack: (v: boolean) => void
@@ -20,11 +21,24 @@ const TestAddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
         setAddPack(false)
     }
     return (
-        <div>
-            New pack name:
-            <input type="text" value={newPack} onChange={(e) => seNewPack(e.currentTarget.value)}/>
-            Make private:
-            <input type="checkbox" onChange={(e) => setNewPackPrivate(e.currentTarget.checked)}/>
+        <div className={s.addItemContainer}>
+            <div>
+                <h2>
+                    Add new pack:
+                </h2>
+                <div className={s.addPackInput}>
+                    <span>
+                    Name pack
+                    </span>
+                    <input type="text" value={newPack} onChange={(e) => seNewPack(e.currentTarget.value)}/>
+                </div>
+            </div>
+            <div className={s.makePrivate}>
+                <span>
+                Make private:
+                    </span>
+                <input type="checkbox" onChange={(e) => setNewPackPrivate(e.currentTarget.checked)}/>
+            </div>
             <button onClick={addNewPack}>Add</button>
         </div>
     );
