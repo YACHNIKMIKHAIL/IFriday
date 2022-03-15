@@ -4,7 +4,7 @@ import {packsActions} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/A
 import {useDispatch} from "react-redux";
 
 const TablesPagination = () => {
-    const [page, setPage] = React.useState<number>(2);
+    const [page, setPage] = React.useState<number>(1);
     const [rowsPerPage, setRowsPerPage] = React.useState<number>(10);
     const dispatch = useDispatch()
     const handleChangePage = (
@@ -12,6 +12,7 @@ const TablesPagination = () => {
         newPage: number,
     ) => {
         setPage(newPage);
+        dispatch(packsActions.pageAC(newPage))
     };
     const handleChangeRowsPerPage = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

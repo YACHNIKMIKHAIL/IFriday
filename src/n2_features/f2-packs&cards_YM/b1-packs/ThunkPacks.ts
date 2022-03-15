@@ -5,6 +5,7 @@ import {Dispatch} from "redux";
 import {packsActions} from "./ActionsPacks";
 
 export const packsTC = () => async (dispatch: Dispatch, getState: () => fridayReducerType) => {
+    debugger
     const {packName, minCardsCount, maxCardsCount, updated, page, pageCount, user_id} = getState().packs
     dispatch(setAppStatusAC("loading"))
     try {

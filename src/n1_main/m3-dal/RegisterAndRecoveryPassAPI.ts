@@ -8,7 +8,6 @@ export const registerAndRecoveryPassAPI = {
             AxiosResponse<registerStateType>, { email: string, password: string }>(`/auth/register`, body)
     },
     async forgot(email: string) {
-        debugger
         return await instance.post<ForgotResponseType>(`/auth/forgot`, {
             email,
             message: `<div style="background-color: lime; padding: 15px">

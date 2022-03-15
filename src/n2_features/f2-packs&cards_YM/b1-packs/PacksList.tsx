@@ -25,7 +25,8 @@ const PacksList = () => {
     const debouncedSelect = useDebounce<'MY' | 'ALL'>(selected, 1500)
     const debouncedMIN = useDebounce<number>(packsState.minCardsCount, 1500)
     const debouncedMAX = useDebounce<number>(packsState.maxCardsCount, 1500)
-
+    const debouncedPackOnPage = useDebounce<number>(packsState.pageCount, 1500)
+    const debouncedPageChanged = useDebounce<number>(packsState.page, 1500)
 
     const selectMyOrAll = (value: string | null) => {
         dispatch(packsActions.allMyAC(value))
@@ -43,7 +44,8 @@ const PacksList = () => {
 
     useEffect(() => {
         dispatch(packsTC())
-    }, [debouncedSearch[0], debouncedSelect[0], debouncedMIN[0], debouncedMAX[0]])
+    }, [debouncedSearch[0], debouncedSelect[0], debouncedMIN[0], debouncedMAX[0], debouncedPackOnPage[0],
+        debouncedPageChanged[0]])
 
     return (
         <div className={style.packsListBlock}>
