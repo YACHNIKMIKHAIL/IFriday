@@ -82,7 +82,7 @@ export const updateCardTC = (updatedCard: UpdatedCardType): FridayThunkType => a
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         if (e.response) {
-            alert(e.response ? e.response.data.error : 'some error')
+            // alert(e.response ? e.response.data.error : 'some error')
         }
         dispatch(setAppStatusAC("failed"))
     } finally {

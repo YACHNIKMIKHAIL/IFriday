@@ -5,7 +5,6 @@ import {Dispatch} from "redux";
 import {packsActions} from "./ActionsPacks";
 
 export const packsTC = () => async (dispatch: Dispatch, getState: () => fridayReducerType) => {
-    debugger
     const {packName, minCardsCount, maxCardsCount, updated, page, pageCount, user_id} = getState().packs
     dispatch(setAppStatusAC("loading"))
     try {
@@ -16,7 +15,7 @@ export const packsTC = () => async (dispatch: Dispatch, getState: () => fridayRe
         if (e.response) {
             //alert(e.response ? e.response.data.error : 'some error')
         } else {
-            alert('включи сервак')
+            // alert('включи сервак')
         }
         dispatch(setAppStatusAC("failed"))
     } finally {
@@ -31,7 +30,7 @@ export const addNewPacksTC = (newPack: newPackType): FridayThunkType => async (d
         dispatch(packsTC())
     } catch (e: any) {
         if (e.response) {
-            alert(e.response ? e.response.data.error : 'some error')
+            // alert(e.response ? e.response.data.error : 'some error')
         }
         dispatch(setAppStatusAC("failed"))
     } finally {

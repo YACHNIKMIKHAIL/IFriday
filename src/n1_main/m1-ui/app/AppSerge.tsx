@@ -12,12 +12,14 @@ import {meTC} from "../../m2-bll/r3-thunks/ThunkMe";
 function AppSerge() {
     const status = useFridaySelector<RequestStatusType>(state => state.app.status)
     const dispatch = useDispatch()
+    const initialized=useFridaySelector<boolean>(state=>state.me.isInitialized)
 
     useEffect(() => {
         dispatch(meTC())
     }, [])
-
-
+    if (!initialized) {
+        return <Preloader status={status}/>
+    }
     return (
         <div className="App">
             <HashRouter>

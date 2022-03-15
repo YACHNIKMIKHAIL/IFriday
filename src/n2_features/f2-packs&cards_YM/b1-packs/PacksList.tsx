@@ -12,6 +12,7 @@ import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {useDebounce} from "use-debounce";
 import TableX from "../../../n1_main/m1-ui/common/table/TableX";
 import TableHeader from "../../../n1_main/m1-ui/common/table/TableHeader";
+import TestAddPackComponent from "./TestAddPackComponent";
 
 
 const PacksList = () => {
@@ -19,6 +20,7 @@ const PacksList = () => {
     const navigate = useNavigate();
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const [selected, setSelected] = useState<'MY' | 'ALL'>('ALL')
+    const [addPack, setAddPack] = useState<boolean>(false)
     const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
     const packs = useFridaySelector<PackType[]>(state => state.packs.cardPacks)
     const debouncedSearch = useDebounce<string>(packsState.packName, 1000)
@@ -35,9 +37,7 @@ const PacksList = () => {
     const onChangeSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(packsActions.searchAC(e.currentTarget.value))
     }
-    const getPacks = () => {
-        dispatch(packsTC())
-    }
+    
     const runToCards = (packId: string) => {
         navigate(`${RoutesXPaths.CARDS}/${packId}`)
     }
@@ -70,7 +70,7 @@ const PacksList = () => {
                 <div>
                     <input placeholder={"Search..."} value={packsState.packName}
                            onChange={onChangeSearchInput}/>
-                    <button className={style.buttonSearch} onClick={getPacks}>Search</button>
+                    <button className={style.buttonSearch} onClick={() => setAddPack(!addPack)}>Add New</button>
                 </div>
 
                 <div className={style.cardsBlock}>
@@ -87,6 +87,7 @@ const PacksList = () => {
                     <TablesPagination/>
                 </div>
             </div>
+            {addPack && <TestAddPackComponent setAddPack={setAddPack}/>}
         </div>
     )
 }

@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import s from "./Table.module.css"
 import {PackType} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/packsReducer";
 import {useFridaySelector} from "../../../m2-bll/store";
 import {useDispatch} from "react-redux";
-import {deletePacksTC} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/ThunkPacks";
+import {changePacksTC, deletePacksTC} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/ThunkPacks";
 import {useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../routes/routes";
 
@@ -11,7 +11,6 @@ type TableType = {
     p: PackType
 }
 const TableX = ({p}: TableType) => {
-    // console.log('called with', p.name)
     const arr = [
         {
             Name: p.name,
@@ -59,22 +58,36 @@ const TableRow = ({arr}: any) => {
     )
 };
 const TableCell = ({item, status, _id, user_id}: any) => {
+    const dispatch = useDispatch()
+    const [newPackName, setNewPackName] = useState<string>('')
+    const [edit, setEdit] = useState<boolean>(false)
+    // const debouncedEdit = useDebounce<boolean>(edit, 1000)
+
+    // useEffect(()=>{
+    //     dispatch(changePacksTC(newPackName, _id))
+    // },[debouncedEdit[0]])
+
+    const saveChanges = () => {
+        setEdit(false)
+        dispatch(changePacksTC(newPackName, _id))
+    }
+
     return (
         <div className={s.tableCell}>
-            {/*<input*/}
-            {/*    value={state}*/}
-            {/*    onChange={({ target }) => setState(target.value)}*/}
-            {/*    type="text" />*/}
-            <>{item}</>
+            {edit ? <input
+                    value={newPackName}
+                    onChange={({target}) => setNewPackName(target.value)}
+                    type="text"/>
+                : <>{item}</>}
             {status &&
-            <ButtonGroup _id={_id} user_id={user_id}/>
+            <ButtonGroup _id={_id} user_id={user_id} edit={edit} setEdit={setEdit} saveChanges={saveChanges}/>
             }
         </div>
     )
 }
 export default TableX;
 
-export const ButtonGroup = ({_id, user_id}: any) => {
+export const ButtonGroup = ({_id, user_id, edit, setEdit, saveChanges}: any) => {
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -86,8 +99,9 @@ export const ButtonGroup = ({_id, user_id}: any) => {
 
     return (
         <div className={s.BtnContainer}>
-            {myId === user_id && <>
-                <button onClick={() => alert("edit")}>edit</button>
+            {myId === user_id && <>{!edit
+                ? <button onClick={() => setEdit(true)}>edit</button>
+                : <button onClick={saveChanges}>save</button>}
                 <button onClick={() => deletePack(_id)}>delete</button>
             </>
             }
