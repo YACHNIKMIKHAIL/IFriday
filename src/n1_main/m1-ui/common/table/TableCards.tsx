@@ -1,24 +1,23 @@
 import React, {useState} from "react";
-import s from "./Table.module.css"
-import {PackType} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/packsReducer";
+import s from "./TableCards.module.css"
 import Preloader from "../preloader/Preloader";
+import {CardType} from "../../../../n2_features/f2-packs&cards_YM/b2-cards/cardsReducer";
+import Rating from "@mui/material/Rating/Rating";
 
 
-type TableType = {
-    p: PackType
+
+type TableCardsType = {
+    cards: CardType
 }
-const TableX = ({p}: TableType) => {
+const TableCards = ({cards}: TableCardsType) => {
 
     const arr = [{
-        Name: p.name,
-        Cards: p.cardsCount,
-        LastUpd: p.updated,
-        CreatedBy: p.user_name,
-        Actions: null
+        Question: cards.question,
+        Answer: cards.answer,
+        Updated: cards.updated,
+        Grade: cards.grade,
+
     }]
-
-// const arr=useFridaySelector<any[]>(state => state.packs.cardPacks)
-
     return (
         arr
             ? (
@@ -34,22 +33,21 @@ const TableX = ({p}: TableType) => {
 const TableRow = ({arr}: any) => {
 
     const {
-        Name,
-        Cards,
-        LastUpd,
-        CreatedBy,
-        Actions
+        Question,
+        Answer,
+        Updated,
+        Grade
     } = arr
 
 
     return (
         <div className={s.tableRow}>
 
-            <TableCell item={Name}/>
-            <TableCell item={Cards}/>
-            <TableCell item={LastUpd}/>
-            <TableCell item={CreatedBy}/>
-            <TableCell status={true} item={Actions}/>
+            <TableCell item={Question}/>
+            <TableCell item={Answer}/>
+            <TableCell item={Updated}/>
+            <TableCell item={<Rating  name={"half-rating-read"}
+                                      value={Grade} precision={0.01} readOnly/>}/>
 
         </div>
     )
@@ -63,13 +61,13 @@ const TableCell = ({item, status}: any) => {
             {/*    onChange={({ target }) => setState(target.value)}*/}
             {/*    type="text" />*/}
             {state}
-            {status &&
-            <ButtonGroup/>
-            }
+            {/*{status &&*/}
+            {/*// <ButtonGroup/>*/}
+            {/*}*/}
         </div>
     )
 }
-export default TableX;
+export default TableCards;
 
 export const ButtonGroup = () => {
     return (

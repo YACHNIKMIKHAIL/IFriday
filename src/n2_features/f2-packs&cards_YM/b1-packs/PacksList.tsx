@@ -44,14 +44,12 @@ const PacksList = () => {
     useEffect(() => {
         dispatch(packsTC())
     }, [debouncedSearch[0], debouncedSelect[0], debouncedMIN[0], debouncedMAX[0]])
-
     return (
         <div className={style.packsListBlock}>
             <div className={style.showPacks}>
                 <h4 className={style.title}>Show packs cards</h4>
                 <div className={style.blockContainer}>
                     <span className={style.btnValue}>
-                        {selected}
                     </span>
                 </div>
                 <button className={selected === "MY" ? style.selected : ""} onClick={() => selectMyOrAll(myId)}>My
