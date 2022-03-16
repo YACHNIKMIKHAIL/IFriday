@@ -1,4 +1,5 @@
 import {InitialCardPacksType} from "../r1-reducers/packsReducer";
+import {UpdatedType} from "../../m3-dal/packsAPI";
 
 export enum packsActionsEnum {
     SET_PACKS = 'SET_PACKS',
@@ -8,6 +9,7 @@ export enum packsActionsEnum {
     SEARCH = 'SEARCH',
     PAGE = 'PAGE',
     pageCount = 'pageCount',
+    updated = 'updated',
 }
 
 export type packsActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
@@ -53,6 +55,12 @@ export const packsActions = {
         return {
             type: packsActionsEnum.pageCount,
             payload: {pageCount}
+        } as const
+    },
+    updateFilterAC: (updated: UpdatedType) => {
+        return {
+            type: packsActionsEnum.updated,
+            payload: {updated}
         } as const
     },
 }

@@ -13,6 +13,7 @@ import {useDebounce} from "use-debounce";
 import TableX from "../../../n1_main/m1-ui/common/table/TableX";
 import TableHeader from "../../../n1_main/m1-ui/common/table/TableHeader";
 import AddPackComponent from "./AddPackComponent";
+import {UpdatedType} from "../../../n1_main/m3-dal/packsAPI";
 
 const PacksList = () => {
     const dispatch = useDispatch()
@@ -28,6 +29,7 @@ const PacksList = () => {
     const debouncedMAX = useDebounce<number>(packsState.maxCardsCount, 1000)
     const debouncedPackOnPage = useDebounce<number>(packsState.pageCount, 1000)
     const debouncedPageChanged = useDebounce<number>(packsState.page, 1000)
+    const debouncedPageUpdateFiler = useDebounce<UpdatedType>(packsState.updated, 0)
     const globalError = useFridaySelector<string>(state => state.app.globalError)
 
     const selectMyOrAll = (value: string | null) => {
@@ -41,11 +43,11 @@ const PacksList = () => {
     const runToCards = (packId: string) => {
         navigate(`${RoutesXPaths.CARDS}/${packId}`)
     }
-
+    console.log(debouncedPageUpdateFiler[0])
     useEffect(() => {
         dispatch(packsTC())
     }, [debouncedSearch[0], debouncedSelect[0], debouncedMIN[0], debouncedMAX[0], debouncedPackOnPage[0],
-        debouncedPageChanged[0]])
+        debouncedPageChanged[0],debouncedPageUpdateFiler[0]])
 
     return (
         <div>

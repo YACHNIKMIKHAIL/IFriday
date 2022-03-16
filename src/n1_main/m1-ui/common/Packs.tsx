@@ -12,8 +12,6 @@ const Packs = () => {
     useEffect(() => {
         setSearchParams({pathPacks: location.pathname})
     }, [searchParams])
-    console.log(searchParams.get('pathPacks'))
-    console.log(location.pathname)
 
 
     if (!isLoggedIn) {

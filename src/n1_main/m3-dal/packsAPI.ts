@@ -32,6 +32,7 @@ export const packsAPI = {
         (`/cards/pack`, {cardsPack: updatedPack})
     }
 }
+
 export type UpdatedType = '0updated' | '1updated'
 export type newPackType = {
     name: string
