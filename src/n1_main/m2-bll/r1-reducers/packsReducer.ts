@@ -39,7 +39,7 @@ const initialCardPacks: InitialCardPacksType = {
     page: 1,
     pageCount: 10,
     packName: '',
-    updated: '0updated',
+    updated: '' as UpdatedType,
     user_id: null,
 }
 

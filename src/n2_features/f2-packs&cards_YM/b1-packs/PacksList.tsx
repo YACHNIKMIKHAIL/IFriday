@@ -31,7 +31,7 @@ const PacksList = () => {
     const debouncedPageChanged = useDebounce<number>(packsState.page, 1000)
     const debouncedPageUpdateFiler = useDebounce<UpdatedType>(packsState.updated, 0)
     const globalError = useFridaySelector<string>(state => state.app.globalError)
-
+    console.log(packs[0].name)
     const selectMyOrAll = (value: string | null) => {
         dispatch(packsActions.allMyAC(value))
         value ? setSelected('MY') : setSelected('ALL')
