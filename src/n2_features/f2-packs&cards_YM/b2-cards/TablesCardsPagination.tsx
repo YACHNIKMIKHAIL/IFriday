@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TablePagination from '@mui/material/TablePagination';
 import {useDispatch} from "react-redux";
-import {cardsActions} from "./ActionsCards";
+import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 
 const TablesCardsPagination = () => {
     const [page, setPage] = React.useState<number>(1);

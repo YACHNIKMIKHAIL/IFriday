@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import s from "./Table.module.css"
-import {PackType} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/packsReducer";
+import {PackType} from "../../../m2-bll/r1-reducers/packsReducer";
 import {useFridaySelector} from "../../../m2-bll/store";
 import {useDispatch} from "react-redux";
-import {changePacksTC, deletePacksTC} from "../../../../n2_features/f2-packs&cards_YM/b1-packs/ThunkPacks";
+import {changePacksTC, deletePacksTC} from "../../../m2-bll/r3-thunks/ThunkPacks";
 import {useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../routes/routes";
 import Preloader from "../preloader/Preloader";

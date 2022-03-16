@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {addNewPacksTC} from "./ThunkPacks";
+import {addNewPacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import {useDispatch} from "react-redux";
 import s from "./AddPackComponent.module.css"
 
 type TestAddPackComponentType = {
     setAddPack: (v: boolean) => void
 }
-const TestAddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
+const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
     const dispatch = useDispatch()
     const [newPack, seNewPack] = useState<string>('')
     const [newPackPrivate, setNewPackPrivate] = useState<boolean>(false)
@@ -48,4 +48,4 @@ const TestAddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
     );
 };
 
-export default TestAddPackComponent;
+export default AddPackComponent;

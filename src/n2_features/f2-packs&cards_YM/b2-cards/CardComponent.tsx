@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {CardType} from "./cardsReducer";
+import {CardType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
 import {Rating} from "@material-ui/core";
-import {deleteCardTC, updateCardTC} from "./ThunkCards";
+import {deleteCardTC, updateCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 
@@ -78,18 +78,6 @@ const CardComponent = ({c}: CardComponentType) => {
                     <button onClick={() => setEditCard(false)}>cancel</button>
                 </>}
             </>}
-            {/*{!editCard*/}
-            {/*    ? <>*/}
-            {/*        <button onClick={deleteCard}>delete</button>*/}
-            {/*        <button onClick={() => setEditCard(true)}>edit</button>*/}
-            {/*    </>*/}
-
-            {/*    : <>*/}
-            {/*        <button onClick={saveCard}>save</button>*/}
-            {/*        <button onClick={() => setEditCard(false)}>cancel</button>*/}
-            {/*    </>}*/}
-            {/*<button onClick={deleteCard}>delete</button>*/}
-            {/*<button onClick={()=>setEditCard(true)}>edit</button>*/}
         </div>
     );
 };

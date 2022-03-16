@@ -1,8 +1,8 @@
-import axios, {AxiosResponse} from "axios";
-import {UpdatedType} from "../b1-packs/packsAPI";
-import {CardsType} from "./ActionsCards";
-import {UpdatedCardType} from "./ThunkCards";
-import {instance} from "../../instance";
+import {AxiosResponse} from "axios";
+import {UpdatedType} from "./packsAPI";
+import {CardsType} from "../m2-bll/r2-actions/ActionsCards";
+import {UpdatedCardType} from "../m2-bll/r3-thunks/ThunkCards";
+import {instance} from "../../n2_features/instance";
 
 export const cardsAPI = {
     async setCards(cardAnswer: string, cardQuestion: string, cardsPack_id: string, min: number, max: number, sortCards: UpdatedType, page: number, pageCount: number) {

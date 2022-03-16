@@ -9,8 +9,8 @@ import {
 } from "./r1-reducers/RegisterAndRecoveryPassReducer";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 import {AppActionsType, appReducer} from "./r1-reducers/app-reducer";
-import {packsReducer, packsReducerActionType} from "../../n2_features/f2-packs&cards_YM/b1-packs/packsReducer";
-import {cardsReducer} from "../../n2_features/f2-packs&cards_YM/b2-cards/cardsReducer";
+import {packsReducer, packsReducerActionType} from "./r1-reducers/packsReducer";
+import {cardsReducer} from "./r1-reducers/cardsReducer";
 
 const fridayReducer = combineReducers({
     me: meReducer,

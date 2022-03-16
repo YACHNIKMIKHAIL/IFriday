@@ -1,9 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import s from "./TableCards.module.css"
 import Preloader from "../preloader/Preloader";
-import {CardType} from "../../../../n2_features/f2-packs&cards_YM/b2-cards/cardsReducer";
+import {CardType} from "../../../m2-bll/r1-reducers/cardsReducer";
 import Rating from "@mui/material/Rating/Rating";
-
 
 
 type TableCardsType = {
@@ -52,18 +51,10 @@ const TableRow = ({arr}: any) => {
         </div>
     )
 };
-const TableCell = ({item, status}: any) => {
-    const [state, setState] = useState(item);
+const TableCell = ({item}: any) => {
     return (
         <div className={s.tableCell}>
-            {/*<input*/}
-            {/*    value={state}*/}
-            {/*    onChange={({ target }) => setState(target.value)}*/}
-            {/*    type="text" />*/}
-            {state}
-            {/*{status &&*/}
-            {/*// <ButtonGroup/>*/}
-            {/*}*/}
+            {item}
         </div>
     )
 }

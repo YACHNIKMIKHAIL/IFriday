@@ -1,4 +1,4 @@
-import {InitialCardPacksType} from "./packsReducer";
+import {InitialCardPacksType} from "../r1-reducers/packsReducer";
 
 export enum packsActionsEnum {
     SET_PACKS = 'SET_PACKS',

@@ -1,6 +1,6 @@
-import axios, {AxiosResponse} from "axios";
-import {InitialCardPacksType, PackType} from "./packsReducer";
-import {instance} from "../../instance";
+import {AxiosResponse} from "axios";
+import {InitialCardPacksType, PackType} from "../m2-bll/r1-reducers/packsReducer";
+import {instance} from "../../n2_features/instance";
 
 export const packsAPI = {
     async setPacks(packName: string, min: number, max: number, updated: UpdatedType, page: number, pageCount: number, user_id: string | null) {

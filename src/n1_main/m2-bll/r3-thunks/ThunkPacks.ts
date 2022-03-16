@@ -1,8 +1,8 @@
-import {setAppStatusAC, setGlobalErrorAC} from "../../../n1_main/m2-bll/r1-reducers/app-reducer";
-import {newPackType, packsAPI} from "./packsAPI";
-import {fridayReducerType, FridayThunkType} from "../../../n1_main/m2-bll/store";
+import {setAppStatusAC, setGlobalErrorAC} from "../r1-reducers/app-reducer";
+import {newPackType, packsAPI} from "../../m3-dal/packsAPI";
+import {fridayReducerType, FridayThunkType} from "../store";
 import {Dispatch} from "redux";
-import {packsActions} from "./ActionsPacks";
+import {packsActions} from "../r2-actions/ActionsPacks";
 
 export const packsTC = () => async (dispatch: Dispatch, getState: () => fridayReducerType) => {
     const {packName, minCardsCount, maxCardsCount, updated, page, pageCount, user_id} = getState().packs

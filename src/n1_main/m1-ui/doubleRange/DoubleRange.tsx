@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './DoubleRange.module.css'
 import Slider from '@mui/material/Slider';
-import {packsActions} from "../../../n2_features/f2-packs&cards_YM/b1-packs/ActionsPacks";
+import {packsActions} from "../../m2-bll/r2-actions/ActionsPacks";
 import {useDispatch} from "react-redux";
 import {styled} from "@mui/material";
 

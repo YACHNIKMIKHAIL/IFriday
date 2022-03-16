@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import CardsList from "../../../n2_features/f2-packs&cards_YM/b2-cards/CardsList";
 import {useFridaySelector} from "../../m2-bll/store";
 import {Navigate, useParams} from "react-router-dom";
-import {PackType} from "../../../n2_features/f2-packs&cards_YM/b1-packs/packsReducer";
-import {cardsTC} from "../../../n2_features/f2-packs&cards_YM/b2-cards/ThunkCards";
+import {PackType} from "../../m2-bll/r1-reducers/packsReducer";
+import {cardsTC} from "../../m2-bll/r3-thunks/ThunkCards";
 import {useDispatch} from "react-redux";
 import {RoutesXPaths} from "../routes/routes";
 

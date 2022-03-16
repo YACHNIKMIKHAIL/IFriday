@@ -1,4 +1,4 @@
-import {CardType} from "./cardsReducer";
+import {CardType} from "../r1-reducers/cardsReducer";
 
 export enum cardsActionsEnum {
     SET_CARDS = 'SET_CARDS',

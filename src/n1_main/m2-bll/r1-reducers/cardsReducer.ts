@@ -1,5 +1,5 @@
-import {cardsActions, cardsActionsEnum, cardsActionsTypes} from "./ActionsCards";
-import {UpdatedType} from "../b1-packs/packsAPI";
+import {cardsActions, cardsActionsEnum, cardsActionsTypes} from "../r2-actions/ActionsCards";
+import {UpdatedType} from "../../m3-dal/packsAPI";
 
 export type CardType = {
     answer: string

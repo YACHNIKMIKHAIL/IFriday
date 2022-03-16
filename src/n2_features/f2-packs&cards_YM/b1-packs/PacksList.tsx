@@ -2,17 +2,17 @@ import React, {ChangeEvent, useEffect, useState} from "react";
 import style from "./PacksList.module.css"
 import DoubleRange from "../../../n1_main/m1-ui/doubleRange/DoubleRange";
 import TablesPagination from "../../../n1_main/m1-ui/common/pagination/TablePagination";
-import {packsActions} from "./ActionsPacks";
+import {packsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsPacks";
 import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
-import {InitialCardPacksType, PackType} from "./packsReducer";
-import {packsTC} from "./ThunkPacks";
+import {InitialCardPacksType, PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
+import {packsTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import {useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {useDebounce} from "use-debounce";
 import TableX from "../../../n1_main/m1-ui/common/table/TableX";
 import TableHeader from "../../../n1_main/m1-ui/common/table/TableHeader";
-import TestAddPackComponent from "./TestAddPackComponent";
+import AddPackComponent from "./AddPackComponent";
 
 const PacksList = () => {
     const dispatch = useDispatch()
@@ -105,7 +105,7 @@ const PacksList = () => {
                         </div>
                     ) : (
                         <div>
-                            {addPack && <TestAddPackComponent setAddPack={setAddPack}/>}
+                            {addPack && <AddPackComponent setAddPack={setAddPack}/>}
                         </div>)
             }
         </div>

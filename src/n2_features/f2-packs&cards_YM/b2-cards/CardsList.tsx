@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import style from "./CardsList.module.css"
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
-import {CardType, InitialCardsType} from "./cardsReducer";
+import {CardType, InitialCardsType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
 import TableCardsHeader from "../../../n1_main/m1-ui/common/table/TableHeaderCards";
 import CardComponent from "./CardComponent";
 import TablesCardsPagination from "./TablesCardsPagination";
 import {useDebounce} from "use-debounce";
 import {useDispatch} from "react-redux";
-import {cardsTC} from "./ThunkCards";
+import {cardsTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import {useParams} from "react-router-dom";
 import TestAddCardComponent from "./TestAddCardComponent";
 

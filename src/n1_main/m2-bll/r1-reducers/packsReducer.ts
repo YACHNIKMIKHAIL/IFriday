@@ -1,5 +1,5 @@
-import {packsActions, packsActionsEnum, packsActionsTypes} from "./ActionsPacks";
-import {UpdatedType} from "./packsAPI";
+import {packsActions, packsActionsEnum, packsActionsTypes} from "../r2-actions/ActionsPacks";
+import {UpdatedType} from "../../m3-dal/packsAPI";
 
 export type PackType = {
     _id: string
