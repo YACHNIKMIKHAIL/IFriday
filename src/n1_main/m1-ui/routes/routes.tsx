@@ -6,7 +6,6 @@ import NewPassword from "../common/NewPassword";
 import Packs from "../common/Packs";
 import Login from "../common/Login";
 import PasswordRecovery from "../common/PasswordRecovery";
-import Logout from "../common/Logout";
 import Profile from "../common/Profile/Profile";
 import Cards from "../common/Cards";
 
@@ -20,7 +19,7 @@ export enum RoutesXPaths {
     CARDSWITHID = '/cards/:packId',
     SET_PASS = '/set-new-password/:token',
     NOT_FOUND = '/404',
-    LOGOUT = '/logout'
+    LOGOUT = '/logout',
 }
 
 const RoutesX = () => {
@@ -39,7 +38,7 @@ const RoutesX = () => {
                 <Route path={RoutesXPaths.PACKS} element={<Packs/>}/>
                 <Route path={RoutesXPaths.CARDS} element={<Cards/>}/>
                 <Route path={RoutesXPaths.CARDSWITHID} element={<Cards/>}/>
-                <Route path={RoutesXPaths.LOGOUT} element={<Logout/>}/>
+                <Route path={RoutesXPaths.CARDSWITHID} element={<Cards/>}/>
                 <Route path={RoutesXPaths.NOT_FOUND}
                        element={<h1 style={{textAlign: 'center'}}>404:PAGE NOT FOUND</h1>}/>
                 <Route path={'*'} element={<Navigate to={RoutesXPaths.NOT_FOUND}/>}/>
