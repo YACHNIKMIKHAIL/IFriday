@@ -24,25 +24,25 @@ const TestAddCardComponent = ({setNewCard,packId}: TestAddCardComponentType) => 
 
     return (
         <div className={s.addItemContainer}>
-            <div>
                 <h2>
                     Add new card:
                 </h2>
-                <div className={s.addPackInput}>
+                <div className={s.questionContainer}>
                     <span>
                     Question:
                     </span>
                     <input type="text" value={question} onChange={(e) => setQuestion(e.currentTarget.value)}/>
-                </div>
             </div>
-            <div className={s.makePrivate}>
+            <div className={s.answerContainer}>
                 <span>
                 Answer:
                     </span>
                 <input type="text" value={answer} onChange={(e) => setAnswer(e.currentTarget.value)}/>
             </div>
+            <div className={s.buttonsContainer}>
             <button onClick={addNewCard}>Add</button>
             <button onClick={turnBach}>Cancel</button>
+            </div>
         </div>
     );
 };

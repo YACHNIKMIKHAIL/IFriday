@@ -42,12 +42,12 @@ const CardsList = ({name, user_id}: CardsListType) => {
         <div className={style.cardsListBlock}>
             {!newCard
                 ? (<div className={style.cardsList}>
-                    <div style={{display: 'flex'}}>
-                        <h2 className={style.title} style={{color: '&#129040'}}> Pack Name: {name}</h2>
-                        <input placeholder={"Search..."} value={cardSearchName} onChange={searchCard}/>
+                    <div className={style.searchContainer}>
+                        <h2> Pack Name: {name}</h2>
+                        <input
+                            placeholder={"Search..."} value={cardSearchName} onChange={searchCard}/>
                         {myId === user_id ?
                             <button
-                                className={style.buttonSearch}
                                 onClick={() => setNewCard(true)}>
                                 Add New Card
                             </button>

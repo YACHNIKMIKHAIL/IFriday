@@ -47,7 +47,7 @@ const PacksList = () => {
     useEffect(() => {
         dispatch(packsTC())
     }, [debouncedSearch[0], debouncedSelect[0], debouncedMIN[0], debouncedMAX[0], debouncedPackOnPage[0],
-        debouncedPageChanged[0],debouncedPageUpdateFiler[0]])
+        debouncedPageChanged[0], debouncedPageUpdateFiler[0]])
 
     return (
         <div>
@@ -79,7 +79,7 @@ const PacksList = () => {
                                 {/*}*/}
                                 <div>
                                     <h2 className={style.title}>Pack list</h2>
-                                    <div style={{display:'flex'}}>
+                                    <div className={style.searchContainer}>
                                         <input placeholder={"Search..."}
                                                value={packsState.packName}
                                                onChange={onChangeSearchInput}/>

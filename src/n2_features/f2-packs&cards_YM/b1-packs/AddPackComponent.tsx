@@ -36,7 +36,7 @@ const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
                     <input type="text" value={newPack} onChange={(e) => seNewPack(e.currentTarget.value)}/>
                 </div>
             </div>
-            <div className={s.makePrivate}>
+            <div className={s.answerContainer}>
                 <span>
                 Make private:
                     </span>

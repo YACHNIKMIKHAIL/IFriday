@@ -4,7 +4,6 @@ import {instance} from "../../n2_features/instance";
 
 export const packsAPI = {
     async setPacks(packName: string, min: number, max: number, updated: UpdatedType, page: number, pageCount: number, user_id: string | null) {
-        debugger
         return await instance.get<InitialCardPacksType,
             AxiosResponse<InitialCardPacksType>, {
             packName: string, min: number, max: number, updated: UpdatedType, page: number, pageCount: number, user_id: string
