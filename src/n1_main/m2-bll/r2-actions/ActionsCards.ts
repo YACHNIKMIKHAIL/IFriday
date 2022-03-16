@@ -3,7 +3,8 @@ import {CardType} from "../r1-reducers/cardsReducer";
 export enum cardsActionsEnum {
     SET_CARDS = 'SET_CARDS',
     PAGE='PAGE',
-    pageCount='pageCount'
+    pageCount='pageCount',
+    searchCard='searchCard',
 }
 
 export type cardsActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
@@ -27,7 +28,12 @@ export const cardsActions = {
         payload: {pageCount}
     } as const
     },
-
+    searchCardAC: (e: string) => {
+        return {
+            type: cardsActionsEnum.searchCard,
+            payload: {e}
+        } as const
+    },
 }
 
 export type CardsType  = {

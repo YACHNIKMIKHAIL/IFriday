@@ -16,15 +16,15 @@ const Cards = () => {
     const location = useLocation()
     const [searchParams, setSearchParams] = useSearchParams()
 
-
     useEffect(() => {
-        setSearchParams({cardsPath: location.pathname})
+        setSearchParams({pathCards: location.pathname})
         if (packId) {
             dispatch(cardsTC(packId))
         }
-    }, [searchParams,location])
-    console.log(searchParams.get('cardsPath'))
-    console.log(location)
+    }, [searchParams])
+
+    console.log(searchParams.get('pathCards'))
+    console.log(location.pathname)
 
     if (!isLoggedIn) {
         return <Navigate to={RoutesXPaths.LOGIN}/>

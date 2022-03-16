@@ -24,7 +24,7 @@ export type InitialCardsType = {
     cardQuestion: string
     sortCards: UpdatedType
 }
-const initialCards: InitialCardsType  = {
+const initialCards: InitialCardsType = {
     cards: [
         {
             answer: '',
@@ -52,13 +52,16 @@ export type cardsReducerActionType = ReturnType<cardsActionsTypes<typeof cardsAc
 export const cardsReducer = (state = initialCards, action: cardsReducerActionType): InitialCardsType => {
     switch (action.type) {
         case cardsActionsEnum.SET_CARDS: {
-            return {...state,...action.payload.state}
+            return {...state, ...action.payload.state}
         }
         case cardsActionsEnum.pageCount: {
-            return {...state,pageCount:action.payload.pageCount}
+            return {...state, pageCount: action.payload.pageCount}
         }
         case cardsActionsEnum.PAGE: {
-            return {...state,page:action.payload.page}
+            return {...state, page: action.payload.page}
+        }
+        case cardsActionsEnum.searchCard: {
+            return {...state, cardQuestion: action.payload.e}
         }
         default:
             return state

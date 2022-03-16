@@ -10,9 +10,11 @@ const Packs = () => {
     const [searchParams, setSearchParams] = useSearchParams()
 
     useEffect(() => {
-        setSearchParams({packsPath: location.pathname})
+        setSearchParams({pathPacks: location.pathname})
     }, [searchParams])
-    console.log(searchParams.get('packsPath'))
+    console.log(searchParams.get('pathPacks'))
+    console.log(location.pathname)
+
 
     if (!isLoggedIn) {
         return <Navigate to={RoutesXPaths.LOGIN}/>
