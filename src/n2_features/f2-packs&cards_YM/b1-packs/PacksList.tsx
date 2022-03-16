@@ -71,23 +71,25 @@ const PacksList = () => {
                                 </div>
                             </div>
                             <div className={style.packsList}>
-                                {globalError
-                                    ? <h2 style={{color: 'red'}}>{globalError}</h2>
-                                    : <h2 className={style.title}>Pack list</h2>
-                                }
+                                {/*{globalError*/}
+                                {/*    ? <h2 style={{color: 'red'}}>{globalError}</h2>*/}
+                                {/*    : <h2 className={style.title}>Pack list</h2>*/}
+                                {/*}*/}
                                 <div>
-                                    <input placeholder={"Search..."}
-                                           value={packsState.packName}
-                                           onChange={onChangeSearchInput}
-                                    />
-                                    <button
-                                        className={style.buttonSearch}
-                                        onClick={() => setAddPack(!addPack)}
-                                    >
-                                        Add New
-                                    </button>
+                                    <h2 className={style.title}>Pack list</h2>
+                                    <div style={{display:'flex'}}>
+                                        <input placeholder={"Search..."}
+                                               value={packsState.packName}
+                                               onChange={onChangeSearchInput}
+                                        />
+                                        <button
+                                            className={style.buttonSearch}
+                                            onClick={() => setAddPack(!addPack)}
+                                        >
+                                            Add New
+                                        </button>
+                                    </div>
                                 </div>
-
                                 <div className={style.cardsBlock}>
                                     <TableHeader/>
                                     {

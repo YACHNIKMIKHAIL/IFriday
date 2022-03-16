@@ -75,6 +75,7 @@
     font-weight: 700;
     -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
     transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    margin:5px
 
 }
 

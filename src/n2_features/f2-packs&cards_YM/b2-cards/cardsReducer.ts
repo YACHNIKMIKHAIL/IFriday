@@ -42,8 +42,8 @@ const initialCards: InitialCardsType  = {
     cardsTotalCount: 0,
     maxGrade: 0,
     minGrade: 0,
-    page: 0,
-    pageCount: 0,
+    page: 1,
+    pageCount: 10,
     cardAnswer: '',
     cardQuestion: '',
     sortCards: '0updated'
@@ -54,6 +54,12 @@ export const cardsReducer = (state = initialCards, action: cardsReducerActionTyp
     switch (action.type) {
         case cardsActionsEnum.SET_CARDS: {
             return {...state,...action.payload.state}
+        }
+        case cardsActionsEnum.pageCount: {
+            return {...state,pageCount:action.payload.pageCount}
+        }
+        case cardsActionsEnum.PAGE: {
+            return {...state,page:action.payload.page}
         }
         default:
             return state

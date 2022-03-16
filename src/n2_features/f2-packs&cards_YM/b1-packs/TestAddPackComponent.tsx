@@ -8,7 +8,6 @@ type TestAddPackComponentType = {
 }
 const TestAddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
     const dispatch = useDispatch()
-
     const [newPack, seNewPack] = useState<string>('')
     const [newPackPrivate, setNewPackPrivate] = useState<boolean>(false)
     const pack = {
@@ -18,6 +17,9 @@ const TestAddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
     }
     const addNewPack = () => {
         dispatch(addNewPacksTC(pack))
+        setAddPack(false)
+    }
+    const turnBach = () => {
         setAddPack(false)
     }
 
@@ -41,6 +43,7 @@ const TestAddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
                 <input type="checkbox" onChange={(e) => setNewPackPrivate(e.currentTarget.checked)}/>
             </div>
             <button onClick={addNewPack}>Add</button>
+            <button onClick={turnBach}>Cancel</button>
         </div>
     );
 };
