@@ -15,12 +15,16 @@ function AppSerge() {
     const dispatch = useDispatch()
     const initialized = useFridaySelector<boolean>(state => state.me.isInitialized)
 
+
     useEffect(() => {
         dispatch(meTC())
     }, [])
+
+
     if (!initialized) {
         return <Preloader status={status}/>
     }
+
     return (
         <div className="App">
             <HashRouter>

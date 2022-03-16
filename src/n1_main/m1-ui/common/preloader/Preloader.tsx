@@ -3,7 +3,6 @@ import preloader from "../../assets/preloader/preloader.gif"
 import {RequestStatusType} from "../../../m2-bll/r1-reducers/app-reducer";
 
 
-
 type PreloaderType = {
     status: RequestStatusType
 }

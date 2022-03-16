@@ -6,7 +6,6 @@ import {useFridaySelector} from "../../m2-bll/store";
 
 const Links = () => {
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
-
     if (!isLoggedIn) {
         return <div className={s.main}><></></div>
     }

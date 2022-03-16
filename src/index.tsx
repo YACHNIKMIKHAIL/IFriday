@@ -23,7 +23,7 @@ ReactDOM.render(
     // <React.StrictMode>
     <ThemeProvider theme={theme}>
         <Provider store={store}>
-            <AppSerge/>
+                <AppSerge/>
         </Provider>
     </ThemeProvider>,
     //</React.StrictMode>

@@ -1,8 +1,8 @@
 
 
-export const loadToken = () => {
+export const loadPath = () => {
     try {
-        const serializedToken = localStorage.getItem('token');
+        const serializedToken = localStorage.getItem('path');
         if (serializedToken === null) {
             return undefined;
         }
@@ -12,10 +12,10 @@ export const loadToken = () => {
     }
 };
 
-export const saveToken = (token: string|null ) => {
+export const savePath = (path: string|null ) => {
     try {
-        const serializedToken = JSON.stringify(token);
-        localStorage.setItem('token', serializedToken);
+        const serializedToken = JSON.stringify(path);
+        localStorage.setItem('path', serializedToken);
     } catch {
 
     }

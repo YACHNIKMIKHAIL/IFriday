@@ -24,6 +24,8 @@ export enum RoutesXPaths {
 }
 
 const RoutesX = () => {
+
+
     return (
         <div style={{height:'100vh'}}>
             <Routes>

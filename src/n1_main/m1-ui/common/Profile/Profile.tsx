@@ -13,7 +13,6 @@ import {ProfileNameSpan} from "./ProfileNameSpan";
 export const BASE_IMG_URL = "https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg"
 
 const Profile = () => {
-
     const userInfo = useFridaySelector<UserDataType | meRespType>(state => state.profile.profile)
     const errorMessage = useFridaySelector<string>(state => state.profile.error)
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
@@ -52,6 +51,7 @@ const Profile = () => {
     }
 
 
+
     return (
         <div className={s.profilePage}>
 
@@ -77,7 +77,6 @@ const Profile = () => {
                             />
                     }
                 </div>
-
 
 
             </div>

@@ -14,6 +14,7 @@ const Logout = () => {
         dispatch(logoutUserTC())
     }
 
+
     if (!isLoggedIn) {
         return <Navigate to={RoutesXPaths.LOGIN}/>
     }

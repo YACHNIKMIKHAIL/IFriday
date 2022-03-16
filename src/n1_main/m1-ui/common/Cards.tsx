@@ -13,7 +13,6 @@ const Cards = () => {
     const {packId} = useParams<'packId'>();
     const actualPack = useFridaySelector<PackType[]>(state => state.packs.cardPacks.filter(f => f._id === packId))[0]
 
-
     useEffect(() => {
         if(packId) {
             dispatch(cardsTC(packId))
