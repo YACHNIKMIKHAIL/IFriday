@@ -9,6 +9,7 @@ const TableCardsHeader=()=>{
             <li>Answer</li>
             <li>Updated</li>
             <li>Grade</li>
+            <li>Actions</li>
 
 
         </div>

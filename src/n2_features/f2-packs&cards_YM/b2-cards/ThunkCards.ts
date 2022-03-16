@@ -52,8 +52,9 @@ export const addNewCardTC = (question: string, answer: string, packId: string): 
 export const deleteCardTC = (cardId: string): FridayThunkType => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
+        debugger
         let res = await cardsAPI.deleteCard(cardId)
-        dispatch(cardsTC(res.data.cardsPack_id))
+        dispatch(cardsTC(res.data.deletedCard.cardsPack_id))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
