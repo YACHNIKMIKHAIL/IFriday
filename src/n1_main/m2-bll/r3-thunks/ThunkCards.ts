@@ -37,7 +37,6 @@ export const addNewCardTC = (question: string, answer: string, packId: string): 
 
     dispatch(setAppStatusAC("loading"))
     try {
-        debugger
         await cardsAPI.addCard(newCard)
         dispatch(cardsTC(packId))
         dispatch(setAppStatusAC("succeeded"))
@@ -52,7 +51,6 @@ export const addNewCardTC = (question: string, answer: string, packId: string): 
 export const deleteCardTC = (cardId: string): FridayThunkType => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
-        debugger
         let res = await cardsAPI.deleteCard(cardId)
         dispatch(cardsTC(res.data.deletedCard.cardsPack_id))
         dispatch(setAppStatusAC("succeeded"))
@@ -71,7 +69,6 @@ export type UpdatedCardType = {
     comments: string
 }
 export const updateCardTC = (updatedCard: UpdatedCardType): FridayThunkType => async (dispatch) => {
-   debugger
     dispatch(setAppStatusAC("loading"))
     try {
         let res = await cardsAPI.updateCard(updatedCard)
