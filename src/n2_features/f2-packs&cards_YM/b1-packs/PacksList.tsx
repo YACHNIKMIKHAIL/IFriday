@@ -24,14 +24,14 @@ const PacksList = () => {
     const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
     const packs = useFridaySelector<PackType[]>(state => state.packs.cardPacks)
     const debouncedSearch = useDebounce<string>(packsState.packName, 1000)
-    const debouncedSelect = useDebounce<'MY' | 'ALL'>(selected, 1000)
+    const debouncedSelect = useDebounce<'MY' | 'ALL'>(selected, 200)
     const debouncedMIN = useDebounce<number>(packsState.minCardsCount, 1000)
     const debouncedMAX = useDebounce<number>(packsState.maxCardsCount, 1000)
-    const debouncedPackOnPage = useDebounce<number>(packsState.pageCount, 1000)
-    const debouncedPageChanged = useDebounce<number>(packsState.page, 1000)
+    const debouncedPackOnPage = useDebounce<number>(packsState.pageCount, 500)
+    const debouncedPageChanged = useDebounce<number>(packsState.page, 0)
     const debouncedPageUpdateFiler = useDebounce<UpdatedType>(packsState.updated, 0)
     const globalError = useFridaySelector<string>(state => state.app.globalError)
-    console.log(packs[0].name)
+
     const selectMyOrAll = (value: string | null) => {
         dispatch(packsActions.allMyAC(value))
         value ? setSelected('MY') : setSelected('ALL')

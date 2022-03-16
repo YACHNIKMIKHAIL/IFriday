@@ -9,7 +9,7 @@ export const packsAPI = {
             AxiosResponse<InitialCardPacksType>, {
             packName: string, min: number, max: number, updated: UpdatedType, page: number, pageCount: number, user_id: string
         }>
-        (`/cards/pack`, {params: {packName, min, max, updated, page, pageCount, user_id}})
+        (`/cards/pack`, {params: {packName, min, max, sortPacks:updated, page, pageCount, user_id}})
     },
     async addNewPack(newPack: newPackType) {
         return await instance.post<PackType,
