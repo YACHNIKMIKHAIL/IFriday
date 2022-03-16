@@ -45,3 +45,32 @@
     padding-bottom: 10px;
     color: #333
 }
+
+.buttonSearch {
+    margin-left: 30px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #4f74cb;
+    border-radius: 0.6em;
+    color: #4f74cb;
+    cursor: pointer;
+    line-height: 1;
+    font-size: large;
+    padding: .5em 1.5em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.packsList button:hover {
+    color: #fff;
+    outline: 0;
+    box-shadow: 0 0 40px 40px #4f74cb inset;
+}

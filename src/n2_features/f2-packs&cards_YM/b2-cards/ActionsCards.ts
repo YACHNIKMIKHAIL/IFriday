@@ -37,5 +37,5 @@ export type CardsType  = {
     minGrade: number
     page: number
     pageCount: number
-    packUserId: string
+    cardsPack_id: string
 }

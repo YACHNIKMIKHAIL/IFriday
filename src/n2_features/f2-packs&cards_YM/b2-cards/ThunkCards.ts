@@ -37,8 +37,9 @@ export const addNewCardTC = (question: string, answer: string, packId: string): 
 
     dispatch(setAppStatusAC("loading"))
     try {
-        let res = await cardsAPI.addCard(newCard)
-        dispatch(cardsTC(res.data.packUserId))
+        debugger
+        await cardsAPI.addCard(newCard)
+        dispatch(cardsTC(packId))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
@@ -52,7 +53,7 @@ export const deleteCardTC = (cardId: string): FridayThunkType => async (dispatch
     dispatch(setAppStatusAC("loading"))
     try {
         let res = await cardsAPI.deleteCard(cardId)
-        dispatch(cardsTC(res.data.packUserId))
+        dispatch(cardsTC(res.data.cardsPack_id))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
@@ -72,7 +73,7 @@ export const updateCardTC = (updatedCard: UpdatedCardType): FridayThunkType => a
     dispatch(setAppStatusAC("loading"))
     try {
         let res = await cardsAPI.updateCard(updatedCard)
-        dispatch(cardsTC(res.data.packUserId))
+        dispatch(cardsTC(res.data.cardsPack_id))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))

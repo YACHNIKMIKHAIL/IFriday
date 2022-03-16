@@ -80,12 +80,10 @@ const PacksList = () => {
                                     <div style={{display:'flex'}}>
                                         <input placeholder={"Search..."}
                                                value={packsState.packName}
-                                               onChange={onChangeSearchInput}
-                                        />
+                                               onChange={onChangeSearchInput}/>
                                         <button
                                             className={style.buttonSearch}
-                                            onClick={() => setAddPack(!addPack)}
-                                        >
+                                            onClick={() => setAddPack(!addPack)}>
                                             Add New
                                         </button>
                                     </div>
