@@ -71,10 +71,11 @@ export type UpdatedCardType = {
     comments: string
 }
 export const updateCardTC = (updatedCard: UpdatedCardType): FridayThunkType => async (dispatch) => {
+   debugger
     dispatch(setAppStatusAC("loading"))
     try {
         let res = await cardsAPI.updateCard(updatedCard)
-        dispatch(cardsTC(res.data.cardsPack_id))
+        dispatch(cardsTC(res.data.updatedCard.cardsPack_id))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))

@@ -13,17 +13,17 @@ import TestAddCardComponent from "./TestAddCardComponent";
 
 type CardsListType = {
     name: string
+    user_id:string
 }
-const CardsList = ({name}: CardsListType) => {
+const CardsList = ({name,user_id}: CardsListType) => {
     const dispatch = useDispatch()
     const {packId} = useParams<'packId'>();
     const [newCard, setNewCard] = useState<boolean>(false)
     const cards = useFridaySelector<CardType[]>(state => state.cards.cards)
+    const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const cardsState = useFridaySelector<InitialCardsType>(state => state.cards)
     const debouncedCardsOnPage = useDebounce<number>(cardsState.pageCount, 1000)
     const debouncedPageCardsChanged = useDebounce<number>(cardsState.page, 1000)
-    console.log(newCard)
-
     useEffect(() => {
         if (packId) {
             dispatch(cardsTC(packId))
@@ -33,18 +33,21 @@ const CardsList = ({name}: CardsListType) => {
     return (
         <div className={style.cardsListBlock}>
             {!newCard
-            ?( <div className={style.cardsList}>
+                ? (<div className={style.cardsList}>
                     <div style={{display: 'flex'}}>
                         <h2 className={style.title} style={{color: '&#129040'}}> Pack Name: {name}</h2>
                         <input placeholder={"Search..."}/>
-                        <button
-                            className={style.buttonSearch}
-                            onClick={() => setNewCard(true)}>
-                            Add New Card
-                        </button>
+                        {myId===user_id ?
+                            <button
+                                className={style.buttonSearch}
+                                onClick={() => setNewCard(true)}>
+                                Add New Card
+                            </button>
+                            : <></>}
+
                     </div>
                     <div className={style.cardsBlock}>
-                        <TableCardsHeader/>
+                        <TableCardsHeader user_id={user_id}/>
                         {cards?.map((m, i) => {
                             // return <TableCards key={i} cards={m}/>
                             return <CardComponent key={i} c={m}/>
@@ -52,12 +55,11 @@ const CardsList = ({name}: CardsListType) => {
                         <TablesCardsPagination/>
                     </div>
                 </div>)
-            :(
-                <div>
-                    <TestAddCardComponent packId={packId} setNewCard={setNewCard}/>
-                </div>
+                : (
+                    <div>
+                        <TestAddCardComponent packId={packId} setNewCard={setNewCard}/>
+                    </div>
                 )}
-
 
 
         </div>

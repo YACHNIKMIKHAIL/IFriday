@@ -20,7 +20,6 @@ export type InitialCardsType = {
     minGrade: number
     page: number
     pageCount: number
-    // packUserId: string
     cardAnswer: string
     cardQuestion: string
     sortCards: UpdatedType
