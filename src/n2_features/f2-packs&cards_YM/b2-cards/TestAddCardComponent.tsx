@@ -30,9 +30,9 @@ const TestAddCardComponent = ({setNewCard, packId}: TestAddCardComponentType) =>
                 Add new card:
             </h2>
             <div className={s.questionContainer}>
-                    <span>
-                        Question:
-                    </span>
+                <span>
+                    Question:
+                </span>
                 <input
                     type="text"
                     value={question}

@@ -4,6 +4,8 @@ import {Rating} from "@material-ui/core";
 import {deleteCardTC, updateCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
+import {Button, IconButton} from "@mui/material";
+import {Delete} from "@material-ui/icons";
 
 const styles = {
     main: {
@@ -14,7 +16,7 @@ const styles = {
         borderRadius: '20px',
         border: '2px grey solid'
     },
-    okoshko: {
+    window: {
         width: '25%',
         display: 'flex',
         justifyContent: 'space-around',
@@ -49,44 +51,58 @@ const CardComponent = ({c}: CardComponentType) => {
         const updatedCard = {
             _id: c._id,
             question: q,
-            comments: ''
+            comments: '',
         }
         dispatch(updateCardTC(updatedCard))
         setEditCard(false)
     }
 
-    return (<div style={styles.main} onDoubleClick={() => setLearn(!learn)}>
-            <div style={styles.okoshko}>
+    return (
+        <div style={styles.main} onDoubleClick={() => setLearn(!learn)}>
+            <div style={styles.window}>
                 {
                     editCard
                         ? <input type="text" value={q} onChange={(e) => setQ(e.currentTarget.value)}/>
-                        : <span>{c.question}</span>}
+                        : <span>{c.question}</span>
+                }
             </div>
-            <div style={styles.okoshko}>
+            <div style={styles.window}>
                 {c.answer}
             </div>
             <div style={styles.updated}>
-                {c.updated}</div>
-            <div style={styles.okoshko}>
-                <Rating name="read-only" value={c.grade} readOnly size='small'/>
+                {c.updated}
             </div>
-            {myId === c.user_id &&
-            <>
-                {
-                    !editCard
-                        ? (<>
-                                <button onClick={() => setLearn(true)}>learn</button>
-                                <button onClick={deleteCard}>delete</button>
-                                <button onClick={() => setEditCard(true)}>edit</button>
-                            </>
-                        ) : (<>
-                            <button onClick={saveCard}>save</button>
-                            <button onClick={() => setEditCard(false)}>cancel</button>
-                        </>)
-                }
-            </>}
+            <div style={styles.window}>
+                <Rating
+                    name="read-only"
+                    value={c.grade}
+                    readOnly size='small'
+                />
+            </div>
+            {
+                myId === c.user_id &&
+                <>
+                    {
+                        !editCard
+                            ? (
+                                <>
+                                    <Button size="small" onClick={() => setLearn(true)}>learn</Button>
+                                    <Button size="small" onClick={() => setEditCard(true)}>edit</Button>
+                                    <IconButton onClick={deleteCard} aria-label="delete">
+                                        <Delete/>
+                                    </IconButton>
+                                </>
+                            ) : (
+                                <>
+                                    <Button size="small" onClick={saveCard}>save</Button>
+                                    <Button size="small" onClick={() => setEditCard(false)}>cancel</Button>
+                                </>
+                            )
+                    }
+                </>
+            }
         </div>
-    );
-};
+    )
+}
 
-export default CardComponent;
+export default CardComponent

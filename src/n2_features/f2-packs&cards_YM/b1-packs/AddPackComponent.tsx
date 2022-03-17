@@ -38,17 +38,27 @@ const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
                     <span>
                         Name pack
                     </span>
-                    <input type="text" value={newPack} onChange={(e) => seNewPack(e.currentTarget.value)}/>
+                    <input
+                        type="text"
+                        value={newPack}
+                        onChange={(e) => seNewPack(e.currentTarget.value)}
+                    />
                 </div>
             </div>
             <div className={s.answerContainer}>
                 <span>
                     Make private:
                 </span>
-                <input type="checkbox" onChange={(e) => setNewPackPrivate(e.currentTarget.checked)}/>
+                <input
+                    type="checkbox"
+                    onChange={(e) => setNewPackPrivate(e.currentTarget.checked)}
+                />
             </div>
-            <button onClick={addNewPack}>Add</button>
-            <button onClick={turnBach}>Cancel</button>
+            <div>
+                <button onClick={addNewPack}>Add</button>
+                <button onClick={turnBach}>Cancel</button>
+            </div>
+
         </div>
     )
 }

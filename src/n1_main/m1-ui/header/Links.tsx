@@ -7,15 +7,18 @@ import {useFridaySelector} from "../../m2-bll/store";
 const Links = () => {
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
     if (!isLoggedIn) {
-        return <div className={s.main}><></></div>
+        return <div className={s.main}><></>
+        </div>
     }
 
     return (
         <div className={s.main}>
-            <><NavLink to={RoutesXPaths.PROFILE}
-                       className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
-                       style={{textDecoration: 'none'}}
-            >Profile</NavLink></>
+            <>
+                <NavLink to={RoutesXPaths.PROFILE}
+                         className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
+                         style={{textDecoration: 'none'}}
+                >Profile</NavLink>
+            </>
 
             {/*<><NavLink to={RoutesXPaths.REGISTER}*/}
             {/*           className={({isActive}) => (isActive ? s.activeR : '')}*/}
@@ -37,18 +40,24 @@ const Links = () => {
             {/*           style={{textDecoration: 'none'}}*/}
             {/*>NewPassword</NavLink></>*/}
 
-            <><NavLink to={RoutesXPaths.PACKS}
-                       className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
-                       style={{textDecoration: 'none'}}
-            >Packs</NavLink></>
-            <><NavLink to={RoutesXPaths.CARDS}
-                       className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
-                       style={{textDecoration: 'none'}}
-            >Cards</NavLink></>
-            <><NavLink to={RoutesXPaths.LOGOUT}
-                       className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
-                       style={{textDecoration: 'none'}}
-            >Logout</NavLink></>
+            <>
+                <NavLink to={RoutesXPaths.PACKS}
+                         className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
+                         style={{textDecoration: 'none'}}
+                >Packs</NavLink>
+            </>
+            <>
+                <NavLink to={RoutesXPaths.CARDS}
+                         className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
+                         style={{textDecoration: 'none'}}
+                >Cards</NavLink>
+            </>
+            <>
+                <NavLink to={RoutesXPaths.LOGOUT}
+                         className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
+                         style={{textDecoration: 'none'}}
+                >Logout</NavLink>
+            </>
         </div>
     );
 };
