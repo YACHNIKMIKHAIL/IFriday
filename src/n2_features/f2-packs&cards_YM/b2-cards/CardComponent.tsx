@@ -47,12 +47,12 @@ const CardComponent = ({c}: CardComponentType) => {
         dispatch(deleteCardTC(c._id))
     }
 
+    const updatedCard = {
+        _id: c._id,
+        question: q,
+        comments: '',
+    }
     const saveCard = () => {
-        const updatedCard = {
-            _id: c._id,
-            question: q,
-            comments: '',
-        }
         dispatch(updateCardTC(updatedCard))
         setEditCard(false)
     }
@@ -62,7 +62,7 @@ const CardComponent = ({c}: CardComponentType) => {
             <div style={styles.window}>
                 {
                     editCard
-                        ? <input onBlur={() => setEditCard(false)} autoFocus type="text" value={q}
+                        ? <input onBlur={saveCard} autoFocus type="text" value={q}
                                  onChange={(e) => setQ(e.currentTarget.value)}/>
                         : <span onDoubleClick={() => setEditCard(true)}>{c.question}</span>
                 }
