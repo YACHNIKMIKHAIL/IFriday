@@ -5,13 +5,12 @@ import {
 } from "../r1-reducers/RegisterAndRecoveryPassReducer";
 
 export enum RegisterAndRecoveryPassReducer {
-    REGISTER_USER = 'REGISTER_USER',
-    SET_ERROR_REGISTER = 'SET_ERROR_REGISTER',
-    SET_INFO_RECOVERY_PASS = 'SET_INFO_RECOVERY_PASS',
-    SET_INFO_NEW_PASS = 'SET_INFO_NEW_PASS',
-    SET_NEW_ERROR = 'SET_NEW_ERROR',
+    REGISTER_USER = 'CARDS/REGISTER_AND_RECOVERY/REGISTER_USER',
+    SET_ERROR_REGISTER = 'CARDS/REGISTER_AND_RECOVERY/SET_ERROR_REGISTER',
+    SET_INFO_RECOVERY_PASS = 'CARDS/REGISTER_AND_RECOVERY/SET_INFO_RECOVERY_PASS',
+    SET_INFO_NEW_PASS = 'CARDS/REGISTER_AND_RECOVERY/SET_INFO_NEW_PASS',
+    SET_NEW_ERROR = 'CARDS/REGISTER_AND_RECOVERY/SET_NEW_ERROR',
 }
-
 
 export type RegisterAndRecoveryPassReducerActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
 
@@ -39,8 +38,7 @@ export const registerAndRecoveryPassActions = {
             type: RegisterAndRecoveryPassReducer.SET_INFO_NEW_PASS,
             payload: {data}
         } as const
-    }
-    ,
+    },
     setNewErrorAC: (e: string) => {
         return {
             type: RegisterAndRecoveryPassReducer.SET_NEW_ERROR,

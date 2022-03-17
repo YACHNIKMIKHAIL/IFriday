@@ -30,7 +30,7 @@ export const packsAPI = {
             cardsPack: UpdatedPackType
         }>
         (`/cards/pack`, {cardsPack: updatedPack})
-    }
+    },
 }
 
 export type UpdatedType = '0updated' | '1updated'

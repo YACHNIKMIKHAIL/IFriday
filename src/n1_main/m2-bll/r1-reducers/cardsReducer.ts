@@ -54,13 +54,13 @@ export const cardsReducer = (state = initialCards, action: cardsReducerActionTyp
         case cardsActionsEnum.SET_CARDS: {
             return {...state, ...action.payload.state}
         }
-        case cardsActionsEnum.pageCount: {
+        case cardsActionsEnum.PAGE_COUNT: {
             return {...state, pageCount: action.payload.pageCount}
         }
         case cardsActionsEnum.PAGE: {
             return {...state, page: action.payload.page}
         }
-        case cardsActionsEnum.searchCard: {
+        case cardsActionsEnum.SEARCH_CARDS: {
             return {...state, cardQuestion: action.payload.e}
         }
         default:

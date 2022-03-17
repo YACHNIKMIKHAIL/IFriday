@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from "axios";
+import {AxiosResponse} from "axios";
 import {UserDataType} from "../m2-bll/r2-actions/ActionLoginForm";
 import {instance} from "../../n2_features/instance";
 

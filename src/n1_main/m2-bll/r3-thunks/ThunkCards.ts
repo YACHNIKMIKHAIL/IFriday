@@ -22,7 +22,7 @@ export const cardsTC = (id: string) => {
     };
 }
 
-export const addNewCardTC = (question: string, answer: string, packId: string): FridayThunkType => async (dispatch) => {
+export const addNewCardTC = (question: string, answer: string, packId: string): FridayThunkType => async (dispatch: any) => {
     const newCard = {
         cardsPack_id: packId,
         question: question,
@@ -48,7 +48,7 @@ export const addNewCardTC = (question: string, answer: string, packId: string): 
     }
 }
 
-export const deleteCardTC = (cardId: string): FridayThunkType => async (dispatch) => {
+export const deleteCardTC = (cardId: string): FridayThunkType => async (dispatch: any) => {
     dispatch(setAppStatusAC("loading"))
     try {
         let res = await cardsAPI.deleteCard(cardId)
@@ -62,13 +62,12 @@ export const deleteCardTC = (cardId: string): FridayThunkType => async (dispatch
     }
 }
 
-
 export type UpdatedCardType = {
     _id: string
     question: string
     comments: string
 }
-export const updateCardTC = (updatedCard: UpdatedCardType): FridayThunkType => async (dispatch) => {
+export const updateCardTC = (updatedCard: UpdatedCardType): FridayThunkType => async (dispatch: any) => {
     dispatch(setAppStatusAC("loading"))
     try {
         let res = await cardsAPI.updateCard(updatedCard)

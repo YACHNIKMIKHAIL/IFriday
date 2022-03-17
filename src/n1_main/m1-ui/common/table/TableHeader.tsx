@@ -1,8 +1,7 @@
 import React, {useState} from "react";
-import s from "./TableHeader.module.css"
+import style from "./TableHeader.module.css"
 import {useDispatch} from "react-redux";
 import {packsActions} from "../../../m2-bll/r2-actions/ActionsPacks";
-
 
 const TableHeader = () => {
 
@@ -20,7 +19,7 @@ const TableHeader = () => {
     }
 
     return (
-        <div className={s.tableHeader}>
+        <div className={style.tableHeader}>
             <li>Name</li>
             <li>Cards</li>
             <li>Last Update
@@ -31,8 +30,8 @@ const TableHeader = () => {
             </li>
             <li>Created by</li>
             <li>Actions</li>
-
         </div>
     )
 }
-export default TableHeader;
+
+export default TableHeader

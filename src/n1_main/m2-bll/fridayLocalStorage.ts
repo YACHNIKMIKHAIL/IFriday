@@ -1,5 +1,3 @@
-
-
 export const loadPath = () => {
     try {
         const serializedToken = localStorage.getItem('path');
@@ -10,7 +8,7 @@ export const loadPath = () => {
     } catch (err) {
         return undefined;
     }
-};
+}
 
 export const savePath = (path: string|null ) => {
     try {
@@ -19,4 +17,4 @@ export const savePath = (path: string|null ) => {
     } catch {
 
     }
-};
+}

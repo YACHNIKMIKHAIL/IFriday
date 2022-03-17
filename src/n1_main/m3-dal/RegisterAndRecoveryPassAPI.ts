@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from "axios";
+import {AxiosResponse} from "axios";
 import {registerStateType} from "../m2-bll/r1-reducers/RegisterAndRecoveryPassReducer";
 import {instance} from "../../n2_features/instance";
 
@@ -22,11 +22,13 @@ link</a>
             AxiosResponse<SetNewResponseType>, newPassBodyType>(`/auth/set-new-password`, body)
     }
 }
+
+//types=================
 type ForgotResponseType = {
-    info: string,
-    success: boolean,
-    answer: boolean,
-    html: boolean,
+    info: string
+    success: boolean
+    answer: boolean
+    html: boolean
 }
 export type newPassBodyType = {
     password: string
@@ -34,5 +36,5 @@ export type newPassBodyType = {
 }
 type SetNewResponseType = {
     info: string
-    error: string;
+    error: string
 }

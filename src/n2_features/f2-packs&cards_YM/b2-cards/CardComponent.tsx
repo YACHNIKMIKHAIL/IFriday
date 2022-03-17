@@ -62,8 +62,9 @@ const CardComponent = ({c}: CardComponentType) => {
             <div style={styles.window}>
                 {
                     editCard
-                        ? <input type="text" value={q} onChange={(e) => setQ(e.currentTarget.value)}/>
-                        : <span>{c.question}</span>
+                        ? <input onBlur={() => setEditCard(false)} autoFocus type="text" value={q}
+                                 onChange={(e) => setQ(e.currentTarget.value)}/>
+                        : <span onDoubleClick={() => setEditCard(true)}>{c.question}</span>
                 }
             </div>
             <div style={styles.window}>
