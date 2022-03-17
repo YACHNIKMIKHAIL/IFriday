@@ -64,13 +64,13 @@ const PacksList = () => {
                                     Show packs cards
                                 </h4>
                                 <button
-                                    className={selected === "MY" ? style.selected : ""}
+                                    className={selected === "MY" ? style.selected : style.hoverSelected}
                                     onClick={() => selectMyOrAll(myId)}
                                 >
                                     My
                                 </button>
                                 <button
-                                    className={selected === "ALL" ? style.selected : ""}
+                                    className={selected === "ALL" ? style.selected :  style.hoverSelected}
                                     onClick={() => selectMyOrAll(null)}
                                 >
                                     All
@@ -115,8 +115,9 @@ const PacksList = () => {
                                             )
                                         })
                                     }
-                                    <TablesPagination/>
+
                                 </div>
+                                <TablesPagination/>
                             </div>
 
                         </div>

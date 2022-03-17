@@ -32,8 +32,11 @@
     background-color: #899de5;
 }
 
-.selected:hover {
-    background-color: #607bef;
+/*.selected:hover {*/
+/*    background-color: #607bef;*/
+/*}*/
+.hoverSelected:hover {
+    background-color:hsla(360, 0%, 83%, 1);
 }
 
 .packsList {
@@ -48,12 +51,7 @@
     background: #f3f0f0;
 }
 
-.packsList input {
-    width: 60%;
-    height: 35px;
-    border-radius: 0.6em;
 
-}
 
 .searchContainer {
     display: flex;
@@ -61,7 +59,12 @@
     justify-content: space-between;
     align-items: flex-start;
 }
+.searchContainer input {
+    width: 60%;
+    height: 35px;
+    border-radius: 0.6em;
 
+}
 .buttonSearch {
     margin-left: 30px;
     box-sizing: border-box;
@@ -91,11 +94,6 @@
     box-shadow: 0 0 40px 40px #4f74cb inset;
 }
 
-.packsList button:hover {
-    color: #fff;
-    outline: 0;
-    box-shadow: 0 0 40px 40px #4f74cb inset;
-}
 
 .cardsBlock {
     width: 100%;
