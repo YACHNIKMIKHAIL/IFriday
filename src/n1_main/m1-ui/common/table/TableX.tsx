@@ -42,7 +42,12 @@ const TableX = ({p}: TableType) => {
     )
 }
 
-const TableRow = ({arr}: any) => {
+const TableRow = ({arr, status = true}: any) => {
+    const [edit, setEdit] = useState<boolean>(false)
+    const [newPackName, setNewPackName] = useState<string>('')
+    const myId = useFridaySelector<string>(state => state.profile.profile._id)
+    const dispatch = useDispatch()
+
     const {
         Name,
         Cards,
@@ -52,14 +57,24 @@ const TableRow = ({arr}: any) => {
         _id,
         user_id
     } = arr
-
+    const saveChanges = () => {
+        setEdit(false)
+        dispatch(changePacksTC(newPackName, _id))
+    }
     return (
         <div className={s.tableRow}>
-            <TableCell item={Name}/>
+            {myId === user_id && edit ? <input type={"text"}
+                                               onChange={({target}) => setNewPackName(target.value)}
+                                               autoFocus value={newPackName}
+                                               className={s.input}/> : <TableCell item={Name}/>}
             <TableCell item={Cards}/>
             <TableCell item={LastUpd}/>
             <TableCell item={CreatedBy}/>
-            <TableCell status={true} item={Actions} _id={_id} user_id={user_id}/>
+            <TableCell item={Actions} _id={_id} user_id={user_id}/>
+            {
+                status &&
+                <ButtonGroup _id={_id} user_id={user_id} edit={edit} setEdit={setEdit} saveChanges={saveChanges}/>
+            }
         </div>
     )
 }
@@ -77,14 +92,8 @@ const TableCell = ({item, status, _id, user_id}: any) => {
 
     return (
         <div className={s.tableCell}>
-            {
-                edit
-                    ? <input
-                        value={newPackName}
-                        onChange={({target}) => setNewPackName(target.value)}
-                        type="text"/>
-                    : <>{item}</>
-            }
+
+                   <>{item}</>
             {
                 status &&
                 <ButtonGroup _id={_id} user_id={user_id} edit={edit} setEdit={setEdit} saveChanges={saveChanges}/>

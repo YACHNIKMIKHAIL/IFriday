@@ -15,6 +15,12 @@
     background-color: #b5d2fc;
 }
 
+.input {
+    margin-left: 5px;
+    border: none;
+    border-bottom: 1px #726d6f solid;
+}
+
 .tableCell {
     display: flex;
     justify-content: center;
@@ -29,10 +35,11 @@
     font-size: 14px;
 }
 
-.BtnContainer{
+.BtnContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     text-align: center;
+
 }
 
