@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {registerStateType} from "../m2-bll/r1-reducers/RegisterAndRecoveryPassReducer";
-import {instance} from "../../n2_features/instance";
+import {instance} from "./instance";
 
 export const registerAndRecoveryPassAPI = {
     async registerMe(body: { email: string, password: string }) {
