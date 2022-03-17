@@ -8,7 +8,6 @@ export const packsTC = () => async (dispatch: Dispatch, getState: () => fridayRe
     const {packName, minCardsCount, maxCardsCount, updated, page, pageCount, user_id} = getState().packs
     dispatch(setAppStatusAC("loading"))
     try {
-        debugger
         let res = await packsAPI.setPacks(packName, minCardsCount, maxCardsCount, updated, page, pageCount, user_id)
         dispatch(packsActions.setPacksAC(res.data))
         dispatch(setAppStatusAC("succeeded"))

@@ -6,12 +6,12 @@ import {RoutesXPaths} from "../routes/routes";
 
 const Packs = () => {
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
-    const location = useLocation()
-    const [searchParams, setSearchParams] = useSearchParams()
-
-    useEffect(() => {
-        setSearchParams({pathPacks: location.pathname})
-    }, [searchParams])
+    // const location = useLocation()
+    // const [searchParams, setSearchParams] = useSearchParams()
+    //
+    // useEffect(() => {
+    //     setSearchParams({...Object.fromEntries(searchParams), pathPacks: location.pathname})
+    // }, [searchParams])
 
 
     if (!isLoggedIn) {
