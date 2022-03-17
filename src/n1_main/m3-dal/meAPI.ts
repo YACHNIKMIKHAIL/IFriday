@@ -1,5 +1,5 @@
 import {AxiosResponse} from "axios";
-import {instance} from "../../n2_features/instance";
+import { instance } from "./instance";
 
 export const meAPI = {
     async me() {

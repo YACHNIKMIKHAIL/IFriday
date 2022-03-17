@@ -14,12 +14,12 @@ const TableCardsHeader = ({user_id}: TCHType) => {
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
 
     const getNewCard = () => {
-        dispatch(cardsActions.updateFilterCardAC('1updated'))
+        dispatch(cardsActions.updateFilterCardAC('1grade'))
         setLastUpd(true)
     }
 
     const getOldCard = () => {
-        dispatch(cardsActions.updateFilterCardAC('0updated'))
+        dispatch(cardsActions.updateFilterCardAC('0grade'))
         setLastUpd(false)
     }
 
@@ -30,8 +30,8 @@ const TableCardsHeader = ({user_id}: TCHType) => {
             <li>Last Updated
                 {
                     lastUpd
-                        ? <button onClick={getNewCard}>{`old ᐃ`}</button>
-                        : <button onClick={getOldCard}>{`new ᐁ`}</button>
+                        ? <button onClick={getOldCard}>{`new ᐃ`}</button>
+                        : <button onClick={getNewCard}>{`old ᐁ`}</button>
                 }
             </li>
             <li>Grade</li>

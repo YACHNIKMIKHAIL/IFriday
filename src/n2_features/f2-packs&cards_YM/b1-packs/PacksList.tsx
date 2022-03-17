@@ -30,12 +30,11 @@ const PacksList = () => {
 
     const debouncedSearch = useDebounce<string>(packsState.packName, 1000)
     const debouncedSelect = useDebounce<'MY' | 'ALL'>(selected, 200)
-    const debouncedMIN = useDebounce<number>(packsState.minCardsCount, 1000)
-    const debouncedMAX = useDebounce<number>(packsState.maxCardsCount, 1000)
+    const debouncedMIN = useDebounce<number>(packsState.minCardsCount, 1200)
+    const debouncedMAX = useDebounce<number>(packsState.maxCardsCount, 1200)
     const debouncedPackOnPage = useDebounce<number>(packsState.pageCount, 500)
-    const debouncedPageChanged = useDebounce<number>(packsState.page, 0)
+    const debouncedPageChanged = useDebounce<number>(packsState.page, 1)
     const debouncedPageUpdateFiler = useDebounce<UpdatedType>(packsState.updated, 0)
-
     const selectMyOrAll = (value: string | null) => {
         dispatch(packsActions.allMyAC(value))
         value ? setSelected('MY') : setSelected('ALL')
@@ -47,7 +46,6 @@ const PacksList = () => {
     const runToCards = (packId: string) => {
         navigate(`${RoutesXPaths.CARDS}/${packId}`)
     }
-    console.log(debouncedPageUpdateFiler[0])
     useEffect(() => {
         dispatch(packsTC())
     }, [debouncedSearch[0], debouncedSelect[0], debouncedMIN[0], debouncedMAX[0], debouncedPackOnPage[0],
@@ -70,7 +68,7 @@ const PacksList = () => {
                                     My
                                 </button>
                                 <button
-                                    className={selected === "ALL" ? style.selected :  style.hoverSelected}
+                                    className={selected === "ALL" ? style.selected : style.hoverSelected}
                                     onClick={() => selectMyOrAll(null)}
                                 >
                                     All
@@ -115,11 +113,9 @@ const PacksList = () => {
                                             )
                                         })
                                     }
-
+                                    <TablesPagination/>
                                 </div>
-                                <TablesPagination/>
                             </div>
-
                         </div>
                     ) : (
                         <div>

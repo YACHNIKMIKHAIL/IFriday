@@ -1,5 +1,5 @@
 import {CardType} from "../r1-reducers/cardsReducer";
-import {UpdatedType} from "../../m3-dal/packsAPI";
+import {UpdatedCardsType} from "../../m3-dal/cardsAPI";
 
 export enum cardsActionsEnum {
     SET_CARDS = 'CARDS/CARDS/SET_CARDS',
@@ -36,7 +36,7 @@ export const cardsActions = {
             payload: {e}
         } as const
     },
-    updateFilterCardAC: (updated: UpdatedType) => {
+    updateFilterCardAC: (updated: UpdatedCardsType) => {
         return {
             type: cardsActionsEnum.UPDATE_CARDS,
             payload: {updated}

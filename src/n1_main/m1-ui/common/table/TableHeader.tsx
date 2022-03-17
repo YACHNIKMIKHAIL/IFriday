@@ -24,8 +24,8 @@ const TableHeader = () => {
             <li>Cards</li>
             <li>Last Updated
                 {lastUpd
-                    ? <button onClick={getOld}>{`old ᐃ`}</button>
-                    : <button onClick={getNew}>{`new ᐁ`}</button>
+                    ? <button onClick={getOld}>{`new ᐃ`}</button>
+                    : <button onClick={getNew}>{`old ᐁ`}</button>
                 }
             </li>
             <li>Created by</li>

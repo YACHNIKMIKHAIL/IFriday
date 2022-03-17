@@ -11,6 +11,7 @@ import {cardsTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import {useParams} from "react-router-dom";
 import TestAddCardComponent from "./TestAddCardComponent";
 import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
+import {UpdatedCardsType} from "../../../n1_main/m3-dal/cardsAPI";
 
 type CardsListType = {
     name: string
@@ -31,6 +32,7 @@ const CardsList = ({name, user_id}: CardsListType) => {
     const debouncedPageCardsChanged = useDebounce<number>(cardsState.page, 1000)
     const debouncedSearchCardQ = useDebounce<string>(cardsState.cardQuestion, 1000)
     const debouncedSearchCardA = useDebounce<string>(cardsState.cardAnswer, 1000)
+    const debouncedSearchlastUpdated = useDebounce<UpdatedCardsType>(cardsState.sortCards, 0)
 
     const searchCard = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(cardsActions.searchCardAC(e.currentTarget.value))
@@ -40,7 +42,7 @@ const CardsList = ({name, user_id}: CardsListType) => {
         if (packId) {
             dispatch(cardsTC(packId))
         }
-    }, [debouncedCardsOnPage[0], debouncedPageCardsChanged[0], debouncedSearchCardQ[0], debouncedSearchCardA[0]])
+    }, [debouncedCardsOnPage[0], debouncedPageCardsChanged[0], debouncedSearchCardQ[0], debouncedSearchCardA[0], debouncedSearchlastUpdated[0]])
 
     return (
         <div className={style.cardsListBlock}>

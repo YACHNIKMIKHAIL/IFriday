@@ -2,26 +2,31 @@ import * as React from 'react';
 import TablePagination from '@mui/material/TablePagination';
 import {useDispatch} from "react-redux";
 import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
+import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 
 const TablesCardsPagination = () => {
-
     const dispatch = useDispatch()
+    const actualCardsPage = useFridaySelector<number>(state => state.cards.page)
+    const actualCardsCount = useFridaySelector<number>(state => state.cards.pageCount)
 
-    const [page, setPage] = React.useState<number>(1);
-    const [rowsPerPage, setRowsPerPage] = React.useState<number>(10);
+    const [page, setPage] = React.useState<number>(actualCardsPage);
 
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
         newPage: number,
     ) => {
-        setPage(newPage)
-        dispatch(cardsActions.cardsPageAC(newPage))
+        if (newPage === page) {
+            setPage(page + 1)
+            dispatch(cardsActions.cardsPageAC(newPage + 1))
+        } else if (newPage < page) {
+            setPage(page - 1)
+            dispatch(cardsActions.cardsPageAC(newPage + 1))
+        }
     }
 
     const handleChangeRowsPerPage = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
         dispatch(cardsActions.cardsPageCountAC(parseInt(event.target.value)))
     }
@@ -30,9 +35,9 @@ const TablesCardsPagination = () => {
         <TablePagination
             component="div"
             count={100}
-            page={page}
+            page={page - 1}
             onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
+            rowsPerPage={actualCardsCount}
             onRowsPerPageChange={handleChangeRowsPerPage}
         />
     );
