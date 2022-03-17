@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Navigate, Route, Routes, useLocation, useParams, useSearchParams} from 'react-router-dom';
+import {Navigate, Route, Routes, useLocation, useSearchParams} from 'react-router-dom';
 import Register from "../common/Register";
 import NewPassword from "../common/NewPassword";
 import Packs from "../common/Packs";
@@ -23,17 +23,13 @@ export enum RoutesXPaths {
 }
 
 const RoutesX = () => {
-    const {packId} = useParams<'packId'>();
     const location = useLocation()
     const [searchParams, setSearchParams] = useSearchParams()
 
-
     useEffect(() => {
-        debugger
-            setSearchParams(location.hash =location.pathname.toString())
+        setSearchParams({variable: location.pathname})
     }, [searchParams])
-    console.log(location.hash)
-    console.log(location.pathname)
+
     return (
         <div style={{height: '100vh'}}>
             <Routes>
