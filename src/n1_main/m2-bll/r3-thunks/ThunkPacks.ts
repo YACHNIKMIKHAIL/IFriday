@@ -5,7 +5,7 @@ import {Dispatch} from "redux";
 import {packsActions} from "../r2-actions/ActionsPacks";
 
 export const packsTC = () => async (dispatch: Dispatch, getState: () => fridayReducerType) => {
-    const {packName, minCardsCount, maxCardsCount, updated, page, pageCount, user_id} = getState().packs
+    const {packName, minCardsCount, maxCardsCount, updated, page=0, pageCount, user_id} = getState().packs
     dispatch(setAppStatusAC("loading"))
     try {
         let res = await packsAPI.setPacks(packName, minCardsCount, maxCardsCount, updated, page, pageCount, user_id)

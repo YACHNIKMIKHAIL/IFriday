@@ -11,9 +11,7 @@ const TablesPagination = () => {
         event: React.MouseEvent<HTMLButtonElement> | null,
         newPage: number,
     ) => {
-        if (newPage === 1) {
-            setPage(2)
-        }else
+
         setPage(newPage);
         dispatch(packsActions.pageAC(newPage))
     };
@@ -26,7 +24,7 @@ const TablesPagination = () => {
     };
 
     return (
-        <>
+       <>
             <TablePagination
                 component="div"
                 count={100}
@@ -36,8 +34,8 @@ const TablesPagination = () => {
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
 
-            {page}
-        </>
+
+       </>
 
     );
 }
