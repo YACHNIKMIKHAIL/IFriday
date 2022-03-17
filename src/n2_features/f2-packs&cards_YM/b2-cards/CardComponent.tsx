@@ -55,33 +55,37 @@ const CardComponent = ({c}: CardComponentType) => {
         setEditCard(false)
     }
 
-    return (<div style={styles.main} onDoubleClick={()=>setLearn(!learn)}>
-                <div style={styles.okoshko}>
-                    {editCard ? <input type="text" value={q} onChange={(e) => setQ(e.currentTarget.value)}/>
+    return (<div style={styles.main} onDoubleClick={() => setLearn(!learn)}>
+            <div style={styles.okoshko}>
+                {
+                    editCard
+                        ? <input type="text" value={q} onChange={(e) => setQ(e.currentTarget.value)}/>
                         : <span>{c.question}</span>}
-                </div>
-                <div style={styles.okoshko}>
-                    {c.answer}
-                </div>
-                <div style={styles.updated}>
-                    {c.updated}</div>
-                <div style={styles.okoshko}>
-                    <Rating name="read-only" value={c.grade} readOnly size='small'/>
-                </div>
-                {myId === c.user_id &&
-                <>{!editCard
-                    ? <>
-                        <button onClick={() => setLearn(true)}>learn</button>
-                        <button onClick={deleteCard}>delete</button>
-                        <button onClick={() => setEditCard(true)}>edit</button>
-                    </>
-
-                    : <>
-                        <button onClick={saveCard}>save</button>
-                        <button onClick={() => setEditCard(false)}>cancel</button>
-                    </>}
-                </>}
             </div>
+            <div style={styles.okoshko}>
+                {c.answer}
+            </div>
+            <div style={styles.updated}>
+                {c.updated}</div>
+            <div style={styles.okoshko}>
+                <Rating name="read-only" value={c.grade} readOnly size='small'/>
+            </div>
+            {myId === c.user_id &&
+            <>
+                {
+                    !editCard
+                        ? (<>
+                                <button onClick={() => setLearn(true)}>learn</button>
+                                <button onClick={deleteCard}>delete</button>
+                                <button onClick={() => setEditCard(true)}>edit</button>
+                            </>
+                        ) : (<>
+                            <button onClick={saveCard}>save</button>
+                            <button onClick={() => setEditCard(false)}>cancel</button>
+                        </>)
+                }
+            </>}
+        </div>
     );
 };
 

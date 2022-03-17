@@ -16,13 +16,18 @@ import AddPackComponent from "./AddPackComponent";
 import {UpdatedType} from "../../../n1_main/m3-dal/packsAPI";
 
 const PacksList = () => {
+
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    const myId = useFridaySelector<string>(state => state.profile.profile._id)
+
     const [selected, setSelected] = useState<'MY' | 'ALL'>('ALL')
     const [addPack, setAddPack] = useState<boolean>(false)
+
+    const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
     const packs = useFridaySelector<PackType[]>(state => state.packs.cardPacks)
+    const globalError = useFridaySelector<string>(state => state.app.globalError)
+
     const debouncedSearch = useDebounce<string>(packsState.packName, 1000)
     const debouncedSelect = useDebounce<'MY' | 'ALL'>(selected, 200)
     const debouncedMIN = useDebounce<number>(packsState.minCardsCount, 1000)
@@ -30,7 +35,6 @@ const PacksList = () => {
     const debouncedPackOnPage = useDebounce<number>(packsState.pageCount, 500)
     const debouncedPageChanged = useDebounce<number>(packsState.page, 0)
     const debouncedPageUpdateFiler = useDebounce<UpdatedType>(packsState.updated, 0)
-    const globalError = useFridaySelector<string>(state => state.app.globalError)
 
     const selectMyOrAll = (value: string | null) => {
         dispatch(packsActions.allMyAC(value))
@@ -56,22 +60,31 @@ const PacksList = () => {
                     ? (<div className={style.packsListBlock}>
 
                             <div className={style.showPacks}>
-                                <h4 className={style.title}>Show packs cards</h4>
-                                <div className={style.blockContainer}>
-                                </div>
-                                <button className={selected === "MY" ? style.selected : ""}
-                                        onClick={() => selectMyOrAll(myId)}>My
+                                <h4 className={style.title}>
+                                    Show packs cards
+                                </h4>
+                                <button
+                                    className={selected === "MY" ? style.selected : ""}
+                                    onClick={() => selectMyOrAll(myId)}
+                                >
+                                    My
                                 </button>
-                                <button className={selected === "ALL" ? style.selected : ""}
-                                        onClick={() => selectMyOrAll(null)}>All
+                                <button
+                                    className={selected === "ALL" ? style.selected : ""}
+                                    onClick={() => selectMyOrAll(null)}
+                                >
+                                    All
                                 </button>
-                                <h4 className={style.title}>Number of cards</h4>
+                                <h4 className={style.title}>
+                                    Number of cards
+                                </h4>
                                 <DoubleRange/>
                                 <div className={style.rangeValue}>
                                     <div className={style.rangeValue__item}>min : {packsState.minCardsCount} </div>
                                     <div className={style.rangeValue__item}>max : {packsState.maxCardsCount}</div>
                                 </div>
                             </div>
+
                             <div className={style.packsList}>
                                 {/*{globalError*/}
                                 {/*    ? <h2 style={{color: 'red'}}>{globalError}</h2>*/}
@@ -85,7 +98,8 @@ const PacksList = () => {
                                                onChange={onChangeSearchInput}/>
                                         <button
                                             className={style.buttonSearch}
-                                            onClick={() => setAddPack(!addPack)}>
+                                            onClick={() => setAddPack(!addPack)}
+                                        >
                                             Add New
                                         </button>
                                     </div>
@@ -104,6 +118,7 @@ const PacksList = () => {
                                     <TablesPagination/>
                                 </div>
                             </div>
+
                         </div>
                     ) : (
                         <div>

@@ -17,9 +17,12 @@ type CardsListType = {
     user_id: string
 }
 const CardsList = ({name, user_id}: CardsListType) => {
+
     const dispatch = useDispatch()
+
     const {packId} = useParams<'packId'>();
     const [newCard, setNewCard] = useState<boolean>(false)
+
     const cards = useFridaySelector<CardType[]>(state => state.cards.cards)
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const cardsState = useFridaySelector<InitialCardsType>(state => state.cards)
@@ -28,6 +31,7 @@ const CardsList = ({name, user_id}: CardsListType) => {
     const debouncedPageCardsChanged = useDebounce<number>(cardsState.page, 1000)
     const debouncedSearchCardQ = useDebounce<string>(cardsState.cardQuestion, 1000)
     const debouncedSearchCardA = useDebounce<string>(cardsState.cardAnswer, 1000)
+
     const searchCard = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(cardsActions.searchCardAC(e.currentTarget.value))
     }
@@ -40,36 +44,41 @@ const CardsList = ({name, user_id}: CardsListType) => {
 
     return (
         <div className={style.cardsListBlock}>
-            {!newCard
-                ? (<div className={style.cardsList}>
-                    <div className={style.searchContainer}>
-                        <h2> Pack Name: {name}</h2>
-                        <input
-                            placeholder={"Search..."} value={cardSearchName} onChange={searchCard}/>
-                        {myId === user_id ?
-                            <button
-                                onClick={() => setNewCard(true)}>
-                                Add New Card
-                            </button>
-                            : <></>}
+            {
+                !newCard
+                    ? (<div className={style.cardsList}>
+                        <div className={style.searchContainer}>
+                            <h2> Pack Name: {name}</h2>
+                            <input
+                                placeholder={"Search..."}
+                                value={cardSearchName}
+                                onChange={searchCard}
+                            />
+                            {myId === user_id ?
+                                <button
+                                    onClick={() => setNewCard(true)}>
+                                    Add New Card
+                                </button>
+                                : <></>}
 
-                    </div>
-                    <div className={style.cardsBlock}>
-                        <TableCardsHeader user_id={user_id}/>
-                        {cards?.map((m, i) => {
-                            // return <TableCards key={i} cards={m}/>
-                            return <CardComponent key={i} c={m}/>
-                        })}
-                        <TablesCardsPagination/>
-                    </div>
-                </div>)
-                : (
-                    <div>
-                        <TestAddCardComponent packId={packId} setNewCard={setNewCard}/>
-                    </div>
-                )}
-
-
+                        </div>
+                        <div className={style.cardsBlock}>
+                            <TableCardsHeader user_id={user_id}/>
+                            {
+                                cards?.map((m, i) => {
+                                    // return <TableCards key={i} cards={m}/>
+                                    return <CardComponent key={i} c={m}/>
+                                })
+                            }
+                            <TablesCardsPagination/>
+                        </div>
+                    </div>)
+                    : (
+                        <div>
+                            <TestAddCardComponent packId={packId} setNewCard={setNewCard}/>
+                        </div>
+                    )
+            }
         </div>
     )
 }
