@@ -94,10 +94,10 @@ const CardComponent = ({c}: CardComponentType) => {
                                     </IconButton>
                                 </>
                             ) : (
-                                <>
+                                <div>
                                     <Button size="small" onClick={saveCard}>save</Button>
                                     <Button size="small" onClick={() => setEditCard(false)}>cancel</Button>
-                                </>
+                                </div>
                             )
                     }
                 </>

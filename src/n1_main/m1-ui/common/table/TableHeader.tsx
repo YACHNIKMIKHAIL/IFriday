@@ -22,7 +22,7 @@ const TableHeader = () => {
         <div className={style.tableHeader}>
             <li>Name</li>
             <li>Cards</li>
-            <li>Last Update
+            <li>Last Updated
                 {lastUpd
                     ? <button onClick={getOld}>{`old ᐃ`}</button>
                     : <button onClick={getNew}>{`new ᐁ`}</button>

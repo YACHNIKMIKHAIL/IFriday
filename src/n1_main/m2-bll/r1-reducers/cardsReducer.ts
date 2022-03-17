@@ -63,6 +63,9 @@ export const cardsReducer = (state = initialCards, action: cardsReducerActionTyp
         case cardsActionsEnum.SEARCH_CARDS: {
             return {...state, cardQuestion: action.payload.e}
         }
+        case cardsActionsEnum.UPDATE_CARDS : {
+            return {...state, sortCards : action.payload.updated}
+        }
         default:
             return state
     }

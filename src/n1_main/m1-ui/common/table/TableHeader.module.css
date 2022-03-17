@@ -1,5 +1,5 @@
-.tableHeader{
-    list-style-type : none;
+.tableHeader {
+    list-style-type: none;
     display: flex;
     justify-content: space-around;
     font-family: 'Montserrat', sans-serif;;
@@ -7,9 +7,10 @@
 }
 
 .tableHeader button {
-    background: white;
+    background: #a5add7;
     border: none;
     margin-left: 1px;
     border-radius: 2px;
     font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
 }

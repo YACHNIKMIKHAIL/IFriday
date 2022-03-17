@@ -64,10 +64,10 @@ export const packsReducer = (state = initialCardPacks, action: packsReducerActio
         case packsActionsEnum.PAGE : {
             return {...state, page: action.payload.page}
         }
-        case packsActionsEnum.pageCount : {
+        case packsActionsEnum.PAGE_PACKS_COUNT : {
             return {...state, pageCount: action.payload.pageCount}
         }
-        case packsActionsEnum.updated : {
+        case packsActionsEnum.PACKS_UPDATED : {
             return {...state, updated:action.payload.updated}
         }
         default:
