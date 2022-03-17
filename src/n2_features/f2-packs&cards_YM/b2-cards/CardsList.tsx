@@ -68,7 +68,6 @@ const CardsList = ({name, user_id}: CardsListType) => {
                             <TableCardsHeader user_id={user_id}/>
                             {
                                 cards?.map((m, i) => {
-                                    // return <TableCards key={i} cards={m}/>
                                     return <CardComponent key={i} c={m}/>
                                 })
                             }

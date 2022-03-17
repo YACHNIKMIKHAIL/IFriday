@@ -27,11 +27,13 @@ const RoutesX = () => {
     const location = useLocation()
     const [searchParams, setSearchParams] = useSearchParams()
 
-    console.log(searchParams.get('iii'))
-    useEffect(() => {
-            setSearchParams({ i:location.pathname})
-    }, [searchParams])
 
+    useEffect(() => {
+        debugger
+            setSearchParams(location.hash =location.pathname.toString())
+    }, [searchParams])
+    console.log(location.hash)
+    console.log(location.pathname)
     return (
         <div style={{height: '100vh'}}>
             <Routes>
