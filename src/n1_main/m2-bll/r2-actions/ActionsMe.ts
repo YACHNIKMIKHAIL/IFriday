@@ -1,6 +1,6 @@
 export enum meActions{
-    INITIALIZE_ME = 'INITIALIZE_ME',
-    SET_ME_ERROR = 'SET_ME_ERROR'
+    INITIALIZE_ME = 'CARDS/ME/INITIALIZE_ME',
+    SET_ME_ERROR = 'CARDS/ME/SET_ME_ERROR'
 }
 
 export type initializeMeACType = ReturnType<typeof initializeMeAC>

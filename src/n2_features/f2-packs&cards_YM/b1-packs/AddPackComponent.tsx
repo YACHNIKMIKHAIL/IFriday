@@ -7,18 +7,23 @@ type TestAddPackComponentType = {
     setAddPack: (v: boolean) => void
 }
 const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
+
     const dispatch = useDispatch()
+
     const [newPack, seNewPack] = useState<string>('')
     const [newPackPrivate, setNewPackPrivate] = useState<boolean>(false)
+
     const pack = {
         name: newPack,
         deckCover: '',
         private: newPackPrivate
     }
+
     const addNewPack = () => {
         dispatch(addNewPacksTC(pack))
         setAddPack(false)
     }
+
     const turnBach = () => {
         setAddPack(false)
     }
@@ -31,21 +36,31 @@ const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
                 </h2>
                 <div className={s.addPackInput}>
                     <span>
-                    Name pack
+                        Name pack
                     </span>
-                    <input type="text" value={newPack} onChange={(e) => seNewPack(e.currentTarget.value)}/>
+                    <input
+                        type="text"
+                        value={newPack}
+                        onChange={(e) => seNewPack(e.currentTarget.value)}
+                    />
                 </div>
             </div>
-            <div className={s.makePrivate}>
+            <div className={s.answerContainer}>
                 <span>
-                Make private:
-                    </span>
-                <input type="checkbox" onChange={(e) => setNewPackPrivate(e.currentTarget.checked)}/>
+                    Make private:
+                </span>
+                <input
+                    type="checkbox"
+                    onChange={(e) => setNewPackPrivate(e.currentTarget.checked)}
+                />
             </div>
-            <button onClick={addNewPack}>Add</button>
-            <button onClick={turnBach}>Cancel</button>
+            <div>
+                <button onClick={addNewPack}>Add</button>
+                <button onClick={turnBach}>Cancel</button>
+            </div>
+
         </div>
-    );
-};
+    )
+}
 
 export default AddPackComponent;

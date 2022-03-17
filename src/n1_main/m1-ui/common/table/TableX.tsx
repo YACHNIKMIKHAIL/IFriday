@@ -16,6 +16,7 @@ type TableType = {
 }
 
 const TableX = ({p}: TableType) => {
+
     const arr = [
         {
             Name: p.name,
@@ -39,7 +40,8 @@ const TableX = ({p}: TableType) => {
                     <Preloader status={"failed"}/>
                 </div>)
     )
-};
+}
+
 const TableRow = ({arr}: any) => {
     const {
         Name,
@@ -51,7 +53,6 @@ const TableRow = ({arr}: any) => {
         user_id
     } = arr
 
-
     return (
         <div className={s.tableRow}>
             <TableCell item={Name}/>
@@ -61,7 +62,8 @@ const TableRow = ({arr}: any) => {
             <TableCell status={true} item={Actions} _id={_id} user_id={user_id}/>
         </div>
     )
-};
+}
+
 const TableCell = ({item, status, _id, user_id}: any) => {
     const dispatch = useDispatch()
     const [newPackName, setNewPackName] = useState<string>('')
@@ -75,13 +77,17 @@ const TableCell = ({item, status, _id, user_id}: any) => {
 
     return (
         <div className={s.tableCell}>
-            {edit ? <input
-                    value={newPackName}
-                    onChange={({target}) => setNewPackName(target.value)}
-                    type="text"/>
-                : <>{item}</>}
-            {status &&
-            <ButtonGroup _id={_id} user_id={user_id} edit={edit} setEdit={setEdit} saveChanges={saveChanges}/>
+            {
+                edit
+                    ? <input
+                        value={newPackName}
+                        onChange={({target}) => setNewPackName(target.value)}
+                        type="text"/>
+                    : <>{item}</>
+            }
+            {
+                status &&
+                <ButtonGroup _id={_id} user_id={user_id} edit={edit} setEdit={setEdit} saveChanges={saveChanges}/>
             }
         </div>
     )
@@ -89,26 +95,31 @@ const TableCell = ({item, status, _id, user_id}: any) => {
 export default TableX;
 
 export const ButtonGroup = ({_id, user_id, edit, setEdit, saveChanges}: any) => {
-    const myId = useFridaySelector<string>(state => state.profile.profile._id)
+
     const dispatch = useDispatch()
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+
+    const myId = useFridaySelector<string>(state => state.profile.profile._id)
 
     const deletePack = (id: string) => {
         dispatch(deletePacksTC(id))
     }
 
-
     return (
         <div className={s.BtnContainer}>
             <Button size="small" onClick={() => navigate(`${RoutesXPaths.CARDS}/${_id}`)}>learn</Button>
             {
-                myId === user_id && <>{!edit
-                ? <Button size="small" onClick={() => setEdit(true)}>edit</Button>
-                : <Button size="small" onClick={saveChanges}>save</Button>}
-                <IconButton  onClick={() => deletePack(_id)} aria-label="delete">
-                    <Delete />
-                </IconButton>
-            </>
+                myId === user_id &&
+                <>
+                    {
+                        !edit
+                            ? <Button size="small" onClick={() => setEdit(true)}>edit</Button>
+                            : <Button size="small" onClick={saveChanges}>save</Button>
+                    }
+                    <IconButton onClick={() => deletePack(_id)} aria-label="delete">
+                        <Delete/>
+                    </IconButton>
+                </>
             }
         </div>
     )

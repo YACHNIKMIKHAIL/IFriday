@@ -19,7 +19,7 @@ const fridayReducer = combineReducers({
     app: appReducer,
     regForNewPass: registerAndRecoveryPassReducer,
     packs: packsReducer,
-    cards:cardsReducer
+    cards:cardsReducer,
 })
 
 export const useFridaySelector: TypedUseSelectorHook<fridayReducerType> = useSelector
