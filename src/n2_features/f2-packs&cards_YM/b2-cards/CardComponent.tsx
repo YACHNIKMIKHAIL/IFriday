@@ -61,7 +61,7 @@ const CardComponent = ({c}: CardComponentType) => {
         <div style={styles.main} onDoubleClick={() => setLearn(!learn)}>
             <div style={styles.window}>
                 {
-                    editCard
+                    editCard && c.user_id === myId
                         ? <input onBlur={saveCard} autoFocus type="text" value={q}
                                  onChange={(e) => setQ(e.currentTarget.value)}/>
                         : <span onDoubleClick={() => setEditCard(true)}>{c.question}</span>
