@@ -20,7 +20,6 @@ const TablesPagination = () => {
             setPage(page + 1)
             dispatch(packsActions.pageAC(newPage + 1))
         } else if (newPage < page) {
-            console.log('go down')
             setPage(page - 1)
             dispatch(packsActions.pageAC(newPage + 1))
         }

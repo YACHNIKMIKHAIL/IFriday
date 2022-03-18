@@ -3,8 +3,6 @@ import s from './Profile.module.css'
 import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../../m2-bll/store";
 import {updateUserNameTC} from "../../../m2-bll/r1-reducers/ProfileReducer";
-import {Navigate} from 'react-router-dom';
-import {RoutesXPaths} from "../../routes/routes";
 import {UserDataType} from "../../../m2-bll/r2-actions/ActionLoginForm";
 import {meRespType} from "../../../m3-dal/meAPI";
 import {ChangeNameInput} from "./ChangeNameInput";
@@ -45,12 +43,6 @@ const Profile = () => {
             setModification(!modification)
         }
     }
-
-    if (!isLoggedIn) {
-        return <Navigate to={RoutesXPaths.LOGIN}/>
-    }
-
-
 
     return (
         <div className={s.profilePage}>

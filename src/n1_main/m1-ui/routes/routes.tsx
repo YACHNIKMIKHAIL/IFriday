@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {Navigate, Route, Routes, useLocation, useSearchParams} from 'react-router-dom';
+import React from 'react';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import Register from "../common/Register";
 import NewPassword from "../common/NewPassword";
 import Packs from "../common/Packs";
@@ -23,12 +23,18 @@ export enum RoutesXPaths {
 }
 
 const RoutesX = () => {
-    const location = useLocation()
-    const [searchParams, setSearchParams] = useSearchParams()
 
-    useEffect(() => {
-        setSearchParams({variable: location.pathname})
-    }, [searchParams])
+    // const location = useLocation()
+    // // const [searchParams, setSearchParams] = useSearchParams()
+    // //
+    // // useEffect(() => {
+    // //     const path=location.pathname.toString()
+    // //     console.log(path)
+    // //     setSearchParams({variable: path})
+    // // }, [searchParams])
+    //
+    //     const path=location.pathname.toString()
+    //     console.log(path)
 
     return (
         <div style={{height: '100vh'}}>

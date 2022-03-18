@@ -8,7 +8,6 @@ import TablesCardsPagination from "./TablesCardsPagination";
 import {useDebounce} from "use-debounce";
 import {useDispatch} from "react-redux";
 import {cardsTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
-import {useParams} from "react-router-dom";
 import TestAddCardComponent from "./TestAddCardComponent";
 import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 import {UpdatedCardsType} from "../../../n1_main/m3-dal/cardsAPI";
@@ -16,12 +15,10 @@ import {UpdatedCardsType} from "../../../n1_main/m3-dal/cardsAPI";
 type CardsListType = {
     name: string
     user_id: string
+    packId:string|undefined
 }
-const CardsList = ({name, user_id}: CardsListType) => {
-
+const CardsList = ({name, user_id,packId}: CardsListType) => {
     const dispatch = useDispatch()
-
-    const {packId} = useParams<'packId'>();
     const [newCard, setNewCard] = useState<boolean>(false)
 
     const cards = useFridaySelector<CardType[]>(state => state.cards.cards)
@@ -39,10 +36,15 @@ const CardsList = ({name, user_id}: CardsListType) => {
     }
 
     useEffect(() => {
-        if (packId) {
+        if(packId) {
             dispatch(cardsTC(packId))
         }
-    }, [debouncedCardsOnPage[0], debouncedPageCardsChanged[0], debouncedSearchCardQ[0], debouncedSearchCardA[0], debouncedSearchlastUpdated[0]])
+    }, [debouncedCardsOnPage[0],
+        debouncedPageCardsChanged[0],
+        debouncedSearchCardQ[0],
+        debouncedSearchCardA[0],
+        debouncedSearchlastUpdated[0]
+    ])
 
     return (
         <div className={style.cardsListBlock}>

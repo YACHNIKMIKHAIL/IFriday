@@ -29,7 +29,6 @@ function AppSerge() {
         <div className="App">
             <HashRouter>
                 <>
-                    <Preloader status={status}/>
                     <Main/>
                     <RoutesX/>
                 </>
