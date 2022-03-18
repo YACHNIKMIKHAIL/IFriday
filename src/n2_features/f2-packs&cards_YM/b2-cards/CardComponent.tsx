@@ -56,7 +56,6 @@ const CardComponent = ({c}: CardComponentType) => {
         dispatch(updateCardTC(updatedCard))
         setEditCard(false)
     }
-
     return (
         <div style={styles.main} onDoubleClick={() => setLearn(!learn)}>
             <div style={styles.window}>
