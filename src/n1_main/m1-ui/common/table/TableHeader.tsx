@@ -7,21 +7,35 @@ const TableHeader = () => {
 
     const dispatch = useDispatch()
     const [lastUpd, setLastUpd] = useState<boolean>(false)
+    const [cardsCountUpd, setCardsCountUpd] = useState<boolean>(false)
 
     const getNew = () => {
         dispatch(packsActions.updateFilterAC('1updated'))
         setLastUpd(true)
     }
-
     const getOld = () => {
         dispatch(packsActions.updateFilterAC('0updated'))
         setLastUpd(false)
     }
 
+    const getFew = () => {
+        dispatch(packsActions.updateFilterAC('1cardsCount'))
+        setCardsCountUpd(true)
+    }
+    const getMore = () => {
+        dispatch(packsActions.updateFilterAC('0cardsCount'))
+        setCardsCountUpd(false)
+    }
+
     return (
         <div className={style.tableHeader}>
             <li>Name</li>
-            <li>Cards</li>
+            <li>Cards
+                {cardsCountUpd
+                    ? <button onClick={getMore}>{`many ᐃ`}</button>
+                    : <button onClick={getFew}>{`few ᐁ`}</button>
+                }
+            </li>
             <li>Last Updated
                 {lastUpd
                     ? <button onClick={getOld}>{`new ᐃ`}</button>

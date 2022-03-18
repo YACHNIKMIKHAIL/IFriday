@@ -13,7 +13,6 @@ export const BASE_IMG_URL = "https://upload.wikimedia.org/wikipedia/commons/4/49
 const Profile = () => {
     const userInfo = useFridaySelector<UserDataType | meRespType>(state => state.profile.profile)
     const errorMessage = useFridaySelector<string>(state => state.profile.error)
-    const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
     const dispatch = useDispatch()
 
     let [name, setName] = useState<string>(userInfo.name)
