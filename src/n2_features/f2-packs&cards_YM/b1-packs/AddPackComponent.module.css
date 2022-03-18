@@ -14,6 +14,7 @@
     box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
 }
 
+
 .addItemContainer h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
@@ -21,19 +22,19 @@
     margin-bottom: 20px;
 }
 
-.questionContainer {
+.centerInputContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.questionContainer span {
+.centerInputContainer span {
     font-family: 'Montserrat', sans-serif;
     color: #726d6f;
 }
 
-.questionContainer input {
+.centerInputContainer input {
     width: 80%;
     min-height: 30px;
     border: none;
@@ -45,29 +46,18 @@
     margin-bottom: 10px;
 }
 
-.answerContainer {
+
+.makePrivateContainer {
     width: 80%;
-    text-align: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
 }
 
-.answerContainer span {
+.makePrivateContainer span {
     font-family: 'Montserrat', sans-serif;
     color: #726d6f;
-}
-
-.answerContainer input {
-    width: 80%;
-    min-height: 30px;
-    border: none;
-    border-bottom: 1px solid #5f7271;
-    outline:none;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 10px;
 }
 
 .addItemContainer button {

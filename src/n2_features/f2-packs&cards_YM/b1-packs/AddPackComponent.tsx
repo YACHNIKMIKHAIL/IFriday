@@ -30,11 +30,10 @@ const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
 
     return (
         <div className={s.addItemContainer}>
-            <div>
                 <h2>
                     Add new pack:
                 </h2>
-                <div className={s.addPackInput}>
+                <div className={s.centerInputContainer}>
                     <span>
                         Name pack
                     </span>
@@ -44,8 +43,8 @@ const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
                         onChange={(e) => seNewPack(e.currentTarget.value)}
                     />
                 </div>
-            </div>
-            <div className={s.answerContainer}>
+
+            <div className={s.makePrivateContainer}>
                 <span>
                     Make private:
                 </span>
@@ -55,8 +54,8 @@ const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
                 />
             </div>
             <div>
-                <button onClick={addNewPack}>Add</button>
                 <button onClick={turnBach}>Cancel</button>
+                <button onClick={addNewPack}>Add</button>
             </div>
 
         </div>

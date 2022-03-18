@@ -1,7 +1,12 @@
 .tableHeader {
     list-style-type: none;
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr 1fr 1.5fr;
+    grid-template-rows: 1fr;
+    gap: 0em 0px;
+    grid-template-areas:
+    ". . . . .";
+    text-align: center;
     font-family: 'Montserrat', sans-serif;;
     background-color: #d6dcea;
 }

@@ -126,4 +126,4 @@ const PacksList = () => {
     )
 }
 
-export default PacksList
+export default PacksList;
