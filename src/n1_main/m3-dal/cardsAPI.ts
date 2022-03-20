@@ -21,6 +21,9 @@ export const cardsAPI = {
     async updateCard(updatedCard: UpdatedCardType) {
         return await instance.put(`/cards/card`, {card: updatedCard})
     },
+    async gradeCard(grade: number,card_id: string) {
+        return await instance.put(`/cards/grade`, {grade,card_id})
+    },
 }
 export type UpdatedCardsType = '0grade' | '1grade'
 type addCardType = {
@@ -33,4 +36,12 @@ type addCardType = {
     questionImg: string
     questionVideo: string
     answerVideo: string
+}
+export type UpdatedGradeType= {
+    _id: string
+    cardsPack_id: string
+    card_id: string
+    user_id: string
+    grade: number
+    shots: number
 }

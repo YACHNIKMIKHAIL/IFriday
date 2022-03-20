@@ -80,3 +80,18 @@ export const updateCardTC = (updatedCard: UpdatedCardType): FridayThunkType => a
         dispatch(setAppStatusAC("idle"))
     }
 }
+
+export const gradeCardTC = (grade: number,card_id: string): FridayThunkType => async (dispatch: any) => {
+    debugger
+    dispatch(setAppStatusAC("loading"))
+    try {
+        let res = await cardsAPI.gradeCard(grade,card_id)
+        dispatch(cardsActions.gradeCardAC(res.data.updatedGrade))
+        dispatch(setAppStatusAC("succeeded"))
+    } catch (e: any) {
+        dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
+        dispatch(setAppStatusAC("failed"))
+    } finally {
+        dispatch(setAppStatusAC("idle"))
+    }
+}

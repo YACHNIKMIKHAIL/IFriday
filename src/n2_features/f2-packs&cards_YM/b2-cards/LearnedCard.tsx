@@ -4,9 +4,13 @@ import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {CardType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
 import {PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
+import {useDispatch} from "react-redux";
+import {gradeCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 
 
 const LearnedCard = () => {
+    const dispatch = useDispatch()
+
     const navigate = useNavigate()
     const {cardId} = useParams<'cardId'>();
     const [showAnswer, setShowAnswer] = useState<boolean>(false)
@@ -14,6 +18,14 @@ const LearnedCard = () => {
     const learnedCard = useFridaySelector<CardType>(state => state.cards.cards.filter(f => f._id === cardId)[0])
     const packName = useFridaySelector<string>(state => state.packs.cardPacks.filter(f => f._id === learnedCard.cardsPack_id)[0].name)
 
+    console.log(learnedCard.grade)
+    console.log(cardRate)
+
+    const nextCard = () => {
+        if(cardRate) {
+            dispatch(gradeCardTC(cardRate, learnedCard._id))
+        }
+    }
     return (
         <div style={{borderRadius: '10px', backgroundColor: 'white'}}>
             <div>
@@ -58,8 +70,7 @@ const LearnedCard = () => {
                 <button onClick={() => navigate(RoutesXPaths.CARDS_WITH_ID)}>Cancel</button>
                 {!showAnswer
                     ? <button onClick={() => setShowAnswer(!showAnswer)}>Show answer</button>
-                    : <button onClick={() => {
-                    }}>Next card</button>
+                    : <button onClick={nextCard}>Next card</button>
                 }
 
             </div>

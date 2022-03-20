@@ -1,5 +1,5 @@
 import {CardType} from "../r1-reducers/cardsReducer";
-import {UpdatedCardsType} from "../../m3-dal/cardsAPI";
+import {UpdatedCardsType, UpdatedGradeType} from "../../m3-dal/cardsAPI";
 
 export enum cardsActionsEnum {
     SET_CARDS = 'CARDS/CARDS/SET_CARDS',
@@ -7,6 +7,7 @@ export enum cardsActionsEnum {
     PAGE_COUNT = 'CARDS/CARDS/PAGE_COUNT',
     SEARCH_CARDS = 'CARDS/CARDS/SEARCH_CARDS',
     UPDATE_CARDS = 'CARDS/CARDS/UPDATE_CARDS',
+    GRADE_CARD = 'CARDS/CARDS/GRADE_CARD',
 }
 
 export type cardsActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
@@ -40,6 +41,12 @@ export const cardsActions = {
         return {
             type: cardsActionsEnum.UPDATE_CARDS,
             payload: {updated}
+        } as const
+    },
+    gradeCardAC: (updatedCard: UpdatedGradeType) => {
+        return {
+            type: cardsActionsEnum.GRADE_CARD,
+            payload: {updatedCard}
         } as const
     },
 }
