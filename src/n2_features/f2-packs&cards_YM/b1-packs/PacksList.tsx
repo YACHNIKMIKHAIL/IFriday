@@ -13,7 +13,6 @@ import {useDebounce} from "use-debounce";
 import TableX from "../../../n1_main/m1-ui/common/table/TableX";
 import TableHeader from "../../../n1_main/m1-ui/common/table/TableHeader";
 import AddPackComponent from "./AddPackComponent";
-import {UpdatedType} from "../../../n1_main/m3-dal/packsAPI";
 
 const PacksList = () => {
 
@@ -29,12 +28,8 @@ const PacksList = () => {
     const globalError = useFridaySelector<string>(state => state.app.globalError)
 
     const debouncedSearch = useDebounce<string>(packsState.packName, 1000)
-    const debouncedSelect = useDebounce<'MY' | 'ALL'>(selected, 200)
-    const debouncedMIN = useDebounce<number>(packsState.minCardsCount, 1200)
-    const debouncedMAX = useDebounce<number>(packsState.maxCardsCount, 1200)
-    const debouncedPackOnPage = useDebounce<number>(packsState.pageCount, 500)
-    const debouncedPageChanged = useDebounce<number>(packsState.page, 1)
-    const debouncedPageUpdateFiler = useDebounce<UpdatedType>(packsState.updated, 0)
+    const debouncedMIN = useDebounce<number>(packsState.minCardsCount, 1000)
+    const debouncedMAX = useDebounce<number>(packsState.maxCardsCount, 1000)
 
     const selectMyOrAll = (value: string | null) => {
         dispatch(packsActions.allMyAC(value))
@@ -45,12 +40,18 @@ const PacksList = () => {
     }
 
     const runToCards = (packId: string) => {
+        dispatch(packsActions.allMyAC(''))
+        dispatch(packsActions.searchAC(''))
+        dispatch(packsActions.pageAC(1))
+        dispatch(packsActions.minAC(0))
+        dispatch(packsActions.maxAC(100))
+
         navigate(`${RoutesXPaths.CARDS}/${packId}`)
     }
     useEffect(() => {
         dispatch(packsTC())
-    }, [debouncedSearch[0], debouncedSelect[0], debouncedMIN[0], debouncedMAX[0], debouncedPackOnPage[0],
-        debouncedPageChanged[0], debouncedPageUpdateFiler[0]])
+    }, [debouncedSearch[0], packsState.user_id, debouncedMIN[0], debouncedMAX[0], packsState.pageCount,
+        packsState.page, packsState.updated])
 
 
 

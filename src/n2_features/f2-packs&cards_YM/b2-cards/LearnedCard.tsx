@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {CardType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
@@ -9,19 +9,19 @@ import {gradeCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import s from './LearnedCard.module.css'
 
 const LearnedCard = () => {
+
     const dispatch = useDispatch()
-    const loc=useLocation()
-    console.log(loc.pathname)
     const navigate = useNavigate()
     const {cardId} = useParams<'cardId'>();
+    const {packId} = useParams<'packId'>();
     const [showAnswer, setShowAnswer] = useState<boolean>(false)
     const learnedCard = useFridaySelector<CardType>(state => state.cards.cards.filter(f => f._id === cardId)[0])
-    const actualPack = useFridaySelector<PackType>(state => state.packs.cardPacks.filter(f => f._id === learnedCard.cardsPack_id)[0])
-    const actualPackCards = useFridaySelector<CardType[]>(state => state.cards.cards.filter(f => f.cardsPack_id === learnedCard.cardsPack_id))
+    const actualPack = useFridaySelector<PackType>(state => state.packs.cardPacks.filter(f => f._id === packId)[0])
+    const actualPackCards = useFridaySelector<CardType[]>(state => state.cards.cards.filter(f => f.cardsPack_id === packId))
     const [actualCard, setActualCard] = useState<CardType>(learnedCard)
-    const [cardRate, setCardRate] = useState<number>(actualCard.grade)
-
-
+    const [cardRate, setCardRate] = useState<number | undefined>(actualCard.grade)
+    console.log(learnedCard)
+    console.log(actualCard.grade)
     const getCard = (cards: CardType[]) => {
         const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0);
         const rand = Math.random() * sum;
