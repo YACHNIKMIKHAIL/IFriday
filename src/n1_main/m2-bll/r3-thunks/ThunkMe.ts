@@ -9,7 +9,6 @@ export const meTC = () => async (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
         let res = await meAPI.me()
-        dispatch(initializeMeAC(true))
         dispatch(ProfileActions.setProfileAC(res.data))
         dispatch(LoginFormActions.setIsLoggedInAC(true))
         dispatch(setAppStatusAC("succeeded"))

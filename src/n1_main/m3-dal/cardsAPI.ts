@@ -5,7 +5,7 @@ import {UpdatedCardType} from "../m2-bll/r3-thunks/ThunkCards";
 import {instance} from "./instance";
 
 export const cardsAPI = {
-    async setCards(cardAnswer: string, cardQuestion: string, cardsPack_id: string, min: number, max: number, sortCards: UpdatedCardsType, page: number, pageCount: number) {
+    async setCards(cardAnswer: string, cardQuestion: string, cardsPack_id: string, min: number, max: number, sortCards: UpdatedType, page: number, pageCount: number) {
         return await instance.get<CardsType,
             AxiosResponse<CardsType>, { cardAnswer: string, cardQuestion: string, cardsPack_id: string, min: number, max: number, sortCards: UpdatedType, page: number, pageCount: number }>
         (`/cards/card`, {params: {cardsPack_id, cardAnswer, cardQuestion, min, max, sortCards, page, pageCount}})
@@ -25,7 +25,7 @@ export const cardsAPI = {
         return await instance.put(`/cards/grade`, {grade,card_id})
     },
 }
-export type UpdatedCardsType = '0grade' | '1grade'
+// export type UpdatedCardsType = '0grade' | '1grade'
 type addCardType = {
     cardsPack_id: string
     question: string

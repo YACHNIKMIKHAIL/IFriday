@@ -50,6 +50,7 @@ const LoginForm = () => {
         return <Navigate to={RoutesXPaths.PROFILE}/>
     }
 
+
     return (
         <div className={style.main}>
 

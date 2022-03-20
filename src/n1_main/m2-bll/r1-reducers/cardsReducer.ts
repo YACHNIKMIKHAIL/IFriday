@@ -1,6 +1,5 @@
 import {cardsActions, cardsActionsEnum, cardsActionsTypes} from "../r2-actions/ActionsCards";
 import {UpdatedType} from "../../m3-dal/packsAPI";
-import {UpdatedCardsType} from "../../m3-dal/cardsAPI";
 
 export type CardType = {
     answer: string
@@ -23,7 +22,7 @@ export type InitialCardsType = {
     pageCount: number
     cardAnswer: string
     cardQuestion: string
-    sortCards: UpdatedCardsType
+    sortCards: UpdatedType
 }
 const initialCards: InitialCardsType = {
     cards: [
@@ -46,7 +45,7 @@ const initialCards: InitialCardsType = {
     pageCount: 10,
     cardAnswer: '',
     cardQuestion: '',
-    sortCards: '' as UpdatedCardsType
+    sortCards: '' as UpdatedType
 }
 
 export type cardsReducerActionType = ReturnType<cardsActionsTypes<typeof cardsActions>>

@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {InitialCardPacksType, PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 import {packsTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {useDebounce} from "use-debounce";
 import TableX from "../../../n1_main/m1-ui/common/table/TableX";
@@ -35,6 +35,7 @@ const PacksList = () => {
     const debouncedPackOnPage = useDebounce<number>(packsState.pageCount, 500)
     const debouncedPageChanged = useDebounce<number>(packsState.page, 1)
     const debouncedPageUpdateFiler = useDebounce<UpdatedType>(packsState.updated, 0)
+
     const selectMyOrAll = (value: string | null) => {
         dispatch(packsActions.allMyAC(value))
         value ? setSelected('MY') : setSelected('ALL')

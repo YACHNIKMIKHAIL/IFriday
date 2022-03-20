@@ -10,7 +10,7 @@ import {useDispatch} from "react-redux";
 import {cardsTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import TestAddCardComponent from "./TestAddCardComponent";
 import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
-import {UpdatedCardsType} from "../../../n1_main/m3-dal/cardsAPI";
+import {UpdatedType} from "../../../n1_main/m3-dal/packsAPI";
 
 type CardsListType = {
     name: string
@@ -29,7 +29,7 @@ const CardsList = ({name, user_id,packId}: CardsListType) => {
     const debouncedPageCardsChanged = useDebounce<number>(cardsState.page, 1000)
     const debouncedSearchCardQ = useDebounce<string>(cardsState.cardQuestion, 1000)
     const debouncedSearchCardA = useDebounce<string>(cardsState.cardAnswer, 1000)
-    const debouncedSearchlastUpdated = useDebounce<UpdatedCardsType>(cardsState.sortCards, 0)
+    const debouncedSearchlastUpdated = useDebounce<UpdatedType>(cardsState.sortCards, 0)
 
     const searchCard = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(cardsActions.searchCardAC(e.currentTarget.value))

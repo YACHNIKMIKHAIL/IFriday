@@ -10,31 +10,42 @@ const TableCardsHeader = ({user_id}: TCHType) => {
 
     const dispatch = useDispatch()
     const [lastUpd, setLastUpd] = useState<boolean>(false)
+    const [gradeUpd, setGradeUpd] = useState<boolean>(false)
 
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
 
     const getNewCard = () => {
-        dispatch(cardsActions.updateFilterCardAC('1grade'))
+        dispatch(cardsActions.updateFilterCardAC('1created'))
         setLastUpd(true)
     }
 
     const getOldCard = () => {
-        dispatch(cardsActions.updateFilterCardAC('0grade'))
+        dispatch(cardsActions.updateFilterCardAC('0created'))
         setLastUpd(false)
+    }
+
+    const getGradeUpdMoreCard = () => {
+        dispatch(cardsActions.updateFilterCardAC('1grade'))
+        setGradeUpd(true)
+    }
+
+    const getGradeUpdLessCard = () => {
+        dispatch(cardsActions.updateFilterCardAC('0grade'))
+        setGradeUpd(false)
     }
 
     return (
         <div className={s.tableHeader}>
             <li>Question</li>
             <li>Answer</li>
-            <li>Last Updated
-                {
-                    lastUpd
-                        ? <button onClick={getOldCard}>{`new ᐃ`}</button>
-                        : <button onClick={getNewCard}>{`old ᐁ`}</button>
-                }
+            <li onClick={lastUpd ? getOldCard : getNewCard}>Last Updated
+                {/*{*/}
+                {/*    lastUpd*/}
+                {/*        ? <button onClick={getOldCard}>{`new ᐃ`}</button>*/}
+                {/*        : <button onClick={getNewCard}>{`old ᐁ`}</button>*/}
+                {/*}*/}
             </li>
-            <li>Grade</li>
+            <li onClick={gradeUpd ? getGradeUpdLessCard : getGradeUpdMoreCard}>Grade</li>
             {
                 myId === user_id && <li>Actions</li>
             }

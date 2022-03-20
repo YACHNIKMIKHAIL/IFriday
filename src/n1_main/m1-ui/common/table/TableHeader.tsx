@@ -30,11 +30,11 @@ const TableHeader = () => {
     return (
         <div className={style.tableHeader}>
             <li>Name</li>
-            <li>Cards
-                {cardsCountUpd
-                    ? <button onClick={getMore}>{`many ᐃ`}</button>
-                    : <button onClick={getFew}>{`few ᐁ`}</button>
-                }
+            <li onClick={cardsCountUpd?getMore:getFew}>Cards
+                {/*{cardsCountUpd*/}
+                {/*    ? <button onClick={getMore}>{`many ᐃ`}</button>*/}
+                {/*    : <button onClick={getFew}>{`few ᐁ`}</button>*/}
+                {/*}*/}
             </li>
             <li onClick={lastUpd ? getOld : getNew}>Last Updated
                 {/*{lastUpd*/}

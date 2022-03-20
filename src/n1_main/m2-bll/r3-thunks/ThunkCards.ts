@@ -82,7 +82,6 @@ export const updateCardTC = (updatedCard: UpdatedCardType): FridayThunkType => a
 }
 
 export const gradeCardTC = (grade: number,card_id: string): FridayThunkType => async (dispatch: any) => {
-    debugger
     dispatch(setAppStatusAC("loading"))
     try {
         let res = await cardsAPI.gradeCard(grade,card_id)

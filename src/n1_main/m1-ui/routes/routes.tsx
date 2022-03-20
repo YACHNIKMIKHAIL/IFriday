@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navigate, Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes, useLocation} from 'react-router-dom';
 import Register from "../common/Register";
 import NewPassword from "../common/NewPassword";
 import Packs from "../common/Packs";
@@ -22,16 +22,12 @@ export enum RoutesXPaths {
     SET_PASS = '/set-new-password/:token',
     NOT_FOUND = '/404',
     LOGOUT = '/logout',
-    LEARNED_CARD = '/LEARNED_CARD',
-    LEARNED_CARD_WITH_ID = '/LEARNED_CARD/:cardId',
+    LEARNED_CARD = '/card',
+    LEARNED_CARD_WITH_ID = '/card/:packId/:cardId',
+    // LEARNED_CARD_WITH_ID = '/cards/:packId/:cardId',
 }
 
 const RoutesX = () => {
-
-    // const inLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
-    // if (!inLoggedIn) {
-    //     return <Navigate to={RoutesXPaths.LOGIN}/>
-    // }
 
     return (
         <div style={{height: '100vh'}}>
@@ -52,9 +48,27 @@ const RoutesX = () => {
                 <Route path={RoutesXPaths.NOT_FOUND}
                        element={<h1 style={{textAlign: 'center'}}>404:PAGE NOT FOUND</h1>}/>
                 <Route path={'*'} element={<Navigate to={RoutesXPaths.NOT_FOUND}/>}/>
+
             </Routes>
+
+
+            <Redirect/>
         </div>
     );
 };
 
 export default RoutesX;
+
+export const Redirect = () => {
+
+    const {pathname} = useLocation()
+    const inLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
+
+    if (!inLoggedIn && pathname !== RoutesXPaths.LOGIN) {
+        return <Navigate to={RoutesXPaths.LOGIN}/>
+    }
+
+    return (
+        <>
+        </>)
+}

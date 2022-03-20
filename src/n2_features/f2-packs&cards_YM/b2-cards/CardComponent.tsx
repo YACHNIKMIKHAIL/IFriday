@@ -7,13 +7,12 @@ import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@material-ui/icons";
 import {RoutesXPaths} from '../../../n1_main/m1-ui/routes/routes';
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const styles = {
     main: {
         display: 'flex',
         justifyContent: 'space-between',
-        // height: '50px',
         margin: '5px',
         borderRadius: '20px',
         border: '2px grey solid'
@@ -41,10 +40,9 @@ const CardComponent = ({c}: CardComponentType) => {
     const dispatch = useDispatch()
     const [editCard, setEditCard] = useState<boolean>(false)
     const [q, setQ] = useState<string>('')
-    const [learn, setLearn] = useState<boolean>(false)
+    const {pathname}=useLocation()
 
-    //         <LearnedCard setLearn={setLearn} question={c.question} answer={c.answer}/>
-
+    console.log(pathname)
     const deleteCard = () => {
         dispatch(deleteCardTC(c._id))
     }
@@ -59,9 +57,10 @@ const CardComponent = ({c}: CardComponentType) => {
         setEditCard(false)
     }
     const cardId = c._id
+    const packId = c.cardsPack_id
 
     const goToCard=()=>{
-        navigate(`${RoutesXPaths.LEARNED_CARD}/${cardId}`)
+        navigate(`${RoutesXPaths.LEARNED_CARD}/${packId}/${cardId}`)
     }
 
     return (
@@ -94,7 +93,7 @@ const CardComponent = ({c}: CardComponentType) => {
                         !editCard
                             ? (
                                 <>
-                                    <Button size="small" onClick={() => setLearn(true)}>learn</Button>
+                                    <Button size="small" onClick={goToCard}>learn</Button>
                                     <Button size="small" onClick={() => setEditCard(true)}>edit</Button>
                                     <IconButton onClick={deleteCard} aria-label="delete">
                                         <Delete/>
