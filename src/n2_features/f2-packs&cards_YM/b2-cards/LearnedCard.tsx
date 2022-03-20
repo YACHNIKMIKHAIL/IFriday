@@ -7,61 +7,77 @@ import {PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 import {useDispatch} from "react-redux";
 import {gradeCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 
-
 const LearnedCard = () => {
     const dispatch = useDispatch()
 
     const navigate = useNavigate()
     const {cardId} = useParams<'cardId'>();
     const [showAnswer, setShowAnswer] = useState<boolean>(false)
-    const [cardRate, setCardRate] = useState<1 | 2 | 3 | 4 | 5 | undefined>(undefined)
-    const learnedCard = useFridaySelector<CardType>(state => state.cards.cards.filter(f => f._id === cardId)[0])
-    const packName = useFridaySelector<string>(state => state.packs.cardPacks.filter(f => f._id === learnedCard.cardsPack_id)[0].name)
 
-    console.log(learnedCard.grade)
-    console.log(cardRate)
+    const learnedCard = useFridaySelector<CardType>(state => state.cards.cards.filter(f => f._id === cardId)[0])
+    const actualPack = useFridaySelector<PackType>(state => state.packs.cardPacks.filter(f => f._id === learnedCard.cardsPack_id)[0])
+    const actualPackCards = useFridaySelector<CardType[]>(state => state.cards.cards.filter(f => f.cardsPack_id === learnedCard.cardsPack_id))
+    const [actualCard, setActualCard] = useState<CardType>(learnedCard)
+    const [cardRate, setCardRate] = useState<number>(actualCard.grade)
+
+
+    const getCard = (cards: CardType[]) => {
+        const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0);
+        const rand = Math.random() * sum;
+        const res = cards.reduce((acc: { sum: number, id: number }, card, i) => {
+                const newSum = acc.sum + (6 - card.grade) * (6 - card.grade);
+                return {sum: newSum, id: newSum < rand ? i : acc.id}
+            }
+            , {sum: 0, id: -1});
+        console.log('test: ', sum, rand, res)
+
+        setActualCard(cards[res.id + 1]);
+    }
 
     const nextCard = () => {
-        if(cardRate) {
+        if (cardRate) {
             dispatch(gradeCardTC(cardRate, learnedCard._id))
         }
+        getCard(actualPackCards)
+        setShowAnswer(false)
     }
+
     return (
         <div style={{borderRadius: '10px', backgroundColor: 'white'}}>
             <div>
                 learn:
-                {packName}
+                {actualPack.name}
             </div>
             <div>
                 question:
-                {learnedCard.question}
+                {actualCard.question}
             </div>
             {showAnswer && <div>
                 <div>
                     answer:
-                    {learnedCard.answer}
+                    {actualCard.answer}
                 </div>
                 <div>
                     rate yourself:
                     <div>
                         <input type="radio" onChange={() => setCardRate(5)} value={cardRate}
-                               name='rate'/>5
+                               name='rate'/>знал
                     </div>
                     <div>
                         <input type="radio" onChange={() => setCardRate(4)} value={cardRate}
-                               name='rate'/>4
+                               name='rate'/>перепутал
                     </div>
                     <div>
                         <input type="radio" onChange={() => setCardRate(3)} value={cardRate}
-                               name='rate'/>3
+                               name='rate'/>долго думал
                     </div>
                     <div>
                         <input type="radio" onChange={() => setCardRate(2)} value={cardRate}
-                               name='rate'/>2
+                               name='rate'/>забыл
                     </div>
                     <div>
                         <input type="radio" onChange={() => setCardRate(1)} value={cardRate}
-                               name='rate'/>1
+                               name='rate'/>не знал
                     </div>
                 </div>
             </div>}
