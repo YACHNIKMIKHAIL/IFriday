@@ -36,11 +36,11 @@ const TableHeader = () => {
                     : <button onClick={getFew}>{`few ᐁ`}</button>
                 }
             </li>
-            <li>Last Updated
-                {lastUpd
-                    ? <button onClick={getOld}>{`new ᐃ`}</button>
-                    : <button onClick={getNew}>{`old ᐁ`}</button>
-                }
+            <li onClick={lastUpd ? getOld : getNew}>Last Updated
+                {/*{lastUpd*/}
+                {/*    ? <button onClick={getOld}>{`new ᐃ`}</button>*/}
+                {/*    : <button onClick={getNew}>{`old ᐁ`}</button>*/}
+                {/*}*/}
             </li>
             <li>Created by</li>
             <li>Actions</li>

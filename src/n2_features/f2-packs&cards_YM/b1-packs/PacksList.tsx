@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {InitialCardPacksType, PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 import {packsTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {useDebounce} from "use-debounce";
 import TableX from "../../../n1_main/m1-ui/common/table/TableX";
@@ -50,6 +50,8 @@ const PacksList = () => {
         dispatch(packsTC())
     }, [debouncedSearch[0], debouncedSelect[0], debouncedMIN[0], debouncedMAX[0], debouncedPackOnPage[0],
         debouncedPageChanged[0], debouncedPageUpdateFiler[0]])
+
+
 
     return (
         <div>

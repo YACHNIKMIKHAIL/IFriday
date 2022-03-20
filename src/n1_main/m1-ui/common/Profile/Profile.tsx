@@ -7,6 +7,8 @@ import {UserDataType} from "../../../m2-bll/r2-actions/ActionLoginForm";
 import {meRespType} from "../../../m3-dal/meAPI";
 import {ChangeNameInput} from "./ChangeNameInput";
 import {ProfileNameSpan} from "./ProfileNameSpan";
+import {Navigate} from "react-router-dom";
+import {RoutesXPaths} from "../../routes/routes";
 
 export const BASE_IMG_URL = "https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg"
 
@@ -19,6 +21,11 @@ const Profile = () => {
     let [error, setError] = useState<string>("")
     let [modification, setModification] = useState<boolean>(false)
 
+    // const inLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
+    //
+    // if (!inLoggedIn) {
+    //     return <Navigate to={RoutesXPaths.LOGIN}/>
+    // }
 
     const changeModification = () => {
         setModification(true)

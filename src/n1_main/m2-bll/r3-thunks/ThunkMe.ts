@@ -11,12 +11,10 @@ export const meTC = () => async (dispatch: Dispatch) => {
         let res = await meAPI.me()
         dispatch(initializeMeAC(true))
         dispatch(ProfileActions.setProfileAC(res.data))
-        // saveToken(res.data.token)
         dispatch(LoginFormActions.setIsLoggedInAC(true))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
-        // saveToken(null)
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(initializeMeAC(true))

@@ -1,23 +1,67 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {useNavigate, useParams} from "react-router-dom";
+import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
+import {useFridaySelector} from "../../../n1_main/m2-bll/store";
+import {CardType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
+import {PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 
-type LearnedCardType = {
-    question: string
-    answer: string
-    setLearn: (v: boolean) => void
-}
-const LearnedCard = ({question, answer, setLearn}: LearnedCardType) => {
+
+const LearnedCard = () => {
+    const navigate = useNavigate()
+    const {cardId} = useParams<'cardId'>();
+    const [showAnswer, setShowAnswer] = useState<boolean>(false)
+    const [cardRate, setCardRate] = useState<1 | 2 | 3 | 4 | 5 | undefined>(undefined)
+    const learnedCard = useFridaySelector<CardType>(state => state.cards.cards.filter(f => f._id === cardId)[0])
+    const packName = useFridaySelector<string>(state => state.packs.cardPacks.filter(f => f._id === learnedCard.cardsPack_id)[0].name)
+
     return (
-        <div style={{border: '2px black solid'}}>
-            question:
+        <div style={{borderRadius: '10px', backgroundColor: 'white'}}>
             <div>
-                {question}
-            </div>
-            answer:
-            <div>
-                {answer}
+                learn:
+                {packName}
             </div>
             <div>
-                <button onClick={() => setLearn(false)}>Close</button>
+                question:
+                {learnedCard.question}
+            </div>
+            {showAnswer && <div>
+                <div>
+                    answer:
+                    {learnedCard.answer}
+                </div>
+                <div>
+                    rate yourself:
+                    <div>
+                        <input type="radio" onChange={() => setCardRate(5)} value={cardRate}
+                               name='rate'/>5
+                    </div>
+                    <div>
+                        <input type="radio" onChange={() => setCardRate(4)} value={cardRate}
+                               name='rate'/>4
+                    </div>
+                    <div>
+                        <input type="radio" onChange={() => setCardRate(3)} value={cardRate}
+                               name='rate'/>3
+                    </div>
+                    <div>
+                        <input type="radio" onChange={() => setCardRate(2)} value={cardRate}
+                               name='rate'/>2
+                    </div>
+                    <div>
+                        <input type="radio" onChange={() => setCardRate(1)} value={cardRate}
+                               name='rate'/>1
+                    </div>
+                </div>
+            </div>}
+
+            <div>
+                <button onClick={() => navigate(RoutesXPaths.CARDS_WITH_ID)}>Cancel</button>
+                {!showAnswer
+                    ? <button onClick={() => setShowAnswer(!showAnswer)}>Show answer</button>
+                    : <button onClick={() => {
+                    }}>Next card</button>
+                }
+
             </div>
         </div>
     )

@@ -6,6 +6,8 @@ import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@material-ui/icons";
+import {RoutesXPaths} from '../../../n1_main/m1-ui/routes/routes';
+import {useNavigate} from "react-router-dom";
 
 const styles = {
     main: {
@@ -35,7 +37,7 @@ type CardComponentType = {
 }
 const CardComponent = ({c}: CardComponentType) => {
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
-
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [editCard, setEditCard] = useState<boolean>(false)
     const [q, setQ] = useState<string>('')
@@ -56,8 +58,14 @@ const CardComponent = ({c}: CardComponentType) => {
         dispatch(updateCardTC(updatedCard))
         setEditCard(false)
     }
+    const cardId = c._id
+
+    const goToCard=()=>{
+        navigate(`${RoutesXPaths.LEARNED_CARD}/${cardId}`)
+    }
+
     return (
-        <div style={styles.main} onDoubleClick={() => setLearn(!learn)}>
+        <div style={styles.main} onDoubleClick={goToCard}>
             <div style={styles.window}>
                 {
                     editCard && c.user_id === myId

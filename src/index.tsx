@@ -7,6 +7,7 @@ import {store} from "./n1_main/m2-bll/store";
 import AppSerge from "./n1_main/m1-ui/app/AppSerge";
 import {ThemeProvider} from "@material-ui/core";
 import {createTheme} from "@mui/material";
+import {HashRouter} from "react-router-dom";
 
 const theme = createTheme({
     palette: {
@@ -23,7 +24,9 @@ ReactDOM.render(
     // <React.StrictMode>
     <ThemeProvider theme={theme}>
         <Provider store={store}>
+            <HashRouter>
                 <AppSerge/>
+            </HashRouter>
         </Provider>
     </ThemeProvider>,
     //</React.StrictMode>

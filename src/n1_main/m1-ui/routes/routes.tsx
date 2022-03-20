@@ -8,6 +8,8 @@ import PasswordRecovery from "../common/PasswordRecovery";
 import Logout from "../common/Logout";
 import Profile from "../common/Profile/Profile";
 import Cards from "../common/Cards";
+import {useFridaySelector} from "../../m2-bll/store";
+import LearnedCard from "../../../n2_features/f2-packs&cards_YM/b2-cards/LearnedCard";
 
 export enum RoutesXPaths {
     PROFILE = '/',
@@ -20,21 +22,16 @@ export enum RoutesXPaths {
     SET_PASS = '/set-new-password/:token',
     NOT_FOUND = '/404',
     LOGOUT = '/logout',
+    LEARNED_CARD = '/LEARNED_CARD',
+    LEARNED_CARD_WITH_ID = '/LEARNED_CARD/:cardId',
 }
 
 const RoutesX = () => {
 
-    // const location = useLocation()
-    // // const [searchParams, setSearchParams] = useSearchParams()
-    // //
-    // // useEffect(() => {
-    // //     const path=location.pathname.toString()
-    // //     console.log(path)
-    // //     setSearchParams({variable: path})
-    // // }, [searchParams])
-    //
-    //     const path=location.pathname.toString()
-    //     console.log(path)
+    // const inLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
+    // if (!inLoggedIn) {
+    //     return <Navigate to={RoutesXPaths.LOGIN}/>
+    // }
 
     return (
         <div style={{height: '100vh'}}>
@@ -49,6 +46,8 @@ const RoutesX = () => {
                 <Route path={RoutesXPaths.PACKS} element={<Packs/>}/>
                 <Route path={RoutesXPaths.CARDS} element={<Cards/>}/>
                 <Route path={RoutesXPaths.CARDS_WITH_ID} element={<Cards/>}/>
+                <Route path={RoutesXPaths.LEARNED_CARD} element={<LearnedCard/>}/>
+                <Route path={RoutesXPaths.LEARNED_CARD_WITH_ID} element={<LearnedCard/>}/>
                 <Route path={RoutesXPaths.LOGOUT} element={<Logout/>}/>
                 <Route path={RoutesXPaths.NOT_FOUND}
                        element={<h1 style={{textAlign: 'center'}}>404:PAGE NOT FOUND</h1>}/>
