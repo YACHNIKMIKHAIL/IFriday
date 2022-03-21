@@ -46,12 +46,12 @@ const Links = () => {
                          style={{textDecoration: 'none'}}
                 >Cards</NavLink>
             </>
-            {/*<>*/}
-            {/*    <NavLink to={RoutesXPaths.LEARNED_CARD}*/}
-            {/*             className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}*/}
-            {/*             style={{textDecoration: 'none'}}*/}
-            {/*    >LC</NavLink>*/}
-            {/*</>*/}
+            <>
+                <NavLink to={RoutesXPaths.LEARNED_CARD}
+                         className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
+                         style={{textDecoration: 'none'}}
+                >LC</NavLink>
+            </>
             <>
                 <NavLink to={RoutesXPaths.LOGOUT}
                          className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}

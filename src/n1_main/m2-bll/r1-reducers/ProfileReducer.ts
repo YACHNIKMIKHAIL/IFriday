@@ -69,6 +69,8 @@ export const updateUserNameTC = (newUserName: string) => async (dispatch: Dispat
         dispatch(setGlobalErrorAC(error))
 
         dispatch(setAppStatusAC("failed"))
+    }finally {
+        dispatch(setAppStatusAC("idle"))
     }
 }
 

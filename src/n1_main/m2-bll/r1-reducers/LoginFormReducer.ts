@@ -39,6 +39,8 @@ export const loginUserTC = (body: loginType) => async (dispatch: Dispatch) => {
         dispatch(LoginFormActions.setErrorAC(error))
         dispatch(setGlobalErrorAC(error))
         dispatch(setAppStatusAC("failed"))
+    }finally {
+        dispatch(setAppStatusAC("idle"))
     }
 }
 
@@ -48,5 +50,7 @@ export const logoutUserTC = () => async (dispatch: Dispatch) => {
         dispatch(LoginFormActions.setIsLoggedInAC(false))
     } catch (e) {
         dispatch(setGlobalErrorAC(e))
+    }finally {
+        dispatch(setAppStatusAC("idle"))
     }
 }

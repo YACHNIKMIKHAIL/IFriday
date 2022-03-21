@@ -7,7 +7,6 @@ import {cardsActions} from "../r2-actions/ActionsCards";
 export const cardsTC = (id: string) => {
     return async (dispatch: Dispatch, getState: () => fridayReducerType) => {
         const {cardAnswer, cardQuestion, minGrade, maxGrade, sortCards, page, pageCount} = getState().cards
-
         dispatch(setAppStatusAC("loading"))
         try {
             let res = await cardsAPI.setCards(cardAnswer, cardQuestion, id, minGrade, maxGrade, sortCards, page, pageCount)
@@ -81,10 +80,10 @@ export const updateCardTC = (updatedCard: UpdatedCardType): FridayThunkType => a
     }
 }
 
-export const gradeCardTC = (grade: number,card_id: string): FridayThunkType => async (dispatch: any) => {
+export const gradeCardTC = (grade: number, card_id: string): FridayThunkType => async (dispatch: any) => {
     dispatch(setAppStatusAC("loading"))
     try {
-        let res = await cardsAPI.gradeCard(grade,card_id)
+        let res = await cardsAPI.gradeCard(grade, card_id)
         dispatch(cardsActions.gradeCardAC(res.data.updatedGrade))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
