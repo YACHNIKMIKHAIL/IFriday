@@ -17,8 +17,10 @@
 
 .input {
     margin-left: 5px;
+    outline: none;
     border: none;
     border-bottom: 1px #726d6f solid;
+    background-color: #b5d2fc;
 }
 
 .tableCell {
