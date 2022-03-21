@@ -5,6 +5,7 @@ import {CardType} from "../../../m2-bll/r1-reducers/cardsReducer";
 import Rating from "@mui/material/Rating/Rating";
 
 
+
 type TableCardsType = {
     cards: CardType
 }
@@ -26,6 +27,7 @@ const TableCards = ({cards}: TableCardsType) => {
             ) : (
                 <div>
                     <Preloader status={"failed"}/>
+
                 </div>)
     )
 };

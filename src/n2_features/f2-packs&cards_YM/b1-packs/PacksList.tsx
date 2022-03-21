@@ -13,6 +13,7 @@ import {useDebounce} from "use-debounce";
 import TableX from "../../../n1_main/m1-ui/common/table/TableX";
 import TableHeader from "../../../n1_main/m1-ui/common/table/TableHeader";
 import AddPackComponent from "./AddPackComponent";
+import TableRow from "../../../n1_main/m1-ui/common/table/TableX";
 
 const PacksList = () => {
 
@@ -24,6 +25,7 @@ const PacksList = () => {
 
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
+
     const packs = useFridaySelector<PackType[]>(state => state.packs.cardPacks)
     const globalError = useFridaySelector<string>(state => state.app.globalError)
 
@@ -96,8 +98,7 @@ const PacksList = () => {
                                     <div className={style.searchContainer}>
                                         <input placeholder={"Search..."}
                                                value={packsState.packName}
-                                               onChange={onChangeSearchInput}
-                                        />
+                                               onChange={onChangeSearchInput}/>
                                         <button
                                             className={style.buttonSearch}
                                             onClick={() => setAddPack(!addPack)}
@@ -111,20 +112,14 @@ const PacksList = () => {
                                     {
                                         packs.map((item, index) => {
                                             return (
-                                                <div
-                                                    key={index}
-                                                    onDoubleClick={() => runToCards(item._id)}
-                                                >
-                                                    <TableX
-                                                        key={index}
-                                                        p={item}
-                                                    />
+                                                <div key={index} onDoubleClick={() => runToCards(item._id)}>
+                                                    <TableX/>
                                                 </div>
                                             )
                                         })
                                     }
-                                    <TablesPagination/>
                                 </div>
+                                <TablesPagination/>
                             </div>
                         </div>
                     ) : (
