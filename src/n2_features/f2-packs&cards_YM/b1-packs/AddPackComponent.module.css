@@ -39,7 +39,7 @@
     min-height: 30px;
     border: none;
     border-bottom: 1px solid #5f7271;
-    outline:none;
+    outline: none;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 20px;
@@ -80,7 +80,7 @@
     font-weight: 700;
     -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
     transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-    margin:5px
+    margin: 5px
 
 }
 
@@ -88,4 +88,8 @@
     color: #fff;
     outline: 0;
     box-shadow: 0 0 40px 40px #4f74cb inset;
+}
+
+.inputForm {
+    width: 80%;
 }

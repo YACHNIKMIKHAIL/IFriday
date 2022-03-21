@@ -25,7 +25,7 @@ const Logout = () => {
                 Are you sure you want to exit?
             </div>
             <div className={style.text}>
-                If you are sure click the button below
+                If you are sure click the button below <span className={style.arrow}>&#10534;</span>
             </div>
             <div
                 className={style.logoutBtn}
