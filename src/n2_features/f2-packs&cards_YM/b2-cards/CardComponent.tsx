@@ -79,7 +79,7 @@ const CardComponent = ({c}: CardComponentType) => {
                 {c.answer}
             </div>
             <div style={styles.updated}>
-                {c.updated}
+                {`дата: ${c.updated.slice(0,10)}, время: ${c.updated.slice(12,19)}`}
             </div>
             <div style={styles.window}>
                 <Rating

@@ -29,21 +29,21 @@ const TableHeader = () => {
 
     return (
         <div className={style.tableHeader}>
-            <li>Name</li>
-            <li onClick={cardsCountUpd?getMore:getFew}>Cards
+            <div>Name</div>
+            <div onClick={cardsCountUpd ? getMore : getFew } >Cards
                 {/*{cardsCountUpd*/}
                 {/*    ? <button onClick={getMore}>{`many ᐃ`}</button>*/}
                 {/*    : <button onClick={getFew}>{`few ᐁ`}</button>*/}
                 {/*}*/}
-            </li>
-            <li onClick={lastUpd ? getOld : getNew}>Last Updated
+            </div>
+            <div onClick={lastUpd ? getOld : getNew}>Last Updated
                 {/*{lastUpd*/}
                 {/*    ? <button onClick={getOld}>{`new ᐃ`}</button>*/}
                 {/*    : <button onClick={getNew}>{`old ᐁ`}</button>*/}
                 {/*}*/}
-            </li>
-            <li>Created by</li>
-            <li>Actions</li>
+            </div>
+            <div>Created by</div>
+            <div>Actions</div>
         </div>
     )
 }
