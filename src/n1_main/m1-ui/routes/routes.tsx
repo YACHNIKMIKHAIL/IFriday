@@ -9,7 +9,7 @@ import Logout from "../common/Logout";
 import Profile from "../common/Profile/Profile";
 import Cards from "../common/Cards";
 import {useFridaySelector} from "../../m2-bll/store";
-import LearnedCard from "../../../n2_features/f2-packs&cards_YM/b2-cards/LearnedCard";
+import LearnedCardContainer from '../../../n2_features/f2-packs&cards_YM/b2-cards/LearnedCardContainer';
 
 export enum RoutesXPaths {
     PROFILE = '/',
@@ -42,15 +42,14 @@ const RoutesX = () => {
                 <Route path={RoutesXPaths.PACKS} element={<Packs/>}/>
                 <Route path={RoutesXPaths.CARDS} element={<Cards/>}/>
                 <Route path={RoutesXPaths.CARDS_WITH_ID} element={<Cards/>}/>
-                <Route path={RoutesXPaths.LEARNED_CARD} element={<LearnedCard/>}/>
-                <Route path={RoutesXPaths.LEARNED_CARD_WITH_ID} element={<LearnedCard/>}/>
+                <Route path={RoutesXPaths.LEARNED_CARD} element={<LearnedCardContainer/>}/>
+                <Route path={RoutesXPaths.LEARNED_CARD_WITH_ID} element={<LearnedCardContainer/>}/>
                 <Route path={RoutesXPaths.LOGOUT} element={<Logout/>}/>
                 <Route path={RoutesXPaths.NOT_FOUND}
                        element={<h1 style={{textAlign: 'center'}}>404:PAGE NOT FOUND</h1>}/>
                 <Route path={'*'} element={<Navigate to={RoutesXPaths.NOT_FOUND}/>}/>
 
             </Routes>
-
 
             <Redirect/>
         </div>
