@@ -11,52 +11,47 @@ import {Button, IconButton} from "@mui/material";
 import {Delete} from "@material-ui/icons";
 
 
-type TableType = {
-    p: PackType
-}
+const TableX = () => {
 
-const TableX = ({p}: TableType) => {
-
-    const arr = [
-        {
-            Name: p.name,
-            Cards: p.cardsCount,
-            LastUpd: p.updated,
-            CreatedBy: p.user_name,
-            Actions: null,
-            _id: p._id,
-            user_id: p.user_id
-        }
-    ]
+    const arr = useFridaySelector<PackType[]>(state => state.packs.cardPacks)
 
     return (
         arr
             ? (
                 <div className={s.table}>
-                    {arr.map((arr, idx) => <TableRow key={idx} arr={arr}/>)}
+                    {arr.map((arrPack, idx) => {
+                        return <TableRow key={idx} arr={arrPack}/>
+                    })}
                 </div>
             ) : (
                 <div>
+                    error
                     <Preloader status={"failed"}/>
                 </div>)
     )
 }
+// type TableRowType={
+//     arr:PackType
+//     status:boolean
+//
+// }
+
 
 const TableRow = ({arr, status = true}: any) => {
-    const [edit, setEdit] = useState<boolean>(false)
-    const [newPackName, setNewPackName] = useState<string>('')
-    const myId = useFridaySelector<string>(state => state.profile.profile._id)
-    const dispatch = useDispatch()
-
     const {
-        Name,
-        Cards,
-        LastUpd,
-        CreatedBy,
-        Actions,
+        name,
+        cardsCount,
+        updated,
+        user_name,
+        actions,
         _id,
         user_id
     } = arr
+    console.log(arr)
+    const [edit, setEdit] = useState<boolean>(false)
+    const [newPackName, setNewPackName] = useState<string>(name)
+    const myId = useFridaySelector<string>(state => state.profile.profile._id)
+    const dispatch = useDispatch()
     const saveChanges = () => {
         setEdit(false)
         dispatch(changePacksTC(newPackName, _id))
@@ -66,11 +61,11 @@ const TableRow = ({arr, status = true}: any) => {
             {myId === user_id && edit ? <input type={"text"}
                                                onChange={({target}) => setNewPackName(target.value)}
                                                autoFocus value={newPackName}
-                                               className={s.input}/> : <TableCell item={Name}/>}
-            <TableCell item={Cards}/>
-            <TableCell item={LastUpd}/>
-            <TableCell item={CreatedBy}/>
-            <TableCell item={Actions} _id={_id} user_id={user_id}/>
+                                               className={s.input}/> : <TableCell item={name}/>}
+            <TableCell item={cardsCount}/>
+            <TableCell item={updated}/>
+            <TableCell item={user_name}/>
+            <TableCell item={actions} _id={_id} user_id={user_id}/>
             {
                 status &&
                 <ButtonGroup _id={_id} user_id={user_id} edit={edit} setEdit={setEdit} saveChanges={saveChanges}/>
@@ -79,25 +74,13 @@ const TableRow = ({arr, status = true}: any) => {
     )
 }
 
-const TableCell = ({item, status, _id, user_id}: any) => {
-    const dispatch = useDispatch()
-    const [newPackName, setNewPackName] = useState<string>('')
-    const [edit, setEdit] = useState<boolean>(false)
-
-
-    const saveChanges = () => {
-        setEdit(false)
-        dispatch(changePacksTC(newPackName, _id))
-    }
+const TableCell = ({item}: any) => {
 
     return (
         <div className={s.tableCell}>
 
-                   <>{item}</>
-            {
-                status &&
-                <ButtonGroup _id={_id} user_id={user_id} edit={edit} setEdit={setEdit} saveChanges={saveChanges}/>
-            }
+            <>{item}</>
+
         </div>
     )
 }
@@ -115,7 +98,7 @@ export const ButtonGroup = ({_id, user_id, edit, setEdit, saveChanges}: any) => 
     }
 
     return (
-        <div className={s.BtnContainer}>
+        <div className={s.btnContainer}>
             <Button size="small" onClick={() => navigate(`${RoutesXPaths.CARDS}/${_id}`)}>learn</Button>
             {
                 myId === user_id &&

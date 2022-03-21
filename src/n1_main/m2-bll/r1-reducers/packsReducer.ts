@@ -46,6 +46,7 @@ const initialCardPacks: InitialCardPacksType = {
 export type packsReducerActionType = ReturnType<packsActionsTypes<typeof packsActions>>
 export const packsReducer = (state = initialCardPacks, action: packsReducerActionType): InitialCardPacksType => {
     switch (action.type) {
+
         case packsActionsEnum.SET_PACKS: {
             return {...state, cardPacks: action.payload.state.cardPacks}
         }
