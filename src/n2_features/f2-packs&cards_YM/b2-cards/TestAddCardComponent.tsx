@@ -31,7 +31,7 @@ const TestAddCardComponent = ({setNewCard, packId}: TestAddCardComponentType) =>
             </h2>
             <div className={s.centerInputContainer}>
                 <span>
-                    Question:
+                    Question: <span>&nbsp; ✎</span>
                 </span>
                 <input
                     type="text"
@@ -41,7 +41,7 @@ const TestAddCardComponent = ({setNewCard, packId}: TestAddCardComponentType) =>
             </div>
             <div className={s.centerInputContainer}>
                 <span>
-                    Answer:
+                    Answer: <span>&nbsp; ✎</span>
                 </span>
                 <input
                     type="text"

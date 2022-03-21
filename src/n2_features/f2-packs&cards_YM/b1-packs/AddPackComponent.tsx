@@ -35,7 +35,7 @@ const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
             </h2>
             <div className={s.centerInputContainer}>
                     <span>
-                        Name pack
+                        Name pack <span>&nbsp; ✎</span>
                     </span>
                 <input
                     type="text"
