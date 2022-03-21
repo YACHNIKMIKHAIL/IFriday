@@ -16,7 +16,7 @@ const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
     const pack = {
         name: newPack,
         deckCover: '',
-        private: newPackPrivate
+        private: newPackPrivate,
     }
 
     const addNewPack = () => {
@@ -30,19 +30,19 @@ const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
 
     return (
         <div className={s.addItemContainer}>
-                <h2>
-                    Add new pack:
-                </h2>
-                <div className={s.centerInputContainer}>
+            <h2>
+                Add new pack:
+            </h2>
+            <div className={s.centerInputContainer}>
                     <span>
                         Name pack
                     </span>
-                    <input
-                        type="text"
-                        value={newPack}
-                        onChange={(e) => seNewPack(e.currentTarget.value)}
-                    />
-                </div>
+                <input
+                    type="text"
+                    value={newPack}
+                    onChange={(e) => seNewPack(e.currentTarget.value)}
+                />
+            </div>
 
             <div className={s.makePrivateContainer}>
                 <span>
@@ -62,4 +62,4 @@ const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
     )
 }
 
-export default AddPackComponent;
+export default AddPackComponent

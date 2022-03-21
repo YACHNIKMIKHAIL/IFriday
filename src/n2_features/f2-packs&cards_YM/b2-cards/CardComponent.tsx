@@ -31,9 +31,11 @@ const styles = {
         fontSize: 'small'
     }
 }
+
 type CardComponentType = {
     c: CardType
 }
+
 const CardComponent = ({c}: CardComponentType) => {
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const navigate = useNavigate()

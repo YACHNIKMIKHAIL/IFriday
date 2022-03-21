@@ -54,7 +54,7 @@ const TestAddCardComponent = ({setNewCard, packId}: TestAddCardComponentType) =>
                 <button onClick={addNewCard}>Add</button>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default TestAddCardComponent;
+export default TestAddCardComponent

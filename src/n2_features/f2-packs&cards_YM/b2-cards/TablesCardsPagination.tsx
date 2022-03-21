@@ -8,8 +8,7 @@ const TablesCardsPagination = () => {
     const dispatch = useDispatch()
     const actualCardsPage = useFridaySelector<number>(state => state.cards.page)
     const actualCardsCount = useFridaySelector<number>(state => state.cards.pageCount)
-
-    const [page, setPage] = React.useState<number>(actualCardsPage);
+    const [page, setPage] = React.useState<number>(actualCardsPage)
 
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
@@ -27,7 +26,7 @@ const TablesCardsPagination = () => {
     const handleChangeRowsPerPage = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
-        setPage(0);
+        setPage(0)
         dispatch(cardsActions.cardsPageCountAC(parseInt(event.target.value)))
     }
     return (
@@ -39,6 +38,7 @@ const TablesCardsPagination = () => {
             rowsPerPage={actualCardsCount}
             onRowsPerPageChange={handleChangeRowsPerPage}
         />
-    );
+    )
 }
+
 export default TablesCardsPagination;

@@ -17,7 +17,7 @@ import AddPackComponent from "./AddPackComponent";
 const PacksList = () => {
 
     const dispatch = useDispatch()
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const [selected, setSelected] = useState<'MY' | 'ALL'>('ALL')
     const [addPack, setAddPack] = useState<boolean>(false)
@@ -52,7 +52,6 @@ const PacksList = () => {
         dispatch(packsTC())
     }, [debouncedSearch[0], packsState.user_id, debouncedMIN[0], debouncedMAX[0], packsState.pageCount,
         packsState.page, packsState.updated])
-
 
 
     return (
@@ -97,7 +96,8 @@ const PacksList = () => {
                                     <div className={style.searchContainer}>
                                         <input placeholder={"Search..."}
                                                value={packsState.packName}
-                                               onChange={onChangeSearchInput}/>
+                                               onChange={onChangeSearchInput}
+                                        />
                                         <button
                                             className={style.buttonSearch}
                                             onClick={() => setAddPack(!addPack)}
@@ -111,8 +111,14 @@ const PacksList = () => {
                                     {
                                         packs.map((item, index) => {
                                             return (
-                                                <div key={index} onDoubleClick={() => runToCards(item._id)}>
-                                                    <TableX key={index} p={item}/>
+                                                <div
+                                                    key={index}
+                                                    onDoubleClick={() => runToCards(item._id)}
+                                                >
+                                                    <TableX
+                                                        key={index}
+                                                        p={item}
+                                                    />
                                                 </div>
                                             )
                                         })
@@ -124,10 +130,11 @@ const PacksList = () => {
                     ) : (
                         <div>
                             {addPack && <AddPackComponent setAddPack={setAddPack}/>}
-                        </div>)
+                        </div>
+                    )
             }
         </div>
     )
 }
 
-export default PacksList;
+export default PacksList
