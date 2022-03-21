@@ -85,7 +85,7 @@ const TableCell = ({item, status, _id, user_id, dataStatus}: any) => {
     const [edit, setEdit] = useState<boolean>(false)
 
 
-    const saveChanges = () => {
+    const saveChanges =() => {
         setEdit(false)
         dispatch(changePacksTC(newPackName, _id))
     }
