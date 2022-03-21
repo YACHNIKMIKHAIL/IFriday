@@ -21,7 +21,6 @@ const theme = createTheme({
 })
 
 ReactDOM.render(
-    // <React.StrictMode>
     <ThemeProvider theme={theme}>
         <Provider store={store}>
             <HashRouter>

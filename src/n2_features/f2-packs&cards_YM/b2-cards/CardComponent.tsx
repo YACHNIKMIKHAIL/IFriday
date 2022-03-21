@@ -7,7 +7,7 @@ import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@material-ui/icons";
 import {RoutesXPaths} from '../../../n1_main/m1-ui/routes/routes';
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const styles = {
     main: {
@@ -40,9 +40,7 @@ const CardComponent = ({c}: CardComponentType) => {
     const dispatch = useDispatch()
     const [editCard, setEditCard] = useState<boolean>(false)
     const [q, setQ] = useState<string>('')
-    const {pathname}=useLocation()
 
-    console.log(pathname)
     const deleteCard = () => {
         dispatch(deleteCardTC(c._id))
     }
