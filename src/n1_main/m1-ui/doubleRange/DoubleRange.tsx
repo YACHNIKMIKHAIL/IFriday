@@ -5,7 +5,6 @@ import {packsActions} from "../../m2-bll/r2-actions/ActionsPacks";
 import {useDispatch} from "react-redux";
 import {styled} from "@mui/material";
 
-
 type DoubleRangePropsType = {}
 
 const SuperDoubleRangeElem = styled(Slider)({
@@ -47,35 +46,24 @@ const SuperDoubleRangeElem = styled(Slider)({
             transform: 'rotate(45deg)',
         },
     },
-});
+})
 
 const DoubleRange: React.FC<DoubleRangePropsType> = (
     {}
 ) => {
-    const dispatch = useDispatch()
-    const [value, setValue] = useState([0, 100])
-    const onChangeCallback = (e: Event, values: number | number[]) => {
-        setValue(values as number[]);
 
+    const dispatch = useDispatch()
+
+    const [value, setValue] = useState([0, 100])
+
+    const onChangeCallback = (e: Event, values: number | number[]) => {
+        setValue(values as number[])
         dispatch(packsActions.minAC(value[0]))
         dispatch(packsActions.maxAC(value[1]))
-    };
-
+    }
 
     return (
         <div>
-            {/*<Slider
-                sx={{width: 100}}
-                step={10}
-                min={0}
-                max={100}
-                marks
-                getAriaLabel={() => 'Minimum distance'}
-                value={value}
-                onChange={onChangeCallback}
-                valueLabelDisplay="auto"
-                disableSwap
-            />*/}
             <SuperDoubleRangeElem
                 value={value}
                 onChange={onChangeCallback}
@@ -86,6 +74,8 @@ const DoubleRange: React.FC<DoubleRangePropsType> = (
                 disableSwap
             />
         </div>
-    );
+    )
 }
-export default DoubleRange;
+
+export default DoubleRange
+

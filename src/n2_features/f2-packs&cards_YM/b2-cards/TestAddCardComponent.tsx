@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import s from "./../b1-packs/AddPackComponent.module.css"
 import {addNewCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
+import {Undetectable} from "../../../types/Undetectable";
 
 type TestAddCardComponentType = {
     setNewCard: (c: boolean) => void
-    packId: string | undefined
+    packId: Undetectable<string>
 }
 
 const TestAddCardComponent = ({setNewCard, packId}: TestAddCardComponentType) => {

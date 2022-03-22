@@ -7,6 +7,7 @@ import {PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 import {useDispatch} from "react-redux";
 import {gradeCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import s from './LearnedCard.module.css'
+import {Undetectable} from "../../../types/Undetectable";
 
 export const LearnedCard = () => {
     const navigate = useNavigate()
@@ -21,7 +22,7 @@ export const LearnedCard = () => {
 
     const [showAnswer, setShowAnswer] = useState<boolean>(false)
     const [actualCard, setActualCard] = useState<CardType>(learnedCard)
-    const [cardRate, setCardRate] = useState<number | undefined>(undefined)
+    const [cardRate, setCardRate] = useState<Undetectable<number>>(undefined)
 
     const getCard = (cards: CardType[]) => {
         const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0);

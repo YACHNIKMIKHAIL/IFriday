@@ -7,6 +7,7 @@ import {Navigate, NavLink} from 'react-router-dom'
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {registerUserTC} from "../../../n1_main/m2-bll/r3-thunks/ThunksActionsRegisterAndRecoveryPassReducer";
 import {registerAndRecoveryPassActions} from "../../../n1_main/m2-bll/r2-actions/ActionsRegisterAndRecoveryPassReducer";
+import {Undetectable} from "../../../types/Undetectable";
 
 type FormikErrorType = {
     email?: string
@@ -15,9 +16,12 @@ type FormikErrorType = {
 }
 
 const RegisterForm = () => {
-    const error = useFridaySelector<string | undefined>(state => state.regForNewPass.register.error)
+
     const dispatch = useDispatch()
+
+    const error = useFridaySelector<Undetectable<string>>(state => state.regForNewPass.register.error)
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -25,35 +29,37 @@ const RegisterForm = () => {
             confirm: ''
         },
         validate: (values) => {
-            const errors: FormikErrorType = {};
+            const errors: FormikErrorType = {}
             if (!values.email) {
-                errors.email = 'Required';
+                errors.email = 'Required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                errors.email = 'Invalid email address';
+                errors.email = 'Invalid email address'
             }
             if (!values.password) {
-                errors.password = 'Required';
+                errors.password = 'Required'
             } else if (values.password.length < 8) {
-                errors.password = 'Invalid password,pass will be longer tham 8 symbols';
+                errors.password = 'Invalid password,pass will be longer that 8 symbols'
             }
             if (!values.confirm) {
-                errors.confirm = 'Required';
+                errors.confirm = 'Required'
             } else if (values.confirm.length !== values.password.length && values.confirm !== values.password) {
-                errors.confirm = 'Invalid confirm password';
+                errors.confirm = 'Invalid confirm password'
             }
-            return errors;
+            return errors
         },
         onSubmit: value => {
             formik.resetForm()
             dispatch(registerUserTC({email: value.email, password: value.password}))
         }
     })
+
     const cancelHandler = () => {
         formik.resetForm()
         formik.setTouched({})
         formik.setErrors({email: undefined, password: undefined, confirm: undefined})
         dispatch(registerAndRecoveryPassActions.setErrorRegisterAC(""))
     }
+
     if (error === "email already exists /ᐠ｡ꞈ｡ᐟ\\") {
         return <Navigate to={RoutesXPaths.LOGIN}/>
     }
@@ -61,6 +67,7 @@ const RegisterForm = () => {
     if (isLoggedIn) {
         return <Navigate to={RoutesXPaths.PROFILE}/>
     }
+
     return (
         <div className={regS.registerPage}>
             <div className={regS.registerContainer}>
@@ -94,17 +101,17 @@ const RegisterForm = () => {
                                 <div className={regS.errorMessage}>{formik.errors.confirm}</div> : null}
                         </div>
                         <div className={regS.buttonsDiv}>
-                            <button type="button" className={regS.cancelButton}
-                                // onClick={cancelHandler}
-                            ><NavLink to={RoutesXPaths.LOGIN} >
-                                Cancel</NavLink></button>
+                            <button type="button" className={regS.cancelButton}>
+                                <NavLink to={RoutesXPaths.LOGIN}>
+                                    Cancel
+                                </NavLink></button>
                             <button type="submit" className={regS.registerButton}>Register</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default RegisterForm;
+export default RegisterForm

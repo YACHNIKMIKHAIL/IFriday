@@ -3,6 +3,7 @@ import TablePagination from '@mui/material/TablePagination';
 import {useDispatch} from "react-redux";
 import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
+import {Nullable} from "../../../types/Nullable";
 
 const TablesCardsPagination = () => {
 
@@ -14,7 +15,7 @@ const TablesCardsPagination = () => {
     const [page, setPage] = React.useState<number>(actualCardsPage)
 
     const handleChangePage = (
-        event: React.MouseEvent<HTMLButtonElement> | null,
+        event: Nullable<React.MouseEvent<HTMLButtonElement>>,
         newPage: number,
     ) => {
         if (newPage === page) {

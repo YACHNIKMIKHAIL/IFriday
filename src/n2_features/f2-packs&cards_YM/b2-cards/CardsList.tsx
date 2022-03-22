@@ -13,10 +13,11 @@ import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 import {UpdatedType} from "../../../n1_main/m3-dal/packsAPI";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import {useParams} from "react-router-dom";
+import {Undetectable} from "../../../types/Undetectable";
 
 type CardsListType = {
     name: string
-    packId: string | undefined
+    packId: Undetectable<string>
 }
 
 const CardsList = ({name}: CardsListType) => {
@@ -80,24 +81,25 @@ const CardsList = ({name}: CardsListType) => {
                         value={cardSearchName}
                         onChange={searchCard}
                     />
-                    {myId === user_id && <button
-                        onClick={() => setNewCard(true)}>
-                        Add New Card
-                    </button>}
-
+                    {
+                        myId === user_id &&
+                        <button
+                            onClick={() => setNewCard(true)}>
+                            Add New Card
+                        </button>
+                    }
                 </div>
                 <div className={style.cardsBlock}>
                     <TableCardsHeader user_id={user_id}/>
                     {
                         cards?.map((m, i) => {
-                                return (
-                                    <CardComponent
-                                        key={i}
-                                        c={m}
-                                    />
-                                )
-                            }
-                        )
+                            return (
+                                <CardComponent
+                                    key={i}
+                                    c={m}
+                                />
+                            )
+                        })
                     }
                     <TablesCardsPagination/>
                 </div>

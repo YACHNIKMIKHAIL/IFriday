@@ -15,7 +15,7 @@ export enum RoutesXPaths {
     PROFILE = '/',
     LOGIN = '/login',
     REGISTER = '/register',
-    RECOVERY = '/passwordrecovery',
+    RECOVERY = '/passwordRecovery',
     PACKS = '/packs',
     CARDS = '/cards',
     CARDS_WITH_ID = '/cards/:packId',
@@ -52,14 +52,15 @@ const RoutesX = () => {
 
             <Redirect/>
         </div>
-    );
-};
+    )
+}
 
-export default RoutesX;
+export default RoutesX
 
 export const Redirect = () => {
 
     const {pathname} = useLocation()
+
     const inLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
 
     if (!inLoggedIn && pathname !== RoutesXPaths.LOGIN) {
@@ -68,5 +69,6 @@ export const Redirect = () => {
 
     return (
         <>
-        </>)
+        </>
+    )
 }

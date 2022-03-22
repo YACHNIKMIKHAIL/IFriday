@@ -6,7 +6,7 @@ const Packs = () => {
         <div>
             <PacksList/>
         </div>
-    );
-};
+    )
+}
 
-export default Packs;
+export default Packs

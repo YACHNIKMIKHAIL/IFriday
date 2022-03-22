@@ -5,14 +5,16 @@ import {useParams} from "react-router-dom";
 import {PackType} from "../../m2-bll/r1-reducers/packsReducer";
 
 const Cards = () => {
-    const {packId} = useParams<'packId'>();
+
+    const {packId} = useParams<'packId'>()
+
     const actualPack = useFridaySelector<PackType[]>(state => state.packs.cardPacks.filter(f => f._id === packId))[0]
 
     return (
         <div>
             <CardsList name={actualPack?.name}  packId={packId} />
         </div>
-    );
-};
+    )
+}
 
-export default Cards;
+export default Cards

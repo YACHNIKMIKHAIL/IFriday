@@ -4,11 +4,10 @@ import Preloader from "../preloader/Preloader";
 import {CardType} from "../../../m2-bll/r1-reducers/cardsReducer";
 import Rating from "@mui/material/Rating/Rating";
 
-
-
 type TableCardsType = {
     cards: CardType
 }
+
 const TableCards = ({cards}: TableCardsType) => {
 
     const arr = [{
@@ -18,6 +17,7 @@ const TableCards = ({cards}: TableCardsType) => {
         Grade: cards.grade,
 
     }]
+
     return (
         arr
             ? (
@@ -30,7 +30,8 @@ const TableCards = ({cards}: TableCardsType) => {
 
                 </div>)
     )
-};
+}
+
 const TableRow = ({arr}: any) => {
 
     const {
@@ -39,7 +40,6 @@ const TableRow = ({arr}: any) => {
         Updated,
         Grade
     } = arr
-
 
     return (
         <div className={s.tableRow}>
@@ -52,7 +52,8 @@ const TableRow = ({arr}: any) => {
 
         </div>
     )
-};
+}
+
 const TableCell = ({item}: any) => {
     return (
         <div className={s.tableCell}>
@@ -60,6 +61,7 @@ const TableCell = ({item}: any) => {
         </div>
     )
 }
+
 export default TableCards;
 
 export const ButtonGroup = () => {

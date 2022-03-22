@@ -39,15 +39,17 @@ type CardComponentType = {
 }
 
 const CardComponent = ({c}: CardComponentType) => {
-    const myId = useFridaySelector<string>(state => state.profile.profile._id)
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    const myId = useFridaySelector<string>(state => state.profile.profile._id)
+
     const [editCard, setEditCard] = useState<boolean>(false)
 
     const deleteCard = () => {
         dispatch(deleteCardTC(c._id))
     }
-
 
     const cardId = c._id
     const packId = c.cardsPack_id
@@ -57,14 +59,20 @@ const CardComponent = ({c}: CardComponentType) => {
     }
 
     if (editCard) {
-        return <Modal backgroundOnClick={() => setEditCard(false)}
-                      show={true}
-                      height={0}
-                      width={0}
-                      backgroundStyle={{backgroundColor: 'darkolivegreen'}}
-                      enableBackground={true}>
-            <EditCardComponent setEditCard={setEditCard} cardId={c._id} oldQ={c.question}/>
-        </Modal>
+        return (
+            <Modal
+                backgroundOnClick={() => setEditCard(false)}
+                show={true}
+                height={0}
+                width={0}
+                backgroundStyle={{backgroundColor: 'darkolivegreen'}}
+                enableBackground={true}>
+                <EditCardComponent
+                    setEditCard={setEditCard}
+                    cardId={c._id}
+                    oldQ={c.question}/>
+            </Modal>
+        )
     }
     return (
         <div style={styles.main} onDoubleClick={goToCard}>

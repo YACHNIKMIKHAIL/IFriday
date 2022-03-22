@@ -9,10 +9,11 @@ type TCHType = { user_id: string }
 const TableCardsHeader = ({user_id}: TCHType) => {
 
     const dispatch = useDispatch()
-    const [lastUpd, setLastUpd] = useState<boolean>(false)
-    const [gradeUpd, setGradeUpd] = useState<boolean>(false)
 
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
+
+    const [lastUpd, setLastUpd] = useState<boolean>(false)
+    const [gradeUpd, setGradeUpd] = useState<boolean>(false)
 
     const getNewCard = () => {
         dispatch(cardsActions.updateFilterCardAC('1created'))
@@ -36,16 +37,18 @@ const TableCardsHeader = ({user_id}: TCHType) => {
 
     return (
         <div className={s.tableHeader}>
-            <li>Question</li>
-            <li>Answer</li>
-            <li onClick={lastUpd ? getOldCard : getNewCard}>Last Updated
-                {/*{*/}
-                {/*    lastUpd*/}
-                {/*        ? <button onClick={getOldCard}>{`new ᐃ`}</button>*/}
-                {/*        : <button onClick={getNewCard}>{`old ᐁ`}</button>*/}
-                {/*}*/}
+            <li>
+                Question
             </li>
-            <li onClick={gradeUpd ? getGradeUpdLessCard : getGradeUpdMoreCard}>Grade</li>
+            <li>
+                Answer
+            </li>
+            <li onClick={lastUpd ? getOldCard : getNewCard}>
+                Last Updated
+            </li>
+            <li onClick={gradeUpd ? getGradeUpdLessCard : getGradeUpdMoreCard}>
+                Grade
+            </li>
             {
                 myId === user_id && <li>Actions</li>
             }

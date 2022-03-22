@@ -7,13 +7,14 @@ import {RoutesXPaths} from "../routes/routes";
 import style from './Logout.module.css'
 
 const Logout = () => {
+
     const dispatch = useDispatch()
+
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
 
     const logoutHandler = () => {
         dispatch(logoutUserTC())
     }
-
 
     if (!isLoggedIn) {
         return <Navigate to={RoutesXPaths.LOGIN}/>
@@ -34,6 +35,6 @@ const Logout = () => {
             </div>
         </div>
     )
-};
+}
 
-export default Logout;
+export default Logout

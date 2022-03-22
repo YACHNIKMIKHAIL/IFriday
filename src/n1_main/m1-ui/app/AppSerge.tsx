@@ -10,8 +10,10 @@ import {meTC} from "../../m2-bll/r3-thunks/ThunkMe";
 
 
 function AppSerge() {
-    const status = useFridaySelector<RequestStatusType>(state => state.app.status)
+
     const dispatch = useDispatch()
+
+    const status = useFridaySelector<RequestStatusType>(state => state.app.status)
     const initialized = useFridaySelector<boolean>(state => state.me.isInitialized)
 
     useEffect(() => {
@@ -22,13 +24,12 @@ function AppSerge() {
         return <Preloader status={status}/>
     }
 
-
     return (
         <div className="App">
             <Main/>
             <RoutesX/>
         </div>
-    );
+    )
 }
 
-export default AppSerge;
+export default AppSerge
