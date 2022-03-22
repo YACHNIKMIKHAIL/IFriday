@@ -39,6 +39,9 @@ const LearnedCard = () => {
         getCard(actualPackCards)
         setShowAnswer(false)
     }
+    const goBack = () => {
+        navigate(RoutesXPaths.CARDS)
+    }
 
     return (
         <div className={s.addItemContainer}
@@ -112,13 +115,12 @@ const LearnedCard = () => {
                 }
             </div>
             <div>
-                <button onClick={() => navigate(RoutesXPaths.CARDS)}>Cancel</button>
+                <button onClick={goBack}>Cancel</button>
                 {
                     !showAnswer
                         ? <button onClick={() => setShowAnswer(!showAnswer)}>Show answer</button>
                         : <button onClick={nextCard}>Next card</button>
                 }
-
             </div>
         </div>
     )
