@@ -13,6 +13,7 @@ import {useDebounce} from "use-debounce";
 import TableHeader from "../../../n1_main/m1-ui/common/table/TableHeader";
 import AddPackComponent from "./AddPackComponent";
 import OnlyOnePackComponent from "./OnlyOnePackComponent";
+import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 
 const PacksList = () => {
 
@@ -108,6 +109,17 @@ const PacksList = () => {
                                 </div>
 
                                 <div className={style.cardsBlock}>
+                                    <Modal modalOnClick={() => {
+                                        alert('modalOnClick')
+                                    }}
+                                           backgroundOnClick={() => {
+                                               alert('backgroundOnClick')
+                                           }}
+                                           show={true} height={10} width={10}
+                                           backgroundStyle={{backgroundColor: 'pink'}}
+                                           enableBackground={true}>
+                                        <div>nbdvicask`</div>
+                                    </Modal>
                                     <TableHeader/>
                                     {
                                         packs.map((item, index) => {
