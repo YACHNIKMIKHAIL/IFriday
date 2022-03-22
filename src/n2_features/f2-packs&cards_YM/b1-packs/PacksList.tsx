@@ -10,10 +10,10 @@ import {packsTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import {useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {useDebounce} from "use-debounce";
-import TableX from "../../../n1_main/m1-ui/common/table/TableX";
 import TableHeader from "../../../n1_main/m1-ui/common/table/TableHeader";
 import AddPackComponent from "./AddPackComponent";
-import TableRow from "../../../n1_main/m1-ui/common/table/TableX";
+import OnlyOnePackComponent from "./OnlyOnePackComponent";
+import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 
 const PacksList = () => {
 
@@ -56,78 +56,83 @@ const PacksList = () => {
         packsState.page, packsState.updated])
 
 
+    if (addPack) {
+        return <Modal backgroundOnClick={() => setAddPack(false)}
+                      show={true}
+                      height={0}
+                      width={0}
+                      backgroundStyle={{backgroundColor: 'hotpink'}}
+                      enableBackground={true}>
+            <AddPackComponent setAddPack={setAddPack}/>
+        </Modal>
+    }
+
     return (
-        <div>
-            {
-                !addPack
-                    ? (<div className={style.packsListBlock}>
+        <div className={style.packsListBlock}>
 
-                            <div className={style.showPacks}>
-                                <h4 className={style.title}>
-                                    Show packs cards
-                                </h4>
-                                <button
-                                    className={selected === "MY" ? style.selected : style.hoverSelected}
-                                    onClick={() => selectMyOrAll(myId)}
-                                >
-                                    My
-                                </button>
-                                <button
-                                    className={selected === "ALL" ? style.selected : style.hoverSelected}
-                                    onClick={() => selectMyOrAll(null)}
-                                >
-                                    All
-                                </button>
-                                <h4 className={style.title}>
-                                    Number of cards
-                                </h4>
-                                <DoubleRange/>
-                                <div className={style.rangeValue}>
-                                    <div className={style.rangeValue__item}>min : {packsState.minCardsCount} </div>
-                                    <div className={style.rangeValue__item}>max : {packsState.maxCardsCount}</div>
-                                </div>
+            <div className={style.showPacks}>
+                <h4 className={style.title}>
+                    Show packs cards
+                </h4>
+                <button
+                    className={selected === "MY" ? style.selected : style.hoverSelected}
+                    onClick={() => selectMyOrAll(myId)}
+                >
+                    My
+                </button>
+                <button
+                    className={selected === "ALL" ? style.selected : style.hoverSelected}
+                    onClick={() => selectMyOrAll(null)}
+                >
+                    All
+                </button>
+                <h4 className={style.title}>
+                    Number of cards
+                </h4>
+                <DoubleRange/>
+                <div className={style.rangeValue}>
+                    <div className={style.rangeValue__item}>min : {packsState.minCardsCount} </div>
+                    <div className={style.rangeValue__item}>max : {packsState.maxCardsCount}</div>
+                </div>
+            </div>
+
+            <div className={style.packsList}>
+                <div>
+                    <h2 className={style.title}>Pack list</h2>
+                    <div className={style.searchContainer}>
+                        <input placeholder={"Search..."}
+                               value={packsState.packName}
+                               onChange={onChangeSearchInput}/>
+                        <button
+                            className={style.buttonSearch}
+                            onClick={() => setAddPack(!addPack)}
+                        >
+                            Add New
+                        </button>
+                    </div>
+                </div>
+
+                <div className={style.cardsBlock}>
+                    <TableHeader/>
+                    {
+                        packs.map((item, index) => {
+                            return <div key={index} onDoubleClick={() => runToCards(item._id)}>
+                                <OnlyOnePackComponent item={item} runToCards={runToCards}/>
                             </div>
 
-                            <div className={style.packsList}>
-                                {/*{globalError*/}
-                                {/*    ? <h2 style={{color: 'red'}}>{globalError}</h2>*/}
-                                {/*    : <h2 className={style.title}>Pack list</h2>*/}
-                                {/*}*/}
-                                <div>
-                                    <h2 className={style.title}>Pack list</h2>
-                                    <div className={style.searchContainer}>
-                                        <input placeholder={"Search..."}
-                                               value={packsState.packName}
-                                               onChange={onChangeSearchInput}/>
-                                        <button
-                                            className={style.buttonSearch}
-                                            onClick={() => setAddPack(!addPack)}
-                                        >
-                                            Add New
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className={style.cardsBlock}>
-                                    <TableHeader/>
-                                    {
-                                        packs.map((item, index) => {
-                                            return (
-                                                <div key={index} onDoubleClick={() => runToCards(item._id)}>
-                                                    <TableX/>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                                <TablesPagination/>
-                            </div>
-                        </div>
-                    ) : (
-                        <div>
-                            {addPack && <AddPackComponent setAddPack={setAddPack}/>}
-                        </div>
-                    )
-            }
+                            // <div key={index} onDoubleClick={() => runToCards(item._id)}>
+                            {/*<TableX/>*/
+                            }
+                            // <OnlyOnePackComponent item={item} key={index}/>
+                            {/*</div>*/
+                            }
+
+                        })
+                    }
+                    <TablesPagination/>
+                </div>
+
+            </div>
         </div>
     )
 }

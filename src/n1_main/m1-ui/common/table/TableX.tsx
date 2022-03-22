@@ -30,12 +30,6 @@ const TableX = () => {
                 </div>)
     )
 }
-// type TableRowType={
-//     arr:PackType
-//     status:boolean
-//
-// }
-
 
 const TableRow = ({arr, status = true}: any) => {
     const {
@@ -63,7 +57,7 @@ const TableRow = ({arr, status = true}: any) => {
                                                autoFocus value={newPackName}
                                                className={s.input}/> : <TableCell item={name}/>}
             <TableCell item={cardsCount}/>
-            <TableCell item={updated}/>
+            <TableCell item={updated} dataStatus={true}/>
             <TableCell item={user_name}/>
             <TableCell item={actions} _id={_id} user_id={user_id}/>
             {
@@ -74,13 +68,26 @@ const TableRow = ({arr, status = true}: any) => {
     )
 }
 
-const TableCell = ({item}: any) => {
+const TableCell = ({item, status, _id, user_id, dataStatus}: any) => {
+    const dispatch = useDispatch()
+    const [newPackName, setNewPackName] = useState<string>('')
+    const [edit, setEdit] = useState<boolean>(false)
+
+
+    const saveChanges = () => {
+        setEdit(false)
+        dispatch(changePacksTC(newPackName, _id))
+    }
 
     return (
         <div className={s.tableCell}>
-
-            <>{item}</>
-
+            {
+                dataStatus ? <>{`дата: ${item.slice(0,10)}, время: ${item.slice(12,19)}`}</>: <>{item}</>
+            }
+            {
+                status &&
+                <ButtonGroup _id={_id} user_id={user_id} edit={edit} setEdit={setEdit} saveChanges={saveChanges}/>
+            }
         </div>
     )
 }
