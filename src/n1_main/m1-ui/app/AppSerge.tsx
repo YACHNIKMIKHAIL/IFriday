@@ -8,8 +8,7 @@ import Main from "../../Main";
 import RoutesX from "../routes/routes";
 import {meTC} from "../../m2-bll/r3-thunks/ThunkMe";
 
-
-function AppSerge() {
+const AppSerge = () => {
 
     const dispatch = useDispatch()
 

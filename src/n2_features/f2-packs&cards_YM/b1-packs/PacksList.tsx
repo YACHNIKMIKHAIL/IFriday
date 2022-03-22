@@ -82,14 +82,12 @@ const PacksList = () => {
                 </h4>
                 <button
                     className={selected === "MY" ? style.selected : style.hoverSelected}
-                    onClick={() => selectMyOrAll(myId)}
-                >
+                    onClick={() => selectMyOrAll(myId)}>
                     My
                 </button>
                 <button
                     className={selected === "ALL" ? style.selected : style.hoverSelected}
-                    onClick={() => selectMyOrAll(null)}
-                >
+                    onClick={() => selectMyOrAll(null)}>
                     All
                 </button>
                 <h4 className={style.title}>
@@ -97,7 +95,7 @@ const PacksList = () => {
                 </h4>
                 <DoubleRange/>
                 <div className={style.rangeValue}>
-                    <div className={style.rangeValue__item}>min : {packsState.minCardsCount} </div>
+                    <div className={style.rangeValue__item}>min : {packsState.minCardsCount}</div>
                     <div className={style.rangeValue__item}>max : {packsState.maxCardsCount}</div>
                 </div>
             </div>
@@ -111,8 +109,7 @@ const PacksList = () => {
                                onChange={onChangeSearchInput}/>
                         <button
                             className={style.buttonSearch}
-                            onClick={() => setAddPack(!addPack)}
-                        >
+                            onClick={() => setAddPack(!addPack)}>
                             Add New
                         </button>
                     </div>

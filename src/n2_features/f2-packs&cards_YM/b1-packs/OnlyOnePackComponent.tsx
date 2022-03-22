@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import {deletePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import EditPackComponent from "./EditPackComponent";
+import s from './OnlyOnePackComponent.module.css'
 
 type OnlyOnePackComponentType = {
     item: PackType
@@ -43,66 +44,34 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
     }
 
     return (
-        <div style={{
-            display: 'flex',
-            width: '98%',
-            backgroundColor: 'pink',
-            margin: '5px',
-            borderRadius: '5px'
-        }}>
-            <div style={{
-                width: '16%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                textAlign: 'center'
-            }}>{item.name}
+        <div className={s.TableContainer}>
+            <div className={s.TableItem__name}>
+                {item.name}
             </div>
-            <div style={{
-                width: '15%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}>
+            <div className={s.TableItem__cardsCount}>
                 {item.cardsCount}
             </div>
-            <div style={{
-                width: '25%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                fontSize: '13px'
-            }}>
+            <div className={s.TableItem__data}>
                 <div>дата: {item.updated.slice(0, 10)},</div>
                 <div>время: {item.updated.slice(12, 19)}</div>
             </div>
-            <div style={{
-                width: '15%',
-                display: 'flex',
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-                textAlign: 'end'
-            }}>
+            <div className={s.TableItem__userName}>
                 {item.user_name}
             </div>
-            <div style={{
-                width: '29%', display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}>
-                {myId === item.user_id
-                    ? <>
-                        <Button size="small" onClick={() => setEdit(true)}>edit</Button>
-                        <Button size="small" onClick={() => runToCards(item._id)}>learn</Button>
-                        <IconButton onClick={() => deletePack(item._id)} aria-label="delete">
-                            <Delete/>
-                        </IconButton>
-                    </>
-                    : <>
-                        <Button size="small" onClick={() => runToCards(item._id)}>learn</Button>
-                    </>}
-
+            <div className={s.TableItem__BtnGroup}>
+                {
+                    myId === item.user_id
+                        ? <div className={s.BtnGroup__Item__My}>
+                            <Button size="small" onClick={() => setEdit(true)}>edit</Button>
+                            <Button size="small" onClick={() => runToCards(item._id)}>learn</Button>
+                            <IconButton onClick={() => deletePack(item._id)} aria-label="delete">
+                                <Delete/>
+                            </IconButton>
+                        </div>
+                        : <div className={s.BtnGroup__Item__NoMy}>
+                            <Button size="small" onClick={() => runToCards(item._id)}>learn</Button>
+                        </div>
+                }
             </div>
         </div>
     )
