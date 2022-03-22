@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {addNewPacksTC, changePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
+import {changePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import {useDispatch} from "react-redux";
 import s from "./AddPackComponent.module.css"
 
@@ -22,7 +22,7 @@ const EditPackComponent = ({packId, oldName, setEditPack}: EditPackComponentType
     return (
         <div className={s.addItemContainer}>
             <h2>
-                Add new pack:
+                Edit pack:
             </h2>
             <div className={s.centerInputContainer}>
                     <span>

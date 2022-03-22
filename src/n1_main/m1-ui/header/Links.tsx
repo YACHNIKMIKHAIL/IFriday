@@ -50,7 +50,7 @@ const Links = () => {
                 <NavLink to={RoutesXPaths.LEARNED_CARD}
                          className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}
                          style={{textDecoration: 'none'}}
-                >LC</NavLink>
+                >Learned Card</NavLink>
             </>
             <>
                 <NavLink to={RoutesXPaths.LOGOUT}

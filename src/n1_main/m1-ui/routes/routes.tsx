@@ -24,7 +24,6 @@ export enum RoutesXPaths {
     LOGOUT = '/logout',
     LEARNED_CARD = '/card',
     LEARNED_CARD_WITH_ID = '/card/:packId/:cardId',
-    // LEARNED_CARD_WITH_ID = '/cards/:packId/:cardId',
 }
 
 const RoutesX = () => {

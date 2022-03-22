@@ -5,7 +5,6 @@ import {Button, IconButton} from "@mui/material";
 import {Delete} from "@material-ui/icons";
 import {useDispatch} from "react-redux";
 import {deletePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
-import AddPackComponent from "./AddPackComponent";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import EditPackComponent from "./EditPackComponent";
 
@@ -17,7 +16,6 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const dispatch = useDispatch()
     const [edit, setEdit] = useState<boolean>(false)
-    const [newName, setNewName] = useState<string>(item.name)
 
     const deletePack = (id: string) => {
         dispatch(deletePacksTC(id))

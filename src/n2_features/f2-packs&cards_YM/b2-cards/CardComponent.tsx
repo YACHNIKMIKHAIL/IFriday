@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import {CardType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
 import {Rating} from "@material-ui/core";
-import {deleteCardTC, updateCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
+import {deleteCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@material-ui/icons";
 import {RoutesXPaths} from '../../../n1_main/m1-ui/routes/routes';
 import {useNavigate} from "react-router-dom";
+import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
+import EditCardComponent from "./EditCardComponent";
 
 const styles = {
     main: {
@@ -41,43 +43,39 @@ const CardComponent = ({c}: CardComponentType) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [editCard, setEditCard] = useState<boolean>(false)
-    const [q, setQ] = useState<string>('')
 
     const deleteCard = () => {
         dispatch(deleteCardTC(c._id))
     }
 
-    const updatedCard = {
-        _id: c._id,
-        question: q,
-        comments: '',
-    }
-    const saveCard = () => {
-        dispatch(updateCardTC(updatedCard))
-        setEditCard(false)
-    }
+
     const cardId = c._id
     const packId = c.cardsPack_id
 
-    const goToCard=()=>{
+    const goToCard = () => {
         navigate(`${RoutesXPaths.LEARNED_CARD}/${packId}/${cardId}`)
     }
 
+    if (editCard) {
+        return <Modal backgroundOnClick={() => setEditCard(false)}
+                      show={true}
+                      height={0}
+                      width={0}
+                      backgroundStyle={{backgroundColor: 'darkolivegreen'}}
+                      enableBackground={true}>
+            <EditCardComponent setEditCard={setEditCard} cardId={c._id} oldQ={c.question}/>
+        </Modal>
+    }
     return (
         <div style={styles.main} onDoubleClick={goToCard}>
             <div style={styles.window}>
-                {
-                    editCard && c.user_id === myId
-                        ? <input onBlur={saveCard} autoFocus type="text" value={q}
-                                 onChange={(e) => setQ(e.currentTarget.value)}/>
-                        : <span onDoubleClick={() => setEditCard(true)}>{c.question}</span>
-                }
+                <span onDoubleClick={() => setEditCard(true)}>{c.question}</span>
             </div>
             <div style={styles.window}>
                 {c.answer}
             </div>
             <div style={styles.updated}>
-                {`дата: ${c.updated.slice(0,10)}, время: ${c.updated.slice(12,19)}`}
+                дата: {c.updated.slice(0, 10)}, время: {c.updated.slice(12, 19)}
             </div>
             <div style={styles.window}>
                 <Rating
@@ -89,23 +87,11 @@ const CardComponent = ({c}: CardComponentType) => {
             {
                 myId === c.user_id &&
                 <>
-                    {
-                        !editCard
-                            ? (
-                                <>
-                                    <Button size="small" onClick={goToCard}>learn</Button>
-                                    <Button size="small" onClick={() => setEditCard(true)}>edit</Button>
-                                    <IconButton onClick={deleteCard} aria-label="delete">
-                                        <Delete/>
-                                    </IconButton>
-                                </>
-                            ) : (
-                                <div>
-                                    <Button size="small" onClick={saveCard}>save</Button>
-                                    <Button size="small" onClick={() => setEditCard(false)}>cancel</Button>
-                                </div>
-                            )
-                    }
+                    <Button size="small" onClick={goToCard}>learn</Button>
+                    <Button size="small" onClick={() => setEditCard(true)}>edit</Button>
+                    <IconButton onClick={deleteCard} aria-label="delete">
+                        <Delete/>
+                    </IconButton>
                 </>
             }
         </div>

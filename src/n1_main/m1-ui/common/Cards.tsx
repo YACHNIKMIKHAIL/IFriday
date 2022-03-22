@@ -10,7 +10,7 @@ const Cards = () => {
 
     return (
         <div>
-            <CardsList name={actualPack?.name} user_id={actualPack?.user_id} packId={packId}/>
+            <CardsList name={actualPack?.name}  packId={packId} />
         </div>
     );
 };
