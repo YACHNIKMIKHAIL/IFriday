@@ -11,6 +11,8 @@ import {cardsTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import TestAddCardComponent from "./TestAddCardComponent";
 import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 import {UpdatedType} from "../../../n1_main/m3-dal/packsAPI";
+import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
+import AddPackComponent from "../b1-packs/AddPackComponent";
 
 type CardsListType = {
     name: string
@@ -81,12 +83,17 @@ const CardsList = ({name, user_id, packId}: CardsListType) => {
                             </div>
                         </div>
                     ) : (
-                        <div>
+                        <Modal backgroundOnClick={() => setNewCard(false)}
+                               show={true}
+                               height={0}
+                               width={0}
+                               backgroundStyle={{backgroundColor: 'deepskyblue'}}
+                               enableBackground={true}>
                             <TestAddCardComponent
                                 packId={packId}
                                 setNewCard={setNewCard}
                             />
-                        </div>
+                        </Modal>
                     )
             }
         </div>
