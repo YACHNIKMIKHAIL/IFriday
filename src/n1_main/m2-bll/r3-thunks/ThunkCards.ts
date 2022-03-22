@@ -9,6 +9,7 @@ export const cardsTC = (id: string) => {
         const {cardAnswer, cardQuestion, minGrade, maxGrade, sortCards, page, pageCount} = getState().cards
         dispatch(setAppStatusAC("loading"))
         try {
+            debugger
             let res = await cardsAPI.setCards(cardAnswer, cardQuestion, id, minGrade, maxGrade, sortCards, page, pageCount)
             dispatch(cardsActions.setCardsAC(res.data))
             dispatch(setAppStatusAC("succeeded"))

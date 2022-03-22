@@ -10,10 +10,9 @@ import {packsTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import {useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {useDebounce} from "use-debounce";
-import TableX from "../../../n1_main/m1-ui/common/table/TableX";
 import TableHeader from "../../../n1_main/m1-ui/common/table/TableHeader";
 import AddPackComponent from "./AddPackComponent";
-import TableRow from "../../../n1_main/m1-ui/common/table/TableX";
+import OnlyOnePackComponent from "./OnlyOnePackComponent";
 
 const PacksList = () => {
 
@@ -107,19 +106,24 @@ const PacksList = () => {
                                         </button>
                                     </div>
                                 </div>
+
                                 <div className={style.cardsBlock}>
                                     <TableHeader/>
                                     {
                                         packs.map((item, index) => {
-                                            return (
-                                                <div key={index} onDoubleClick={() => runToCards(item._id)}>
-                                                    <TableX/>
-                                                </div>
-                                            )
+                                            return <OnlyOnePackComponent item={item} key={index}/>
+                                            // <div key={index} onDoubleClick={() => runToCards(item._id)}>
+                                            {/*<TableX/>*/
+                                            }
+                                            // <OnlyOnePackComponent item={item} key={index}/>
+                                            {/*</div>*/
+                                            }
+
                                         })
                                     }
+                                    <TablesPagination/>
                                 </div>
-                                <TablesPagination/>
+
                             </div>
                         </div>
                     ) : (
