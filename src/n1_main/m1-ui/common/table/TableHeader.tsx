@@ -32,18 +32,20 @@ const TableHeader = () => {
 
     return (
         <div className={style.tableHeader}>
-            <div>Name</div>
+            <div>
+                <span className={style.tableHeader__item}>Name</span>
+            </div>
             <div onClick={cardsCountUpd ? getMore : getFew}>
-                Cards
+                <span className={style.tableHeader__item}>Cards</span>
             </div>
             <div onClick={lastUpd ? getOld : getNew}>
-                Last Updated
+                <span className={style.tableHeader__item}>Last Updated</span>
             </div>
             <div>
-                Created by
+                <span className={style.tableHeader__item}>Created by</span>
             </div>
             <div>
-                Actions
+                <span className={style.tableHeader__item}>Actions</span>
             </div>
         </div>
     )

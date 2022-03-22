@@ -3,6 +3,7 @@ import s from "./TableHeader.module.css"
 import {useFridaySelector} from "../../../m2-bll/store";
 import {useDispatch} from "react-redux";
 import {cardsActions} from "../../../m2-bll/r2-actions/ActionsCards";
+import style from "./TableHeader.module.css";
 
 type TCHType = { user_id: string }
 
@@ -37,20 +38,32 @@ const TableCardsHeader = ({user_id}: TCHType) => {
 
     return (
         <div className={s.tableHeader}>
-            <li>
-                Question
-            </li>
-            <li>
-                Answer
-            </li>
-            <li onClick={lastUpd ? getOldCard : getNewCard}>
-                Last Updated
-            </li>
-            <li onClick={gradeUpd ? getGradeUpdLessCard : getGradeUpdMoreCard}>
-                Grade
-            </li>
+            <div>
+                <span className={style.tableHeader__item}>
+                    Question
+                </span>
+            </div>
+            <div>
+                <span className={style.tableHeader__item}>
+                    Answer
+                </span>
+            </div>
+            <div onClick={lastUpd ? getOldCard : getNewCard}>
+                <span className={style.tableHeader__item}>
+                    Last Updated
+                </span>
+            </div>
+            <div onClick={gradeUpd ? getGradeUpdLessCard : getGradeUpdMoreCard}>
+                <span className={style.tableHeader__item}>
+                    Grade
+                </span>
+            </div>
             {
-                myId === user_id && <li>Actions</li>
+                myId === user_id && <div>
+                    <span className={style.tableHeader__item}>
+                        Actions
+                    </span>
+                </div>
             }
         </div>
     )

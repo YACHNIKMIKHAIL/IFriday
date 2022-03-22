@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
-import {Button, IconButton} from "@mui/material";
+import {IconButton} from "@mui/material";
 import {Delete} from "@material-ui/icons";
 import {useDispatch} from "react-redux";
 import {deletePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
@@ -62,14 +62,14 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
                 {
                     myId === item.user_id
                         ? <div className={s.BtnGroup__Item__My}>
-                            <Button size="small" onClick={() => setEdit(true)}>edit</Button>
-                            <Button size="small" onClick={() => runToCards(item._id)}>learn</Button>
+                            <div className={s.Btn} onClick={() => setEdit(true)}>edit</div>
+                            <div className={s.Btn} onClick={() => runToCards(item._id)}>learn</div>
                             <IconButton onClick={() => deletePack(item._id)} aria-label="delete">
                                 <Delete/>
                             </IconButton>
                         </div>
-                        : <div className={s.BtnGroup__Item__NoMy}>
-                            <Button size="small" onClick={() => runToCards(item._id)}>learn</Button>
+                        : <div className={s.BtnGroup__Item__My}>
+                            <div className={s.Btn} onClick={() => runToCards(item._id)}>learn</div>
                         </div>
                 }
             </div>
