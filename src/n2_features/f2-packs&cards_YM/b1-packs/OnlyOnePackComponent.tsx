@@ -5,21 +5,18 @@ import {Button, IconButton} from "@mui/material";
 import {Delete} from "@material-ui/icons";
 import {useDispatch} from "react-redux";
 import {deletePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
-import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
-import {useNavigate} from "react-router-dom";
 
 type OnlyOnePackComponentType = {
     item: PackType
+    runToCards: (packId: string) => void
 }
-const OnlyOnePackComponent = ({item}: OnlyOnePackComponentType) => {
+const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const [edit, setEdit] = useState<boolean>(false)
     const [newName, setNewName] = useState<string>(item.name)
     const itemName = item.name
 
-    const runToCards = () => navigate(`${RoutesXPaths.CARDS}/${item._id}`)
     const deletePack = (id: string) => {
         dispatch(deletePacksTC(id))
     }
@@ -27,16 +24,16 @@ const OnlyOnePackComponent = ({item}: OnlyOnePackComponentType) => {
         <div style={{
             display: 'flex',
             width: '98%',
-            backgroundColor:'pink',
-            margin:'5px',
-            borderRadius:'5px'
+            backgroundColor: 'pink',
+            margin: '5px',
+            borderRadius: '5px'
         }}>
             <div style={{
                 width: '16%',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                textAlign:'center'
+                textAlign: 'center'
             }}>
                 {!edit
                     ? itemName
@@ -67,11 +64,11 @@ const OnlyOnePackComponent = ({item}: OnlyOnePackComponentType) => {
                 display: 'flex',
                 justifyContent: 'flex-end',
                 alignItems: 'center',
-                textAlign:'end'
+                textAlign: 'end'
             }}>
                 {item.user_name}
             </div>
-            <div style={ {
+            <div style={{
                 width: '29%', display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -79,13 +76,13 @@ const OnlyOnePackComponent = ({item}: OnlyOnePackComponentType) => {
                 {myId === item.user_id
                     ? <>
                         <Button size="small" onClick={() => setEdit(true)}>edit</Button>
-                        <Button size="small" onClick={runToCards}>learn</Button>
+                        <Button size="small" onClick={() => runToCards(item._id)}>learn</Button>
                         <IconButton onClick={() => deletePack(item._id)} aria-label="delete">
                             <Delete/>
                         </IconButton>
                     </>
                     : <>
-                        <Button size="small" onClick={runToCards}>learn</Button>
+                        <Button size="small" onClick={() => runToCards(item._id)}>learn</Button>
                     </>}
 
             </div>

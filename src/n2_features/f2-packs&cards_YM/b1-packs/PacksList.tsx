@@ -109,21 +109,13 @@ const PacksList = () => {
                                 </div>
 
                                 <div className={style.cardsBlock}>
-                                    <Modal modalOnClick={() => {
-                                        alert('modalOnClick')
-                                    }}
-                                           backgroundOnClick={() => {
-                                               alert('backgroundOnClick')
-                                           }}
-                                           show={true} height={10} width={10}
-                                           backgroundStyle={{backgroundColor: 'pink'}}
-                                           enableBackground={true}>
-                                        <div>nbdvicask`</div>
-                                    </Modal>
                                     <TableHeader/>
                                     {
                                         packs.map((item, index) => {
-                                            return <OnlyOnePackComponent item={item} key={index}/>
+                                            return <div  key={index} onDoubleClick={() => runToCards(item._id)}>
+                                                <OnlyOnePackComponent item={item} runToCards={runToCards}/>
+                                            </div>
+
                                             // <div key={index} onDoubleClick={() => runToCards(item._id)}>
                                             {/*<TableX/>*/
                                             }
@@ -139,9 +131,14 @@ const PacksList = () => {
                             </div>
                         </div>
                     ) : (
-                        <div>
-                            {addPack && <AddPackComponent setAddPack={setAddPack}/>}
-                        </div>
+                        <Modal backgroundOnClick={() => setAddPack(false)}
+                               show={true}
+                               height={0}
+                               width={0}
+                               backgroundStyle={{backgroundColor: 'hotpink'}}
+                               enableBackground={true}>
+                            <AddPackComponent setAddPack={setAddPack}/>
+                        </Modal>
                     )
             }
         </div>
