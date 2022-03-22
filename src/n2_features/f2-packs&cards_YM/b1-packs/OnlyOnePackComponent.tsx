@@ -5,6 +5,9 @@ import {Button, IconButton} from "@mui/material";
 import {Delete} from "@material-ui/icons";
 import {useDispatch} from "react-redux";
 import {deletePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
+import AddPackComponent from "./AddPackComponent";
+import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
+import EditPackComponent from "./EditPackComponent";
 
 type OnlyOnePackComponentType = {
     item: PackType
@@ -15,11 +18,21 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
     const dispatch = useDispatch()
     const [edit, setEdit] = useState<boolean>(false)
     const [newName, setNewName] = useState<string>(item.name)
-    const itemName = item.name
 
     const deletePack = (id: string) => {
         dispatch(deletePacksTC(id))
     }
+    if (edit) {
+        return <Modal backgroundOnClick={() => setEdit(false)}
+                      show={true}
+                      height={0}
+                      width={0}
+                      backgroundStyle={{backgroundColor: 'goldenrod'}}
+                      enableBackground={true}>
+            <EditPackComponent packId={item._id} setEditPack={setEdit} oldName={item.name}/>
+        </Modal>
+    }
+
     return (
         <div style={{
             display: 'flex',
@@ -34,11 +47,7 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 textAlign: 'center'
-            }}>
-                {!edit
-                    ? itemName
-                    : <input type="text" value={newName} onChange={(e) => setNewName(e.currentTarget.value)}/>
-                }
+            }}>{item.name}
             </div>
             <div style={{
                 width: '15%',

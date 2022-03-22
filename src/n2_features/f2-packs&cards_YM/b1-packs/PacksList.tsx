@@ -89,10 +89,6 @@ const PacksList = () => {
                             </div>
 
                             <div className={style.packsList}>
-                                {/*{globalError*/}
-                                {/*    ? <h2 style={{color: 'red'}}>{globalError}</h2>*/}
-                                {/*    : <h2 className={style.title}>Pack list</h2>*/}
-                                {/*}*/}
                                 <div>
                                     <h2 className={style.title}>Pack list</h2>
                                     <div className={style.searchContainer}>
