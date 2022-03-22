@@ -14,27 +14,29 @@ type OnlyOnePackComponentType = {
 const OnlyOnePackComponent = ({item}: OnlyOnePackComponentType) => {
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const dispatch = useDispatch()
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const [edit, setEdit] = useState<boolean>(false)
     const [newName, setNewName] = useState<string>(item.name)
     const itemName = item.name
 
-    const runToCards=() => navigate(`${RoutesXPaths.CARDS}/${item._id}`)
+    const runToCards = () => navigate(`${RoutesXPaths.CARDS}/${item._id}`)
     const deletePack = (id: string) => {
         dispatch(deletePacksTC(id))
     }
     return (
         <div style={{
             display: 'flex',
-            width: '100%',
-            border: '2px red solid',
+            width: '98%',
+            backgroundColor:'pink',
+            margin:'5px',
+            borderRadius:'5px'
         }}>
             <div style={{
                 width: '16%',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                border: '2px blue solid'
+                textAlign:'center'
             }}>
                 {!edit
                     ? itemName
@@ -46,7 +48,6 @@ const OnlyOnePackComponent = ({item}: OnlyOnePackComponentType) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                border: '2px blue solid'
             }}>
                 {item.cardsCount}
             </div>
@@ -56,7 +57,6 @@ const OnlyOnePackComponent = ({item}: OnlyOnePackComponentType) => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                border: '2px blue solid',
                 fontSize: '13px'
             }}>
                 <div>дата: {item.updated.slice(0, 10)},</div>
@@ -65,17 +65,16 @@ const OnlyOnePackComponent = ({item}: OnlyOnePackComponentType) => {
             <div style={{
                 width: '15%',
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'flex-end',
                 alignItems: 'center',
-                border: '2px blue solid'
+                textAlign:'end'
             }}>
                 {item.user_name}
             </div>
-            <div style={{
+            <div style={ {
                 width: '29%', display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                border: '2px blue solid'
             }}>
                 {myId === item.user_id
                     ? <>
