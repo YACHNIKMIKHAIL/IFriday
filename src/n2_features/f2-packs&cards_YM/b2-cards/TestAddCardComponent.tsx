@@ -7,6 +7,7 @@ type TestAddCardComponentType = {
     setNewCard: (c: boolean) => void
     packId: string | undefined
 }
+
 const TestAddCardComponent = ({setNewCard, packId}: TestAddCardComponentType) => {
 
     const dispatch = useDispatch()

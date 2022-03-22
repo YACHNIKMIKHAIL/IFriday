@@ -29,6 +29,7 @@ const TablesCardsPagination = () => {
         setPage(0)
         dispatch(cardsActions.cardsPageCountAC(parseInt(event.target.value)))
     }
+
     return (
         <TablePagination
             component="div"
@@ -41,4 +42,4 @@ const TablesCardsPagination = () => {
     )
 }
 
-export default TablesCardsPagination;
+export default TablesCardsPagination
