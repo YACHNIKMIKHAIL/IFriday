@@ -21,6 +21,7 @@ const TestAddCardComponent = ({setNewCard, packId}: TestAddCardComponentType) =>
             setNewCard(false)
         }
     }
+
     const turnBach = () => {
         setNewCard(false)
     }

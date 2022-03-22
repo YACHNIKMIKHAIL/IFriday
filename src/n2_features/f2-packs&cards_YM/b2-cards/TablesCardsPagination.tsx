@@ -5,9 +5,12 @@ import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 
 const TablesCardsPagination = () => {
+
     const dispatch = useDispatch()
+
     const actualCardsPage = useFridaySelector<number>(state => state.cards.page)
     const actualCardsCount = useFridaySelector<number>(state => state.cards.pageCount)
+
     const [page, setPage] = React.useState<number>(actualCardsPage)
 
     const handleChangePage = (

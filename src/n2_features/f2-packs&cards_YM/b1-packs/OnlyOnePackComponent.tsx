@@ -12,23 +12,34 @@ type OnlyOnePackComponentType = {
     item: PackType
     runToCards: (packId: string) => void
 }
+
 const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
-    const myId = useFridaySelector<string>(state => state.profile.profile._id)
+
     const dispatch = useDispatch()
+
+    const myId = useFridaySelector<string>(state => state.profile.profile._id)
+
     const [edit, setEdit] = useState<boolean>(false)
 
     const deletePack = (id: string) => {
         dispatch(deletePacksTC(id))
     }
+
     if (edit) {
-        return <Modal backgroundOnClick={() => setEdit(false)}
-                      show={true}
-                      height={0}
-                      width={0}
-                      backgroundStyle={{backgroundColor: 'goldenrod'}}
-                      enableBackground={true}>
-            <EditPackComponent packId={item._id} setEditPack={setEdit} oldName={item.name}/>
-        </Modal>
+        return (
+            <Modal
+                backgroundOnClick={() => setEdit(false)}
+                show={true}
+                height={0}
+                width={0}
+                backgroundStyle={{backgroundColor: 'goldenrod'}}
+                enableBackground={true}>
+                <EditPackComponent
+                    packId={item._id}
+                    setEditPack={setEdit}
+                    oldName={item.name}/>
+            </Modal>
+        )
     }
 
     return (
@@ -94,7 +105,7 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
 
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default OnlyOnePackComponent;
+export default OnlyOnePackComponent

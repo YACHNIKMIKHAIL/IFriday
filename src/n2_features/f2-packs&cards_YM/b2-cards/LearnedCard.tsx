@@ -11,15 +11,16 @@ import s from './LearnedCard.module.css'
 export const LearnedCard = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
     const {cardId} = useParams<'cardId'>();
     const {packId} = useParams<'packId'>();
-    const [showAnswer, setShowAnswer] = useState<boolean>(false)
+
     const learnedCard = useFridaySelector<CardType>(state => state.cards.cards.filter(f => f._id === cardId)[0])
     const actualPack = useFridaySelector<PackType>(state => state.packs.cardPacks.filter(f => f._id === packId)[0])
     const actualPackCards = useFridaySelector<CardType[]>(state => state.cards.cards.filter(f => f.cardsPack_id === packId))
+
+    const [showAnswer, setShowAnswer] = useState<boolean>(false)
     const [actualCard, setActualCard] = useState<CardType>(learnedCard)
-
-
     const [cardRate, setCardRate] = useState<number | undefined>(undefined)
 
     const getCard = (cards: CardType[]) => {
@@ -41,62 +42,64 @@ export const LearnedCard = () => {
         getCard(actualPackCards)
         setShowAnswer(false)
     }
+
     const goBack = () => {
         navigate(RoutesXPaths.CARDS)
     }
 
-
-    return <div className={s.addItemContainer}
-                style={{borderRadius: '10px', backgroundColor: 'white'}}>
-        <h2>
-            learn:
-            {actualPack?.name}
-        </h2>
-        <div>
+    return (
+        <div className={s.addItemContainer}
+             style={{borderRadius: '10px', backgroundColor: 'white'}}>
+            <h2>
+                learn:
+                {actualPack?.name}
+            </h2>
             <div>
-                question:
-                {actualCard?.question}
-            </div>
-            {
-                showAnswer &&
                 <div>
-                    <div>
-                        answer:
-                        {actualCard?.answer}
-                    </div>
-                    <div>
-                        rate yourself:
-                        <label style={{display: 'flex'}}>
-                            <input type="radio" onChange={() => setCardRate(5)} value={cardRate}
-                                   name='rate'/>знал
-                        </label>
-                        <label style={{display: 'flex'}}>
-                            <input type="radio" onChange={() => setCardRate(4)} value={cardRate}
-                                   name='rate'/>перепутал
-                        </label>
-                        <label style={{display: 'flex'}}>
-                            <input type="radio" onChange={() => setCardRate(3)} value={cardRate}
-                                   name='rate'/>долго думал
-                        </label>
-                        <label style={{display: 'flex'}}>
-                            <input type="radio" onChange={() => setCardRate(2)} value={cardRate}
-                                   name='rate'/>забыл
-                        </label>
-                        <label style={{display: 'flex'}}>
-                            <input type="radio" onChange={() => setCardRate(1)} value={cardRate}
-                                   name='rate'/>не знал
-                        </label>
-                    </div>
+                    question:
+                    {actualCard?.question}
                 </div>
-            }
+                {
+                    showAnswer &&
+                    <div>
+                        <div>
+                            answer:
+                            {actualCard?.answer}
+                        </div>
+                        <div>
+                            rate yourself:
+                            <label style={{display: 'flex'}}>
+                                <input type="radio" onChange={() => setCardRate(5)} value={cardRate}
+                                       name='rate'/>знал
+                            </label>
+                            <label style={{display: 'flex'}}>
+                                <input type="radio" onChange={() => setCardRate(4)} value={cardRate}
+                                       name='rate'/>перепутал
+                            </label>
+                            <label style={{display: 'flex'}}>
+                                <input type="radio" onChange={() => setCardRate(3)} value={cardRate}
+                                       name='rate'/>долго думал
+                            </label>
+                            <label style={{display: 'flex'}}>
+                                <input type="radio" onChange={() => setCardRate(2)} value={cardRate}
+                                       name='rate'/>забыл
+                            </label>
+                            <label style={{display: 'flex'}}>
+                                <input type="radio" onChange={() => setCardRate(1)} value={cardRate}
+                                       name='rate'/>не знал
+                            </label>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div>
+                <button onClick={goBack}>Cancel</button>
+                {
+                    !showAnswer
+                        ? <button onClick={() => setShowAnswer(!showAnswer)}>Show answer</button>
+                        : <button onClick={nextCard}>Next card</button>
+                }
+            </div>
         </div>
-        <div>
-            <button onClick={goBack}>Cancel</button>
-            {
-                !showAnswer
-                    ? <button onClick={() => setShowAnswer(!showAnswer)}>Show answer</button>
-                    : <button onClick={nextCard}>Next card</button>
-            }
-        </div>
-    </div>
+    )
 }

@@ -8,6 +8,7 @@ type EditPackComponentType = {
     oldName: string
     setEditPack: (v: boolean) => void
 }
+
 const EditPackComponent = ({packId, oldName, setEditPack}: EditPackComponentType) => {
 
     const dispatch = useDispatch()

@@ -1,21 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
-import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
+import React, {useEffect} from 'react';
+import {useParams} from "react-router-dom";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
-import {CardType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
-import {PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 import {useDispatch} from "react-redux";
-import {cardsTC, gradeCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
-import s from './LearnedCard.module.css'
+import {cardsTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import {RequestStatusType} from "../../../n1_main/m2-bll/r1-reducers/app-reducer";
 import Preloader from "../../../n1_main/m1-ui/common/preloader/Preloader";
 import {LearnedCard} from "./LearnedCard";
 
 const LearnedCardContainer = () => {
-    const {packId} = useParams<'packId'>();
-    const appStatus = useFridaySelector<RequestStatusType>(state => state.app.status)
 
     const dispatch = useDispatch()
+
+    const appStatus = useFridaySelector<RequestStatusType>(state => state.app.status)
+
+    const {packId} = useParams<'packId'>()
 
     useEffect(() => {
         if (packId) {
@@ -34,4 +32,4 @@ const LearnedCardContainer = () => {
     )
 }
 
-export default LearnedCardContainer;
+export default LearnedCardContainer

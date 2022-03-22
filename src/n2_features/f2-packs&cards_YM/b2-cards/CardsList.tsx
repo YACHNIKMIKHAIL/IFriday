@@ -20,14 +20,18 @@ type CardsListType = {
 }
 
 const CardsList = ({name}: CardsListType) => {
+
     const dispatch = useDispatch()
+
     const [newCard, setNewCard] = useState<boolean>(false)
     const {packId} = useParams<'packId'>()
+
     const cards = useFridaySelector<CardType[]>(state => state.cards.cards)
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const user_id = useFridaySelector<string>(state => state.cards.cards.filter(f => f.cardsPack_id === packId)[0]?.user_id)
     const cardsState = useFridaySelector<InitialCardsType>(state => state.cards)
     const cardSearchName = useFridaySelector<string>(state => state.cards.cardQuestion)
+
     const debouncedCardsOnPage = useDebounce<number>(cardsState.pageCount, 1000)
     const debouncedPageCardsChanged = useDebounce<number>(cardsState.page, 1000)
     const debouncedSearchCardQ = useDebounce<string>(cardsState.cardQuestion, 1000)
@@ -39,28 +43,32 @@ const CardsList = ({name}: CardsListType) => {
     }
 
     useEffect(() => {
-        if (packId) {
-            dispatch(cardsTC(packId))
-        }
-    }, [debouncedCardsOnPage[0],
-        debouncedPageCardsChanged[0],
-        debouncedSearchCardQ[0],
-        debouncedSearchCardA[0],
-        debouncedSearchLastUpdated[0]
-    ])
+            if (packId) {
+                dispatch(cardsTC(packId))
+            }
+        }, [debouncedCardsOnPage[0],
+            debouncedPageCardsChanged[0],
+            debouncedSearchCardQ[0],
+            debouncedSearchCardA[0],
+            debouncedSearchLastUpdated[0],
+        ]
+    )
 
     if (newCard) {
-        return <Modal backgroundOnClick={() => setNewCard(false)}
-                      show={true}
-                      height={0}
-                      width={0}
-                      backgroundStyle={{backgroundColor: 'deepskyblue'}}
-                      enableBackground={true}>
-            <TestAddCardComponent
-                packId={packId}
-                setNewCard={setNewCard}
-            />
-        </Modal>
+        return (
+            <Modal
+                backgroundOnClick={() => setNewCard(false)}
+                show={true}
+                height={0}
+                width={0}
+                backgroundStyle={{backgroundColor: 'deepskyblue'}}
+                enableBackground={true}>
+                <TestAddCardComponent
+                    packId={packId}
+                    setNewCard={setNewCard}
+                />
+            </Modal>
+        )
     }
     return (
         <div className={style.cardsListBlock}>
@@ -72,7 +80,7 @@ const CardsList = ({name}: CardsListType) => {
                         value={cardSearchName}
                         onChange={searchCard}
                     />
-                    {myId===user_id && <button
+                    {myId === user_id && <button
                         onClick={() => setNewCard(true)}>
                         Add New Card
                     </button>}
@@ -82,8 +90,14 @@ const CardsList = ({name}: CardsListType) => {
                     <TableCardsHeader user_id={user_id}/>
                     {
                         cards?.map((m, i) => {
-                            return <CardComponent key={i} c={m}/>
-                        })
+                                return (
+                                    <CardComponent
+                                        key={i}
+                                        c={m}
+                                    />
+                                )
+                            }
+                        )
                     }
                     <TablesCardsPagination/>
                 </div>

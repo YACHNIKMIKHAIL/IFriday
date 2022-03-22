@@ -8,6 +8,7 @@ type EditCardComponentType = {
     oldQ: string
     setEditCard: (v: boolean) => void
 }
+
 const EditCardComponent = ({cardId, oldQ, setEditCard}: EditCardComponentType) => {
 
     const dispatch = useDispatch()
@@ -19,11 +20,11 @@ const EditCardComponent = ({cardId, oldQ, setEditCard}: EditCardComponentType) =
         question: newQ,
         comments: '',
     }
+
     const saveCard = () => {
         dispatch(updateCardTC(updatedCard))
         setEditCard(false)
     }
-
 
     return (
         <div className={s.addItemContainer}>
@@ -45,7 +46,6 @@ const EditCardComponent = ({cardId, oldQ, setEditCard}: EditCardComponentType) =
                 <button onClick={()=>setEditCard(false)}>Cancel</button>
                 <button onClick={saveCard}>Save changes</button>
             </div>
-
         </div>
     )
 }

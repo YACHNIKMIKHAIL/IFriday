@@ -6,6 +6,7 @@ import s from "./AddPackComponent.module.css"
 type TestAddPackComponentType = {
     setAddPack: (v: boolean) => void
 }
+
 const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
 
     const dispatch = useDispatch()

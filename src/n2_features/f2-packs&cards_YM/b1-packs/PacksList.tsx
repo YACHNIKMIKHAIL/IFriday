@@ -14,18 +14,15 @@ import TableHeader from "../../../n1_main/m1-ui/common/table/TableHeader";
 import AddPackComponent from "./AddPackComponent";
 import OnlyOnePackComponent from "./OnlyOnePackComponent";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
+import {Nullable} from "../../../types/Nullable";
 
 const PacksList = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const [selected, setSelected] = useState<'MY' | 'ALL'>('ALL')
-    const [addPack, setAddPack] = useState<boolean>(false)
-
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
-
     const packs = useFridaySelector<PackType[]>(state => state.packs.cardPacks)
     const globalError = useFridaySelector<string>(state => state.app.globalError)
 
@@ -33,9 +30,14 @@ const PacksList = () => {
     const debouncedMIN = useDebounce<number>(packsState.minCardsCount, 1000)
     const debouncedMAX = useDebounce<number>(packsState.maxCardsCount, 1000)
 
-    const selectMyOrAll = (value: string | null) => {
+    const [selected, setSelected] = useState<'MY' | 'ALL'>('ALL')
+    const [addPack, setAddPack] = useState<boolean>(false)
+
+    const selectMyOrAll = (value: Nullable<string>) => {
         dispatch(packsActions.allMyAC(value))
-        value ? setSelected('MY') : setSelected('ALL')
+        value
+            ? setSelected('MY')
+            : setSelected('ALL')
     }
     const onChangeSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(packsActions.searchAC(e.currentTarget.value))
@@ -50,21 +52,25 @@ const PacksList = () => {
 
         navigate(`${RoutesXPaths.CARDS}/${packId}`)
     }
+
     useEffect(() => {
         dispatch(packsTC())
     }, [debouncedSearch[0], packsState.user_id, debouncedMIN[0], debouncedMAX[0], packsState.pageCount,
         packsState.page, packsState.updated])
 
-
     if (addPack) {
-        return <Modal backgroundOnClick={() => setAddPack(false)}
-                      show={true}
-                      height={0}
-                      width={0}
-                      backgroundStyle={{backgroundColor: 'hotpink'}}
-                      enableBackground={true}>
-            <AddPackComponent setAddPack={setAddPack}/>
-        </Modal>
+        return (
+            <Modal
+                backgroundOnClick={() => setAddPack(false)}
+                show={true}
+                height={0}
+                width={0}
+                backgroundStyle={{backgroundColor: 'hotpink'}}
+                enableBackground={true}
+            >
+                <AddPackComponent setAddPack={setAddPack}/>
+            </Modal>
+        )
     }
 
     return (
@@ -111,28 +117,25 @@ const PacksList = () => {
                         </button>
                     </div>
                 </div>
-
                 <div className={style.cardsBlock}>
                     <TableHeader/>
                     {
                         packs.map((item, index) => {
-                            return <div key={index} onDoubleClick={() => runToCards(item._id)}>
-                                <OnlyOnePackComponent item={item} runToCards={runToCards}/>
-                            </div>
-
-                            // <div key={index} onDoubleClick={() => runToCards(item._id)}>
-                            {/*<TableX/>*/
-                            }
-                            // <OnlyOnePackComponent item={item} key={index}/>
-                            {/*</div>*/
-                            }
-
+                            return (
+                                <div key={index} onDoubleClick={() => runToCards(item._id)}>
+                                    <OnlyOnePackComponent item={item} runToCards={runToCards}/>
+                                </div>
+                            )
+                            /*<div key={index} onDoubleClick={() => runToCards(item._id)}>
+                            {<TableX/>}
+                            <OnlyOnePackComponent item={item} key={index}/>
+                            {</div>}*/
                         })
                     }
                     <TablesPagination/>
                 </div>
-
             </div>
+
         </div>
     )
 }
