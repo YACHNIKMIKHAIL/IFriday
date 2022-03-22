@@ -5,20 +5,13 @@ import {setAppStatusAC, setGlobalErrorAC} from "./app-reducer";
 
 export enum PROFILE {
     SET_PROFILE = 'CARDS/PROFILE/SET_PROFILE',
-    SET_ERROR = 'CARDS/PROFILE/SET_ERROR'
+    SET_ERROR = 'CARDS/PROFILE/SET_ERROR',
 }
 
-// TYPES
-export type ProfileInitialStateType = {
-    profile: meRespType
-    error: string
-}
 const initialProfileState = {
     profile: {} as meRespType,
-    error: ''
+    error: '',
 }
-export type profileReducerActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
-export type profileReducerTypes = ReturnType<profileReducerActionsTypes<typeof ProfileActions>>
 
 export const profileReducer = (state: ProfileInitialStateType = initialProfileState, action: profileReducerTypes): ProfileInitialStateType => {
     switch (action.type) {
@@ -69,8 +62,17 @@ export const updateUserNameTC = (newUserName: string) => async (dispatch: Dispat
         dispatch(setGlobalErrorAC(error))
 
         dispatch(setAppStatusAC("failed"))
-    }finally {
+    } finally {
         dispatch(setAppStatusAC("idle"))
     }
 }
+
+// TYPES
+export type ProfileInitialStateType = {
+    profile: meRespType
+    error: string
+}
+
+export type profileReducerActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
+export type profileReducerTypes = ReturnType<profileReducerActionsTypes<typeof ProfileActions>>
 

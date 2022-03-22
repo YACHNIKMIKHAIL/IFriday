@@ -1,6 +1,7 @@
 import {AxiosResponse} from "axios";
 import {registerStateType} from "../m2-bll/r1-reducers/RegisterAndRecoveryPassReducer";
 import {instance} from "./instance";
+import {Undetectable} from "../../types/Undetectable";
 
 export const registerAndRecoveryPassAPI = {
     async registerMe(body: { email: string, password: string }) {
@@ -30,10 +31,12 @@ type ForgotResponseType = {
     answer: boolean
     html: boolean
 }
+
 export type newPassBodyType = {
     password: string
-    resetPasswordToken: string | undefined
+    resetPasswordToken: Undetectable<string>
 }
+
 type SetNewResponseType = {
     info: string
     error: string

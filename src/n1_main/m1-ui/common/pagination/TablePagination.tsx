@@ -3,17 +3,19 @@ import TablePagination from '@mui/material/TablePagination';
 import {packsActions} from "../../../m2-bll/r2-actions/ActionsPacks";
 import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../../m2-bll/store";
+import {Nullable} from "../../../../types/Nullable";
 
 const TablesPagination = () => {
+
+    const dispatch = useDispatch()
+
     const actualPacksPage = useFridaySelector<number>(state => state.packs.page)
     const actualPacksCount = useFridaySelector<number>(state => state.packs.pageCount)
 
     const [page, setPage] = React.useState<number>(actualPacksPage);
 
-    const dispatch = useDispatch()
-
     const handleChangePage = (
-        event: React.MouseEvent<HTMLButtonElement> | null,
+        event: Nullable<React.MouseEvent<HTMLButtonElement>>,
         newPage: number,
     ) => {
         if (newPage === page) {
@@ -23,12 +25,13 @@ const TablesPagination = () => {
             setPage(page - 1)
             dispatch(packsActions.pageAC(newPage + 1))
         }
-    };
+    }
+
     const handleChangeRowsPerPage = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
         dispatch(packsActions.pageCountAC(parseInt(event.target.value)))
-    };
+    }
 
     return (
         <>
@@ -40,10 +43,8 @@ const TablesPagination = () => {
                 rowsPerPage={actualPacksCount}
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
-
-
         </>
-
-    );
+    )
 }
-export default TablesPagination;
+
+export default TablesPagination

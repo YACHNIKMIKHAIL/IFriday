@@ -1,5 +1,6 @@
 import {packsActions, packsActionsEnum, packsActionsTypes} from "../r2-actions/ActionsPacks";
 import {UpdatedType} from "../../m3-dal/packsAPI";
+import {Nullable} from "../../../types/Nullable";
 
 export type PackType = {
     _id: string
@@ -8,8 +9,9 @@ export type PackType = {
     cardsCount: number
     created: string
     updated: string
-    user_name:string
+    user_name: string
 }
+
 export type InitialCardPacksType = {
     cardPacks: PackType[]
     cardPacksTotalCount: number
@@ -19,8 +21,9 @@ export type InitialCardPacksType = {
     pageCount: number
     packName: string
     updated: UpdatedType
-    user_id: string | null
+    user_id: Nullable<string>
 }
+
 const initialCardPacks: InitialCardPacksType = {
     cardPacks: [
         {
@@ -30,7 +33,7 @@ const initialCardPacks: InitialCardPacksType = {
             cardsCount: 0,
             created: "",
             updated: "",
-            user_name:""
+            user_name: "",
         }
     ],
     cardPacksTotalCount: 0,
@@ -44,9 +47,9 @@ const initialCardPacks: InitialCardPacksType = {
 }
 
 export type packsReducerActionType = ReturnType<packsActionsTypes<typeof packsActions>>
+
 export const packsReducer = (state = initialCardPacks, action: packsReducerActionType): InitialCardPacksType => {
     switch (action.type) {
-
         case packsActionsEnum.SET_PACKS: {
             return {...state, cardPacks: action.payload.state.cardPacks}
         }
@@ -69,7 +72,7 @@ export const packsReducer = (state = initialCardPacks, action: packsReducerActio
             return {...state, pageCount: action.payload.pageCount}
         }
         case packsActionsEnum.PACKS_UPDATED : {
-            return {...state, updated:action.payload.updated}
+            return {...state, updated: action.payload.updated}
         }
         default:
             return state

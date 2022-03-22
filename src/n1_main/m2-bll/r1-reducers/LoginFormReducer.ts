@@ -30,7 +30,7 @@ export const loginUserTC = (body: loginType) => async (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
         const res = await loginFormAPI.loginMe(body)
-        dispatch(LoginFormActions.setUserDataAC(res.data)) // можно заменить на setProfileAC, чтоб не дублировать логику
+        dispatch(LoginFormActions.setUserDataAC(res.data))
         dispatch(ProfileActions.setProfileAC(res.data))
         dispatch(LoginFormActions.setIsLoggedInAC(true))
         dispatch(setAppStatusAC("succeeded"))

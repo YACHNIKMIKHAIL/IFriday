@@ -11,8 +11,6 @@ export enum cardsActionsEnum {
     GRADE_CARD = 'CARDS/CARDS/GRADE_CARD',
 }
 
-export type cardsActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
-
 export const cardsActions = {
     setCardsAC: (state: CardsType) => {
         return {
@@ -51,6 +49,11 @@ export const cardsActions = {
         } as const
     },
 }
+
+
+//types
+
+export type cardsActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
 
 export type CardsType = {
     cards: CardType[]

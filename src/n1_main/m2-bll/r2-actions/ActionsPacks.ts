@@ -1,5 +1,6 @@
 import {InitialCardPacksType} from "../r1-reducers/packsReducer";
 import {UpdatedType} from "../../m3-dal/packsAPI";
+import {Nullable} from "../../../types/Nullable";
 
 export enum packsActionsEnum {
     SET_PACKS = 'CARDS/PACKS/SET_PACKS',
@@ -12,8 +13,6 @@ export enum packsActionsEnum {
     PACKS_UPDATED = 'CARDS/PACKS/PACKS_UPDATED',
 }
 
-export type packsActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
-
 export const packsActions = {
     setPacksAC: (state: InitialCardPacksType) => {
         return {
@@ -21,7 +20,7 @@ export const packsActions = {
             payload: {state}
         } as const
     },
-    allMyAC: (value: string | null) => {
+    allMyAC: (value: Nullable<string>) => {
         return {
             type: packsActionsEnum.ALL_MY,
             payload: {value}
@@ -64,3 +63,6 @@ export const packsActions = {
         } as const
     },
 }
+
+//types
+export type packsActionsTypes<T> = T extends { [key: string]: infer A } ? A : never

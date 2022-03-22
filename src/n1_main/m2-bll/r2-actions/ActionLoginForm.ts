@@ -4,19 +4,6 @@ export enum LoginFormReducer {
     SET_ERROR = 'CARDS/LOGIN/SET_ERROR',
 }
 
-export type UserDataType = {
-    avatar: string,
-    created: number,
-    email: string,
-    isAdmin: boolean,
-    name: string,
-    publicCardPacksCount: number,
-    rememberMe: boolean,
-    token: string,
-    updated: number,
-    _id: string,
-}
-
 export const LoginFormInitialState = {
     isLoggedIn: false,
     user: {
@@ -33,11 +20,6 @@ export const LoginFormInitialState = {
     },
     error: "",
 }
-
-export type LoginInitialStateType = typeof LoginFormInitialState
-
-
-export type LoginFormReducerReducerActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
 
 export const LoginFormActions = {
     setIsLoggedInAC: (isLoggedIn: boolean) => {
@@ -60,3 +42,21 @@ export const LoginFormActions = {
     },
 }
 
+//types
+
+export type UserDataType = {
+    avatar: string,
+    created: number,
+    email: string,
+    isAdmin: boolean,
+    name: string,
+    publicCardPacksCount: number,
+    rememberMe: boolean,
+    token: string,
+    updated: number,
+    _id: string,
+}
+
+export type LoginInitialStateType = typeof LoginFormInitialState
+
+export type LoginFormReducerReducerActionsTypes<T> = T extends { [key: string]: infer A } ? A : never

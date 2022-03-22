@@ -1,9 +1,10 @@
 import {AxiosResponse} from "axios";
 import {InitialCardPacksType, PackType} from "../m2-bll/r1-reducers/packsReducer";
 import {instance} from "./instance";
+import {Nullable} from "../../types/Nullable";
 
 export const packsAPI = {
-    async setPacks(packName: string, min: number, max: number, updated: UpdatedType, page: number, pageCount: number, user_id: string | null) {
+    async setPacks(packName: string, min: number, max: number, updated: UpdatedType, page: number, pageCount: number, user_id: Nullable<string>) {
         return await instance.get<InitialCardPacksType,
             AxiosResponse<InitialCardPacksType>, {
             packName: string, min: number, max: number, updated: UpdatedType, page: number, pageCount: number, user_id: string
@@ -33,6 +34,8 @@ export const packsAPI = {
     },
 }
 
+//types
+
 export type UpdatedType =
     '0updated'
     | '1updated'
@@ -50,6 +53,7 @@ export type newPackType = {
     deckCover: string
     private: boolean
 }
+
 export type UpdatedPackType = {
     _id: string
     name: string

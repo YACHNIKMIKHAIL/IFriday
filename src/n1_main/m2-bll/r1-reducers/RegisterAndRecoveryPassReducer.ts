@@ -3,34 +3,8 @@ import {
     RegisterAndRecoveryPassReducer,
     RegisterAndRecoveryPassReducerActionsTypes
 } from "../r2-actions/ActionsRegisterAndRecoveryPassReducer";
+import {Nullable} from "../../../types/Nullable";
 
-
-export type userType = {
-    error: string,
-    email: string,
-    in: string
-}
-export type registerStateType = {
-    addedUser: userType
-    error?: string;
-}
-export type passwordRecoveryStateType = {
-    info: string,
-    success: boolean,
-    answer: boolean,
-    html: boolean,
-}
-export type newPasswordStateType = {
-    info: string
-    error: string;
-}
-
-export type RegisterAndRecoveryPassReducerType = {
-    register: registerStateType
-    passwordRecovery: passwordRecoveryStateType
-    newPassword: newPasswordStateType
-    e:string|null
-}
 const registerAndRecoveryPassReducerState: RegisterAndRecoveryPassReducerType = {
     register: {
         addedUser: {} as userType,
@@ -46,7 +20,7 @@ const registerAndRecoveryPassReducerState: RegisterAndRecoveryPassReducerType = 
         info: '',
         error: ''
     },
-    e:null
+    e: null
 }
 
 export const registerAndRecoveryPassReducer = (state = registerAndRecoveryPassReducerState, action: RegisterAndRecoveryPassReducerActionType): RegisterAndRecoveryPassReducerType => {
@@ -69,11 +43,44 @@ export const registerAndRecoveryPassReducer = (state = registerAndRecoveryPassRe
         case RegisterAndRecoveryPassReducer.SET_INFO_NEW_PASS: {
             return {...state, newPassword: action.payload.data}
         }
-        case RegisterAndRecoveryPassReducer.SET_NEW_ERROR:{
-            return {...state,e:action.payload.e}
+        case RegisterAndRecoveryPassReducer.SET_NEW_ERROR: {
+            return {...state, e: action.payload.e}
         }
         default:
             return state
     }
 }
+
+
+//types
 export type RegisterAndRecoveryPassReducerActionType = ReturnType<RegisterAndRecoveryPassReducerActionsTypes<typeof registerAndRecoveryPassActions>>
+
+export type userType = {
+    error: string,
+    email: string,
+    in: string
+}
+
+export type registerStateType = {
+    addedUser: userType
+    error?: string;
+}
+
+export type passwordRecoveryStateType = {
+    info: string,
+    success: boolean,
+    answer: boolean,
+    html: boolean,
+}
+
+export type newPasswordStateType = {
+    info: string
+    error: string;
+}
+
+export type RegisterAndRecoveryPassReducerType = {
+    register: registerStateType
+    passwordRecovery: passwordRecoveryStateType
+    newPassword: newPasswordStateType
+    e: Nullable<string>
+}

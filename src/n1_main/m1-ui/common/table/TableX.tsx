@@ -42,10 +42,14 @@ const TableRow = ({arr, status = true}: any) => {
         user_id
     } = arr
     console.log(arr)
+
+    const dispatch = useDispatch()
+
+    const myId = useFridaySelector<string>(state => state.profile.profile._id)
+
     const [edit, setEdit] = useState<boolean>(false)
     const [newPackName, setNewPackName] = useState<string>(name)
-    const myId = useFridaySelector<string>(state => state.profile.profile._id)
-    const dispatch = useDispatch()
+
     const saveChanges = () => {
         setEdit(false)
         dispatch(changePacksTC(newPackName, _id))
@@ -69,10 +73,11 @@ const TableRow = ({arr, status = true}: any) => {
 }
 
 const TableCell = ({item, status, _id, user_id, dataStatus}: any) => {
+
     const dispatch = useDispatch()
+
     const [newPackName, setNewPackName] = useState<string>('')
     const [edit, setEdit] = useState<boolean>(false)
-
 
     const saveChanges = () => {
         setEdit(false)
@@ -91,7 +96,8 @@ const TableCell = ({item, status, _id, user_id, dataStatus}: any) => {
         </div>
     )
 }
-export default TableX;
+
+export default TableX
 
 export const ButtonGroup = ({_id, user_id, edit, setEdit, saveChanges}: any) => {
 

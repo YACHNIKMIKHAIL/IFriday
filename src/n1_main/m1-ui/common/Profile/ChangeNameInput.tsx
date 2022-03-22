@@ -1,11 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from "./Profile.module.css";
 
-
-
-
 export const ChangeNameInput = ({name, updateUser, onKeyPressHandler, changeNameValue, error}: ChangeNameInputPropsType) => {
-
 
     const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
         changeNameValue(e.currentTarget.value)
@@ -27,8 +23,8 @@ export const ChangeNameInput = ({name, updateUser, onKeyPressHandler, changeName
 
             <button className={s.button} onClick={updateUser}>Save</button>
         </div>
-    );
-};
+    )
+}
 
 
 // TYPES

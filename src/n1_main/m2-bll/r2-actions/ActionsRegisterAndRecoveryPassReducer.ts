@@ -12,8 +12,6 @@ export enum RegisterAndRecoveryPassReducer {
     SET_NEW_ERROR = 'CARDS/REGISTER_AND_RECOVERY/SET_NEW_ERROR',
 }
 
-export type RegisterAndRecoveryPassReducerActionsTypes<T> = T extends { [key: string]: infer A } ? A : never
-
 export const registerAndRecoveryPassActions = {
     registerUserAC: (data: registerStateType) => {
         return {
@@ -46,3 +44,6 @@ export const registerAndRecoveryPassActions = {
         } as const
     }
 }
+
+//type
+export type RegisterAndRecoveryPassReducerActionsTypes<T> = T extends { [key: string]: infer A } ? A : never

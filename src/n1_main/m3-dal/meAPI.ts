@@ -7,6 +7,7 @@ export const meAPI = {
             AxiosResponse<meRespType>, {}>(`auth/me`, {})
     }
 }
+
 export type meRespType = {
     _id: string
     email: string

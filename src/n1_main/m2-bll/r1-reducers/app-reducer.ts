@@ -9,7 +9,7 @@ export enum AppFormReducer {
 const initialAppState = {
     status: 'idle' as RequestStatusType,
     isVisible: false,
-    globalError: ""
+    globalError: "",
 }
 
 export type InitialAppStateType = typeof initialAppState
@@ -21,29 +21,32 @@ export const appReducer = (state: InitialAppStateType = initialAppState, action:
         case AppFormReducer.SET_VISIBLE:
             return {...state, isVisible: action.payload.isVisible}
         case AppFormReducer.SET_GLOBAL_ERROR:
-            return {...state,globalError: action.payload.e
+            return {
+                ...state, globalError: action.payload.e
+            }
+        default:
+            return state
     }
-default:
-    return state
 }
-}
+
 export const setAppStatusAC = (status: RequestStatusType) => {
     return {
         type: AppFormReducer.SET_STATUS,
         payload: {status},
     } as const
 }
+
 export const setAppVisibleAC = (isVisible: boolean) => {
     return {
         type: AppFormReducer.SET_VISIBLE, payload: {isVisible}
     } as const
 }
+
 export const setGlobalErrorAC = (e: any) => {
     return {
         type: AppFormReducer.SET_GLOBAL_ERROR, payload: {e}
     } as const
 }
-
 
 export type AppActionsType = ReturnType<typeof setAppStatusAC>
     | ReturnType<typeof setAppVisibleAC>

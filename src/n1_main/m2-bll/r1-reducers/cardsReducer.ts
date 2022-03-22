@@ -24,6 +24,7 @@ export type InitialCardsType = {
     cardQuestion: string
     sortCards: UpdatedType
 }
+
 const initialCards: InitialCardsType = {
     cards: [
         {
@@ -45,10 +46,11 @@ const initialCards: InitialCardsType = {
     pageCount: 10,
     cardAnswer: '',
     cardQuestion: '',
-    sortCards: '' as UpdatedType
+    sortCards: '' as UpdatedType,
 }
 
 export type cardsReducerActionType = ReturnType<cardsActionsTypes<typeof cardsActions>>
+
 export const cardsReducer = (state = initialCards, action: cardsReducerActionType): InitialCardsType => {
     switch (action.type) {
         case cardsActionsEnum.SET_CARDS: {
@@ -64,10 +66,15 @@ export const cardsReducer = (state = initialCards, action: cardsReducerActionTyp
             return {...state, cardQuestion: action.payload.e}
         }
         case cardsActionsEnum.UPDATE_CARDS : {
-            return {...state, sortCards : action.payload.updated}
+            return {...state, sortCards: action.payload.updated}
         }
         case cardsActionsEnum.GRADE_CARD : {
-            return {...state,cards:state.cards.map(m=>m._id===action.payload.updatedCard._id?{...m,grade:action.payload.updatedCard.grade}:{...m})}
+            return {
+                ...state,
+                cards: state.cards.map(m => m._id === action.payload.updatedCard._id
+                    ? {...m, grade: action.payload.updatedCard.grade}
+                    : {...m})
+            }
         }
         default:
             return state

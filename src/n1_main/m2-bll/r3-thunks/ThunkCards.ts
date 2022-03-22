@@ -18,7 +18,7 @@ export const cardsTC = (id: string) => {
         } finally {
             dispatch(setAppStatusAC("idle"))
         }
-    };
+    }
 }
 
 export const addNewCardTC = (question: string, answer: string, packId: string): FridayThunkType => async (dispatch: any) => {
@@ -61,11 +61,6 @@ export const deleteCardTC = (cardId: string): FridayThunkType => async (dispatch
     }
 }
 
-export type UpdatedCardType = {
-    _id: string
-    question: string
-    comments: string
-}
 export const updateCardTC = (updatedCard: UpdatedCardType): FridayThunkType => async (dispatch: any) => {
     dispatch(setAppStatusAC("loading"))
     try {
@@ -92,4 +87,11 @@ export const gradeCardTC = (grade: number, card_id: string): FridayThunkType => 
     } finally {
         dispatch(setAppStatusAC("idle"))
     }
+}
+
+//types
+export type UpdatedCardType = {
+    _id: string
+    question: string
+    comments: string
 }
