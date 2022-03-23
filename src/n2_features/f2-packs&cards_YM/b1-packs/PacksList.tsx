@@ -24,7 +24,6 @@ const PacksList = () => {
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
     const packs = useFridaySelector<PackType[]>(state => state.packs.cardPacks)
-    /*const globalError = useFridaySelector<string>(state => state.app.globalError)*/
 
     const debouncedSearch = useDebounce<string>(packsState.packName, 1000)
     const debouncedMIN = useDebounce<number>(packsState.minCardsCount, 1000)
@@ -66,8 +65,7 @@ const PacksList = () => {
                 height={0}
                 width={0}
                 backgroundStyle={{backgroundColor: 'hotpink'}}
-                enableBackground={true}
-            >
+                enableBackground={true}>
                 <AddPackComponent setAddPack={setAddPack}/>
             </Modal>
         )

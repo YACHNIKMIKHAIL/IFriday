@@ -14,6 +14,7 @@ import {UpdatedType} from "../../../n1_main/m3-dal/packsAPI";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import {useParams} from "react-router-dom";
 import {Undetectable} from "../../../types/Undetectable";
+import GlobalError from "../../../n1_main/m1-ui/common/GlobalError/GlobalError";
 
 type CardsListType = {
     name: string
@@ -28,7 +29,6 @@ const CardsList = ({name}: CardsListType) => {
     const {packId} = useParams<'packId'>()
 
     const cards = useFridaySelector<CardType[]>(state => state.cards.cards)
-    const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const user_id = useFridaySelector<string>(state => state.cards.cards.filter(f => f.cardsPack_id === packId)[0]?.user_id)
     const cardsState = useFridaySelector<InitialCardsType>(state => state.cards)
     const cardSearchName = useFridaySelector<string>(state => state.cards.cardQuestion)
@@ -54,6 +54,19 @@ const CardsList = ({name}: CardsListType) => {
             debouncedSearchLastUpdated[0],
         ]
     )
+    const globalError = useFridaySelector<string>(state => state.app.globalError)
+    if (globalError) {
+        return <Modal
+            backgroundOnClick={() => {
+            }}
+            show={true}
+            height={0}
+            width={0}
+            backgroundStyle={{backgroundColor: 'lightsalmon'}}
+            enableBackground={true}>
+            <GlobalError/>
+        </Modal>
+    }
 
     if (newCard) {
         return (
@@ -81,13 +94,19 @@ const CardsList = ({name}: CardsListType) => {
                         value={cardSearchName}
                         onChange={searchCard}
                     />
-                    {
-                        myId === user_id &&
+                    {/*{*/}
+                    {/*    myId === user_id &&*/}
+                    {/*    <button*/}
+                    {/*        onClick={() => setNewCard(true)}>*/}
+                    {/*        Add New Card*/}
+                    {/*    </button>*/}
+                    {/*}*/}
+
                         <button
                             onClick={() => setNewCard(true)}>
                             Add New Card
                         </button>
-                    }
+
                 </div>
                 <div className={style.cardsBlock}>
                     <TableCardsHeader user_id={user_id}/>

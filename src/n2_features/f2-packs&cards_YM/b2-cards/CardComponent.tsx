@@ -32,6 +32,7 @@ const CardComponent = ({content}: CardComponentType) => {
         navigate(`${RoutesXPaths.LEARNED_CARD}/${packId}/${cardId}`)
     }
 
+
     if (editCard) {
         return (
             <Modal
