@@ -6,14 +6,15 @@
     align-items: center;
     text-align: center;
     width: 98%;
-    background-color: #f3f0f0;;
-    margin: 5px;
+    margin-top: 5px;
+    margin-left: 1%;
+    background-color: #f3f0f0;
     border-radius: 5px;
 }
 
 .TableItem__name {
     word-wrap: break-word;
-    width: 17%;
+    width: 22%;
 }
 
 .TableItem__cardsCount {
@@ -25,12 +26,12 @@
 }
 
 .TableItem__userName {
-    width: 23%;
+    width: 25%;
     word-wrap: break-word;
 }
 
 .TableItem__BtnGroup {
-    width: 29%;
+    width: 21%;
 }
 
 .BtnGroup__Item__My {
