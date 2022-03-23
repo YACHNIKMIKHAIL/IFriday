@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import {changePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import {useDispatch} from "react-redux";
 import s from "./AddPackComponent.module.css"
+import {packsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsPacks";
 
 type EditPackComponentType = {
     packId: string
     oldName: string
-    setEditPack: (v: boolean) => void
 }
 
-const EditPackComponent = ({packId, oldName, setEditPack}: EditPackComponentType) => {
+const EditPackComponent = ({packId, oldName}: EditPackComponentType) => {
 
     const dispatch = useDispatch()
 
@@ -17,7 +17,7 @@ const EditPackComponent = ({packId, oldName, setEditPack}: EditPackComponentType
 
     const changePackName = () => {
         dispatch(changePacksTC(newPackName, packId))
-        setEditPack(false)
+        dispatch(packsActions.packModeAC('edit',false))
     }
 
     return (
@@ -37,7 +37,7 @@ const EditPackComponent = ({packId, oldName, setEditPack}: EditPackComponentType
             </div>
 
             <div>
-                <button onClick={()=>setEditPack(false)}>Cancel</button>
+                <button onClick={()=>dispatch(packsActions.packModeAC('edit',false))}>Cancel</button>
                 <button onClick={changePackName}>Save changes</button>
             </div>
 

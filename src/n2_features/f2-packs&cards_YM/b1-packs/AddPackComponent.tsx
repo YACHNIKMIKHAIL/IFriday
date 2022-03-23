@@ -2,12 +2,11 @@ import React, {useState} from 'react';
 import {addNewPacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import {useDispatch} from "react-redux";
 import s from "./AddPackComponent.module.css"
+import {packsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsPacks";
 
-type TestAddPackComponentType = {
-    setAddPack: (v: boolean) => void
-}
 
-const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
+
+const AddPackComponent = () => {
 
     const dispatch = useDispatch()
 
@@ -22,11 +21,11 @@ const AddPackComponent = ({setAddPack}: TestAddPackComponentType) => {
 
     const addNewPack = () => {
         dispatch(addNewPacksTC(pack))
-        setAddPack(false)
+        dispatch(packsActions.packModeAC('add',false))
     }
 
     const turnBach = () => {
-        setAddPack(false)
+        dispatch(packsActions.packModeAC('add',false))
     }
 
     return (

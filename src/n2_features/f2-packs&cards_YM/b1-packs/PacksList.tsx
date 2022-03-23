@@ -11,9 +11,7 @@ import {useNavigate} from "react-router-dom";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {useDebounce} from "use-debounce";
 import TableHeader from "../../../n1_main/m1-ui/common/table/TableHeader";
-import AddPackComponent from "./AddPackComponent";
 import OnlyOnePackComponent from "./OnlyOnePackComponent";
-import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import {Nullable} from "../../../types/Nullable";
 
 const PacksList = () => {
@@ -30,7 +28,6 @@ const PacksList = () => {
     const debouncedMAX = useDebounce<number>(packsState.maxCardsCount, 1000)
 
     const [selected, setSelected] = useState<'MY' | 'ALL'>('ALL')
-    const [addPack, setAddPack] = useState<boolean>(false)
 
     const selectMyOrAll = (value: Nullable<string>) => {
         dispatch(packsActions.allMyAC(value))
@@ -57,19 +54,19 @@ const PacksList = () => {
     }, [debouncedSearch[0], packsState.user_id, debouncedMIN[0], debouncedMAX[0], packsState.pageCount,
         packsState.page, packsState.updated])
 
-    if (addPack) {
-        return (
-            <Modal
-                backgroundOnClick={() => setAddPack(false)}
-                show={true}
-                height={0}
-                width={0}
-                backgroundStyle={{backgroundColor: 'hotpink'}}
-                enableBackground={true}>
-                <AddPackComponent setAddPack={setAddPack}/>
-            </Modal>
-        )
-    }
+    // if (addPack) {
+    //     return (
+    //         <Modal
+    //             backgroundOnClick={() => setAddPack(false)}
+    //             show={true}
+    //             height={0}
+    //             width={0}
+    //             backgroundStyle={{backgroundColor: 'lightsalmon'}}
+    //             enableBackground={true}>
+    //             <AddPackComponent setAddPack={setAddPack}/>
+    //         </Modal>
+    //     )
+    // }
 
     return (
         <div className={style.packsListBlock}>
@@ -107,7 +104,10 @@ const PacksList = () => {
                                onChange={onChangeSearchInput}/>
                         <button
                             className={style.buttonSearch}
-                            onClick={() => setAddPack(!addPack)}>
+                            onClick={() => {
+                                dispatch(packsActions.packModeAC('add', true))
+                            }}
+                        >
                             Add New
                         </button>
                     </div>
@@ -118,7 +118,7 @@ const PacksList = () => {
                         packs.map((tableRow, index) => {
                             return (
                                 <div key={index} onDoubleClick={() => runToCards(tableRow._id)}>
-                                    <OnlyOnePackComponent item={tableRow} runToCards={runToCards}/>
+                                    <OnlyOnePackComponent item={tableRow} runToCards={runToCards} />
                                 </div>
                             )
                             /*<div key={index} onDoubleClick={() => runToCards(item._id)}>

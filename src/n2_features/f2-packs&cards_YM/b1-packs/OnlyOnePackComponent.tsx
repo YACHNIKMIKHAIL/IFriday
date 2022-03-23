@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
+import React from 'react';
+import {PackModeTypes, PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {IconButton} from "@mui/material";
 import {Delete} from "@material-ui/icons";
@@ -8,6 +8,8 @@ import {deletePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import EditPackComponent from "./EditPackComponent";
 import s from './OnlyOnePackComponent.module.css'
+import AddPackComponent from "./AddPackComponent";
+import {packsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsPacks";
 
 type OnlyOnePackComponentType = {
     item: PackType
@@ -20,24 +22,42 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
 
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
 
-    const [edit, setEdit] = useState<boolean>(false)
-
+    // const [edit, setEdit] = useState<boolean>(false)
+    // const [addMode, setAddMode] = useState<boolean>(false)
+    const addPack = useFridaySelector<PackModeTypes>(state => state.packs.mode.value)
+    const editPack = useFridaySelector<PackModeTypes>(state => state.packs.mode.value)
+    const showModal = useFridaySelector<boolean>(state => state.packs.mode.show)
     const deletePack = (id: string) => {
         dispatch(deletePacksTC(id))
     }
+    console.log(addPack)
+    console.log(editPack)
 
-    if (edit) {
+    if (addPack === 'add' && showModal) {
         return (
             <Modal
-                backgroundOnClick={() => setEdit(false)}
+                backgroundOnClick={() => dispatch(packsActions.packModeAC('add', false))}
                 show={true}
                 height={0}
                 width={0}
-                backgroundStyle={{backgroundColor: 'goldenrod'}}
+                backgroundStyle={{backgroundColor: 'rgba(61,203,215,0.13)'}}
+                enableBackground={true}>
+                <AddPackComponent/>
+            </Modal>
+        )
+    }
+
+    if (editPack === 'edit' && showModal) {
+        return (
+            <Modal
+                backgroundOnClick={() => dispatch(packsActions.packModeAC('edit', false))}
+                show={true}
+                height={0}
+                width={0}
+                backgroundStyle={{backgroundColor: 'rgba(255,145,3,0.13)'}}
                 enableBackground={true}>
                 <EditPackComponent
                     packId={item._id}
-                    setEditPack={setEdit}
                     oldName={item.name}/>
             </Modal>
         )
@@ -62,7 +82,8 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
                 {
                     myId === item.user_id
                         ? <div className={s.BtnGroup__Item__My}>
-                            <div className={s.Btn} onClick={() => setEdit(true)}>edit</div>
+                            <div className={s.Btn} onClick={() => dispatch(packsActions.packModeAC('edit', true))}>edit
+                            </div>
                             <div className={s.Btn} onClick={() => runToCards(item._id)}>learn</div>
                             <IconButton onClick={() => deletePack(item._id)} aria-label="delete">
                                 <Delete/>
