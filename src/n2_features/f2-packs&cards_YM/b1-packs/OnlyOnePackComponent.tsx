@@ -36,7 +36,7 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
             show={true}
             height={0}
             width={0}
-            backgroundStyle={{backgroundColor: 'lightsalmon'}}
+            backgroundStyle={{backgroundColor: 'rgba(255,3,3,0.15)'}}
             enableBackground={true}>
             <GlobalError/>
         </Modal>

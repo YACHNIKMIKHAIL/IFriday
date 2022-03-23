@@ -27,7 +27,6 @@ const CardsList = ({name}: CardsListType) => {
     const user_id = useFridaySelector<string>(state => state.cards.cards.filter(f => f.cardsPack_id === packId)[0]?.user_id)
     const cardsState = useFridaySelector<InitialCardsType>(state => state.cards)
     const cardSearchName = useFridaySelector<string>(state => state.cards.cardQuestion)
-
     const debouncedCardsOnPage = useDebounce<number>(cardsState.pageCount, 1000)
     const debouncedPageCardsChanged = useDebounce<number>(cardsState.page, 1000)
     const debouncedSearchCardQ = useDebounce<string>(cardsState.cardQuestion, 1000)
@@ -37,6 +36,7 @@ const CardsList = ({name}: CardsListType) => {
     const searchCard = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(cardsActions.searchCardAC(e.currentTarget.value))
     }
+
 
     useEffect(() => {
             if (packId) {
@@ -61,12 +61,10 @@ const CardsList = ({name}: CardsListType) => {
                         onChange={searchCard}
                     />
 
-                        <button
-                            onClick={() => {
-                                dispatch(cardsActions.cardModeAC('add'))
-                            }}>
-                            Add New Card
-                        </button>
+                    <button
+                        onClick={()=>dispatch(cardsActions.cardModeAC('add'))}>
+                        Add New Card
+                    </button>
 
                 </div>
                 <div className={style.cardsBlock}>

@@ -10,6 +10,7 @@ export type PackType = {
     created: string
     updated: string
     user_name: string
+    private:boolean
 }
 export type ModeTypes ='add'|'edit'|null
 export type InitialCardPacksType = {
@@ -35,6 +36,7 @@ const initialCardPacks: InitialCardPacksType = {
             created: "",
             updated: "",
             user_name: "",
+            private:false
         }
     ],
     cardPacksTotalCount: 0,
