@@ -96,7 +96,7 @@ const CardsList = ({name}: CardsListType) => {
                             return (
                                 <CardComponent
                                     key={index}
-                                    c={tableRow}
+                                    content={tableRow}
                                 />
                             )
                         })

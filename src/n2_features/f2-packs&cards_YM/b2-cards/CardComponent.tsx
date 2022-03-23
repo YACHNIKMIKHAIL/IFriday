@@ -12,41 +12,7 @@ import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import EditCardComponent from "./EditCardComponent";
 import s from "../b1-packs/OnlyOnePackComponent.module.css";
 
-const styles = {
-    main: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        margin: '5px',
-        borderRadius: '20px',
-        border: '2px grey solid'
-    },
-    window: {
-        width: '25%',
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-    },
-    updated: {
-        width: '25%',
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        fontSize: 'small'
-    },
-    noMain : {
-        display: 'flex',
-        justifyContent: 'center',
-        margin: '5px',
-        borderRadius: '20px',
-        border: '2px grey solid'
-    }
-}
-
-type CardComponentType = {
-    c: CardType
-}
-
-const CardComponent = ({c}: CardComponentType) => {
+const CardComponent = ({content}: CardComponentType) => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -56,11 +22,11 @@ const CardComponent = ({c}: CardComponentType) => {
     const [editCard, setEditCard] = useState<boolean>(false)
 
     const deleteCard = () => {
-        dispatch(deleteCardTC(c._id))
+        dispatch(deleteCardTC(content._id))
     }
 
-    const cardId = c._id
-    const packId = c.cardsPack_id
+    const cardId = content._id
+    const packId = content.cardsPack_id
 
     const goToCard = () => {
         navigate(`${RoutesXPaths.LEARNED_CARD}/${packId}/${cardId}`)
@@ -77,34 +43,32 @@ const CardComponent = ({c}: CardComponentType) => {
                 enableBackground={true}>
                 <EditCardComponent
                     setEditCard={setEditCard}
-                    cardId={c._id}
-                    oldQ={c.question}/>
+                    cardId={content._id}
+                    oldQ={content.question}/>
             </Modal>
         )
     }
 
-    const main = myId === cardId ? styles.main : styles.noMain
-
     return (
-        <div style={main} onDoubleClick={goToCard}>
-            <div style={styles.window}>
-                <span onDoubleClick={() => setEditCard(true)}>{c.question}</span>
+        <div className={s.TableContainer} onDoubleClick={goToCard}>
+            <div className={s.window}>
+                <span onDoubleClick={() => setEditCard(true)}>{content.question}</span>
             </div>
-            <div style={styles.window}>
-                {c.answer}
+            <div className={s.window}>
+                {content.answer}
             </div>
-            <div style={styles.updated}>
-                дата: {c.updated.slice(0, 10)}, время: {c.updated.slice(12, 19)}
+            <div className={s.updated}>
+                дата: {content.updated.slice(0, 10)}, время: {content.updated.slice(12, 19)}
             </div>
-            <div style={styles.window}>
+            <div className={s.window}>
                 <Rating
                     name="read-only"
-                    value={c.grade}
+                    value={content.grade}
                     readOnly size='small'
                 />
             </div>
             {
-                myId === c.user_id &&
+                myId === content.user_id &&
                 <div className={s.BtnGroup__Item__My}>
                     <div className={s.Btn} onClick={goToCard}>edit</div>
                     <div className={s.Btn} onClick={() => setEditCard(true)}>learn</div>
@@ -118,3 +82,8 @@ const CardComponent = ({c}: CardComponentType) => {
 }
 
 export default CardComponent
+
+//types
+type CardComponentType = {
+    content: CardType
+}
