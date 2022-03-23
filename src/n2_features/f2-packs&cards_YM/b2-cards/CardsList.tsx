@@ -2,7 +2,7 @@ import React, {ChangeEvent, useEffect, useState} from "react";
 import style from "./CardsList.module.css"
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {CardType, InitialCardsType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
-import TableCardsHeader from "../../../n1_main/m1-ui/common/table/TableHeaderCards";
+import TableCardsHeader from "../../../n1_main/m1-ui/common/table/TableCardsHeader";
 import CardComponent from "./CardComponent";
 import TablesCardsPagination from "./TablesCardsPagination";
 import {useDebounce} from "use-debounce";

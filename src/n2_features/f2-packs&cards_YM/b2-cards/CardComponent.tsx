@@ -70,8 +70,8 @@ const CardComponent = ({content}: CardComponentType) => {
             {
                 myId === content.user_id &&
                 <div className={s.BtnGroup__Item__My}>
-                    <div className={s.Btn} onClick={goToCard}>edit</div>
-                    <div className={s.Btn} onClick={() => setEditCard(true)}>learn</div>
+                    <div className={s.Btn} onClick={() => setEditCard(true)}>edit</div>
+                    <div className={s.Btn} onClick={goToCard}>learn</div>
                     <IconButton onClick={deleteCard} aria-label="delete">
                         <Delete/>
                     </IconButton>

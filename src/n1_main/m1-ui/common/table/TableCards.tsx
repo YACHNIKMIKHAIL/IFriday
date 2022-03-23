@@ -22,7 +22,7 @@ const TableCards = ({cards}: TableCardsType) => {
         arr
             ? (
                 <div className={s.table}>
-                    {arr.map((arr, idx) => <TableRow key={idx} arr={arr}/>)}
+                    {arr.map((arrItem, index) => <TableRow key={index} arr={arrItem}/>)}
                 </div>
             ) : (
                 <div>
