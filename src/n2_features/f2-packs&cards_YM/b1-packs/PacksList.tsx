@@ -54,20 +54,6 @@ const PacksList = () => {
     }, [debouncedSearch[0], packsState.user_id, debouncedMIN[0], debouncedMAX[0], packsState.pageCount,
         packsState.page, packsState.updated])
 
-    // if (addPack) {
-    //     return (
-    //         <Modal
-    //             backgroundOnClick={() => setAddPack(false)}
-    //             show={true}
-    //             height={0}
-    //             width={0}
-    //             backgroundStyle={{backgroundColor: 'lightsalmon'}}
-    //             enableBackground={true}>
-    //             <AddPackComponent setAddPack={setAddPack}/>
-    //         </Modal>
-    //     )
-    // }
-
     return (
         <div className={style.packsListBlock}>
 
@@ -121,10 +107,6 @@ const PacksList = () => {
                                     <OnlyOnePackComponent item={tableRow} runToCards={runToCards} />
                                 </div>
                             )
-                            /*<div key={index} onDoubleClick={() => runToCards(item._id)}>
-                            {<TableX/>}
-                            <OnlyOnePackComponent item={item} key={index}/>
-                            {</div>}*/
                         })
                     }
                     <TablesPagination/>

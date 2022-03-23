@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import s from "./../b1-packs/AddPackComponent.module.css"
 import {updateCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
+import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 
 type EditCardComponentType = {
     cardId: string
     oldQ: string
-    setEditCard: (v: boolean) => void
 }
 
-const EditCardComponent = ({cardId, oldQ, setEditCard}: EditCardComponentType) => {
+const EditCardComponent = ({cardId, oldQ}: EditCardComponentType) => {
 
     const dispatch = useDispatch()
 
@@ -23,7 +23,7 @@ const EditCardComponent = ({cardId, oldQ, setEditCard}: EditCardComponentType) =
 
     const saveCard = () => {
         dispatch(updateCardTC(updatedCard))
-        setEditCard(false)
+        dispatch(cardsActions.cardModeAC('edit',false))
     }
 
     return (
@@ -43,7 +43,7 @@ const EditCardComponent = ({cardId, oldQ, setEditCard}: EditCardComponentType) =
             </div>
 
             <div>
-                <button onClick={()=>setEditCard(false)}>Cancel</button>
+                <button onClick={()=>dispatch(cardsActions.cardModeAC('edit',false))}>Cancel</button>
                 <button onClick={saveCard}>Save changes</button>
             </div>
         </div>

@@ -3,13 +3,13 @@ import {useDispatch} from "react-redux";
 import s from "./../b1-packs/AddPackComponent.module.css"
 import {addNewCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import {Undetectable} from "../../../types/Undetectable";
+import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 
 type TestAddCardComponentType = {
-    setNewCard: (c: boolean) => void
     packId: Undetectable<string>
 }
 
-const TestAddCardComponent = ({setNewCard, packId}: TestAddCardComponentType) => {
+const TestAddCardComponent = ({ packId}: TestAddCardComponentType) => {
 
     const dispatch = useDispatch()
 
@@ -19,12 +19,12 @@ const TestAddCardComponent = ({setNewCard, packId}: TestAddCardComponentType) =>
     const addNewCard = () => {
         if (packId) {
             dispatch(addNewCardTC(question, answer, packId))
-            setNewCard(false)
+            dispatch(cardsActions.cardModeAC('add',false))
         }
     }
 
-    const turnBach = () => {
-        setNewCard(false)
+    const turnBack = () => {
+        dispatch(cardsActions.cardModeAC('add',false))
     }
 
     return (
@@ -53,7 +53,7 @@ const TestAddCardComponent = ({setNewCard, packId}: TestAddCardComponentType) =>
                 />
             </div>
             <div className={s.buttonsContainer}>
-                <button onClick={turnBach}>Cancel</button>
+                <button onClick={turnBack}>Cancel</button>
                 <button onClick={addNewCard}>Add</button>
             </div>
         </div>

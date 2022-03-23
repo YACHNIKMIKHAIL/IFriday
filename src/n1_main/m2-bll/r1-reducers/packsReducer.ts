@@ -11,7 +11,7 @@ export type PackType = {
     updated: string
     user_name: string
 }
-export type PackModeTypes='add'|'edit'|null
+export type ModeTypes ='add'|'edit'|null
 export type InitialCardPacksType = {
     cardPacks: PackType[]
     cardPacksTotalCount: number
@@ -23,7 +23,7 @@ export type InitialCardPacksType = {
     updated: UpdatedType
     user_id: Nullable<string>,
     mode:{
-        value:PackModeTypes,
+        value:ModeTypes,
         show:boolean
     }
 }

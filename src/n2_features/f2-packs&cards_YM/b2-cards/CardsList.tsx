@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect} from "react";
 import style from "./CardsList.module.css"
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {CardType, InitialCardsType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
@@ -8,7 +8,6 @@ import TablesCardsPagination from "./TablesCardsPagination";
 import {useDebounce} from "use-debounce";
 import {useDispatch} from "react-redux";
 import {cardsTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
-import TestAddCardComponent from "./TestAddCardComponent";
 import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 import {UpdatedType} from "../../../n1_main/m3-dal/packsAPI";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
@@ -25,9 +24,7 @@ const CardsList = ({name}: CardsListType) => {
 
     const dispatch = useDispatch()
 
-    const [newCard, setNewCard] = useState<boolean>(false)
     const {packId} = useParams<'packId'>()
-
     const cards = useFridaySelector<CardType[]>(state => state.cards.cards)
     const user_id = useFridaySelector<string>(state => state.cards.cards.filter(f => f.cardsPack_id === packId)[0]?.user_id)
     const cardsState = useFridaySelector<InitialCardsType>(state => state.cards)
@@ -68,22 +65,7 @@ const CardsList = ({name}: CardsListType) => {
         </Modal>
     }
 
-    if (newCard) {
-        return (
-            <Modal
-                backgroundOnClick={() => setNewCard(false)}
-                show={true}
-                height={0}
-                width={0}
-                backgroundStyle={{backgroundColor: 'deepskyblue'}}
-                enableBackground={true}>
-                <TestAddCardComponent
-                    packId={packId}
-                    setNewCard={setNewCard}
-                />
-            </Modal>
-        )
-    }
+
     return (
         <div className={style.cardsListBlock}>
             <div className={style.cardsList}>
@@ -94,16 +76,11 @@ const CardsList = ({name}: CardsListType) => {
                         value={cardSearchName}
                         onChange={searchCard}
                     />
-                    {/*{*/}
-                    {/*    myId === user_id &&*/}
-                    {/*    <button*/}
-                    {/*        onClick={() => setNewCard(true)}>*/}
-                    {/*        Add New Card*/}
-                    {/*    </button>*/}
-                    {/*}*/}
 
                         <button
-                            onClick={() => setNewCard(true)}>
+                            onClick={() => {
+                                dispatch(cardsActions.cardModeAC('add', true))
+                            }}>
                             Add New Card
                         </button>
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {CardType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
 import {Rating} from "@material-ui/core";
 import {deleteCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
@@ -11,6 +11,9 @@ import {useNavigate} from "react-router-dom";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import EditCardComponent from "./EditCardComponent";
 import s from "../b1-packs/OnlyOnePackComponent.module.css";
+import TestAddCardComponent from "./TestAddCardComponent";
+import {ModeTypes} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
+import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 
 const CardComponent = ({content}: CardComponentType) => {
 
@@ -19,7 +22,12 @@ const CardComponent = ({content}: CardComponentType) => {
 
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
 
-    const [editCard, setEditCard] = useState<boolean>(false)
+
+    const addCard = useFridaySelector<ModeTypes>(state => state.cards.mode.value)
+    const editCard = useFridaySelector<ModeTypes>(state => state.cards.mode.value)
+
+    const showModal = useFridaySelector<boolean>(state => state.cards.mode.show)
+
 
     const deleteCard = () => {
         dispatch(deleteCardTC(content._id))
@@ -31,19 +39,36 @@ const CardComponent = ({content}: CardComponentType) => {
     const goToCard = () => {
         navigate(`${RoutesXPaths.LEARNED_CARD}/${packId}/${cardId}`)
     }
+    const x=()=>{
+        dispatch(cardsActions.cardModeAC('edit',true))
+    }
 
-
-    if (editCard) {
+    if (addCard==='add'&&showModal) {
         return (
             <Modal
-                backgroundOnClick={() => setEditCard(false)}
+                backgroundOnClick={() => dispatch(cardsActions.cardModeAC('add',false))}
+                show={true}
+                height={0}
+                width={0}
+                backgroundStyle={{backgroundColor: 'deepskyblue'}}
+                enableBackground={true}>
+                <TestAddCardComponent
+                    packId={packId}
+                />
+            </Modal>
+        )
+    }
+
+    if (editCard==='edit'&& showModal) {
+        return (
+            <Modal
+                backgroundOnClick={() => dispatch(cardsActions.cardModeAC('edit',false))}
                 show={true}
                 height={0}
                 width={0}
                 backgroundStyle={{backgroundColor: 'darkolivegreen'}}
                 enableBackground={true}>
                 <EditCardComponent
-                    setEditCard={setEditCard}
                     cardId={content._id}
                     oldQ={content.question}/>
             </Modal>
@@ -53,7 +78,7 @@ const CardComponent = ({content}: CardComponentType) => {
     return (
         <div className={s.TableContainer} onDoubleClick={goToCard}>
             <div className={s.window}>
-                <span onDoubleClick={() => setEditCard(true)}>{content.question}</span>
+                <span onDoubleClick={x}>{content.question}</span>
             </div>
             <div className={s.window}>
                 {content.answer}
@@ -71,7 +96,7 @@ const CardComponent = ({content}: CardComponentType) => {
             {
                 myId === content.user_id &&
                 <div className={s.BtnGroup__Item__My}>
-                    <div className={s.Btn} onClick={() => setEditCard(true)}>edit</div>
+                    <div className={s.Btn} onClick={x}>edit</div>
                     <div className={s.Btn} onClick={goToCard}>learn</div>
                     <IconButton onClick={deleteCard} aria-label="delete">
                         <Delete/>

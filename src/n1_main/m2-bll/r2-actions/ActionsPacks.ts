@@ -1,4 +1,4 @@
-import {InitialCardPacksType, PackModeTypes} from "../r1-reducers/packsReducer";
+import {InitialCardPacksType, ModeTypes} from "../r1-reducers/packsReducer";
 import {UpdatedType} from "../../m3-dal/packsAPI";
 import {Nullable} from "../../../types/Nullable";
 
@@ -63,7 +63,7 @@ export const packsActions = {
             payload: {updated}
         } as const
     },
-    packModeAC: (value: PackModeTypes,show:boolean) => {
+    packModeAC: (value: ModeTypes, show:boolean) => {
         return {
             type: packsActionsEnum.PACKS_MODE,
             payload: {value,show}

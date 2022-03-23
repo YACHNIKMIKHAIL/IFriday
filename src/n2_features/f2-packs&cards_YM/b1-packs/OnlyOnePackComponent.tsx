@@ -1,5 +1,5 @@
 import React from 'react';
-import {PackModeTypes, PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
+import {ModeTypes, PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {IconButton} from "@mui/material";
 import {Delete} from "@material-ui/icons";
@@ -22,16 +22,12 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
 
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
 
-    // const [edit, setEdit] = useState<boolean>(false)
-    // const [addMode, setAddMode] = useState<boolean>(false)
-    const addPack = useFridaySelector<PackModeTypes>(state => state.packs.mode.value)
-    const editPack = useFridaySelector<PackModeTypes>(state => state.packs.mode.value)
+    const addPack = useFridaySelector<ModeTypes>(state => state.packs.mode.value)
+    const editPack = useFridaySelector<ModeTypes>(state => state.packs.mode.value)
     const showModal = useFridaySelector<boolean>(state => state.packs.mode.show)
     const deletePack = (id: string) => {
         dispatch(deletePacksTC(id))
     }
-    console.log(addPack)
-    console.log(editPack)
 
     if (addPack === 'add' && showModal) {
         return (
@@ -40,7 +36,7 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
                 show={true}
                 height={0}
                 width={0}
-                backgroundStyle={{backgroundColor: 'rgba(61,203,215,0.13)'}}
+                backgroundStyle={{backgroundColor: 'rgba(161,6,159,0.07)'}}
                 enableBackground={true}>
                 <AddPackComponent/>
             </Modal>
