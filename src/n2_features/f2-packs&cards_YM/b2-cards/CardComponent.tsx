@@ -22,10 +22,7 @@ const CardComponent = ({content}: CardComponentType) => {
     const dispatch = useDispatch()
 
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
-
-
     const cardMode = useFridaySelector<ModeTypes>(state => state.cards.mode)
-    console.log(cardMode)
     const globalError = useFridaySelector<string>(state => state.app.globalError)
 
 
