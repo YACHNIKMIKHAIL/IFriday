@@ -50,10 +50,10 @@ export const cardsActions = {
             payload: {updatedCard}
         } as const
     },
-    cardModeAC: (value: ModeTypes, show:boolean) => {
+    cardModeAC: (mode: ModeTypes) => {
         return {
             type: cardsActionsEnum.CARD_MODE,
-            payload: {value,show}
+            payload: {mode}
         } as const
     },
 }

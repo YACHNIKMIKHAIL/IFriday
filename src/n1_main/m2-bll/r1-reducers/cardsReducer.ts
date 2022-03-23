@@ -24,10 +24,7 @@ export type InitialCardsType = {
     cardAnswer: string
     cardQuestion: string
     sortCards: UpdatedType,
-    mode:{
-        value:ModeTypes,
-        show:boolean
-    }
+    mode:ModeTypes
 }
 
 const initialCards: InitialCardsType = {
@@ -52,10 +49,7 @@ const initialCards: InitialCardsType = {
     cardAnswer: '',
     cardQuestion: '',
     sortCards: '' as UpdatedType,
-    mode:{
-        value:null,
-        show:false
-    }
+    mode:null
 }
 
 export type cardsReducerActionType = ReturnType<cardsActionsTypes<typeof cardsActions>>
@@ -86,7 +80,7 @@ export const cardsReducer = (state = initialCards, action: cardsReducerActionTyp
             }
         }
         case cardsActionsEnum.CARD_MODE: {
-            return {...state, mode:{value:action.payload.value,show:action.payload.show}}
+            return {...state, mode:action.payload.mode}
         }
         default:
             return state

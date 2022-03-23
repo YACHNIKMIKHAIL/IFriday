@@ -91,7 +91,7 @@ const PacksList = () => {
                         <button
                             className={style.buttonSearch}
                             onClick={() => {
-                                dispatch(packsActions.packModeAC('add', true))
+                                dispatch(packsActions.packModeAC('add'))
                             }}
                         >
                             Add New

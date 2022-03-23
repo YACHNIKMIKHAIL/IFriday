@@ -14,6 +14,7 @@ import s from "../b1-packs/OnlyOnePackComponent.module.css";
 import TestAddCardComponent from "./TestAddCardComponent";
 import {ModeTypes} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
+import GlobalError from "../../../n1_main/m1-ui/common/GlobalError/GlobalError";
 
 const CardComponent = ({content}: CardComponentType) => {
 
@@ -23,10 +24,9 @@ const CardComponent = ({content}: CardComponentType) => {
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
 
 
-    const addCard = useFridaySelector<ModeTypes>(state => state.cards.mode.value)
-    const editCard = useFridaySelector<ModeTypes>(state => state.cards.mode.value)
-
-    const showModal = useFridaySelector<boolean>(state => state.cards.mode.show)
+    const cardMode = useFridaySelector<ModeTypes>(state => state.cards.mode)
+    console.log(cardMode)
+    const globalError = useFridaySelector<string>(state => state.app.globalError)
 
 
     const deleteCard = () => {
@@ -39,18 +39,31 @@ const CardComponent = ({content}: CardComponentType) => {
     const goToCard = () => {
         navigate(`${RoutesXPaths.LEARNED_CARD}/${packId}/${cardId}`)
     }
-    const x=()=>{
-        dispatch(cardsActions.cardModeAC('edit',true))
+    const x = () => {
+        dispatch(cardsActions.cardModeAC('edit'))
     }
 
-    if (addCard==='add'&&showModal) {
+    if (globalError) {
+        return <Modal
+            backgroundOnClick={() => {
+            }}
+            show={true}
+            height={0}
+            width={0}
+            backgroundStyle={{backgroundColor: 'rgba(255,3,3,0.15)'}}
+            enableBackground={true}>
+            <GlobalError/>
+        </Modal>
+    }
+
+    if (cardMode === 'add') {
         return (
             <Modal
-                backgroundOnClick={() => dispatch(cardsActions.cardModeAC('add',false))}
+                backgroundOnClick={() => dispatch(cardsActions.cardModeAC(null))}
                 show={true}
                 height={0}
                 width={0}
-                backgroundStyle={{backgroundColor: 'deepskyblue'}}
+                backgroundStyle={{backgroundColor: 'rgba(89,61,215,0.13)'}}
                 enableBackground={true}>
                 <TestAddCardComponent
                     packId={packId}
@@ -59,10 +72,10 @@ const CardComponent = ({content}: CardComponentType) => {
         )
     }
 
-    if (editCard==='edit'&& showModal) {
+    if (cardMode === 'edit') {
         return (
             <Modal
-                backgroundOnClick={() => dispatch(cardsActions.cardModeAC('edit',false))}
+                backgroundOnClick={() => dispatch(cardsActions.cardModeAC(null))}
                 show={true}
                 height={0}
                 width={0}

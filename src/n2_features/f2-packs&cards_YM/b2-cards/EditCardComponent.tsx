@@ -23,7 +23,7 @@ const EditCardComponent = ({cardId, oldQ}: EditCardComponentType) => {
 
     const saveCard = () => {
         dispatch(updateCardTC(updatedCard))
-        dispatch(cardsActions.cardModeAC('edit',false))
+        dispatch(cardsActions.cardModeAC(null))
     }
 
     return (
@@ -43,7 +43,7 @@ const EditCardComponent = ({cardId, oldQ}: EditCardComponentType) => {
             </div>
 
             <div>
-                <button onClick={()=>dispatch(cardsActions.cardModeAC('edit',false))}>Cancel</button>
+                <button onClick={()=>dispatch(cardsActions.cardModeAC(null))}>Cancel</button>
                 <button onClick={saveCard}>Save changes</button>
             </div>
         </div>

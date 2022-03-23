@@ -17,7 +17,7 @@ const EditPackComponent = ({packId, oldName}: EditPackComponentType) => {
 
     const changePackName = () => {
         dispatch(changePacksTC(newPackName, packId))
-        dispatch(packsActions.packModeAC('edit',false))
+        dispatch(packsActions.packModeAC(null))
     }
 
     return (
@@ -37,7 +37,7 @@ const EditPackComponent = ({packId, oldName}: EditPackComponentType) => {
             </div>
 
             <div>
-                <button onClick={()=>dispatch(packsActions.packModeAC('edit',false))}>Cancel</button>
+                <button onClick={()=>dispatch(packsActions.packModeAC(null))}>Cancel</button>
                 <button onClick={changePackName}>Save changes</button>
             </div>
 

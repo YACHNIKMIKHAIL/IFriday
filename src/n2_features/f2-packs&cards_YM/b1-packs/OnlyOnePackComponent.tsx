@@ -10,6 +10,7 @@ import EditPackComponent from "./EditPackComponent";
 import s from './OnlyOnePackComponent.module.css'
 import AddPackComponent from "./AddPackComponent";
 import {packsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsPacks";
+import GlobalError from "../../../n1_main/m1-ui/common/GlobalError/GlobalError";
 
 type OnlyOnePackComponentType = {
     item: PackType
@@ -22,17 +23,29 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
 
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
 
-    const addPack = useFridaySelector<ModeTypes>(state => state.packs.mode.value)
-    const editPack = useFridaySelector<ModeTypes>(state => state.packs.mode.value)
-    const showModal = useFridaySelector<boolean>(state => state.packs.mode.show)
+    const packMode = useFridaySelector<ModeTypes>(state => state.packs.mode)
+    const globalError = useFridaySelector<string>(state => state.app.globalError)
     const deletePack = (id: string) => {
         dispatch(deletePacksTC(id))
     }
 
-    if (addPack === 'add' && showModal) {
+    if (globalError) {
+        return <Modal
+            backgroundOnClick={() => {
+            }}
+            show={true}
+            height={0}
+            width={0}
+            backgroundStyle={{backgroundColor: 'lightsalmon'}}
+            enableBackground={true}>
+            <GlobalError/>
+        </Modal>
+    }
+
+    if (packMode === 'add') {
         return (
             <Modal
-                backgroundOnClick={() => dispatch(packsActions.packModeAC('add', false))}
+                backgroundOnClick={() => dispatch(packsActions.packModeAC(null))}
                 show={true}
                 height={0}
                 width={0}
@@ -43,10 +56,10 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
         )
     }
 
-    if (editPack === 'edit' && showModal) {
+    if (packMode === 'edit') {
         return (
             <Modal
-                backgroundOnClick={() => dispatch(packsActions.packModeAC('edit', false))}
+                backgroundOnClick={() => dispatch(packsActions.packModeAC(null))}
                 show={true}
                 height={0}
                 width={0}
@@ -78,7 +91,7 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
                 {
                     myId === item.user_id
                         ? <div className={s.BtnGroup__Item__My}>
-                            <div className={s.Btn} onClick={() => dispatch(packsActions.packModeAC('edit', true))}>edit
+                            <div className={s.Btn} onClick={() => dispatch(packsActions.packModeAC('edit'))}>edit
                             </div>
                             <div className={s.Btn} onClick={() => runToCards(item._id)}>learn</div>
                             <IconButton onClick={() => deletePack(item._id)} aria-label="delete">

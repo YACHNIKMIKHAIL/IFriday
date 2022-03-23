@@ -21,11 +21,11 @@ const AddPackComponent = () => {
 
     const addNewPack = () => {
         dispatch(addNewPacksTC(pack))
-        dispatch(packsActions.packModeAC('add',false))
+        dispatch(packsActions.packModeAC(null))
     }
 
     const turnBach = () => {
-        dispatch(packsActions.packModeAC('add',false))
+        dispatch(packsActions.packModeAC(null))
     }
 
     return (

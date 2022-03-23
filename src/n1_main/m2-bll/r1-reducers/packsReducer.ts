@@ -22,10 +22,7 @@ export type InitialCardPacksType = {
     packName: string
     updated: UpdatedType
     user_id: Nullable<string>,
-    mode:{
-        value:ModeTypes,
-        show:boolean
-    }
+    mode:ModeTypes,
 }
 
 const initialCardPacks: InitialCardPacksType = {
@@ -48,10 +45,7 @@ const initialCardPacks: InitialCardPacksType = {
     packName: '',
     updated: '' as UpdatedType,
     user_id: null,
-    mode:{
-        value:null,
-        show:false
-    }
+    mode:null,
 }
 
 export type packsReducerActionType = ReturnType<packsActionsTypes<typeof packsActions>>
@@ -83,7 +77,7 @@ export const packsReducer = (state = initialCardPacks, action: packsReducerActio
             return {...state, updated: action.payload.updated}
         }
         case packsActionsEnum.PACKS_MODE: {
-            return {...state, mode:{value:action.payload.value,show:action.payload.show}}
+            return {...state, mode:action.payload.mode}
         }
         default:
             return state

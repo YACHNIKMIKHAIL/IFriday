@@ -19,12 +19,12 @@ const TestAddCardComponent = ({ packId}: TestAddCardComponentType) => {
     const addNewCard = () => {
         if (packId) {
             dispatch(addNewCardTC(question, answer, packId))
-            dispatch(cardsActions.cardModeAC('add',false))
+            dispatch(cardsActions.cardModeAC(null))
         }
     }
 
     const turnBack = () => {
-        dispatch(cardsActions.cardModeAC('add',false))
+        dispatch(cardsActions.cardModeAC(null))
     }
 
     return (

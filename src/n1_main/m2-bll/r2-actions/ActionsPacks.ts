@@ -63,10 +63,10 @@ export const packsActions = {
             payload: {updated}
         } as const
     },
-    packModeAC: (value: ModeTypes, show:boolean) => {
+    packModeAC: (mode: ModeTypes) => {
         return {
             type: packsActionsEnum.PACKS_MODE,
-            payload: {value,show}
+            payload: {mode}
         } as const
     },
 }
