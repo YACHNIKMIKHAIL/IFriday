@@ -4,12 +4,13 @@ import {Rating} from "@material-ui/core";
 import {deleteCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import {useDispatch} from "react-redux";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
-import {Button, IconButton} from "@mui/material";
+import {IconButton} from "@mui/material";
 import {Delete} from "@material-ui/icons";
 import {RoutesXPaths} from '../../../n1_main/m1-ui/routes/routes';
 import {useNavigate} from "react-router-dom";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import EditCardComponent from "./EditCardComponent";
+import s from "../b1-packs/OnlyOnePackComponent.module.css";
 
 const styles = {
     main: {
@@ -23,7 +24,7 @@ const styles = {
         width: '25%',
         display: 'flex',
         justifyContent: 'space-around',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     updated: {
         width: '25%',
@@ -31,6 +32,13 @@ const styles = {
         justifyContent: 'space-around',
         alignItems: 'center',
         fontSize: 'small'
+    },
+    noMain : {
+        display: 'flex',
+        justifyContent: 'center',
+        margin: '5px',
+        borderRadius: '20px',
+        border: '2px grey solid'
     }
 }
 
@@ -74,8 +82,11 @@ const CardComponent = ({c}: CardComponentType) => {
             </Modal>
         )
     }
+
+    const main = myId === cardId ? styles.main : styles.noMain
+
     return (
-        <div style={styles.main} onDoubleClick={goToCard}>
+        <div style={main} onDoubleClick={goToCard}>
             <div style={styles.window}>
                 <span onDoubleClick={() => setEditCard(true)}>{c.question}</span>
             </div>
@@ -94,13 +105,13 @@ const CardComponent = ({c}: CardComponentType) => {
             </div>
             {
                 myId === c.user_id &&
-                <>
-                    <Button size="small" onClick={goToCard}>learn</Button>
-                    <Button size="small" onClick={() => setEditCard(true)}>edit</Button>
+                <div className={s.BtnGroup__Item__My}>
+                    <div className={s.Btn} onClick={goToCard}>edit</div>
+                    <div className={s.Btn} onClick={() => setEditCard(true)}>learn</div>
                     <IconButton onClick={deleteCard} aria-label="delete">
                         <Delete/>
                     </IconButton>
-                </>
+                </div>
             }
         </div>
     )

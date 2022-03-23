@@ -117,10 +117,10 @@ const PacksList = () => {
                 <div className={style.cardsBlock}>
                     <TableHeader/>
                     {
-                        packs.map((item, index) => {
+                        packs.map((tableRow, index) => {
                             return (
-                                <div key={index} onDoubleClick={() => runToCards(item._id)}>
-                                    <OnlyOnePackComponent item={item} runToCards={runToCards}/>
+                                <div key={index} onDoubleClick={() => runToCards(tableRow._id)}>
+                                    <OnlyOnePackComponent item={tableRow} runToCards={runToCards}/>
                                 </div>
                             )
                             /*<div key={index} onDoubleClick={() => runToCards(item._id)}>

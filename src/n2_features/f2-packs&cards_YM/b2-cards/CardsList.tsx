@@ -92,11 +92,11 @@ const CardsList = ({name}: CardsListType) => {
                 <div className={style.cardsBlock}>
                     <TableCardsHeader user_id={user_id}/>
                     {
-                        cards?.map((m, i) => {
+                        cards?.map((tableRow, index) => {
                             return (
                                 <CardComponent
-                                    key={i}
-                                    c={m}
+                                    key={index}
+                                    c={tableRow}
                                 />
                             )
                         })

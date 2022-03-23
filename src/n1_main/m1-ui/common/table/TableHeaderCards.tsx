@@ -36,8 +36,10 @@ const TableCardsHeader = ({user_id}: TCHType) => {
         setGradeUpd(false)
     }
 
+    const tableHeader = myId === user_id ? s.tableHeader : s.tableHeaderWithId
+
     return (
-        <div className={s.tableHeader}>
+        <div className={tableHeader}>
             <div>
                 <span className={style.tableHeader__item}>
                     Question
