@@ -38,12 +38,12 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    text-transform: uppercase;
     text-align: end;
-    font-family: 'Akaya Telivigala', cursive
 }
 
 .Btn {
+    text-transform: uppercase;
+    font-family: 'Akaya Telivigala', cursive;
     background-color: #d6dcea;
     padding: 3px 8px;
     border: 2px solid #1c5886;

@@ -46,15 +46,15 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
                 {
                     myId === item.user_id
                         ? <div className={s.BtnGroup__Item__My}>
-                            <div className={s.Btn} onClick={() => dispatch(packsActions.packModeAC('edit'))} aria-disabled={isLoad}>edit
-                            </div>
-                            <div className={s.Btn} onClick={() => runToCards(item._id)} aria-disabled={isLoad}>learn</div>
+                            <button className={s.Btn} onClick={() => dispatch(packsActions.packModeAC('edit'))} aria-disabled={isLoad}>edit
+                            </button>
+                            <button className={s.Btn} onClick={() => runToCards(item._id)} aria-disabled={isLoad}>learn</button>
                             <IconButton onClick={() => deletePack(item._id)} aria-label="delete" disabled={isLoad}>
                                 <Delete/>
                             </IconButton>
                         </div>
                         : <div className={s.BtnGroup__Item__My}>
-                            <div className={s.Btn} onClick={() => runToCards(item._id)} aria-disabled={isLoad}>learn</div>
+                            <button className={s.Btn} onClick={() => runToCards(item._id)} aria-disabled={isLoad}>learn</button>
                         </div>
                 }
             </div>

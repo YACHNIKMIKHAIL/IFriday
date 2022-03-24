@@ -32,7 +32,7 @@ const AddPackComponent = () => {
     return (
         <div className={s.addItemContainer}>
             <h2>
-                Add new pack:
+                Add new pack
             </h2>
             <div className={s.centerInputContainer}>
                     <span>
