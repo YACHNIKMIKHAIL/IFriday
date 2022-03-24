@@ -20,7 +20,7 @@ const CardComponent = ({content}: CardComponentType) => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
+    console.log(content)
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const cardMode = useFridaySelector<ModeTypes>(state => state.cards.mode)
     const globalError = useFridaySelector<string>(state => state.app.globalError)
