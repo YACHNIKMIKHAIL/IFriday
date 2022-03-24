@@ -15,9 +15,6 @@ const AppSerge = () => {
     const status = useFridaySelector<RequestStatusType>(state => state.app.status)
     const initialized = useFridaySelector<boolean>(state => state.me.isInitialized)
 
-    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
-
-
     useEffect(() => {
         dispatch(meTC())
     }, [])
@@ -28,7 +25,6 @@ const AppSerge = () => {
 
     return (
         <div className="App">
-            {isLoad && <div>isLoad...</div>}
             <Main/>
             <RoutesX/>
         </div>
