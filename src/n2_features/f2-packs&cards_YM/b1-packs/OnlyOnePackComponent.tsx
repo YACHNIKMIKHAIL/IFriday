@@ -8,9 +8,7 @@ import {deletePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import EditPackComponent from "./EditPackComponent";
 import s from './OnlyOnePackComponent.module.css'
-import AddPackComponent from "./AddPackComponent";
 import {packsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsPacks";
-import GlobalError from "../../../n1_main/m1-ui/common/GlobalError/GlobalError";
 
 type OnlyOnePackComponentType = {
     item: PackType
@@ -24,53 +22,10 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
 
     const packMode = useFridaySelector<ModeTypes>(state => state.packs.mode)
-    const globalError = useFridaySelector<string>(state => state.app.globalError)
     const deletePack = (id: string) => {
         dispatch(deletePacksTC(id))
     }
 
-    if (globalError) {
-        return <Modal
-            backgroundOnClick={() => {
-            }}
-            show={true}
-            height={0}
-            width={0}
-            backgroundStyle={{backgroundColor: 'rgba(255,3,3,0.15)'}}
-            enableBackground={true}>
-            <GlobalError/>
-        </Modal>
-    }
-
-    if (packMode === 'add') {
-        return (
-            <Modal
-                backgroundOnClick={() => dispatch(packsActions.packModeAC(null))}
-                show={true}
-                height={0}
-                width={0}
-                backgroundStyle={{backgroundColor: 'rgba(161,6,159,0.07)'}}
-                enableBackground={true}>
-                <AddPackComponent/>
-            </Modal>
-        )
-    }
-
-    if (packMode === 'edit') {
-        return (
-            <Modal
-                backgroundOnClick={() => dispatch(packsActions.packModeAC(null))}
-                show={true}
-                height={0}
-                width={0}
-                backgroundStyle={{backgroundColor: 'rgba(255,145,3,0.13)'}}
-                enableBackground={true}>
-                <EditPackComponent
-                    packId={item._id}
-                    oldName={item.name}/>
-            </Modal>
-        )
-    }
 
     return (
         <div className={s.TableContainer}>
@@ -103,6 +58,18 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
                         </div>
                 }
             </div>
+            <Modal
+                backgroundOnClick={() => {
+                }}
+                show={packMode === 'edit'}
+                height={0}
+                width={0}
+                backgroundStyle={{backgroundColor: 'rgba(255,145,3,0.13)'}}
+                enableBackground={true}>
+                {packMode === 'edit' && <EditPackComponent
+                    packId={item._id}
+                    oldName={item.name}/>}
+            </Modal>
         </div>
     )
 }

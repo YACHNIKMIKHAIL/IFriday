@@ -11,20 +11,15 @@ import {useNavigate} from "react-router-dom";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import EditCardComponent from "./EditCardComponent";
 import s from "../b1-packs/OnlyOnePackComponent.module.css";
-import TestAddCardComponent from "./TestAddCardComponent";
 import {ModeTypes} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
-import GlobalError from "../../../n1_main/m1-ui/common/GlobalError/GlobalError";
 
 const CardComponent = ({content}: CardComponentType) => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    console.log(content)
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const cardMode = useFridaySelector<ModeTypes>(state => state.cards.mode)
-    const globalError = useFridaySelector<string>(state => state.app.globalError)
-
 
     const deleteCard = () => {
         dispatch(deleteCardTC(content._id))
@@ -40,50 +35,8 @@ const CardComponent = ({content}: CardComponentType) => {
         dispatch(cardsActions.cardModeAC('edit'))
     }
 
-    if (globalError) {
-        return <Modal
-            backgroundOnClick={() => {
-            }}
-            show={true}
-            height={0}
-            width={0}
-            backgroundStyle={{backgroundColor: 'rgba(255,3,3,0.15)'}}
-            enableBackground={true}>
-            <GlobalError/>
-        </Modal>
-    }
 
-    if (cardMode === 'add') {
-        return (
-            <Modal
-                backgroundOnClick={() => dispatch(cardsActions.cardModeAC(null))}
-                show={true}
-                height={0}
-                width={0}
-                backgroundStyle={{backgroundColor: 'rgba(89,61,215,0.13)'}}
-                enableBackground={true}>
-                <TestAddCardComponent
-                    packId={packId}
-                />
-            </Modal>
-        )
-    }
 
-    if (cardMode === 'edit') {
-        return (
-            <Modal
-                backgroundOnClick={() => dispatch(cardsActions.cardModeAC(null))}
-                show={true}
-                height={0}
-                width={0}
-                backgroundStyle={{backgroundColor: 'darkolivegreen'}}
-                enableBackground={true}>
-                <EditCardComponent
-                    cardId={content._id}
-                    oldQ={content.question}/>
-            </Modal>
-        )
-    }
 
     return (
         <div className={s.TableContainer} onDoubleClick={goToCard}>
@@ -113,6 +66,17 @@ const CardComponent = ({content}: CardComponentType) => {
                     </IconButton>
                 </div>
             }
+            <Modal
+                backgroundOnClick={() => dispatch(cardsActions.cardModeAC(null))}
+                show={cardMode === 'edit'}
+                height={0}
+                width={0}
+                backgroundStyle={{backgroundColor: 'rgba(215,207,61,0.2)'}}
+                enableBackground={true}>
+                <EditCardComponent
+                    cardId={content._id}
+                    oldQ={content.question}/>
+            </Modal>
         </div>
     )
 }

@@ -12,6 +12,10 @@ import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 import {UpdatedType} from "../../../n1_main/m3-dal/packsAPI";
 import {useParams} from "react-router-dom";
 import {Undetectable} from "../../../types/Undetectable";
+import {ModeTypes} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
+import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
+import TestAddCardComponent from "./TestAddCardComponent";
+import GlobalError from "../../../n1_main/m1-ui/common/GlobalError/GlobalError";
 
 type CardsListType = {
     name: string
@@ -32,11 +36,12 @@ const CardsList = ({name}: CardsListType) => {
     const debouncedSearchCardQ = useDebounce<string>(cardsState.cardQuestion, 1000)
     const debouncedSearchCardA = useDebounce<string>(cardsState.cardAnswer, 1000)
     const debouncedSearchLastUpdated = useDebounce<UpdatedType>(cardsState.sortCards, 0)
+    const globalError = useFridaySelector<string>(state => state.app.globalError)
+
 
     const searchCard = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(cardsActions.searchCardAC(e.currentTarget.value))
     }
-
 
     useEffect(() => {
             if (packId) {
@@ -49,6 +54,7 @@ const CardsList = ({name}: CardsListType) => {
             debouncedSearchLastUpdated[0],
         ]
     )
+    const cardMode = useFridaySelector<ModeTypes>(state => state.cards.mode)
 
     return (
         <div className={style.cardsListBlock}>
@@ -62,7 +68,7 @@ const CardsList = ({name}: CardsListType) => {
                     />
 
                     <button
-                        onClick={()=>dispatch(cardsActions.cardModeAC('add'))}>
+                        onClick={() => dispatch(cardsActions.cardModeAC('add'))}>
                         Add New Card
                     </button>
 
@@ -79,6 +85,20 @@ const CardsList = ({name}: CardsListType) => {
                             )
                         })
                     }
+
+                    <Modal
+                        backgroundOnClick={() => dispatch(cardsActions.cardModeAC(null))}
+                        show={cardMode === 'add' || globalError !== ''}
+                        height={0}
+                        width={0}
+                        backgroundStyle={cardMode === 'add' ? {backgroundColor: 'rgba(89,61,215,0.13)'} : {backgroundColor: 'rgba(255,3,3,0.15)'}}
+                        enableBackground={true}>
+                        {cardMode === 'add' && <TestAddCardComponent
+                            packId={packId}/>}
+                        {globalError !== '' && <GlobalError/>}
+                    </Modal>
+
+
                     <TablesCardsPagination/>
                 </div>
             </div>
