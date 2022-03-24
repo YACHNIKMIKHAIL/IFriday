@@ -21,7 +21,7 @@ const PacksList = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const packsState = useFridaySelector<InitialCardPacksType>(state => state.packs)
     const packs = useFridaySelector<PackType[]>(state => state.packs.cardPacks)
@@ -65,12 +65,12 @@ const PacksList = () => {
                 <h4 className={style.title}>
                     Show packs cards
                 </h4>
-                <button
+                <button disabled={isLoad}
                     className={selected === "MY" ? style.selected : style.hoverSelected}
                     onClick={() => selectMyOrAll(myId)}>
                     My
                 </button>
-                <button
+                <button disabled={isLoad}
                     className={selected === "ALL" ? style.selected : style.hoverSelected}
                     onClick={() => selectMyOrAll(null)}>
                     All
@@ -78,7 +78,7 @@ const PacksList = () => {
                 <h4 className={style.title}>
                     Number of cards
                 </h4>
-                <DoubleRange/>
+                <DoubleRange />
                 <div className={style.rangeValue}>
                     <div className={style.rangeValue__item}>min : {packsState.minCardsCount}</div>
                     <div className={style.rangeValue__item}>max : {packsState.maxCardsCount}</div>
@@ -91,8 +91,9 @@ const PacksList = () => {
                     <div className={style.searchContainer}>
                         <input placeholder={"Search..."}
                                value={packsState.packName}
-                               onChange={onChangeSearchInput}/>
-                        <button
+                               onChange={onChangeSearchInput}
+                        disabled={isLoad}/>
+                        <button disabled={isLoad}
                             className={style.buttonSearch}
                             onClick={() => {
                                 dispatch(packsActions.packModeAC('add'))

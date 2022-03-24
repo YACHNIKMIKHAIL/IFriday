@@ -20,7 +20,7 @@ const CardComponent = ({content}: CardComponentType) => {
     const dispatch = useDispatch()
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const cardMode = useFridaySelector<ModeTypes>(state => state.cards.mode)
-
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
     const deleteCard = () => {
         dispatch(deleteCardTC(content._id))
     }
@@ -41,7 +41,7 @@ const CardComponent = ({content}: CardComponentType) => {
     return (
         <div className={s.TableContainer} onDoubleClick={goToCard}>
             <div className={s.window}>
-                <span onDoubleClick={x}>{content.question}</span>
+                <span onDoubleClick={x} aria-disabled={isLoad}>{content.question}</span>
             </div>
             <div className={s.window}>
                 {content.answer}
@@ -59,9 +59,9 @@ const CardComponent = ({content}: CardComponentType) => {
             {
                 myId === content.user_id &&
                 <div className={s.BtnGroup__Item__My}>
-                    <div className={s.Btn} onClick={x}>edit</div>
-                    <div className={s.Btn} onClick={goToCard}>learn</div>
-                    <IconButton onClick={deleteCard} aria-label="delete">
+                    <div className={s.Btn} onClick={x} aria-disabled={isLoad}>edit</div>
+                    <div className={s.Btn} onClick={goToCard} aria-disabled={isLoad}>learn</div>
+                    <IconButton onClick={deleteCard} aria-label="delete" disabled={isLoad}>
                         <Delete/>
                     </IconButton>
                 </div>

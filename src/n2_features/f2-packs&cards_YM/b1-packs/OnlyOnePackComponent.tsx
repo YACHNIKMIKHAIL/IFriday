@@ -20,7 +20,7 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
     const dispatch = useDispatch()
 
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
-
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
     const packMode = useFridaySelector<ModeTypes>(state => state.packs.mode)
     const deletePack = (id: string) => {
         dispatch(deletePacksTC(id))
@@ -46,15 +46,15 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
                 {
                     myId === item.user_id
                         ? <div className={s.BtnGroup__Item__My}>
-                            <div className={s.Btn} onClick={() => dispatch(packsActions.packModeAC('edit'))}>edit
+                            <div className={s.Btn} onClick={() => dispatch(packsActions.packModeAC('edit'))} aria-disabled={isLoad}>edit
                             </div>
-                            <div className={s.Btn} onClick={() => runToCards(item._id)}>learn</div>
-                            <IconButton onClick={() => deletePack(item._id)} aria-label="delete">
+                            <div className={s.Btn} onClick={() => runToCards(item._id)} aria-disabled={isLoad}>learn</div>
+                            <IconButton onClick={() => deletePack(item._id)} aria-label="delete" disabled={isLoad}>
                                 <Delete/>
                             </IconButton>
                         </div>
                         : <div className={s.BtnGroup__Item__My}>
-                            <div className={s.Btn} onClick={() => runToCards(item._id)}>learn</div>
+                            <div className={s.Btn} onClick={() => runToCards(item._id)} aria-disabled={isLoad}>learn</div>
                         </div>
                 }
             </div>

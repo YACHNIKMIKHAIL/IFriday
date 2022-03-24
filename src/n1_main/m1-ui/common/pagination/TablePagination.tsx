@@ -8,7 +8,7 @@ import {Nullable} from "../../../../types/Nullable";
 const TablesPagination = () => {
 
     const dispatch = useDispatch()
-
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
     const actualPacksPage = useFridaySelector<number>(state => state.packs.page)
     const actualPacksCount = useFridaySelector<number>(state => state.packs.pageCount)
 
@@ -42,6 +42,7 @@ const TablesPagination = () => {
                 onPageChange={handleChangePage}
                 rowsPerPage={actualPacksCount}
                 onRowsPerPageChange={handleChangeRowsPerPage}
+                aria-disabled={isLoad}
             />
         </>
     )

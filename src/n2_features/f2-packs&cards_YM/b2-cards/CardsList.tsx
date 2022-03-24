@@ -25,7 +25,7 @@ type CardsListType = {
 const CardsList = ({name}: CardsListType) => {
 
     const dispatch = useDispatch()
-
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
     const {packId} = useParams<'packId'>()
     const cards = useFridaySelector<CardType[]>(state => state.cards.cards)
     const user_id = useFridaySelector<string>(state => state.cards.cards.filter(f => f.cardsPack_id === packId)[0]?.user_id)
@@ -47,7 +47,8 @@ const CardsList = ({name}: CardsListType) => {
             if (packId) {
                 dispatch(cardsTC(packId))
             }
-        }, [debouncedCardsOnPage[0],
+        }, [cardSearchName[0],
+            debouncedCardsOnPage[0],
             debouncedPageCardsChanged[0],
             debouncedSearchCardQ[0],
             debouncedSearchCardA[0],
@@ -61,20 +62,20 @@ const CardsList = ({name}: CardsListType) => {
             <div className={style.cardsList}>
                 <div className={style.searchContainer}>
                     <h2> Pack Name: {name}</h2>
-                    <input
+                    <input disabled={isLoad}
                         placeholder={"Search..."}
                         value={cardSearchName}
                         onChange={searchCard}
                     />
 
-                    <button
+                    <button disabled={isLoad}
                         onClick={() => dispatch(cardsActions.cardModeAC('add'))}>
                         Add New Card
                     </button>
 
                 </div>
                 <div className={style.cardsBlock}>
-                    <TableCardsHeader user_id={user_id}/>
+                    <TableCardsHeader user_id={user_id} />
                     {
                         cards?.map((tableRow, index) => {
                             return (

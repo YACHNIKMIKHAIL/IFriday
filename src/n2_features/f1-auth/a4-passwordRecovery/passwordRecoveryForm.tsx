@@ -10,7 +10,7 @@ import {Nullable} from "../../../types/Nullable";
 const PasswordRecoveryForm = () => {
 
     const dispatch = useDispatch()
-
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
     const error = useFridaySelector<Nullable<string>>(state => state.regForNewPass.e)
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
 
@@ -38,17 +38,17 @@ const PasswordRecoveryForm = () => {
                     }
                 </div>
                 <div className={regS.second}>
-                    <input
+                    <input disabled={isLoad}
                         type="text"
                            value={email}
                            onChange={(e) => setEmail(e.currentTarget.value)}/>
                     <div className={regS.buttonsDiv}>
-                        <button className={regS.cancelButton} type="button">
+                        <button className={regS.cancelButton} type="button" disabled={isLoad}>
                             <NavLink to={RoutesXPaths.LOGIN} style={{textDecoration: 'none'}}>
                                 Cancel
                             </NavLink>
                         </button>
-                        <button className={regS.registerButton} onClick={send}>Send</button>
+                        <button className={regS.registerButton} onClick={send} disabled={isLoad}>Send</button>
                     </div>
                 </div>
             </div>

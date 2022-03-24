@@ -8,7 +8,6 @@ import {Nullable} from "../../../types/Nullable";
 const TablesCardsPagination = () => {
 
     const dispatch = useDispatch()
-
     const actualCardsPage = useFridaySelector<number>(state => state.cards.page)
     const actualCardsCount = useFridaySelector<number>(state => state.cards.pageCount)
 

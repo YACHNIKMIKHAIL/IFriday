@@ -12,7 +12,7 @@ const TableCardsHeader = ({user_id}: TCHType) => {
     const dispatch = useDispatch()
 
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
-
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
     const [lastUpd, setLastUpd] = useState<boolean>(false)
     const [gradeUpd, setGradeUpd] = useState<boolean>(false)
 
@@ -50,12 +50,12 @@ const TableCardsHeader = ({user_id}: TCHType) => {
                     Answer
                 </span>
             </div>
-            <div onClick={lastUpd ? getOldCard : getNewCard}>
+            <div onClick={lastUpd ? getOldCard : getNewCard} aria-disabled={isLoad}>
                 <span className={style.tableHeader__item}>
                     Last Updated
                 </span>
             </div>
-            <div onClick={gradeUpd ? getGradeUpdLessCard : getGradeUpdMoreCard}>
+            <div onClick={gradeUpd ? getGradeUpdLessCard : getGradeUpdMoreCard} aria-disabled={isLoad}>
                 <span className={style.tableHeader__item}>
                     Grade
                 </span>

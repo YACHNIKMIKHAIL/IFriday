@@ -3,6 +3,7 @@ import {useDispatch} from "react-redux";
 import s from "./../b1-packs/AddPackComponent.module.css"
 import {updateCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
+import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 
 type EditCardComponentType = {
     cardId: string
@@ -12,6 +13,7 @@ type EditCardComponentType = {
 const EditCardComponent = ({cardId, oldQ}: EditCardComponentType) => {
 
     const dispatch = useDispatch()
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
 
     const [newQ, setNewQ] = useState<string>(oldQ)
 
@@ -35,7 +37,7 @@ const EditCardComponent = ({cardId, oldQ}: EditCardComponentType) => {
                     <span>
                         Enter new card question <span>&nbsp; ✎</span>
                     </span>
-                <input
+                <input disabled={isLoad}
                     type="text"
                     value={newQ}
                     onChange={(e) => setNewQ(e.currentTarget.value)}
@@ -43,8 +45,8 @@ const EditCardComponent = ({cardId, oldQ}: EditCardComponentType) => {
             </div>
 
             <div>
-                <button onClick={()=>dispatch(cardsActions.cardModeAC(null))}>Cancel</button>
-                <button onClick={saveCard}>Save changes</button>
+                <button onClick={()=>dispatch(cardsActions.cardModeAC(null))} disabled={isLoad}>Cancel</button>
+                <button onClick={saveCard} disabled={isLoad}>Save changes</button>
             </div>
         </div>
     )

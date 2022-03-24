@@ -10,7 +10,7 @@ import {Undetectable} from "../../../types/Undetectable";
 const NewPasswordForm = () => {
 
     const dispatch = useDispatch()
-
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
     const newPassInfo = useFridaySelector<Undetectable<string>>(state => state.regForNewPass.newPassword.info)
     const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
 
@@ -42,11 +42,11 @@ const NewPasswordForm = () => {
             </div>
             <>
                 <div className={regS.second}>
-                    <input type="text"
+                    <input type="text" disabled={isLoad}
                            value={newPass}
                            onChange={(e) => setNewPass(e.currentTarget.value)}/>
                     <div className={regS.buttonsDiv}>
-                        <button onClick={create}>Create</button>
+                        <button onClick={create} disabled={isLoad}>Create</button>
                     </div>
                 </div>
             </>
