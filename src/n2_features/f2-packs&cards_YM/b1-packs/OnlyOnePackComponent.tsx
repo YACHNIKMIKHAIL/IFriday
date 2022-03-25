@@ -73,8 +73,7 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
                 {
                     packMode === 'edit' &&
                     <EditPackComponent
-                        packId={item._id}
-                        oldName={item.name}/>
+                        packId={item._id}/>
                 }
             </Modal>
         </div>

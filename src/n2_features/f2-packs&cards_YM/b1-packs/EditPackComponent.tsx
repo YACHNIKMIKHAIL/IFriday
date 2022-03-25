@@ -7,14 +7,13 @@ import {packsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsPacks";
 
 type EditPackComponentType = {
     packId: string
-    oldName: string
 }
 
-const EditPackComponent = ({packId, oldName}: EditPackComponentType) => {
+const EditPackComponent = ({packId}: EditPackComponentType) => {
 
     const dispatch = useDispatch()
 
-    const [newPackName, setNewPackName] = useState<string>(oldName)
+    const [newPackName, setNewPackName] = useState<string>('')
 
     const changePackName = () => {
         dispatch(changePacksTC(newPackName, packId))

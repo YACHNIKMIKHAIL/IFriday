@@ -8,15 +8,14 @@ import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 
 type EditCardComponentType = {
     cardId: string
-    oldQ: string
 }
 
-const EditCardComponent = ({cardId, oldQ}: EditCardComponentType) => {
+const EditCardComponent = ({cardId}: EditCardComponentType) => {
 
     const dispatch = useDispatch()
     const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
 
-    const [newQ, setNewQ] = useState<string>(oldQ)
+    const [newQ, setNewQ] = useState<string>('')
 
     const updatedCard = {
         _id: cardId,

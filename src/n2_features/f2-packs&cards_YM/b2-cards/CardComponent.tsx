@@ -77,8 +77,7 @@ const CardComponent = ({content}: CardComponentType) => {
                 backgroundStyle={{backgroundColor: 'rgba(215,207,61,0.2)'}}
                 enableBackground={true}>
                 <EditCardComponent
-                    cardId={content._id}
-                    oldQ={content.question}/>
+                    cardId={content._id}/>
             </Modal>
         </div>
     )
