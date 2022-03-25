@@ -36,7 +36,7 @@
 /*    background-color: #607bef;*/
 /*}*/
 .hoverSelected:hover {
-    background-color:hsla(360, 0%, 83%, 1);
+    background-color: hsla(360, 0%, 83%, 1);
 }
 
 .packsList {
@@ -52,19 +52,20 @@
 }
 
 
-
 .searchContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
 }
+
 .searchContainer input {
     width: 60%;
     height: 35px;
     border-radius: 0.6em;
 
 }
+
 .buttonSearch {
     margin-left: 30px;
     box-sizing: border-box;
@@ -119,3 +120,22 @@
     font-size: 24px;
 }
 
+@media (max-width: 870px) {
+
+    .buttonSearch {
+        margin-left: 20px;
+        font-size: medium;
+        padding: .5em .5em;
+
+    }
+}
+
+@media (max-width: 675px) {
+
+    .buttonSearch {
+        margin-left: 20px;
+        font-size: 14px;
+        padding: .75em .5em;
+
+    }
+}
