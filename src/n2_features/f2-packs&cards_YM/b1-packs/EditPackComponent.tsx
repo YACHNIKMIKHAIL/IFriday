@@ -3,18 +3,19 @@ import s from "./AddPackComponent.module.css"
 import {useDispatch} from "react-redux";
 import {changePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import {packsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsPacks";
+import {PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 
 type EditPackComponentType = {
-    myId: string
+    item: PackType
     closeModal: () => void
 }
-const EditPackComponent = ({myId, closeModal}: EditPackComponentType) => {
+const EditPackComponent = ({item, closeModal}: EditPackComponentType) => {
     const dispatch = useDispatch()
-    const [newPackName, setNewPackName] = useState<string>('')
+    const [newPackName, setNewPackName] = useState<string>(item.name)
 
     const changePackName = () => {
-        if (myId) {
-            dispatch(changePacksTC(newPackName, myId))
+        if (item._id) {
+            dispatch(changePacksTC(newPackName, item._id))
             closeModal()
         }
     }

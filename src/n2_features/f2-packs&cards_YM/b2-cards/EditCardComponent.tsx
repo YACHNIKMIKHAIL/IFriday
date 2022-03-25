@@ -5,21 +5,24 @@ import {useDispatch} from "react-redux";
 import {updateCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
+import {CardType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
 
 type EditCardComponentType = {
-    cardId: string
+    card: CardType
 }
 
-const EditCardComponent = ({cardId}: EditCardComponentType) => {
+const EditCardComponent = ({card}: EditCardComponentType) => {
 
     const dispatch = useDispatch()
     const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
 
-    const [newQ, setNewQ] = useState<string>('')
+    const [newQ, setNewQ] = useState<string>(card.question)
+    const [newA, setNewA] = useState<string>(card.answer)
 
     const updatedCard = {
-        _id: cardId,
+        _id: card._id,
         question: newQ,
+        answer: newA,
         comments: '',
     }
 
@@ -41,6 +44,14 @@ const EditCardComponent = ({cardId}: EditCardComponentType) => {
                     type="text"
                     value={newQ}
                     onChange={(e) => setNewQ(e.currentTarget.value)}
+                />
+                <span>
+                        Enter new card answer <span>&nbsp; ✎</span>
+                    </span>
+                <input disabled={isLoad}
+                       type="text"
+                       value={newA}
+                       onChange={(e) => setNewA(e.currentTarget.value)}
                 />
             </div>
 
