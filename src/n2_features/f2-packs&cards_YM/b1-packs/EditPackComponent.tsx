@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import s from "./AddPackComponent.module.css"
 import {useDispatch} from "react-redux";
 import {changePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
-import {packsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsPacks";
 import {PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 
 type EditPackComponentType = {
@@ -37,7 +36,7 @@ const EditPackComponent = ({item, closeModal}: EditPackComponentType) => {
             </div>
 
             <div>
-                <button onClick={() => dispatch(packsActions.packModeAC(null))}>Cancel</button>
+                <button onClick={() => closeModal()}>Cancel</button>
                 <button onClick={changePackName}>Save changes</button>
             </div>
 

@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import s from './LearnedCard.module.css'
 import {useDispatch} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
-
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {CardType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
