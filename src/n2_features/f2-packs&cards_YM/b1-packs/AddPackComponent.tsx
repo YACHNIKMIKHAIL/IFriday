@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {addNewPacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
-import {useDispatch} from "react-redux";
 import s from "./AddPackComponent.module.css"
+import {useDispatch} from "react-redux";
+
+import {addNewPacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import {packsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsPacks";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
-
 
 
 const AddPackComponent = () => {

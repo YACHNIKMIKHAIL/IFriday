@@ -1,16 +1,18 @@
 import React, {ChangeEvent, useEffect} from "react";
 import style from "./CardsList.module.css"
+
+import {useParams} from "react-router-dom";
+import {useDebounce} from "use-debounce";
+import {useDispatch} from "react-redux";
+
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {CardType, InitialCardsType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
 import TableCardsHeader from "../../../n1_main/m1-ui/common/table/TableCardsHeader";
 import CardComponent from "./CardComponent";
 import TablesCardsPagination from "./TablesCardsPagination";
-import {useDebounce} from "use-debounce";
-import {useDispatch} from "react-redux";
 import {cardsTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
 import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 import {UpdatedType} from "../../../n1_main/m3-dal/packsAPI";
-import {useParams} from "react-router-dom";
 import {Undetectable} from "../../../types/Undetectable";
 import {ModeTypes} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
@@ -62,20 +64,22 @@ const CardsList = ({name}: CardsListType) => {
             <div className={style.cardsList}>
                 <div className={style.searchContainer}>
                     <h2> Pack Name: {name}</h2>
-                    <input disabled={isLoad}
+                    <input
+                        disabled={isLoad}
                         placeholder={"Search..."}
                         value={cardSearchName}
                         onChange={searchCard}
                     />
 
-                    <button disabled={isLoad}
+                    <button
+                        disabled={isLoad}
                         onClick={() => dispatch(cardsActions.cardModeAC('add'))}>
                         Add New Card
                     </button>
 
                 </div>
                 <div className={style.cardsBlock}>
-                    <TableCardsHeader user_id={user_id} />
+                    <TableCardsHeader user_id={user_id}/>
                     {
                         cards?.map((tableRow, index) => {
                             return (
@@ -94,11 +98,15 @@ const CardsList = ({name}: CardsListType) => {
                         width={0}
                         backgroundStyle={cardMode === 'add' ? {backgroundColor: 'rgba(89,61,215,0.13)'} : {backgroundColor: 'rgba(255,3,3,0.15)'}}
                         enableBackground={true}>
-                        {cardMode === 'add' && <TestAddCardComponent
-                            packId={packId}/>}
-                        {globalError !== '' && <GlobalError/>}
+                        {
+                            cardMode === 'add' &&
+                            <TestAddCardComponent packId={packId}/>
+                        }
+                        {
+                            globalError !== '' &&
+                            <GlobalError/>
+                        }
                     </Modal>
-
 
                     <TablesCardsPagination/>
                 </div>

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {changePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
-import {useDispatch} from "react-redux";
 import s from "./AddPackComponent.module.css"
+import {useDispatch} from "react-redux";
+
+import {changePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import {packsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsPacks";
 
 type EditPackComponentType = {

@@ -1,8 +1,9 @@
 import React from "react";
 import s from "./TableCards.module.css"
+
+import Rating from "@mui/material/Rating/Rating";
 import Preloader from "../preloader/Preloader";
 import {CardType} from "../../../m2-bll/r1-reducers/cardsReducer";
-import Rating from "@mui/material/Rating/Rating";
 
 type TableCardsType = {
     cards: CardType
