@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './OnlyOnePackComponent.module.css'
 import {useDispatch} from "react-redux";
 
@@ -10,7 +10,6 @@ import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {deletePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import EditPackComponent from "./EditPackComponent";
-import {packsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsPacks";
 
 type OnlyOnePackComponentType = {
     item: PackType
@@ -21,9 +20,10 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
 
     const dispatch = useDispatch()
 
+    const [isEdit, setIsEdit] = useState(false)
+
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
     const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
-    const packMode = useFridaySelector<ModeTypes>(state => state.packs.mode)
     const deletePack = (id: string) => {
         dispatch(deletePacksTC(id))
     }
@@ -47,7 +47,9 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
                 {
                     myId === item.user_id
                         ? <div className={s.BtnGroup__Item__My}>
-                            <button className={s.Btn} onClick={() => dispatch(packsActions.packModeAC('edit'))}
+                            <button className={s.Btn} onClick={() => {
+                                setIsEdit(true)
+                            }}
                                     disabled={isLoad}>edit
                             </button>
                             <button className={s.Btn} onClick={() => runToCards(item._id)} disabled={isLoad}>learn
@@ -65,15 +67,13 @@ const OnlyOnePackComponent = ({item, runToCards}: OnlyOnePackComponentType) => {
             <Modal
                 backgroundOnClick={() => {
                 }}
-                show={packMode === 'edit'}
+                show={isEdit}
                 height={0}
                 width={0}
                 backgroundStyle={{backgroundColor: 'rgba(255,145,3,0.13)'}}
                 enableBackground={true}>
                 {
-                    packMode === 'edit' &&
-                    <EditPackComponent
-                        packId={item._id}/>
+                    <EditPackComponent myId={item._id} closeModal={() => { setIsEdit(false) }}/>
                 }
             </Modal>
         </div>
