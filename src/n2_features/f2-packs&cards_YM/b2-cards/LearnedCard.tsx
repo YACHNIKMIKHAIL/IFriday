@@ -46,7 +46,7 @@ export const LearnedCard = () => {
     }
 
     const goBack = () => {
-        navigate(RoutesXPaths.CARDS)
+        navigate(`${RoutesXPaths.CARDS}/${packId}`)
     }
 
     return (

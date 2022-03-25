@@ -18,6 +18,7 @@ import {Nullable} from "../../../types/Nullable";
 import GlobalError from "../../../n1_main/m1-ui/common/GlobalError/GlobalError";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import AddPackComponent from "./AddPackComponent";
+import {setGlobalErrorAC} from "../../../n1_main/m2-bll/r1-reducers/app-reducer";
 
 const PacksList = () => {
 
@@ -125,6 +126,8 @@ const PacksList = () => {
                     }
                     <Modal
                         backgroundOnClick={() => {
+                            dispatch(packsActions.packModeAC(null))
+                            dispatch(setGlobalErrorAC(''))
                         }}
                         show={globalError !== '' || packMode === 'add' || packMode === 'edit'}
                         height={0}

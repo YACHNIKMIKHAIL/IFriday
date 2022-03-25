@@ -18,6 +18,7 @@ import {ModeTypes} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 import Modal from "../../../n1_main/m1-ui/common/ModalWindow/ModalWindow";
 import TestAddCardComponent from "./TestAddCardComponent";
 import GlobalError from "../../../n1_main/m1-ui/common/GlobalError/GlobalError";
+import {setGlobalErrorAC} from "../../../n1_main/m2-bll/r1-reducers/app-reducer";
 
 type CardsListType = {
     name: string
@@ -33,6 +34,7 @@ const CardsList = ({name}: CardsListType) => {
     const user_id = useFridaySelector<string>(state => state.cards.cards.filter(f => f.cardsPack_id === packId)[0]?.user_id)
     const cardsState = useFridaySelector<InitialCardsType>(state => state.cards)
     const cardSearchName = useFridaySelector<string>(state => state.cards.cardQuestion)
+    const debouncedCardsSearchName = useDebounce<string>(cardsState.cardQuestion, 1500)
     const debouncedCardsOnPage = useDebounce<number>(cardsState.pageCount, 1000)
     const debouncedPageCardsChanged = useDebounce<number>(cardsState.page, 1000)
     const debouncedSearchCardQ = useDebounce<string>(cardsState.cardQuestion, 1000)
@@ -49,7 +51,7 @@ const CardsList = ({name}: CardsListType) => {
             if (packId) {
                 dispatch(cardsTC(packId))
             }
-        }, [cardSearchName[0],
+        }, [debouncedCardsSearchName[0],
             debouncedCardsOnPage[0],
             debouncedPageCardsChanged[0],
             debouncedSearchCardQ[0],
@@ -92,7 +94,11 @@ const CardsList = ({name}: CardsListType) => {
                     }
 
                     <Modal
-                        backgroundOnClick={() => dispatch(cardsActions.cardModeAC(null))}
+                        backgroundOnClick={() => {
+                            dispatch(cardsActions.cardModeAC(null))
+                            dispatch(setGlobalErrorAC(''))
+
+                        }}
                         show={cardMode === 'add' || globalError !== ''}
                         height={0}
                         width={0}

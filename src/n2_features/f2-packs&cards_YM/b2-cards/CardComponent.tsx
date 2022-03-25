@@ -49,7 +49,7 @@ const CardComponent = ({content}: CardComponentType) => {
                 {content.answer}
             </div>
             <div className={s.updated}>
-                <div>дата: {content.updated.slice(0, 10)}, </div>
+                <div>дата: {content.updated.slice(0, 10)},</div>
                 <div>время: {content.updated.slice(12, 19)}</div>
             </div>
             <div className={s.window}>
@@ -62,8 +62,8 @@ const CardComponent = ({content}: CardComponentType) => {
             {
                 myId === content.user_id &&
                 <div className={s.BtnGroup__Item__My}>
-                    <div className={s.Btn} onClick={x} aria-disabled={isLoad}>edit</div>
-                    <div className={s.Btn} onClick={goToCard} aria-disabled={isLoad}>learn</div>
+                    <button className={s.Btn} onClick={x} disabled={isLoad}>edit</button>
+                    <button className={s.Btn} onClick={goToCard} disabled={isLoad}>learn</button>
                     <IconButton onClick={deleteCard} aria-label="delete" disabled={isLoad}>
                         <Delete/>
                     </IconButton>
