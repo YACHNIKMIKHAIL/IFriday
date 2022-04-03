@@ -30,6 +30,8 @@ const RoutesX = () => {
 
     return (
         <div style={{height: '100vh'}}>
+            <Redirect/>
+
             <Routes>
                 <Route path={RoutesXPaths.PROFILE} element={<Profile/>}/>
                 <Route path={RoutesXPaths.REGISTER} element={<Register/>}/>
@@ -49,8 +51,6 @@ const RoutesX = () => {
                 <Route path={'*'} element={<Navigate to={RoutesXPaths.NOT_FOUND}/>}/>
 
             </Routes>
-
-            <Redirect/>
         </div>
     )
 }
@@ -63,9 +63,16 @@ export const Redirect = () => {
 
     const inLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
 
+
     if (!inLoggedIn && pathname !== RoutesXPaths.LOGIN) {
-        return <Navigate to={RoutesXPaths.LOGIN}/>
+        if (pathname === RoutesXPaths.SET_PASS) {
+        } else if (pathname === RoutesXPaths.REGISTER) {
+        } else if (pathname === RoutesXPaths.RECOVERY) {
+        } else if (pathname === RoutesXPaths.LOGIN) {
+            return <Navigate to={RoutesXPaths.LOGIN}/>
+        }
     }
+
 
     return (
         <>

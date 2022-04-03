@@ -31,14 +31,14 @@ const Links = () => {
                     Cards
                 </NavLink>
             </>
-            {/*<>*/}
-            {/*    <NavLink*/}
-            {/*        to={RoutesXPaths.LEARNED_CARD}*/}
-            {/*        className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}*/}
-            {/*        style={{textDecoration: 'none'}}>*/}
-            {/*        Learned Card*/}
-            {/*    </NavLink>*/}
-            {/*</>*/}
+            <>
+                {/*<NavLink*/}
+                {/*    to={RoutesXPaths.SET_PASS}*/}
+                {/*    className={({isActive}) => (isActive ? s.active : s.ordinaryLink)}*/}
+                {/*    style={{textDecoration: 'none'}}>*/}
+                {/*   v sdasfgvsazfv*/}
+                {/*</NavLink>*/}
+            </>
             <>
                 <NavLink
                     to={RoutesXPaths.LOGOUT}
