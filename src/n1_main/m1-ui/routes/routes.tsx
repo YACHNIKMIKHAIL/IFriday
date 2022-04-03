@@ -65,12 +65,20 @@ export const Redirect = () => {
 
 
     if (!inLoggedIn && pathname !== RoutesXPaths.LOGIN) {
+        debugger
         if (pathname === RoutesXPaths.SET_PASS) {
+        //     debugger
         } else if (pathname === RoutesXPaths.REGISTER) {
+            debugger
         } else if (pathname === RoutesXPaths.RECOVERY) {
-        } else if (pathname === RoutesXPaths.LOGIN) {
+            // debugger
+        }
+        else if (pathname === RoutesXPaths.LOGIN) {
+            // debugger
             return <Navigate to={RoutesXPaths.LOGIN}/>
-        } else {
+        }
+        else {
+            // debugger
             return <Navigate to={RoutesXPaths.LOGIN}/>
         }
     }
