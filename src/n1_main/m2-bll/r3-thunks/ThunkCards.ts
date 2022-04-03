@@ -1,4 +1,4 @@
-import {setAppStatusAC, setGlobalErrorAC} from "../r1-reducers/app-reducer";
+import {setAppStatusAC, setGlobalErrorAC, setIsLoadAC} from "../r1-reducers/app-reducer";
 import {fridayReducerType, FridayThunkType} from "../store";
 import {Dispatch} from "redux";
 import {cardsAPI} from "../../m3-dal/cardsAPI";
@@ -8,6 +8,7 @@ export const cardsTC = (id: string) => {
     return async (dispatch: Dispatch, getState: () => fridayReducerType) => {
         const {cardAnswer, cardQuestion, minGrade, maxGrade, sortCards, page, pageCount} = getState().cards
         dispatch(setAppStatusAC("loading"))
+        dispatch(setIsLoadAC(true))
         try {
             let res = await cardsAPI.setCards(cardAnswer, cardQuestion, id, minGrade, maxGrade, sortCards, page, pageCount)
             dispatch(cardsActions.setCardsAC(res.data))
@@ -17,6 +18,7 @@ export const cardsTC = (id: string) => {
             dispatch(setAppStatusAC("failed"))
         } finally {
             dispatch(setAppStatusAC("idle"))
+            dispatch(setIsLoadAC(false))
         }
     }
 }
@@ -35,6 +37,7 @@ export const addNewCardTC = (question: string, answer: string, packId: string): 
     }
 
     dispatch(setAppStatusAC("loading"))
+    dispatch(setIsLoadAC(true))
     try {
         await cardsAPI.addCard(newCard)
         dispatch(cardsTC(packId))
@@ -44,6 +47,7 @@ export const addNewCardTC = (question: string, answer: string, packId: string): 
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))
+        dispatch(setIsLoadAC(false))
     }
 }
 
@@ -53,16 +57,19 @@ export const deleteCardTC = (cardId: string): FridayThunkType => async (dispatch
         let res = await cardsAPI.deleteCard(cardId)
         dispatch(cardsTC(res.data.deletedCard.cardsPack_id))
         dispatch(setAppStatusAC("succeeded"))
+        dispatch(setIsLoadAC(true))
     } catch (e: any) {
         dispatch(setGlobalErrorAC(e.response ? e.response.data.error : 'some error'))
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))
+        dispatch(setIsLoadAC(false))
     }
 }
 
 export const updateCardTC = (updatedCard: UpdatedCardType): FridayThunkType => async (dispatch: any) => {
     dispatch(setAppStatusAC("loading"))
+    dispatch(setIsLoadAC(true))
     try {
         let res = await cardsAPI.updateCard(updatedCard)
         dispatch(cardsTC(res.data.updatedCard.cardsPack_id))
@@ -72,11 +79,13 @@ export const updateCardTC = (updatedCard: UpdatedCardType): FridayThunkType => a
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))
+        dispatch(setIsLoadAC(false))
     }
 }
 
 export const gradeCardTC = (grade: number, card_id: string): FridayThunkType => async (dispatch: any) => {
     dispatch(setAppStatusAC("loading"))
+    dispatch(setIsLoadAC(true))
     try {
         let res = await cardsAPI.gradeCard(grade, card_id)
         dispatch(cardsActions.gradeCardAC(res.data.updatedGrade))
@@ -86,6 +95,7 @@ export const gradeCardTC = (grade: number, card_id: string): FridayThunkType => 
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))
+        dispatch(setIsLoadAC(false))
     }
 }
 

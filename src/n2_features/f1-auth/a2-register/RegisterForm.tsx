@@ -18,6 +18,7 @@ type FormikErrorType = {
 const RegisterForm = () => {
 
     const dispatch = useDispatch()
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
     const navigate = useNavigate()
     const error = useFridaySelector<Undetectable<string>>(state => state.regForNewPass.register.error)
 
@@ -81,13 +82,13 @@ const RegisterForm = () => {
                     <form onSubmit={formik.handleSubmit}>
                         <div className={regS.second}>
                             eMail
-                            <input {...formik.getFieldProps('email')}/>
+                            <input disabled={isLoad} {...formik.getFieldProps('email')}/>
                             {formik.touched.email && formik.errors.email ?
                                 <div className={regS.errorMessage}>{formik.errors.email}</div> : null}
                         </div>
                         <div className={regS.second}>
                             Password
-                            <input type="password"
+                            <input type="password" disabled={isLoad}
                                    {...formik.getFieldProps('password')}/>
 
                             {formik.touched.password && formik.errors.password ?
@@ -95,7 +96,7 @@ const RegisterForm = () => {
                         </div>
                         <div className={regS.second}>
                             Confirm password
-                            <input type="password"
+                            <input type="password" disabled={isLoad}
                                    {...formik.getFieldProps('confirm')}/>
                             {formik.touched.confirm && formik.errors.confirm ?
                                 <div className={regS.errorMessage}>{formik.errors.confirm}</div> : null}

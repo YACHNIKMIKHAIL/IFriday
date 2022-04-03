@@ -51,7 +51,7 @@ const Profile = () => {
         <div className={s.profilePage}>
             <div className={s.profileContainer}>
                 <h2 className={s.title}>Personal information</h2>
-                <img src={userInfo.avatar ? userInfo.avatar : BASE_IMG_URL} alt={"user's image"}/>
+                <img src={userInfo.avatar ? userInfo.avatar : BASE_IMG_URL} alt={"user's image"} title={"your avatar"}/>
                 <span>{`Cards: ${userInfo.publicCardPacksCount}`}</span>
                 <div className={s.nameContainer}>
                     {

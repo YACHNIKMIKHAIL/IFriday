@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import s from "./TableHeader.module.css"
-import {useFridaySelector} from "../../../m2-bll/store";
-import {useDispatch} from "react-redux";
-import {cardsActions} from "../../../m2-bll/r2-actions/ActionsCards";
 import style from "./TableHeader.module.css";
+import {useDispatch} from "react-redux";
+
+import {useFridaySelector} from "../../../m2-bll/store";
+import {cardsActions} from "../../../m2-bll/r2-actions/ActionsCards";
 
 type TCHType = { user_id: string }
 
@@ -12,6 +12,7 @@ const TableCardsHeader = ({user_id}: TCHType) => {
     const dispatch = useDispatch()
 
     const myId = useFridaySelector<string>(state => state.profile.profile._id)
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
 
     const [lastUpd, setLastUpd] = useState<boolean>(false)
     const [gradeUpd, setGradeUpd] = useState<boolean>(false)
@@ -36,7 +37,7 @@ const TableCardsHeader = ({user_id}: TCHType) => {
         setGradeUpd(false)
     }
 
-    const tableHeader = myId === user_id ? s.tableHeader : s.tableHeaderWithId
+    const tableHeader = myId === user_id ? style.tableHeader : style.tableHeaderWithId
 
     return (
         <div className={tableHeader}>
@@ -50,18 +51,19 @@ const TableCardsHeader = ({user_id}: TCHType) => {
                     Answer
                 </span>
             </div>
-            <div onClick={lastUpd ? getOldCard : getNewCard}>
+            <div onClick={lastUpd ? getOldCard : getNewCard} aria-disabled={isLoad}>
                 <span className={style.tableHeader__item}>
                     Last Updated
                 </span>
             </div>
-            <div onClick={gradeUpd ? getGradeUpdLessCard : getGradeUpdMoreCard}>
+            <div onClick={gradeUpd ? getGradeUpdLessCard : getGradeUpdMoreCard} aria-disabled={isLoad}>
                 <span className={style.tableHeader__item}>
                     Grade
                 </span>
             </div>
             {
-                myId === user_id && <div>
+                myId === user_id &&
+                <div>
                     <span className={style.tableHeader__item}>
                         Actions
                     </span>

@@ -1,23 +1,22 @@
 import React, {useState} from 'react';
-import {changePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
-import {useDispatch} from "react-redux";
 import s from "./AddPackComponent.module.css"
-import {packsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsPacks";
+import {useDispatch} from "react-redux";
+import {changePacksTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkPacks";
+import {PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
 
 type EditPackComponentType = {
-    packId: string
-    oldName: string
+    item: PackType
+    closeModal: () => void
 }
-
-const EditPackComponent = ({packId, oldName}: EditPackComponentType) => {
-
+const EditPackComponent = ({item, closeModal}: EditPackComponentType) => {
     const dispatch = useDispatch()
-
-    const [newPackName, setNewPackName] = useState<string>(oldName)
+    const [newPackName, setNewPackName] = useState<string>(item.name)
 
     const changePackName = () => {
-        dispatch(changePacksTC(newPackName, packId))
-        dispatch(packsActions.packModeAC(null))
+        if (item._id) {
+            dispatch(changePacksTC(newPackName, item._id))
+            closeModal()
+        }
     }
 
     return (
@@ -37,7 +36,7 @@ const EditPackComponent = ({packId, oldName}: EditPackComponentType) => {
             </div>
 
             <div>
-                <button onClick={()=>dispatch(packsActions.packModeAC(null))}>Cancel</button>
+                <button onClick={() => closeModal()}>Cancel</button>
                 <button onClick={changePackName}>Save changes</button>
             </div>
 

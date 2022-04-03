@@ -1,11 +1,12 @@
 import {Dispatch} from "redux";
 import {registerAndRecoveryPassActions} from "../r2-actions/ActionsRegisterAndRecoveryPassReducer";
 import {newPassBodyType, registerAndRecoveryPassAPI} from "../../m3-dal/RegisterAndRecoveryPassAPI";
-import {setAppStatusAC, setGlobalErrorAC} from "../r1-reducers/app-reducer";
+import {setAppStatusAC, setGlobalErrorAC, setIsLoadAC} from "../r1-reducers/app-reducer";
 
 export const registerUserTC = (body: { email: string, password: string }) => async (dispatch: Dispatch) => {
 
     dispatch(setAppStatusAC("loading"))
+    dispatch(setIsLoadAC(true))
     try {
         let res = await registerAndRecoveryPassAPI.registerMe(body)
         dispatch(registerAndRecoveryPassActions.registerUserAC(res.data))
@@ -16,11 +17,13 @@ export const registerUserTC = (body: { email: string, password: string }) => asy
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))
+        dispatch(setIsLoadAC(false))
     }
 }
 
 export const passwordRecoveryTC = (email: string) => async (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
+    dispatch(setIsLoadAC(true))
     try {
         let res = await registerAndRecoveryPassAPI.forgot(email)
         dispatch(registerAndRecoveryPassActions.setInfoRecoveryAC(res.data))
@@ -30,11 +33,13 @@ export const passwordRecoveryTC = (email: string) => async (dispatch: Dispatch) 
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))
+        dispatch(setIsLoadAC(false))
     }
 }
 
 export const newPasswordTC = (body: newPassBodyType) => async (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
+    dispatch(setIsLoadAC(true))
     try {
         let res = await registerAndRecoveryPassAPI.createNewPass(body)
         dispatch(registerAndRecoveryPassActions.setInfoNewPassAC(res.data))
@@ -44,5 +49,6 @@ export const newPasswordTC = (body: newPassBodyType) => async (dispatch: Dispatc
         dispatch(setAppStatusAC("failed"))
     } finally {
         dispatch(setAppStatusAC("idle"))
+        dispatch(setIsLoadAC(false))
     }
 }

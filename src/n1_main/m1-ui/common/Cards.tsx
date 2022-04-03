@@ -1,7 +1,8 @@
 import React from 'react';
+import {useParams} from "react-router-dom";
+
 import CardsList from "../../../n2_features/f2-packs&cards_YM/b2-cards/CardsList";
 import {useFridaySelector} from "../../m2-bll/store";
-import {useParams} from "react-router-dom";
 import {PackType} from "../../m2-bll/r1-reducers/packsReducer";
 
 const Cards = () => {

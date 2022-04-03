@@ -11,6 +11,7 @@ const PasswordRecoveryForm = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
     const error = useFridaySelector<Nullable<string>>(state => state.regForNewPass.e)
 
     const [email, setEmail] = useState<string>('')
@@ -41,7 +42,7 @@ const PasswordRecoveryForm = () => {
                     }
                 </div>
                 <div className={regS.second}>
-                    <input
+                    <input disabled={isLoad}
                         type="text"
                         value={email}
                         onChange={(e) => setEmail(e.currentTarget.value)}/>
@@ -49,7 +50,7 @@ const PasswordRecoveryForm = () => {
                         <button className={regS.cancelButton} type="button" onClick={cancel}>
                                 Cancel
                         </button>
-                        <button className={regS.registerButton} onClick={send}>Send</button>
+                        <button className={regS.registerButton} onClick={send} disabled={isLoad}>Send</button>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import style from "./TableHeader.module.css"
 import {useDispatch} from "react-redux";
 import {packsActions} from "../../../m2-bll/r2-actions/ActionsPacks";
+import {useFridaySelector} from "../../../m2-bll/store";
 
 const TableHeader = () => {
 
@@ -9,7 +10,7 @@ const TableHeader = () => {
 
     const [lastUpd, setLastUpd] = useState<boolean>(false)
     const [cardsCountUpd, setCardsCountUpd] = useState<boolean>(false)
-
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
     const getNew = () => {
         dispatch(packsActions.updateFilterAC('1updated'))
         setLastUpd(true)
@@ -35,10 +36,10 @@ const TableHeader = () => {
             <div>
                 <span className={style.tableHeader__item}>Name</span>
             </div>
-            <div onClick={cardsCountUpd ? getMore : getFew}>
+            <div onClick={cardsCountUpd ? getMore : getFew} aria-disabled={isLoad}>
                 <span className={style.tableHeader__item}>Cards</span>
             </div>
-            <div onClick={lastUpd ? getOld : getNew}>
+            <div onClick={lastUpd ? getOld : getNew} aria-disabled={isLoad}>
                 <span className={style.tableHeader__item}>Last Updated</span>
             </div>
             <div>

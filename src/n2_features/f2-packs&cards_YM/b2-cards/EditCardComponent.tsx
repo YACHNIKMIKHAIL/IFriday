@@ -1,29 +1,33 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
 import s from "./../b1-packs/AddPackComponent.module.css"
+import {useDispatch} from "react-redux";
 import {updateCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
-import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
+import {useFridaySelector} from "../../../n1_main/m2-bll/store";
+import {CardType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
 
 type EditCardComponentType = {
-    cardId: string
-    oldQ: string
+    card: CardType
+    setMode:()=>void
 }
 
-const EditCardComponent = ({cardId, oldQ}: EditCardComponentType) => {
+const EditCardComponent = ({card,setMode}: EditCardComponentType) => {
 
     const dispatch = useDispatch()
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
 
-    const [newQ, setNewQ] = useState<string>(oldQ)
+    const [newQ, setNewQ] = useState<string>(card.question)
+    const [newA, setNewA] = useState<string>(card.answer)
 
     const updatedCard = {
-        _id: cardId,
+        _id: card._id,
         question: newQ,
+        answer: newA,
         comments: '',
     }
 
     const saveCard = () => {
         dispatch(updateCardTC(updatedCard))
-        dispatch(cardsActions.cardModeAC(null))
+        setMode()
     }
 
     return (
@@ -35,16 +39,24 @@ const EditCardComponent = ({cardId, oldQ}: EditCardComponentType) => {
                     <span>
                         Enter new card question <span>&nbsp; ✎</span>
                     </span>
-                <input
+                <input disabled={isLoad}
                     type="text"
                     value={newQ}
                     onChange={(e) => setNewQ(e.currentTarget.value)}
                 />
+                <span>
+                        Enter new card answer <span>&nbsp; ✎</span>
+                    </span>
+                <input disabled={isLoad}
+                       type="text"
+                       value={newA}
+                       onChange={(e) => setNewA(e.currentTarget.value)}
+                />
             </div>
 
             <div>
-                <button onClick={()=>dispatch(cardsActions.cardModeAC(null))}>Cancel</button>
-                <button onClick={saveCard}>Save changes</button>
+                <button onClick={()=>setMode()} disabled={isLoad}>Cancel</button>
+                <button onClick={saveCard} disabled={isLoad}>Save changes</button>
             </div>
         </div>
     )

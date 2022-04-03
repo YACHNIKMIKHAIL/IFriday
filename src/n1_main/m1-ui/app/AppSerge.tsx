@@ -15,8 +15,6 @@ const AppSerge = () => {
     const status = useFridaySelector<RequestStatusType>(state => state.app.status)
     const initialized = useFridaySelector<boolean>(state => state.me.isInitialized)
 
-
-
     useEffect(() => {
         dispatch(meTC())
     }, [])

@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
+import s from './LearnedCard.module.css'
+import {useDispatch} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 import {RoutesXPaths} from "../../../n1_main/m1-ui/routes/routes";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {CardType} from "../../../n1_main/m2-bll/r1-reducers/cardsReducer";
 import {PackType} from "../../../n1_main/m2-bll/r1-reducers/packsReducer";
-import {useDispatch} from "react-redux";
 import {gradeCardTC} from "../../../n1_main/m2-bll/r3-thunks/ThunkCards";
-import s from './LearnedCard.module.css'
 import {Undetectable} from "../../../types/Undetectable";
 
 export const LearnedCard = () => {
@@ -19,7 +19,7 @@ export const LearnedCard = () => {
     const learnedCard = useFridaySelector<CardType>(state => state.cards.cards.filter(f => f._id === cardId)[0])
     const actualPack = useFridaySelector<PackType>(state => state.packs.cardPacks.filter(f => f._id === packId)[0])
     const actualPackCards = useFridaySelector<CardType[]>(state => state.cards.cards.filter(f => f.cardsPack_id === packId))
-
+    const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
     const [showAnswer, setShowAnswer] = useState<boolean>(false)
     const [actualCard, setActualCard] = useState<CardType>(learnedCard)
     const [cardRate, setCardRate] = useState<Undetectable<number>>(undefined)
@@ -45,7 +45,7 @@ export const LearnedCard = () => {
     }
 
     const goBack = () => {
-        navigate(RoutesXPaths.CARDS)
+        navigate(`${RoutesXPaths.CARDS}/${packId}`)
     }
 
     return (
@@ -91,11 +91,11 @@ export const LearnedCard = () => {
                 }
             </div>
             <div>
-                <button onClick={goBack}>Cancel</button>
+                <button onClick={goBack} disabled={isLoad}>Cancel</button>
                 {
                     !showAnswer
-                        ? <button onClick={() => setShowAnswer(!showAnswer)}>Show answer</button>
-                        : <button onClick={nextCard}>Next card</button>
+                        ? <button onClick={() => setShowAnswer(!showAnswer)} disabled={isLoad}>Show answer</button>
+                        : <button onClick={nextCard} disabled={isLoad}>Next card</button>
                 }
             </div>
         </div>

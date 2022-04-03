@@ -1,6 +1,8 @@
 import * as React from 'react';
-import TablePagination from '@mui/material/TablePagination';
 import {useDispatch} from "react-redux";
+
+import TablePagination from '@mui/material/TablePagination';
+
 import {cardsActions} from "../../../n1_main/m2-bll/r2-actions/ActionsCards";
 import {useFridaySelector} from "../../../n1_main/m2-bll/store";
 import {Nullable} from "../../../types/Nullable";
@@ -8,7 +10,6 @@ import {Nullable} from "../../../types/Nullable";
 const TablesCardsPagination = () => {
 
     const dispatch = useDispatch()
-
     const actualCardsPage = useFridaySelector<number>(state => state.cards.page)
     const actualCardsCount = useFridaySelector<number>(state => state.cards.pageCount)
 

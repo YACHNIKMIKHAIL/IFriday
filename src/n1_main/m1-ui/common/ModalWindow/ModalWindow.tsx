@@ -48,7 +48,7 @@ const Modal: React.FC<IModal> = (
                         height: '100vh',
 
                         background: 'black',
-                        opacity: 0.35,
+                        opacity: 0.65,
                         zIndex: 20,
 
                         ...backgroundStyle,
@@ -68,7 +68,6 @@ const Modal: React.FC<IModal> = (
                     alignItems: 'center',
                     justifyContent: 'center',
 
-                    background: 'lime',
                     zIndex: 21,
 
                     ...modalStyle,
