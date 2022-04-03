@@ -70,6 +70,8 @@ export const Redirect = () => {
         } else if (pathname === RoutesXPaths.RECOVERY) {
         } else if (pathname === RoutesXPaths.LOGIN) {
             return <Navigate to={RoutesXPaths.LOGIN}/>
+        } else {
+            return <Navigate to={RoutesXPaths.LOGIN}/>
         }
     }
 

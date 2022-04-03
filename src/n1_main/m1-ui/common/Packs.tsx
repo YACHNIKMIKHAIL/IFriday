@@ -9,7 +9,7 @@ const Packs = () => {
     //that useEffect fix one danger bug
     useEffect(()=>{
         dispatch(cardsActions.cardModeAC(null))
-        dispatch(setGlobalErrorAC(null))
+        dispatch(setGlobalErrorAC(''))
     },[])
     return (
         <div>
