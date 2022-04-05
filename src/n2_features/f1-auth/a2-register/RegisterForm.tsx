@@ -10,6 +10,7 @@ import {registerAndRecoveryPassActions} from "../../../n1_main/m2-bll/r2-actions
 import {Undetectable} from "../../../types/Undetectable";
 import PasswordView from "../../../n1_main/m1-ui/view-password/PasswordView";
 
+
 type FormikErrorType = {
     email?: string
     password?: string
@@ -17,11 +18,11 @@ type FormikErrorType = {
 }
 
 const RegisterForm = () => {
-
     const dispatch = useDispatch()
     const isLoad = useFridaySelector<boolean>(state => state.app.isLoad)
     const error = useFridaySelector<Undetectable<string>>(state => state.regForNewPass.register.error)
-    const isLoggedIn = useFridaySelector<boolean>(state => state.login.isLoggedIn)
+    const globalError = useFridaySelector<Undetectable<string>>(state => state.app.globalError)
+    const status = useFridaySelector<any>(state => state.app.status)
     const isVisible = useFridaySelector<boolean>(state => state.app.isVisible)
     const formik = useFormik({
         initialValues: {
@@ -61,12 +62,14 @@ const RegisterForm = () => {
         dispatch(registerAndRecoveryPassActions.setErrorRegisterAC(""))
     }
 
-    if (error === "email already exists /ᐠ｡ꞈ｡ᐟ\\") {
+    if (globalError !== "you are not authorized /ᐠ-ꞈ-ᐟ\\") {
         return <Navigate to={RoutesXPaths.LOGIN}/>
-    }
 
-    if (isLoggedIn) {
-        return <Navigate to={RoutesXPaths.PROFILE}/>
+    }
+    if (status === "succeeded") {
+        alert("Вы успешно прошли регистрацию!")
+        return <Navigate to={RoutesXPaths.LOGIN}/>
+
     }
 
     return (
@@ -74,7 +77,7 @@ const RegisterForm = () => {
             <div className={regS.registerContainer}>
                 <div className={regS.titles}>
                     <h1>Cards</h1>
-                    {!!error && <div>{error}</div>}
+                    {!!error && <div style={{color:"red",fontSize:"larger",fontWeight:"bold"}}>{error}</div>}
                     <h4>Sing in</h4>
                 </div>
 
@@ -89,18 +92,18 @@ const RegisterForm = () => {
                         <div className={regS.second}>
                             Password
                             <input    type={isVisible ? "text" : "password"}
-                                   {...formik.getFieldProps('password')}/>
+                                      {...formik.getFieldProps('password')}/>
 
                             {formik.touched.password && formik.errors.password ?
                                 <div className={regS.errorMessage}>{formik.errors.password}</div> : null}
-                           <div className={regS.icon}>
-                               <PasswordView isVisible={isVisible}/>
-                           </div>
+                            <div className={regS.icon}>
+                                <PasswordView isVisible={isVisible}/>
+                            </div>
                         </div>
                         <div className={regS.second}>
                             Confirm password
                             <input    type={isVisible ? "text" : "password"}
-                                   {...formik.getFieldProps('confirm')}/>
+                                      {...formik.getFieldProps('confirm')}/>
                             {formik.touched.confirm && formik.errors.confirm ?
                                 <div className={regS.errorMessage}>{formik.errors.confirm}</div> : null}
                             <div className={regS.icon}>
