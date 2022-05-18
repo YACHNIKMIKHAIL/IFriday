@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/TeamProject/static/css/main.dc8636f8.css",
-    "main.js": "/TeamProject/static/js/main.4544ff77.js",
-    "static/js/787.fd77b4ce.chunk.js": "/TeamProject/static/js/787.fd77b4ce.chunk.js",
-    "static/media/preloader.gif": "/TeamProject/static/media/preloader.5c8d1eb4a6265280f7a7.gif",
-    "index.html": "/TeamProject/index.html",
-    "main.dc8636f8.css.map": "/TeamProject/static/css/main.dc8636f8.css.map",
-    "main.4544ff77.js.map": "/TeamProject/static/js/main.4544ff77.js.map",
-    "787.fd77b4ce.chunk.js.map": "/TeamProject/static/js/787.fd77b4ce.chunk.js.map"
+    "main.css": "/IFriday/static/css/main.87bdc427.css",
+    "main.js": "/IFriday/static/js/main.4ddc8daa.js",
+    "static/js/787.2625efd4.chunk.js": "/IFriday/static/js/787.2625efd4.chunk.js",
+    "static/media/preloader.gif": "/IFriday/static/media/preloader.5c8d1eb4a6265280f7a7.gif",
+    "index.html": "/IFriday/index.html",
+    "main.87bdc427.css.map": "/IFriday/static/css/main.87bdc427.css.map",
+    "main.4ddc8daa.js.map": "/IFriday/static/js/main.4ddc8daa.js.map",
+    "787.2625efd4.chunk.js.map": "/IFriday/static/js/787.2625efd4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dc8636f8.css",
-    "static/js/main.4544ff77.js"
+    "static/css/main.87bdc427.css",
+    "static/js/main.4ddc8daa.js"
   ]
 }
